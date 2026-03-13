@@ -79,6 +79,34 @@ export async function runInstall(opts: InstallOptions = {}): Promise<void> {
   console.log("\nUpdating main agent guidance (TOOLS.md, AGENTS.md)...");
   await updateStoreGuidance();
 
+  // Install skills into each agent workspace that lists them
+  if (skills.length > 0) {
+    const { installSkillToWorkspaces } = await import("../lib/skill-fetch.js");
+    for (const resolvedSkill of skills) {
+      const targetWorkspaces: string[] = [];
+      for (const pack of packs) {
+        for (const agent of pack.agents) {
+          if (agent.agentDef.skills?.includes(resolvedSkill.skillDef.id)) {
+            targetWorkspaces.push(agent.workspaceDir);
+          }
+        }
+      }
+      if (targetWorkspaces.length === 0) continue;
+      const results = await installSkillToWorkspaces(
+        resolvedSkill.skillDef,
+        targetWorkspaces,
+        resolvedSkill.status,
+      );
+      for (const r of results) {
+        if (r.status === "installed") {
+          console.log(`  ✓ Skill ${resolvedSkill.skillDef.id} → ${r.targetDir}`);
+        } else if (r.status === "failed") {
+          console.warn(`  ✗ Skill ${resolvedSkill.skillDef.id} failed: ${r.reason}`);
+        }
+      }
+    }
+  }
+
   // Write lockfile
   if (!opts.pack) {
     await writeLockfile(lockfile, opts.projectDir);
