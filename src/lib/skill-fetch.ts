@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { SkillEntry } from "./schema.js";
+import { resolveStoreRoot } from "./paths.js";
 
 export type SkillInstallResult = {
   skillId: string;
@@ -40,8 +41,7 @@ export async function installSkillToWorkspaces(
   }
 
   const cacheDir = path.join(
-    process.env.HOME ?? process.env.USERPROFILE ?? "",
-    ".openclaw-store",
+    resolveStoreRoot(),
     "cache",
     "skills",
     `${skill.id}@${skill.version}`,
@@ -95,7 +95,7 @@ async function resolveSkillSource(skill: SkillEntry): Promise<string | null> {
   const candidates = [
     path.join(home, ".openclaw", "workspace", "skills", skill.id),
     path.join(home, ".openclaw", "skills", skill.id),
-    path.join(home, ".openclaw-store", "cache", "skills", skill.id),
+    path.join(resolveStoreRoot(), "cache", "skills", skill.id),
   ];
   for (const c of candidates) {
     if (await pathExists(c)) return c;

@@ -22,7 +22,7 @@ export async function readOpenClawVersion(): Promise<string | null> {
 }
 
 function semverGte(a: string, b: string): boolean {
-  const parse = (v: string) => v.split(".").map(Number);
+  const parse = (v: string) => v.split("-")[0].split(".").map(Number);
   const [aMaj, aMin, aPatch] = parse(a);
   const [bMaj, bMin, bPatch] = parse(b);
   if (aMaj !== bMaj) return aMaj > bMaj;

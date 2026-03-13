@@ -89,9 +89,12 @@ program
     }
 
     for (const pack of toRemove) {
-      // Derive team ID from pack ID (convention: pack ID == team ID)
-      const teamId = pack.id;
-      const workspaceRoot = path.join(resolveStoreWorkspacesRoot(), teamId);
+      // pack.id is "packId__teamId" — derive workspace root from first agent if available
+      const firstAgentWorkspace = pack.agents[0]?.workspace;
+      const workspaceRoot = firstAgentWorkspace
+        ? path.dirname(firstAgentWorkspace)  // parent of agent workspace = team workspace root
+        : path.join(resolveStoreWorkspacesRoot(), pack.id);
+      const teamId = pack.id.includes("__") ? pack.id.split("__").slice(1).join("__") : pack.id;
       console.log(`Uninstalling pack: ${pack.id}...`);
       await uninstallTeam(teamId, workspaceRoot);
       console.log(`✓ Uninstalled ${pack.id}`);
