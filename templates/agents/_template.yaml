@@ -1,0 +1,39 @@
+# templates/agents/_template.yaml
+# Copy this file to templates/agents/<your-id>.yaml and fill in.
+id: your-agent-id          # kebab-case, unique
+version: 1
+name: "Your Agent Name"
+
+identity:
+  emoji: "🤖"
+  vibe: "One-line description of personality"
+
+soul:
+  persona: |
+    You are {{agent.name}} on the {{team.name}} team.
+    [Describe role, responsibilities, and workflow here.]
+  tone: "How this agent communicates"
+  boundaries:
+    - "What this agent never does"
+
+model:
+  primary: "claude-sonnet-4-5"   # opus | sonnet | haiku
+  fallback: "claude-haiku-4-5"
+
+capabilities:
+  coordination:
+    sessions_spawn: false   # true for leads only
+    sessions_send: false    # always false
+  file_access:
+    write: false
+    edit: false
+    apply_patch: false
+  system:
+    exec: false
+    cron: false
+    gateway: false
+
+skills: []
+
+team_role:
+  role: specialist   # lead | specialist | reviewer

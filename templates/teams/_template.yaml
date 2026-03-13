@@ -1,0 +1,26 @@
+# templates/teams/_template.yaml
+id: your-team-id
+name: "Your Team Name"
+version: 1
+
+members:
+  - agent: your-lead-agent
+    role: lead
+    entry_point: true
+  - agent: your-specialist
+    role: specialist
+
+graph:
+  - from: your-lead-agent
+    to: your-specialist
+    relationship: delegates_to
+
+shared_memory:
+  dir: "~/.openclaw-store/workspaces/store/your-team-id/shared/memory/"
+  files:
+    - path: tasks-log.md
+      access: append-only
+      writer: "*"
+    - path: brief.md
+      access: single-writer
+      writer: your-lead-agent
