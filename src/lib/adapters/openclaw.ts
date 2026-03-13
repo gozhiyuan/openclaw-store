@@ -46,6 +46,14 @@ export async function readOpenClawConfig(): Promise<{ path: string; config: Open
     const config = JSON5.parse(raw) as OpenClawConfig;
     return { path: configPath, config };
   } catch (err) {
+    const isNotFound = (err as NodeJS.ErrnoException).code === "ENOENT";
+    if (isNotFound) {
+      const configPath = resolveOpenClawConfigPath();
+      throw new Error(
+        `OpenClaw config not found at ${configPath}.\n` +
+        `Either install OpenClaw first, or run: openclaw-store install --no-openclaw`,
+      );
+    }
     const msg = err instanceof Error ? err.message : String(err);
     throw new Error(`Failed to read OpenClaw config at ${configPath}: ${msg}`);
   }
@@ -342,6 +350,32 @@ export async function installTeam(params: InstallTeamParams): Promise<void> {
   }
 
   await writeOpenClawConfig(configPath, config);
+}
+
+/** Same as installTeam but skips openclaw.json patching — for CI and Claude Code environments */
+export async function installTeamWorkspacesOnly(params: InstallTeamParams): Promise<void> {
+  if (params.dryRun) {
+    throw new Error("Use planInstallTeam for dry-run");
+  }
+
+  const allMembers = params.agents.map((a) => ({
+    member: a.member,
+    agent: a.agentDef,
+  }));
+
+  // Provision each agent (workspace files only, no config patch)
+  for (const agent of params.agents) {
+    await provisionAgent({
+      agentDef: agent.agentDef,
+      teamDef: params.teamDef,
+      member: agent.member,
+      allMembers,
+      workspaceDir: agent.workspaceDir,
+      agentDir: agent.agentDir,
+      overwrite: params.overwrite,
+    });
+  }
+  // No openclaw.json patch, no allowlist update
 }
 
 /** Produce a dry-run plan without making changes */

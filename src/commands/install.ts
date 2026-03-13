@@ -16,6 +16,7 @@ export type InstallOptions = {
   force?: boolean;
   pack?: string;
   projectDir?: string;
+  noOpenclaw?: boolean;
 };
 
 export async function runInstall(opts: InstallOptions = {}): Promise<void> {
@@ -60,11 +61,20 @@ export async function runInstall(opts: InstallOptions = {}): Promise<void> {
       }),
     );
 
-    await installTeam({
-      teamDef: resolved.teamDef,
-      agents: agentsWithMembers,
-      overwrite: opts.force,
-    });
+    if (opts.noOpenclaw) {
+      const { installTeamWorkspacesOnly } = await import("../lib/adapters/openclaw.js");
+      await installTeamWorkspacesOnly({
+        teamDef: resolved.teamDef,
+        agents: agentsWithMembers,
+        overwrite: opts.force,
+      });
+    } else {
+      await installTeam({
+        teamDef: resolved.teamDef,
+        agents: agentsWithMembers,
+        overwrite: opts.force,
+      });
+    }
 
     console.log(`  Seeding shared memory for ${resolved.teamDef.name ?? resolved.teamDef.id}...`);
     await seedTeamSharedMemory(resolved.teamDef);
@@ -76,8 +86,10 @@ export async function runInstall(opts: InstallOptions = {}): Promise<void> {
   }
 
   // Update main agent guidance
-  console.log("\nUpdating main agent guidance (TOOLS.md, AGENTS.md)...");
-  await updateStoreGuidance();
+  if (!opts.noOpenclaw) {
+    console.log("\nUpdating main agent guidance (TOOLS.md, AGENTS.md)...");
+    await updateStoreGuidance();
+  }
 
   // Install skills into each agent workspace that lists them
   if (skills.length > 0) {

@@ -46,12 +46,14 @@ program
   .option("--dry-run", "Preview changes without applying them")
   .option("--force", "Overwrite existing workspace files")
   .option("--pack <id>", "Install a specific pack without a manifest")
+  .option("--no-openclaw", "Skip openclaw.json patching (use with Claude Code or CI)")
   .action(async (opts) => {
     const { runInstall } = await import("./commands/install.js");
     await runInstall({
       dryRun: opts.dryRun,
       force: opts.force,
       pack: opts.pack,
+      noOpenclaw: opts.openclaw === false,  // commander inverts --no-* flags
     });
   });
 
