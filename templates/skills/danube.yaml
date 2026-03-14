@@ -1,0 +1,21 @@
+id: danube
+version: 1
+name: "Danube"
+description: "100+ API connectors including Gmail, GitHub, Notion, Slack, and more via Danube MCP"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/preston-thiele/danube"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  env: []
+
+disabled_until_configured: false
+
+install_hints:
+  - "Configure individual service connections after install"
+  - "Covers Notion, Slack, GitHub, Gmail and 100+ other services"
+  - "See Danube documentation for per-service authentication setup"

@@ -1,0 +1,28 @@
+id: microsoft365
+version: 1
+name: "Microsoft 365"
+description: "Microsoft 365 integration — Outlook, Teams, Calendar, Contacts, OneDrive via Microsoft Graph API"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/robert-janssen/microsoft365"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  env:
+    - key: MS365_CLIENT_ID
+      description: "Azure AD application (client) ID"
+      required: true
+    - key: MS365_CLIENT_SECRET
+      description: "Azure AD client secret value"
+      required: true
+
+disabled_until_configured: true
+
+install_hints:
+  - "Register an app in Azure Active Directory at portal.azure.com"
+  - "Grant Microsoft Graph API permissions: Mail.ReadWrite, Calendars.ReadWrite, Files.ReadWrite"
+  - "Set: export MS365_CLIENT_ID=... and export MS365_CLIENT_SECRET=..."
+  - "Then re-run: openclaw-store install"

@@ -1,0 +1,20 @@
+id: connect-apps
+version: 1
+name: "Connect Apps"
+description: "Connect Claude to external apps — Gmail, Slack, GitHub — via a unified connector"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/sohamganatra/connect-apps"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  env: []
+
+disabled_until_configured: false
+
+install_hints:
+  - "Configure individual service connections after install via the skill's setup flow"
+  - "Covers Slack (best available substitute until a dedicated Slack skill is available)"

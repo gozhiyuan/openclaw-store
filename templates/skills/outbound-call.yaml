@@ -1,0 +1,32 @@
+id: outbound-call
+version: 1
+name: "Outbound Call"
+description: "Make real outbound phone calls via ElevenLabs voice agent and Twilio"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/humanjesse/outbound-call"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  env:
+    - key: TWILIO_ACCOUNT_SID
+      description: "Twilio account SID"
+      required: true
+    - key: TWILIO_AUTH_TOKEN
+      description: "Twilio auth token"
+      required: true
+    - key: ELEVENLABS_API_KEY
+      description: "ElevenLabs API key for voice synthesis"
+      required: true
+
+disabled_until_configured: true
+
+install_hints:
+  - "Create a Twilio account at twilio.com and get a phone number"
+  - "Set: export TWILIO_ACCOUNT_SID=... and export TWILIO_AUTH_TOKEN=..."
+  - "Get ElevenLabs API key at elevenlabs.io"
+  - "Set: export ELEVENLABS_API_KEY=..."
+  - "Then re-run: openclaw-store install"

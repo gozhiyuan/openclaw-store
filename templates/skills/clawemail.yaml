@@ -1,0 +1,28 @@
+id: clawemail
+version: 1
+name: "ClawEmail (Google Workspace)"
+description: "Google Workspace via ClawEmail — Gmail, Drive, Docs, Sheets, Slides"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/cto1/clawemail"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  env:
+    - key: GOOGLE_CLIENT_ID
+      description: "Google OAuth2 client ID"
+      required: true
+    - key: GOOGLE_CLIENT_SECRET
+      description: "Google OAuth2 client secret"
+      required: true
+
+disabled_until_configured: true
+
+install_hints:
+  - "Create a Google Cloud project and enable Gmail + Drive APIs"
+  - "Create OAuth2 credentials at console.cloud.google.com"
+  - "Set: export GOOGLE_CLIENT_ID=... and export GOOGLE_CLIENT_SECRET=..."
+  - "Then re-run: openclaw-store install"
