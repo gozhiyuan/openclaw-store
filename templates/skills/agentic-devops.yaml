@@ -1,0 +1,23 @@
+id: agentic-devops
+version: 1
+name: "Agentic DevOps"
+description: "Production-grade DevOps toolkit — Docker management, process monitoring, logs, health checks"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/tkuehnl/agentic-devops"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  bins:
+    - docker
+  env: []
+
+disabled_until_configured: false
+
+install_hints:
+  - "Requires Docker Desktop or Docker Engine installed and running"
+  - "Install Docker: docker.com/get-started"
+  - "No API key required"

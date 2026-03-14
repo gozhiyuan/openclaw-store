@@ -1,0 +1,26 @@
+id: reef-polymarket-research
+version: 1
+name: "Polymarket Research"
+description: "Autonomous Polymarket research and directional trading — focused on PnL maximization"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/rimelucci/reef-polymarket-research"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  bins: []
+  env:
+    - key: POLYMARKET_API_KEY
+      description: "Polymarket API key for trading and research"
+      required: true
+
+disabled_until_configured: true
+
+install_hints:
+  - "Create a Polymarket account at polymarket.com"
+  - "Get your API key from Polymarket account settings"
+  - "Set: export POLYMARKET_API_KEY=..."
+  - "Then re-run: openclaw-store install"

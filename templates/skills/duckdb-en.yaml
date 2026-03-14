@@ -1,0 +1,22 @@
+id: duckdb-en
+version: 1
+name: "DuckDB"
+description: "DuckDB CLI specialist for SQL analysis, data processing, and local analytics"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/camelsprout/duckdb-en"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  bins:
+    - duckdb
+  env: []
+
+disabled_until_configured: false
+
+install_hints:
+  - "Install DuckDB CLI: brew install duckdb (macOS) or see duckdb.org/docs/installation"
+  - "No API key required"
