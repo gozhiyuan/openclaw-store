@@ -1,0 +1,30 @@
+id: pre-build-idea-validator
+version: 1
+name: Pre-Build Idea Validator
+description: Before OpenClaw starts building anything new, it automatically
+  checks whether the idea already exists across GitHub, Hacker News, npm, PyPI,
+  and Product Hunt — and adjusts its approach based on what it finds.
+source_usecase: Pre-Build Idea Validator
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/pre-build-idea-validator.md
+entry_team: research-lab
+packs:
+  - research-lab
+project_skills:
+  - openclaw-store-manager
+tags:
+  - research
+  - pre
+  - build
+  - idea
+  - validator
+external_requirements:
+  - idea-reality-mcp — MCP server that scans real data sources and returns a
+    competition score
+bootstrap_prompt: Start the Pre-Build Idea Validator demo project from the
+  openclaw-store starter `pre-build-idea-validator`. Before OpenClaw starts
+  building anything new, it automatically checks whether the idea already exists
+  across GitHub, Hacker News, npm, PyPI, and Product Hunt — and adjusts its
+  approach based on what it finds. Use `research-lab` as the initial entry team.
+  Review STARTER.md, confirm any missing external integrations, then break the
+  work into clear team tasks.

@@ -1,0 +1,36 @@
+id: podcast-production-pipeline
+version: 1
+name: Podcast Production Pipeline
+description: You have a podcast idea, maybe even a backlog of episode topics.
+  But between researching guests, writing outlines, drafting intros, generating
+  show notes, and writing social media posts for promotion — the production
+  overhead kills your momentum. What if you handed off a topic and got back a
+  full production package?
+source_usecase: Podcast Production Pipeline
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/podcast-production-pipeline.md
+entry_team: content-factory
+packs:
+  - content-factory
+project_skills:
+  - openclaw-store-manager
+tags:
+  - content
+  - podcast
+  - production
+  - pipeline
+external_requirements:
+  - Web search / research skill (for guest research and topic deep-dives)
+  - File system access (for reading transcripts and writing output files)
+  - Slack, Discord, or Telegram integration (for delivering assets)
+  - "Optional: sessions_spawn for running research and writing agents in
+    parallel"
+  - "Optional: RSS feed skill (for monitoring competitor podcasts)"
+bootstrap_prompt: Start the Podcast Production Pipeline demo project from the
+  openclaw-store starter `podcast-production-pipeline`. You have a podcast idea,
+  maybe even a backlog of episode topics. But between researching guests,
+  writing outlines, drafting intros, generating show notes, and writing social
+  media posts for promotion — the production overhead kills your momentum. What
+  if you handed off a topic and got back a full production package? Use
+  `content-factory` as the initial entry team. Review STARTER.md, confirm any
+  missing external integrations, then break the work into clear team tasks.

@@ -1,0 +1,36 @@
+id: event-guest-confirmation
+version: 1
+name: Event Guest Confirmation
+description: "You're hosting an event — a dinner party, a wedding, a company
+  offsite — and you need to confirm attendance from a list of guests. Manually
+  calling 20+ people is tedious: you play phone tag, forget who said what, and
+  lose track of dietary restrictions or plus-ones. Texting works sometimes, but
+  people ignore messages. A real phone call gets a much higher response rate."
+source_usecase: Event Guest Confirmation
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/event-guest-confirmation.md
+entry_team: autonomous-startup
+packs:
+  - autonomous-startup
+project_skills:
+  - openclaw-store-manager
+tags:
+  - automation
+  - event
+  - guest
+  - confirmation
+external_requirements:
+  - SuperCall — install via openclaw plugins install @xonder/supercall
+  - A Twilio account with a phone number (for making outbound calls)
+  - An OpenAI API key (for the GPT-4o Realtime voice AI)
+  - ngrok (for webhook tunneling — free tier works)
+  - See the SuperCall README for full configuration instructions.
+bootstrap_prompt: "Start the Event Guest Confirmation demo project from the
+  openclaw-store starter `event-guest-confirmation`. You're hosting an event — a
+  dinner party, a wedding, a company offsite — and you need to confirm
+  attendance from a list of guests. Manually calling 20+ people is tedious: you
+  play phone tag, forget who said what, and lose track of dietary restrictions
+  or plus-ones. Texting works sometimes, but people ignore messages. A real
+  phone call gets a much higher response rate. Use `autonomous-startup` as the
+  initial entry team. Review STARTER.md, confirm any missing external
+  integrations, then break the work into clear team tasks."

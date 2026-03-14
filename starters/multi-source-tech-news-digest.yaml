@@ -1,0 +1,33 @@
+id: multi-source-tech-news-digest
+version: 1
+name: Multi-Source Tech News Digest
+description: Automatically aggregate, score, and deliver tech news from 109+
+  sources across RSS, Twitter/X, GitHub releases, and web search — all managed
+  through natural language.
+source_usecase: Multi-Source Tech News Digest
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/multi-source-tech-news-digest.md
+entry_team: research-lab
+packs:
+  - research-lab
+  - content-factory
+project_skills:
+  - openclaw-store-manager
+tags:
+  - research
+  - content
+  - multi
+  - source
+  - tech
+  - news
+  - digest
+external_requirements:
+  - tech-news-digest — Install via clawhub install tech-news-digest
+  - gog (optional) — For email delivery via Gmail
+bootstrap_prompt: Start the Multi-Source Tech News Digest demo project from the
+  openclaw-store starter `multi-source-tech-news-digest`. Automatically
+  aggregate, score, and deliver tech news from 109+ sources across RSS,
+  Twitter/X, GitHub releases, and web search — all managed through natural
+  language. Use `research-lab` as the initial entry team. Review STARTER.md,
+  confirm any missing external integrations, then break the work into clear team
+  tasks.

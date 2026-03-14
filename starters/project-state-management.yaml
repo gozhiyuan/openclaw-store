@@ -1,0 +1,33 @@
+id: project-state-management
+version: 1
+name: "Project State Management System: Event-Driven Alternative to Kanban"
+description: Traditional Kanban boards are static and require manual updates.
+  You forget to move cards, lose context between sessions, and can't track the
+  "why" behind state changes. Projects drift without clear visibility.
+source_usecase: "Project State Management System: Event-Driven Alternative to Kanban"
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/project-state-management.md
+entry_team: dev-company
+packs:
+  - dev-company
+project_skills:
+  - openclaw-store-manager
+tags:
+  - development
+  - project
+  - state
+  - management
+external_requirements:
+  - postgres or SQLite for project state database
+  - github (gh CLI) for commit tracking
+  - Discord or Telegram for updates and queries
+  - Cron jobs for daily summaries
+  - Sub-agents for parallel project analysis
+bootstrap_prompt: "Start the Project State Management System: Event-Driven
+  Alternative to Kanban demo project from the openclaw-store starter
+  `project-state-management`. Traditional Kanban boards are static and require
+  manual updates. You forget to move cards, lose context between sessions, and
+  can't track the \"why\" behind state changes. Projects drift without clear
+  visibility. Use `dev-company` as the initial entry team. Review STARTER.md,
+  confirm any missing external integrations, then break the work into clear team
+  tasks."

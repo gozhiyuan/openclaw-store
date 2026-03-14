@@ -9,6 +9,8 @@
 OpenClaw is powerful but has a steep setup curve: configuring agents, wiring up shared memory, preventing race conditions, and setting up team coordination all require deep ecosystem knowledge.
 
 `openclaw-store` closes that gap with **starter packs** — pre-built, production-ready multi-agent teams you install like npm packages.
+It also includes starter demo projects generated from `awesome-openclaw-usecases`, so OpenClaw can begin from a working example and then adapt it into a managed project.
+Those demos are also indexed in `demo-projects/index.yaml` with richer cards in `demo-projects/cards/`.
 
 ---
 
@@ -181,6 +183,12 @@ openclaw-store install --pack dev-company    # One-shot install (no manifest nee
 openclaw-store uninstall --pack dev-company  # Remove a pack
 openclaw-store uninstall --all               # Remove everything
 
+# Demo starters
+openclaw-store starter list                  # List starter demo projects
+openclaw-store starter suggest "<idea>"      # Find similar starters for a new idea
+openclaw-store starter show <id>             # Inspect one starter
+openclaw-store starter init <id> [dir]       # Initialize a project from a starter
+
 # Exploration
 openclaw-store list                          # List all packs, teams, agents, skills
 openclaw-store list --packs                  # Packs only
@@ -262,6 +270,65 @@ Skill placement rules:
 - If you change skill placement, re-run `openclaw-store install`
 
 To add another project later, create or enter that project's directory and run `openclaw-store init` there. Then use `openclaw-store project list` and `openclaw-store project show <id>` to discover installed projects and their entry-point agents.
+
+## Starter Demo Projects
+
+The repo includes 36 starter demo projects generated from `awesome-openclaw-usecases`, plus a built-in `default-managed` starter for the lightest managed setup.
+
+Each starter contains:
+
+- a source use case
+- recommended built-in packs
+- a preferred entry team
+- the `openclaw-store-manager` project skill
+- extracted external requirements
+- a bootstrap prompt for the demo
+- a metadata entry in `demo-projects/index.yaml`
+- a richer card in `demo-projects/cards/<starter-id>.md`
+
+Typical flow:
+
+```bash
+openclaw-store starter suggest "build a podcast workflow"
+openclaw-store starter show podcast-production-pipeline
+openclaw-store starter init podcast-production-pipeline ./my-podcast-project
+cd ./my-podcast-project
+openclaw-store install --dry-run
+openclaw-store install
+```
+
+Minimal managed fallback:
+
+```bash
+openclaw-store starter show default-managed
+openclaw-store starter init default-managed ./my-project
+```
+
+The generated project includes `openclaw-store.yaml`, `STARTER.md`, and `DEMO_PROJECT.md`.
+
+The intended conversational path is the same: `openclaw-store-manager` can suggest a starter, inspect its demo card, guide the user through any required skills or API setup in OpenClaw, initialize it, then modify the generated `openclaw-store.yaml` to fit the user's real project.
+
+---
+
+## Default Workflow Support
+
+This repo is intended to coexist with default OpenClaw and default Claude Code workflows.
+
+If a repo does not have `openclaw-store.yaml`, `openclaw-store` treats it as an unmanaged repo instead of assuming it is broken:
+
+- `CLAUDE.md` or `.claude/` present -> default Claude Code workflow
+- no manifest, but OpenClaw is installed -> default OpenClaw workflow
+- manifest present -> `openclaw-store` managed workflow
+
+That means you can install the `openclaw-store-manager` skill into OpenClaw, let it inspect repos, and only opt into full project/team/skill management when the user wants it.
+
+For managed installs in Claude Code or CI-style environments, use:
+
+```bash
+openclaw-store install --no-openclaw
+```
+
+That keeps project/team/skill management while skipping `openclaw.json` patching.
 
 ---
 

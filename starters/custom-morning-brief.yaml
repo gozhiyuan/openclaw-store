@@ -1,0 +1,33 @@
+id: custom-morning-brief
+version: 1
+name: Custom Morning Brief
+description: You wake up and spend the first 30 minutes of your day catching up
+  — scrolling news, checking your calendar, reviewing your to-do list, trying to
+  figure out what matters today. What if all of that was already done and
+  waiting for you as a text message?
+source_usecase: Custom Morning Brief
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/custom-morning-brief.md
+entry_team: research-lab
+packs:
+  - research-lab
+  - content-factory
+project_skills:
+  - openclaw-store-manager
+tags:
+  - research
+  - content
+  - custom
+  - morning
+  - brief
+external_requirements:
+  - Telegram, Discord, or iMessage integration
+  - Todoist / Apple Reminders / Asana integration (whichever you use for tasks)
+  - x-research-v2 for social media trend research (optional)
+bootstrap_prompt: Start the Custom Morning Brief demo project from the
+  openclaw-store starter `custom-morning-brief`. You wake up and spend the first
+  30 minutes of your day catching up — scrolling news, checking your calendar,
+  reviewing your to-do list, trying to figure out what matters today. What if
+  all of that was already done and waiting for you as a text message? Use
+  `research-lab` as the initial entry team. Review STARTER.md, confirm any
+  missing external integrations, then break the work into clear team tasks.

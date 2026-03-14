@@ -1,0 +1,28 @@
+id: knowledge-base-rag
+version: 1
+name: Personal Knowledge Base (RAG)
+description: You read articles, tweets, and watch videos all day but can never
+  find that one thing you saw last week. Bookmarks pile up and become useless.
+source_usecase: Personal Knowledge Base (RAG)
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/knowledge-base-rag.md
+entry_team: research-lab
+packs:
+  - research-lab
+project_skills:
+  - openclaw-store-manager
+tags:
+  - research
+  - knowledge
+  - base
+  - rag
+external_requirements:
+  - knowledge-base skill (or build custom RAG with embeddings)
+  - web_fetch (built-in)
+  - Telegram topic or Slack channel for ingestion
+bootstrap_prompt: Start the Personal Knowledge Base (RAG) demo project from the
+  openclaw-store starter `knowledge-base-rag`. You read articles, tweets, and
+  watch videos all day but can never find that one thing you saw last week.
+  Bookmarks pile up and become useless. Use `research-lab` as the initial entry
+  team. Review STARTER.md, confirm any missing external integrations, then break
+  the work into clear team tasks.

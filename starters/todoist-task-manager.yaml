@@ -1,0 +1,29 @@
+id: todoist-task-manager
+version: 1
+name: "Todoist Task Manager: Agent Task Visibility"
+description: Maximize transparency for long-running agentic workflows by syncing
+  internal reasoning and progress logs directly to Todoist.
+source_usecase: "Todoist Task Manager: Agent Task Visibility"
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/todoist-task-manager.md
+entry_team: dev-company
+packs:
+  - dev-company
+project_skills:
+  - openclaw-store-manager
+tags:
+  - development
+  - todoist
+  - task
+  - manager
+external_requirements:
+  - You don't need a pre-built skill. Simply prompt your OpenClaw agent to
+    create the bash scripts described in the **Setup Guide** below. Since
+    OpenClaw can manage its own filesystem and execute shell commands, it will
+    effectively "build" the skill for you upon request.
+bootstrap_prompt: "Start the Todoist Task Manager: Agent Task Visibility demo
+  project from the openclaw-store starter `todoist-task-manager`. Maximize
+  transparency for long-running agentic workflows by syncing internal reasoning
+  and progress logs directly to Todoist. Use `dev-company` as the initial entry
+  team. Review STARTER.md, confirm any missing external integrations, then break
+  the work into clear team tasks."

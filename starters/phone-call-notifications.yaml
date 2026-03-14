@@ -1,0 +1,32 @@
+id: phone-call-notifications
+version: 1
+name: Phone Call Notifications
+description: Your agent already monitors things for you — stocks, emails, smart
+  home, calendars — but notifications are easy to ignore. Push notifications
+  pile up. Chat messages get buried. For the stuff that actually matters, you
+  need something you can't swipe away.
+source_usecase: Phone Call Notifications
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/phone-call-notifications.md
+entry_team: autonomous-startup
+packs:
+  - autonomous-startup
+project_skills:
+  - openclaw-store-manager
+tags:
+  - automation
+  - phone
+  - call
+  - notifications
+external_requirements:
+  - clawr.ing — install by pasting the setup prompt from the clawr.ing dashboard
+    into your OpenClaw chat. No CLI install needed.
+  - That's it. No other dependencies. The setup prompt includes the API key and
+    links to skill docs — the agent reads them and figures out the rest.
+bootstrap_prompt: Start the Phone Call Notifications demo project from the
+  openclaw-store starter `phone-call-notifications`. Your agent already monitors
+  things for you — stocks, emails, smart home, calendars — but notifications are
+  easy to ignore. Push notifications pile up. Chat messages get buried. For the
+  stuff that actually matters, you need something you can't swipe away. Use
+  `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any
+  missing external integrations, then break the work into clear team tasks.

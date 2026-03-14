@@ -1,0 +1,31 @@
+id: overnight-mini-app-builder
+version: 1
+name: Goal-Driven Autonomous Tasks
+description: Your AI agent is powerful but reactive — it only works when you
+  tell it what to do. What if it knew your goals and proactively came up with
+  tasks to move you closer to them every single day, without being asked?
+source_usecase: Goal-Driven Autonomous Tasks
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/overnight-mini-app-builder.md
+entry_team: autonomous-startup
+packs:
+  - autonomous-startup
+project_skills:
+  - openclaw-store-manager
+tags:
+  - automation
+  - overnight
+  - mini
+  - app
+  - builder
+external_requirements:
+  - Telegram or Discord integration
+  - sessions_spawn / sessions_send for autonomous task execution
+  - Next.js or similar (for the Kanban board — OpenClaw builds it for you)
+bootstrap_prompt: Start the Goal-Driven Autonomous Tasks demo project from the
+  openclaw-store starter `overnight-mini-app-builder`. Your AI agent is powerful
+  but reactive — it only works when you tell it what to do. What if it knew your
+  goals and proactively came up with tasks to move you closer to them every
+  single day, without being asked? Use `autonomous-startup` as the initial entry
+  team. Review STARTER.md, confirm any missing external integrations, then break
+  the work into clear team tasks.

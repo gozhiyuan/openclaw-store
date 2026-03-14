@@ -1,0 +1,30 @@
+id: semantic-memory-search
+version: 1
+name: Semantic Memory Search
+description: OpenClaw's built-in memory system stores everything as markdown
+  files — but as memories grow over weeks and months, finding that one decision
+  from last Tuesday becomes impossible. There is no search, just scrolling
+  through files.
+source_usecase: Semantic Memory Search
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/semantic-memory-search.md
+entry_team: research-lab
+packs:
+  - research-lab
+project_skills:
+  - openclaw-store-manager
+tags:
+  - research
+  - semantic
+  - memory
+  - search
+external_requirements:
+  - No OpenClaw skills required — memsearch is a standalone Python CLI/library
+  - Python 3.10+ with pip or uv
+bootstrap_prompt: Start the Semantic Memory Search demo project from the
+  openclaw-store starter `semantic-memory-search`. OpenClaw's built-in memory
+  system stores everything as markdown files — but as memories grow over weeks
+  and months, finding that one decision from last Tuesday becomes impossible.
+  There is no search, just scrolling through files. Use `research-lab` as the
+  initial entry team. Review STARTER.md, confirm any missing external
+  integrations, then break the work into clear team tasks.

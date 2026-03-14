@@ -3,6 +3,9 @@
 ## Read state
 
 ```bash
+openclaw-store starter list
+openclaw-store starter show <starter-id>
+openclaw-store starter suggest "<idea>"
 openclaw-store project list
 openclaw-store project show <project-id>
 openclaw-store project status
@@ -17,9 +20,22 @@ openclaw-store doctor
 ## Apply state
 
 ```bash
+openclaw-store starter init <starter-id> <dir>
 openclaw-store install
 openclaw-store install --force
 ```
+
+Default lightweight managed entry point:
+
+```bash
+openclaw-store starter show default-managed
+openclaw-store starter init default-managed ./my-project
+```
+
+Demo project metadata:
+
+- `demo-projects/index.yaml`
+- `demo-projects/cards/<starter-id>.md`
 
 ## Manifest patterns
 
@@ -48,5 +64,18 @@ Project definition:
 project:
   id: my-project
   name: "My Project"
+  starter: podcast-production-pipeline
   entry_team: dev-company
 ```
+
+Starter-generated project with team-wide manager skill:
+
+```yaml
+skills:
+  - id: openclaw-store-manager
+    targets:
+      teams:
+        - content-factory
+```
+
+When an external skill is missing, guide the user to install or configure it in OpenClaw first, then re-run `openclaw-store install` so the targeted agents receive it.

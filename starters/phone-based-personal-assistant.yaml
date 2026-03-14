@@ -1,0 +1,32 @@
+id: phone-based-personal-assistant
+version: 1
+name: Phone-Based Personal Assistant
+description: You want to access your AI agent from any phone without needing a
+  smartphone app or internet browser. You need hands-free voice assistance while
+  driving, walking, or when your hands are occupied.
+source_usecase: Phone-Based Personal Assistant
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/phone-based-personal-assistant.md
+entry_team: autonomous-startup
+packs:
+  - autonomous-startup
+project_skills:
+  - openclaw-store-manager
+tags:
+  - automation
+  - phone
+  - based
+  - personal
+  - assistant
+external_requirements:
+  - ClawdTalk
+  - Calendar skill (Google Calendar or Outlook)
+  - Jira skill
+  - Web search skill
+bootstrap_prompt: Start the Phone-Based Personal Assistant demo project from the
+  openclaw-store starter `phone-based-personal-assistant`. You want to access
+  your AI agent from any phone without needing a smartphone app or internet
+  browser. You need hands-free voice assistance while driving, walking, or when
+  your hands are occupied. Use `autonomous-startup` as the initial entry team.
+  Review STARTER.md, confirm any missing external integrations, then break the
+  work into clear team tasks.

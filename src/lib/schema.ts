@@ -162,6 +162,60 @@ export const PackDef = z.object({
 
 export type PackDef = z.infer<typeof PackDef>;
 
+// ── Starter definition (starters/*.yaml) ────────────────────────────────────
+
+export const StarterDef = z.object({
+  id: z.string(),
+  version: z.number().default(1),
+  name: z.string(),
+  description: z.string(),
+  source_usecase: z.string(),
+  source_path: z.string().optional(),
+  entry_team: z.string(),
+  packs: z.array(z.string()).default([]),
+  project_skills: z.array(z.string()).default([]),
+  tags: z.array(z.string()).default([]),
+  external_requirements: z.array(z.string()).default([]),
+  bootstrap_prompt: z.string().optional(),
+});
+
+export type StarterDef = z.infer<typeof StarterDef>;
+
+// ── Demo project metadata (demo-projects/index.yaml) ───────────────────────
+
+export const DemoProjectExecution = z.object({
+  default_workflow: z.string(),
+  managed_workflow: z.string(),
+});
+
+export const DemoProjectDef = z.object({
+  id: z.string(),
+  starter: z.string(),
+  name: z.string(),
+  summary: z.string(),
+  category: z.string(),
+  recommended_mode: z.enum(["default-workflow", "managed-team"]).default("managed-team"),
+  source_usecase: z.string(),
+  source_path: z.string().optional(),
+  entry_team: z.string(),
+  packs: z.array(z.string()).default([]),
+  project_skills: z.array(z.string()).default([]),
+  tags: z.array(z.string()).default([]),
+  external_requirements: z.array(z.string()).default([]),
+  setup_guidance: z.array(z.string()).default([]),
+  card_path: z.string(),
+  execution: DemoProjectExecution,
+});
+
+export const DemoProjectIndex = z.object({
+  version: z.number().default(1),
+  generated_at: z.string().optional(),
+  demos: z.array(DemoProjectDef).default([]),
+});
+
+export type DemoProjectDef = z.infer<typeof DemoProjectDef>;
+export type DemoProjectIndex = z.infer<typeof DemoProjectIndex>;
+
 // ── Project manifest (openclaw-store.yaml) ───────────────────────────────────
 
 export const ManifestProject = z.object({

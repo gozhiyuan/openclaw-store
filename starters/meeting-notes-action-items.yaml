@@ -1,0 +1,36 @@
+id: meeting-notes-action-items
+version: 1
+name: Automated Meeting Notes & Action Items
+description: You just finished a 45-minute team call. Now you need to write up
+  the summary, pull out action items, and distribute them to Jira, Linear, or
+  Todoist — manually. By the time you're done, the next meeting is starting.
+  What if your agent handled all of that the moment the transcript lands?
+source_usecase: Automated Meeting Notes & Action Items
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/meeting-notes-action-items.md
+entry_team: autonomous-startup
+packs:
+  - autonomous-startup
+project_skills:
+  - openclaw-store-manager
+tags:
+  - automation
+  - meeting
+  - notes
+  - action
+  - items
+external_requirements:
+  - Jira, Linear, Todoist, or Notion integration (for task creation)
+  - Slack or Discord integration (for posting summaries)
+  - File system access (for reading transcript files)
+  - Scheduling / cron (for follow-up reminders)
+  - "Optional: Otter.ai, Fireflies.ai, or Google Meet API for automatic
+    transcript retrieval"
+bootstrap_prompt: Start the Automated Meeting Notes & Action Items demo project
+  from the openclaw-store starter `meeting-notes-action-items`. You just
+  finished a 45-minute team call. Now you need to write up the summary, pull out
+  action items, and distribute them to Jira, Linear, or Todoist — manually. By
+  the time you're done, the next meeting is starting. What if your agent handled
+  all of that the moment the transcript lands? Use `autonomous-startup` as the
+  initial entry team. Review STARTER.md, confirm any missing external
+  integrations, then break the work into clear team tasks.

@@ -1,0 +1,31 @@
+id: content-factory
+version: 1
+name: Multi-Agent Content Factory
+description: You're a content creator juggling research, writing, and design
+  across multiple platforms. Each step — finding trending topics, writing
+  scripts, generating thumbnails — eats hours of your day. What if a team of
+  specialized agents handled all of it overnight?
+source_usecase: Multi-Agent Content Factory
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/content-factory.md
+entry_team: content-factory
+packs:
+  - content-factory
+project_skills:
+  - openclaw-store-manager
+tags:
+  - content
+  - factory
+external_requirements:
+  - Discord integration with multiple channels
+  - sessions_spawn / sessions_send for multi-agent orchestration
+  - x-research-v2 or similar for social media research
+  - Local image generation (e.g., Nano Banana) or an image generation API
+  - knowledge-base skill (optional, for RAG-powered research)
+bootstrap_prompt: Start the Multi-Agent Content Factory demo project from the
+  openclaw-store starter `content-factory`. You're a content creator juggling
+  research, writing, and design across multiple platforms. Each step — finding
+  trending topics, writing scripts, generating thumbnails — eats hours of your
+  day. What if a team of specialized agents handled all of it overnight? Use
+  `content-factory` as the initial entry team. Review STARTER.md, confirm any
+  missing external integrations, then break the work into clear team tasks.

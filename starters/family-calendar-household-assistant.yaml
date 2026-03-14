@@ -1,0 +1,39 @@
+id: family-calendar-household-assistant
+version: 1
+name: Family Calendar Aggregation & Household Assistant
+description: Modern families juggle five or more calendars — work, personal,
+  shared family, kids' school, extracurriculars — across different platforms and
+  formats. Important events slip through the cracks because no single view
+  exists. Meanwhile, household coordination (grocery lists, pantry inventory,
+  appointment scheduling) happens through scattered text messages that get
+  buried.
+source_usecase: Family Calendar Aggregation & Household Assistant
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/family-calendar-household-assistant.md
+entry_team: autonomous-startup
+packs:
+  - autonomous-startup
+project_skills:
+  - openclaw-store-manager
+tags:
+  - automation
+  - family
+  - calendar
+  - household
+  - assistant
+external_requirements:
+  - Calendar API access (Google Calendar, Apple Calendar via ical)
+  - imessage skill for message monitoring (macOS only)
+  - Telegram or Slack for the shared family chat interface
+  - File system access for inventory tracking
+  - Camera/photo processing for OCR of physical calendars
+bootstrap_prompt: Start the Family Calendar Aggregation & Household Assistant
+  demo project from the openclaw-store starter
+  `family-calendar-household-assistant`. Modern families juggle five or more
+  calendars — work, personal, shared family, kids' school, extracurriculars —
+  across different platforms and formats. Important events slip through the
+  cracks because no single view exists. Meanwhile, household coordination
+  (grocery lists, pantry inventory, appointment scheduling) happens through
+  scattered text messages that get buried. Use `autonomous-startup` as the
+  initial entry team. Review STARTER.md, confirm any missing external
+  integrations, then break the work into clear team tasks.

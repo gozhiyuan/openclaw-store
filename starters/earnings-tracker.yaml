@@ -1,0 +1,29 @@
+id: earnings-tracker
+version: 1
+name: AI-Powered Earnings Tracker
+description: Following earnings season across dozens of tech companies means
+  checking multiple sources and remembering report dates. You want to stay on
+  top of AI/tech earnings without manually tracking every company.
+source_usecase: AI-Powered Earnings Tracker
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/earnings-tracker.md
+entry_team: research-lab
+packs:
+  - research-lab
+project_skills:
+  - openclaw-store-manager
+tags:
+  - research
+  - earnings
+  - tracker
+external_requirements:
+  - web_search (built-in)
+  - Cron job support in OpenClaw
+  - Telegram topic for earnings updates
+bootstrap_prompt: Start the AI-Powered Earnings Tracker demo project from the
+  openclaw-store starter `earnings-tracker`. Following earnings season across
+  dozens of tech companies means checking multiple sources and remembering
+  report dates. You want to stay on top of AI/tech earnings without manually
+  tracking every company. Use `research-lab` as the initial entry team. Review
+  STARTER.md, confirm any missing external integrations, then break the work
+  into clear team tasks.

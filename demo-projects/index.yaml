@@ -1,0 +1,1730 @@
+version: 1
+generated_at: 2026-03-14T05:48:57.536Z
+demos:
+  - id: aionui-cowork-desktop
+    starter: aionui-cowork-desktop
+    name: OpenClaw as Desktop Cowork (AionUi) — Remote Rescue & Multi-Agent Hub
+    summary: Use OpenClaw from a desktop Cowork UI, access it from Telegram or WebUI
+      when you’re away, and fix it remotely when it won’t connect. AionUi is a
+      free, open-source app that runs **OpenClaw as a first-class agent**
+      alongside 12+ others (Claude Code, Codex, Qwen Code, etc.), with a
+      built-in **OpenClaw deployment expert** for install, diagnose, and repair
+      — including **remote rescue** when OpenClaw is down and you’re not at the
+      machine.
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: OpenClaw as Desktop Cowork (AionUi) — Remote Rescue & Multi-Agent Hub
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/aionui-cowork-desktop.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - aionui
+      - cowork
+      - desktop
+    external_requirements:
+      - "**OpenClaw** (e.g. npm install -g openclaw@latest). AionUi’s **OpenClaw
+        Setup** assistant can guide install, gateway, and config."
+      - API keys or auth for your models (OpenClaw config + any built-in agent
+        keys in AionUi).
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/aionui-cowork-desktop.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: autonomous-game-dev-pipeline
+    starter: autonomous-game-dev-pipeline
+    name: Autonomous Educational Game Development Pipeline
+    summary: '**The Origin Story:** A "LANero of the old school" dad wanted to
+      create a safe, ad-free, and high-quality gaming portal for his daughters,
+      Susana (3) and Julieta (coming soon). Existing sites were plagued with
+      spam, aggressive ads, and deceptive buttons (dark patterns) that
+      frustrated his toddler.'
+    category: development
+    recommended_mode: managed-team
+    source_usecase: Autonomous Educational Game Development Pipeline
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/autonomous-game-dev-pipeline.md
+    entry_team: dev-company
+    packs:
+      - dev-company
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - development
+      - autonomous
+      - game
+      - dev
+      - pipeline
+    external_requirements:
+      - "**Git**: To manage branches, commits, and merges."
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `dev-company` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/autonomous-game-dev-pipeline.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `dev-company` project entry-point agent for structured multi-agent
+        execution.
+  - id: autonomous-project-management
+    starter: autonomous-project-management
+    name: Autonomous Project Management with Subagents
+    summary: Managing complex projects with multiple parallel workstreams is
+      exhausting. You end up context-switching constantly, tracking status
+      across tools, and manually coordinating handoffs.
+    category: development
+    recommended_mode: managed-team
+    source_usecase: Autonomous Project Management with Subagents
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/autonomous-project-management.md
+    entry_team: dev-company
+    packs:
+      - dev-company
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - development
+      - autonomous
+      - project
+      - management
+    external_requirements:
+      - sessions_spawn / sessions_send for subagent management
+      - File system access for STATE.yaml
+      - Git for state versioning (optional but recommended)
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `dev-company` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/autonomous-project-management.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `dev-company` project entry-point agent for structured multi-agent
+        execution.
+  - id: content-factory
+    starter: content-factory
+    name: Multi-Agent Content Factory
+    summary: You're a content creator juggling research, writing, and design across
+      multiple platforms. Each step — finding trending topics, writing scripts,
+      generating thumbnails — eats hours of your day. What if a team of
+      specialized agents handled all of it overnight?
+    category: content
+    recommended_mode: managed-team
+    source_usecase: Multi-Agent Content Factory
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/content-factory.md
+    entry_team: content-factory
+    packs:
+      - content-factory
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - content
+      - factory
+    external_requirements:
+      - Discord integration with multiple channels
+      - sessions_spawn / sessions_send for multi-agent orchestration
+      - x-research-v2 or similar for social media research
+      - Local image generation (e.g., Nano Banana) or an image generation API
+      - knowledge-base skill (optional, for RAG-powered research)
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `content-factory` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/content-factory.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `content-factory` project entry-point agent for structured
+        multi-agent execution.
+  - id: custom-morning-brief
+    starter: custom-morning-brief
+    name: Custom Morning Brief
+    summary: You wake up and spend the first 30 minutes of your day catching up —
+      scrolling news, checking your calendar, reviewing your to-do list, trying
+      to figure out what matters today. What if all of that was already done and
+      waiting for you as a text message?
+    category: content-research
+    recommended_mode: managed-team
+    source_usecase: Custom Morning Brief
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/custom-morning-brief.md
+    entry_team: research-lab
+    packs:
+      - research-lab
+      - content-factory
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - research
+      - content
+      - custom
+      - morning
+      - brief
+    external_requirements:
+      - Telegram, Discord, or iMessage integration
+      - Todoist / Apple Reminders / Asana integration (whichever you use for
+        tasks)
+      - x-research-v2 for social media trend research (optional)
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `research-lab` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/custom-morning-brief.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `research-lab` project entry-point agent for structured multi-agent
+        execution.
+  - id: daily-reddit-digest
+    starter: daily-reddit-digest
+    name: Daily Reddit Digest
+    summary: Run a daily digest everyday to give you the top performing posts from
+      your favourite subreddits.
+    category: content
+    recommended_mode: managed-team
+    source_usecase: Daily Reddit Digest
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/daily-reddit-digest.md
+    entry_team: content-factory
+    packs:
+      - content-factory
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - content
+      - daily
+      - reddit
+      - digest
+    external_requirements:
+      - reddit-readonly skill. It doesn't need auth.
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `content-factory` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/daily-reddit-digest.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `content-factory` project entry-point agent for structured
+        multi-agent execution.
+  - id: daily-youtube-digest
+    starter: daily-youtube-digest
+    name: Daily YouTube Digest
+    summary: Start your day with a personalized summary of new videos from your
+      favorite YouTube channels — no more missing content from creators you
+      actually want to follow.
+    category: content
+    recommended_mode: managed-team
+    source_usecase: Daily YouTube Digest
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/daily-youtube-digest.md
+    entry_team: content-factory
+    packs:
+      - content-factory
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - content
+      - daily
+      - youtube
+      - digest
+    external_requirements:
+      - Install the youtube-full skill.
+      - "Just tell your OpenClaw:"
+      - '"Install the youtube-full skill and set it up for me"'
+      - or
+      - npx clawhub@latest install youtube-full
+      - That's it. The agent handles the rest — including account creation and
+        API key setup. You get **100 free credits on signup**, no credit card
+        required.
+      - "> Note: After creating the account, the skill auto-stores the API key
+        securely in correct locations based on the OS, so the API will work in
+        all contexts."
+      - "!youtube-full skill installation"
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `content-factory` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/daily-youtube-digest.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `content-factory` project entry-point agent for structured
+        multi-agent execution.
+  - id: default-managed
+    starter: default-managed
+    name: Default Managed Project
+    summary: Minimal managed OpenClaw project that keeps the normal default workflow
+      available while adding a single generalist entry-point team for structured
+      installs.
+    category: general
+    recommended_mode: managed-team
+    source_usecase: Default Managed Project
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - default
+      - managed
+      - general
+      - bootstrap
+    external_requirements: []
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - No additional external integrations are required beyond the selected
+        team and bundled management skill.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/default-managed.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: dynamic-dashboard
+    starter: dynamic-dashboard
+    name: Dynamic Dashboard with Sub-agent Spawning
+    summary: Static dashboards show stale data and require constant manual updates.
+      You want real-time visibility across multiple data sources without
+      building a custom frontend or hitting API rate limits.
+    category: development
+    recommended_mode: managed-team
+    source_usecase: Dynamic Dashboard with Sub-agent Spawning
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/dynamic-dashboard.md
+    entry_team: dev-company
+    packs:
+      - dev-company
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - development
+      - dynamic
+      - dashboard
+    external_requirements:
+      - Sub-agent spawning for parallel execution
+      - github (gh CLI) for GitHub metrics
+      - bird (Twitter) for social data
+      - web_search or web_fetch for external APIs
+      - postgres for storing historical metrics
+      - Discord or Canvas for rendering the dashboard
+      - Cron jobs for scheduled updates
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `dev-company` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/dynamic-dashboard.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `dev-company` project entry-point agent for structured multi-agent
+        execution.
+  - id: earnings-tracker
+    starter: earnings-tracker
+    name: AI-Powered Earnings Tracker
+    summary: Following earnings season across dozens of tech companies means
+      checking multiple sources and remembering report dates. You want to stay
+      on top of AI/tech earnings without manually tracking every company.
+    category: research
+    recommended_mode: managed-team
+    source_usecase: AI-Powered Earnings Tracker
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/earnings-tracker.md
+    entry_team: research-lab
+    packs:
+      - research-lab
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - research
+      - earnings
+      - tracker
+    external_requirements:
+      - web_search (built-in)
+      - Cron job support in OpenClaw
+      - Telegram topic for earnings updates
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `research-lab` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/earnings-tracker.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `research-lab` project entry-point agent for structured multi-agent
+        execution.
+  - id: event-guest-confirmation
+    starter: event-guest-confirmation
+    name: Event Guest Confirmation
+    summary: "You're hosting an event — a dinner party, a wedding, a company offsite
+      — and you need to confirm attendance from a list of guests. Manually
+      calling 20+ people is tedious: you play phone tag, forget who said what,
+      and lose track of dietary restrictions or plus-ones. Texting works
+      sometimes, but people ignore messages. A real phone call gets a much
+      higher response rate."
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Event Guest Confirmation
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/event-guest-confirmation.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - event
+      - guest
+      - confirmation
+    external_requirements:
+      - SuperCall — install via openclaw plugins install @xonder/supercall
+      - A Twilio account with a phone number (for making outbound calls)
+      - An OpenAI API key (for the GPT-4o Realtime voice AI)
+      - ngrok (for webhook tunneling — free tier works)
+      - See the SuperCall README for full configuration instructions.
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/event-guest-confirmation.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: family-calendar-household-assistant
+    starter: family-calendar-household-assistant
+    name: Family Calendar Aggregation & Household Assistant
+    summary: Modern families juggle five or more calendars — work, personal, shared
+      family, kids' school, extracurriculars — across different platforms and
+      formats. Important events slip through the cracks because no single view
+      exists. Meanwhile, household coordination (grocery lists, pantry
+      inventory, appointment scheduling) happens through scattered text messages
+      that get buried.
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Family Calendar Aggregation & Household Assistant
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/family-calendar-household-assistant.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - family
+      - calendar
+      - household
+      - assistant
+    external_requirements:
+      - Calendar API access (Google Calendar, Apple Calendar via ical)
+      - imessage skill for message monitoring (macOS only)
+      - Telegram or Slack for the shared family chat interface
+      - File system access for inventory tracking
+      - Camera/photo processing for OCR of physical calendars
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/family-calendar-household-assistant.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: habit-tracker-accountability-coach
+    starter: habit-tracker-accountability-coach
+    name: Habit Tracker & Accountability Coach
+    summary: You've tried every habit tracker app out there. They all work for a
+      week, then you stop opening them. The problem isn't the app — it's that
+      tracking habits is passive. What if your agent actively reached out to
+      you, asked how your day went, and adapted its approach based on whether
+      you're on a streak or falling off?
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Habit Tracker & Accountability Coach
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/habit-tracker-accountability-coach.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - habit
+      - tracker
+      - accountability
+      - coach
+    external_requirements:
+      - Telegram or SMS integration (Twilio for SMS, or Telegram Bot API)
+      - Scheduling / cron for timed check-ins
+      - File system or database access for storing habit data
+      - "Optional: Google Sheets integration for a visual habit dashboard"
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/habit-tracker-accountability-coach.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: health-symptom-tracker
+    starter: health-symptom-tracker
+    name: Health & Symptom Tracker
+    summary: Identifying food sensitivities requires consistent logging over time,
+      which is tedious to maintain. You need reminders to log and analysis to
+      spot patterns.
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Health & Symptom Tracker
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/health-symptom-tracker.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - health
+      - symptom
+      - tracker
+    external_requirements:
+      - Cron jobs for reminders
+      - Telegram topic for logging
+      - File storage (markdown log file)
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/health-symptom-tracker.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: inbox-declutter
+    starter: inbox-declutter
+    name: Inbox De-clutter
+    summary: Newsletters can take up the inbox like nothing else. Often times they
+      pile-up without being opened at all.
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Inbox De-clutter
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/inbox-declutter.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - inbox
+      - declutter
+    external_requirements:
+      - Gmail OAuth Setup.
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/inbox-declutter.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: knowledge-base-rag
+    starter: knowledge-base-rag
+    name: Personal Knowledge Base (RAG)
+    summary: You read articles, tweets, and watch videos all day but can never find
+      that one thing you saw last week. Bookmarks pile up and become useless.
+    category: research
+    recommended_mode: managed-team
+    source_usecase: Personal Knowledge Base (RAG)
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/knowledge-base-rag.md
+    entry_team: research-lab
+    packs:
+      - research-lab
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - research
+      - knowledge
+      - base
+      - rag
+    external_requirements:
+      - knowledge-base skill (or build custom RAG with embeddings)
+      - web_fetch (built-in)
+      - Telegram topic or Slack channel for ingestion
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `research-lab` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/knowledge-base-rag.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `research-lab` project entry-point agent for structured multi-agent
+        execution.
+  - id: market-research-product-factory
+    starter: market-research-product-factory
+    name: Market Research & Product Factory
+    summary: You want to build a product but don't know what to build. Or you have a
+      business and need to understand what your customers are struggling with.
+      This workflow uses the Last 30 Days skill to mine Reddit and X for real
+      pain points, then has OpenClaw build solutions to those problems.
+    category: content-research
+    recommended_mode: managed-team
+    source_usecase: Market Research & Product Factory
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/market-research-product-factory.md
+    entry_team: research-lab
+    packs:
+      - research-lab
+      - content-factory
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - research
+      - content
+      - market
+      - product
+      - factory
+    external_requirements:
+      - Last 30 Days skill by Matt Van Horde
+      - Telegram or Discord integration for receiving research reports
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `research-lab` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/market-research-product-factory.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `research-lab` project entry-point agent for structured multi-agent
+        execution.
+  - id: meeting-notes-action-items
+    starter: meeting-notes-action-items
+    name: Automated Meeting Notes & Action Items
+    summary: You just finished a 45-minute team call. Now you need to write up the
+      summary, pull out action items, and distribute them to Jira, Linear, or
+      Todoist — manually. By the time you're done, the next meeting is starting.
+      What if your agent handled all of that the moment the transcript lands?
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Automated Meeting Notes & Action Items
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/meeting-notes-action-items.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - meeting
+      - notes
+      - action
+      - items
+    external_requirements:
+      - Jira, Linear, Todoist, or Notion integration (for task creation)
+      - Slack or Discord integration (for posting summaries)
+      - File system access (for reading transcript files)
+      - Scheduling / cron (for follow-up reminders)
+      - "Optional: Otter.ai, Fireflies.ai, or Google Meet API for automatic
+        transcript retrieval"
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/meeting-notes-action-items.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: multi-agent-team
+    starter: multi-agent-team
+    name: Multi-Agent Specialized Team (Solo Founder Setup)
+    summary: Solo founders wear every hat — strategy, development, marketing, sales,
+      operations. Context-switching between these roles destroys deep work.
+      Hiring is expensive and slow. What if you could spin up a small,
+      specialized team of AI agents, each with a distinct role and personality,
+      all controllable from a single chat interface?
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Multi-Agent Specialized Team (Solo Founder Setup)
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/multi-agent-team.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - multi
+      - agent
+      - team
+    external_requirements:
+      - telegram skill for the shared control interface
+      - sessions_spawn / sessions_send for multi-agent coordination
+      - Shared file system or note-taking tool for team memory
+      - Individual API keys for different model providers (if using mixed models)
+      - A VPS or always-on machine to run the agents
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/multi-agent-team.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: multi-channel-assistant
+    starter: multi-channel-assistant
+    name: Multi-Channel Personal Assistant
+    summary: Context-switching between apps to manage tasks, schedule events, send
+      messages, and track work is exhausting. You want one interface that routes
+      to all your tools.
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Multi-Channel Personal Assistant
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/multi-channel-assistant.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - multi
+      - channel
+      - assistant
+    external_requirements:
+      - gog CLI (Google Workspace)
+      - Slack integration (bot + user tokens)
+      - Todoist API or skill
+      - Asana API or skill
+      - Telegram channel with multiple topics configured
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/multi-channel-assistant.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: multi-channel-customer-service
+    starter: multi-channel-customer-service
+    name: Multi-Channel AI Customer Service Platform
+    summary: Small businesses juggle WhatsApp, Instagram DMs, emails, and Google
+      Reviews across multiple apps. Customers expect instant responses 24/7, but
+      hiring staff for round-the-clock coverage is expensive.
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Multi-Channel AI Customer Service Platform
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/multi-channel-customer-service.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - multi
+      - channel
+      - customer
+      - service
+    external_requirements:
+      - WhatsApp Business API integration
+      - Instagram Graph API (via Meta Business)
+      - gog CLI for Gmail
+      - Google Business Profile API for reviews
+      - Message routing logic in AGENTS.md
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/multi-channel-customer-service.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: multi-source-tech-news-digest
+    starter: multi-source-tech-news-digest
+    name: Multi-Source Tech News Digest
+    summary: Automatically aggregate, score, and deliver tech news from 109+ sources
+      across RSS, Twitter/X, GitHub releases, and web search — all managed
+      through natural language.
+    category: content-research
+    recommended_mode: managed-team
+    source_usecase: Multi-Source Tech News Digest
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/multi-source-tech-news-digest.md
+    entry_team: research-lab
+    packs:
+      - research-lab
+      - content-factory
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - research
+      - content
+      - multi
+      - source
+      - tech
+      - news
+      - digest
+    external_requirements:
+      - tech-news-digest — Install via clawhub install tech-news-digest
+      - gog (optional) — For email delivery via Gmail
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `research-lab` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/multi-source-tech-news-digest.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `research-lab` project entry-point agent for structured multi-agent
+        execution.
+  - id: n8n-workflow-orchestration
+    starter: n8n-workflow-orchestration
+    name: OpenClaw + n8n Workflow Orchestration
+    summary: Letting your AI agent directly manage API keys and call external
+      services is a recipe for security incidents. Every new integration means
+      another credential in `.env.local`, another surface for the agent to
+      accidentally leak or misuse.
+    category: development
+    recommended_mode: managed-team
+    source_usecase: OpenClaw + n8n Workflow Orchestration
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/n8n-workflow-orchestration.md
+    entry_team: dev-company
+    packs:
+      - dev-company
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - development
+      - n8n
+      - workflow
+      - orchestration
+    external_requirements:
+      - n8n API access (for creating/triggering workflows)
+      - fetch or curl for webhook calls
+      - Docker (if using the pre-configured stack)
+      - n8n credential management (manual, one-time setup per integration)
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `dev-company` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/n8n-workflow-orchestration.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `dev-company` project entry-point agent for structured multi-agent
+        execution.
+  - id: overnight-mini-app-builder
+    starter: overnight-mini-app-builder
+    name: Goal-Driven Autonomous Tasks
+    summary: Your AI agent is powerful but reactive — it only works when you tell it
+      what to do. What if it knew your goals and proactively came up with tasks
+      to move you closer to them every single day, without being asked?
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Goal-Driven Autonomous Tasks
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/overnight-mini-app-builder.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - overnight
+      - mini
+      - app
+      - builder
+    external_requirements:
+      - Telegram or Discord integration
+      - sessions_spawn / sessions_send for autonomous task execution
+      - Next.js or similar (for the Kanban board — OpenClaw builds it for you)
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/overnight-mini-app-builder.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: personal-crm
+    starter: personal-crm
+    name: Personal CRM with Automatic Contact Discovery
+    summary: Keeping track of who you've met, when, and what you discussed is
+      impossible to do manually. Important follow-ups slip through the cracks,
+      and you forget context before important meetings.
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Personal CRM with Automatic Contact Discovery
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/personal-crm.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - personal
+      - crm
+    external_requirements:
+      - gog CLI (for Gmail and Google Calendar)
+      - Custom CRM database (SQLite or similar) or use the crm-query skill if
+        available
+      - Telegram topic for CRM queries
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/personal-crm.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: phone-based-personal-assistant
+    starter: phone-based-personal-assistant
+    name: Phone-Based Personal Assistant
+    summary: You want to access your AI agent from any phone without needing a
+      smartphone app or internet browser. You need hands-free voice assistance
+      while driving, walking, or when your hands are occupied.
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Phone-Based Personal Assistant
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/phone-based-personal-assistant.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - phone
+      - based
+      - personal
+      - assistant
+    external_requirements:
+      - ClawdTalk
+      - Calendar skill (Google Calendar or Outlook)
+      - Jira skill
+      - Web search skill
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/phone-based-personal-assistant.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: phone-call-notifications
+    starter: phone-call-notifications
+    name: Phone Call Notifications
+    summary: Your agent already monitors things for you — stocks, emails, smart
+      home, calendars — but notifications are easy to ignore. Push notifications
+      pile up. Chat messages get buried. For the stuff that actually matters,
+      you need something you can't swipe away.
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: Phone Call Notifications
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/phone-call-notifications.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - phone
+      - call
+      - notifications
+    external_requirements:
+      - clawr.ing — install by pasting the setup prompt from the clawr.ing
+        dashboard into your OpenClaw chat. No CLI install needed.
+      - That's it. No other dependencies. The setup prompt includes the API key
+        and links to skill docs — the agent reads them and figures out the rest.
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/phone-call-notifications.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: podcast-production-pipeline
+    starter: podcast-production-pipeline
+    name: Podcast Production Pipeline
+    summary: You have a podcast idea, maybe even a backlog of episode topics. But
+      between researching guests, writing outlines, drafting intros, generating
+      show notes, and writing social media posts for promotion — the production
+      overhead kills your momentum. What if you handed off a topic and got back
+      a full production package?
+    category: content
+    recommended_mode: managed-team
+    source_usecase: Podcast Production Pipeline
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/podcast-production-pipeline.md
+    entry_team: content-factory
+    packs:
+      - content-factory
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - content
+      - podcast
+      - production
+      - pipeline
+    external_requirements:
+      - Web search / research skill (for guest research and topic deep-dives)
+      - File system access (for reading transcripts and writing output files)
+      - Slack, Discord, or Telegram integration (for delivering assets)
+      - "Optional: sessions_spawn for running research and writing agents in
+        parallel"
+      - "Optional: RSS feed skill (for monitoring competitor podcasts)"
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `content-factory` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/podcast-production-pipeline.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `content-factory` project entry-point agent for structured
+        multi-agent execution.
+  - id: polymarket-autopilot
+    starter: polymarket-autopilot
+    name: "Polymarket Autopilot: Automated Paper Trading"
+    summary: Manually monitoring prediction markets for arbitrage opportunities and
+      executing trades is time-consuming and requires constant attention. You
+      want to test and refine trading strategies without risking real capital.
+    category: automation
+    recommended_mode: managed-team
+    source_usecase: "Polymarket Autopilot: Automated Paper Trading"
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/polymarket-autopilot.md
+    entry_team: autonomous-startup
+    packs:
+      - autonomous-startup
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - automation
+      - polymarket
+      - autopilot
+    external_requirements:
+      - web_search or web_fetch (for Polymarket API data)
+      - postgres or SQLite for trade logs and portfolio tracking
+      - Discord integration for daily reports
+      - Cron jobs for continuous monitoring
+      - Sub-agent spawning for parallel market analysis
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `autonomous-startup` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/polymarket-autopilot.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `autonomous-startup` project entry-point agent for structured
+        multi-agent execution.
+  - id: pre-build-idea-validator
+    starter: pre-build-idea-validator
+    name: Pre-Build Idea Validator
+    summary: Before OpenClaw starts building anything new, it automatically checks
+      whether the idea already exists across GitHub, Hacker News, npm, PyPI, and
+      Product Hunt — and adjusts its approach based on what it finds.
+    category: research
+    recommended_mode: managed-team
+    source_usecase: Pre-Build Idea Validator
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/pre-build-idea-validator.md
+    entry_team: research-lab
+    packs:
+      - research-lab
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - research
+      - pre
+      - build
+      - idea
+      - validator
+    external_requirements:
+      - idea-reality-mcp — MCP server that scans real data sources and returns a
+        competition score
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `research-lab` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/pre-build-idea-validator.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `research-lab` project entry-point agent for structured multi-agent
+        execution.
+  - id: project-state-management
+    starter: project-state-management
+    name: "Project State Management System: Event-Driven Alternative to Kanban"
+    summary: Traditional Kanban boards are static and require manual updates. You
+      forget to move cards, lose context between sessions, and can't track the
+      "why" behind state changes. Projects drift without clear visibility.
+    category: development
+    recommended_mode: managed-team
+    source_usecase: "Project State Management System: Event-Driven Alternative to Kanban"
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/project-state-management.md
+    entry_team: dev-company
+    packs:
+      - dev-company
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - development
+      - project
+      - state
+      - management
+    external_requirements:
+      - postgres or SQLite for project state database
+      - github (gh CLI) for commit tracking
+      - Discord or Telegram for updates and queries
+      - Cron jobs for daily summaries
+      - Sub-agents for parallel project analysis
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `dev-company` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/project-state-management.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `dev-company` project entry-point agent for structured multi-agent
+        execution.
+  - id: second-brain
+    starter: second-brain
+    name: Second Brain
+    summary: You come up with ideas, find interesting links, hear about books to
+      read — but you never have a good system for capturing them. Notion gets
+      complex, Apple Notes becomes a graveyard of 10,000 unread entries. You
+      need something as simple as texting a friend.
+    category: research
+    recommended_mode: managed-team
+    source_usecase: Second Brain
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/second-brain.md
+    entry_team: research-lab
+    packs:
+      - research-lab
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - research
+      - second
+      - brain
+    external_requirements:
+      - Telegram, iMessage, or Discord integration (for text-based capture)
+      - Next.js (OpenClaw builds this for you — no coding needed)
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `research-lab` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/second-brain.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `research-lab` project entry-point agent for structured multi-agent
+        execution.
+  - id: self-healing-home-server
+    starter: self-healing-home-server
+    name: Self-Healing Home Server & Infrastructure Management
+    summary: Running a home server means being on-call 24/7 for your own
+      infrastructure. Services go down at 3 AM, certificates expire silently,
+      disk fills up, and pods crash-loop — all while you're asleep or away.
+    category: development
+    recommended_mode: managed-team
+    source_usecase: Self-Healing Home Server & Infrastructure Management
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/self-healing-home-server.md
+    entry_team: dev-company
+    packs:
+      - dev-company
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - development
+      - self
+      - healing
+      - home
+      - server
+    external_requirements:
+      - ssh access to home network machines
+      - kubectl for Kubernetes cluster management
+      - terraform and ansible for infrastructure-as-code
+      - 1password CLI for secrets management
+      - gog CLI for email access
+      - Calendar API access
+      - Obsidian vault or notes directory (for knowledge base)
+      - openclaw doctor for self-diagnostics
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `dev-company` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/self-healing-home-server.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `dev-company` project entry-point agent for structured multi-agent
+        execution.
+  - id: semantic-memory-search
+    starter: semantic-memory-search
+    name: Semantic Memory Search
+    summary: OpenClaw's built-in memory system stores everything as markdown files —
+      but as memories grow over weeks and months, finding that one decision from
+      last Tuesday becomes impossible. There is no search, just scrolling
+      through files.
+    category: research
+    recommended_mode: managed-team
+    source_usecase: Semantic Memory Search
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/semantic-memory-search.md
+    entry_team: research-lab
+    packs:
+      - research-lab
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - research
+      - semantic
+      - memory
+      - search
+    external_requirements:
+      - No OpenClaw skills required — memsearch is a standalone Python
+        CLI/library
+      - Python 3.10+ with pip or uv
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `research-lab` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/semantic-memory-search.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `research-lab` project entry-point agent for structured multi-agent
+        execution.
+  - id: todoist-task-manager
+    starter: todoist-task-manager
+    name: "Todoist Task Manager: Agent Task Visibility"
+    summary: Maximize transparency for long-running agentic workflows by syncing
+      internal reasoning and progress logs directly to Todoist.
+    category: development
+    recommended_mode: managed-team
+    source_usecase: "Todoist Task Manager: Agent Task Visibility"
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/todoist-task-manager.md
+    entry_team: dev-company
+    packs:
+      - dev-company
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - development
+      - todoist
+      - task
+      - manager
+    external_requirements:
+      - You don't need a pre-built skill. Simply prompt your OpenClaw agent to
+        create the bash scripts described in the **Setup Guide** below. Since
+        OpenClaw can manage its own filesystem and execute shell commands, it
+        will effectively "build" the skill for you upon request.
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `dev-company` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/todoist-task-manager.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `dev-company` project entry-point agent for structured multi-agent
+        execution.
+  - id: x-account-analysis
+    starter: x-account-analysis
+    name: X Account Analysis
+    summary: There are many websites designed to give you a qualitative analysis of
+      your X account. While X already gives you an **analytics** section, it's
+      more focused to show your numbers on your performance.
+    category: content
+    recommended_mode: managed-team
+    source_usecase: X Account Analysis
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/x-account-analysis.md
+    entry_team: content-factory
+    packs:
+      - content-factory
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - content
+      - x
+      - account
+      - analysis
+    external_requirements:
+      - Bird Skill. clawhub install bird (it comes pre-bundled)
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `content-factory` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/x-account-analysis.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `content-factory` project entry-point agent for structured
+        multi-agent execution.
+  - id: youtube-content-pipeline
+    starter: youtube-content-pipeline
+    name: YouTube Content Pipeline
+    summary: As a daily YouTube creator, finding fresh, timely video ideas across
+      the web and X/Twitter is time-consuming. Tracking what you've already
+      covered prevents duplicates and helps you stay ahead of trends.
+    category: content
+    recommended_mode: managed-team
+    source_usecase: YouTube Content Pipeline
+    source_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/youtube-content-pipeline.md
+    entry_team: content-factory
+    packs:
+      - content-factory
+    project_skills:
+      - openclaw-store-manager
+    tags:
+      - content
+      - youtube
+      - pipeline
+    external_requirements:
+      - web_search (built-in)
+      - x-research-v2 or custom X/Twitter search skill
+      - knowledge-base skill for RAG
+      - Asana integration (or Todoist)
+      - gog CLI for YouTube Analytics
+      - Telegram topic for receiving pitches
+    setup_guidance:
+      - Choose between the default OpenClaw or Claude Code workflow and the
+        managed multi-agent workflow.
+      - If you want managed execution, initialize the starter and use
+        `content-factory` as the entry-point team.
+      - Review the generated STARTER.md and confirm the project scope before
+        running install.
+      - Use OpenClaw to verify which external skills, tools, or APIs are still
+        missing before execution.
+      - Install or configure those missing skills and API keys in OpenClaw, then
+        re-run openclaw-store install.
+    card_path: /Users/ll/Documents/Zhiyuan
+      Liu/github/openclaw-dir/openclaw-store/demo-projects/cards/youtube-content-pipeline.md
+    execution:
+      default_workflow: Stay in the normal OpenClaw or Claude Code default workflow if
+        you only need one generalist agent or want to prototype without managed
+        teams.
+      managed_workflow: Initialize this starter, run openclaw-store install, then open
+        the `content-factory` project entry-point agent for structured
+        multi-agent execution.

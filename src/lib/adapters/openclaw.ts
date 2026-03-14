@@ -51,7 +51,7 @@ export async function readOpenClawConfig(): Promise<{ path: string; config: Open
       const configPath = resolveOpenClawConfigPath();
       throw new Error(
         `OpenClaw config not found at ${configPath}.\n` +
-        `Either install OpenClaw first, or run: openclaw-store install --no-openclaw`,
+        `Install OpenClaw first, then run: openclaw-store install`,
       );
     }
     const msg = err instanceof Error ? err.message : String(err);
@@ -338,7 +338,6 @@ export type InstallTeamParams = {
   agents: { agentDef: AgentDef; member: TeamMember; workspaceDir: string; agentDir: string }[];
   overwrite?: boolean;
   dryRun?: boolean;
-  skipOpenClaw?: boolean;
 };
 
 export type InstallAction = {
@@ -396,33 +395,6 @@ export async function installTeam(params: InstallTeamParams): Promise<void> {
   await writeOpenClawConfig(configPath, config);
 }
 
-/** Same as installTeam but skips openclaw.json patching — for CI and Claude Code environments */
-export async function installTeamWorkspacesOnly(params: InstallTeamParams): Promise<void> {
-  if (params.dryRun) {
-    throw new Error("Use planInstallTeam for dry-run");
-  }
-
-  const allMembers = params.agents.map((a) => ({
-    member: a.member,
-    agent: a.agentDef,
-  }));
-
-  // Provision each agent (workspace files only, no config patch)
-  for (const agent of params.agents) {
-    await provisionAgent({
-      agentDef: agent.agentDef,
-      teamDef: params.teamDef,
-      member: agent.member,
-      allMembers,
-      workspaceDir: agent.workspaceDir,
-      agentDir: agent.agentDir,
-      createAgentDir: false,
-      overwrite: params.overwrite,
-    });
-  }
-  // No openclaw.json patch, no allowlist update
-}
-
 /** Produce a dry-run plan without making changes */
 export function planInstallTeam(params: InstallTeamParams): InstallAction[] {
   const actions: InstallAction[] = [];
@@ -437,13 +409,11 @@ export function planInstallTeam(params: InstallTeamParams): InstallAction[] {
       path: agent.workspaceDir,
       description: `Create workspace dir for ${agent.agentDef.name}`,
     });
-    if (!params.skipOpenClaw) {
-      actions.push({
-        type: "create_agent_dir",
-        path: agent.agentDir,
-        description: `Create agent dir for ${agent.agentDef.name}`,
-      });
-    }
+    actions.push({
+      type: "create_agent_dir",
+      path: agent.agentDir,
+      description: `Create agent dir for ${agent.agentDef.name}`,
+    });
 
     const files = renderBootstrapFiles(
       agent.agentDef,
@@ -460,19 +430,17 @@ export function planInstallTeam(params: InstallTeamParams): InstallAction[] {
     }
   }
 
-  if (!params.skipOpenClaw) {
-    actions.push({
-      type: "patch_config",
-      path: resolveOpenClawConfigPath(),
-      description: `Patch openclaw.json: add ${params.agents.length} agents to list`,
-    });
+  actions.push({
+    type: "patch_config",
+    path: resolveOpenClawConfigPath(),
+    description: `Patch openclaw.json: add ${params.agents.length} agents to list`,
+  });
 
-    actions.push({
-      type: "update_guidance",
-      path: resolveMainAgentWorkspaceDir(),
-      description: "Update TOOLS.md and AGENTS.md with store guidance",
-    });
-  }
+  actions.push({
+    type: "update_guidance",
+    path: resolveMainAgentWorkspaceDir(),
+    description: "Update TOOLS.md and AGENTS.md with store guidance",
+  });
 
   return actions;
 }

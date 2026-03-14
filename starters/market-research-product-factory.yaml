@@ -1,0 +1,33 @@
+id: market-research-product-factory
+version: 1
+name: Market Research & Product Factory
+description: You want to build a product but don't know what to build. Or you
+  have a business and need to understand what your customers are struggling
+  with. This workflow uses the Last 30 Days skill to mine Reddit and X for real
+  pain points, then has OpenClaw build solutions to those problems.
+source_usecase: Market Research & Product Factory
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/market-research-product-factory.md
+entry_team: research-lab
+packs:
+  - research-lab
+  - content-factory
+project_skills:
+  - openclaw-store-manager
+tags:
+  - research
+  - content
+  - market
+  - product
+  - factory
+external_requirements:
+  - Last 30 Days skill by Matt Van Horde
+  - Telegram or Discord integration for receiving research reports
+bootstrap_prompt: Start the Market Research & Product Factory demo project from
+  the openclaw-store starter `market-research-product-factory`. You want to
+  build a product but don't know what to build. Or you have a business and need
+  to understand what your customers are struggling with. This workflow uses the
+  Last 30 Days skill to mine Reddit and X for real pain points, then has
+  OpenClaw build solutions to those problems. Use `research-lab` as the initial
+  entry team. Review STARTER.md, confirm any missing external integrations, then
+  break the work into clear team tasks.

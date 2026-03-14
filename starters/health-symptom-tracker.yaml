@@ -1,0 +1,29 @@
+id: health-symptom-tracker
+version: 1
+name: Health & Symptom Tracker
+description: Identifying food sensitivities requires consistent logging over
+  time, which is tedious to maintain. You need reminders to log and analysis to
+  spot patterns.
+source_usecase: Health & Symptom Tracker
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/health-symptom-tracker.md
+entry_team: autonomous-startup
+packs:
+  - autonomous-startup
+project_skills:
+  - openclaw-store-manager
+tags:
+  - automation
+  - health
+  - symptom
+  - tracker
+external_requirements:
+  - Cron jobs for reminders
+  - Telegram topic for logging
+  - File storage (markdown log file)
+bootstrap_prompt: Start the Health & Symptom Tracker demo project from the
+  openclaw-store starter `health-symptom-tracker`. Identifying food
+  sensitivities requires consistent logging over time, which is tedious to
+  maintain. You need reminders to log and analysis to spot patterns. Use
+  `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any
+  missing external integrations, then break the work into clear team tasks.

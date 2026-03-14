@@ -4,6 +4,7 @@ import { loadLockfile, loadManifest } from "../lib/loader.js";
 import { resolveSharedMemoryDir } from "../lib/paths.js";
 import { formatProjectLabel, projectMetaFromLockfile, resolveProjectMeta } from "../lib/project-meta.js";
 import { loadRuntimeState } from "../lib/runtime.js";
+import { describeWorkflowMode, detectWorkflowMode } from "../lib/workflow-mode.js";
 
 async function readFileOrEmpty(filePath: string): Promise<string> {
   try {
@@ -14,6 +15,7 @@ async function readFileOrEmpty(filePath: string): Promise<string> {
 }
 
 export async function projectStatus(projectDir?: string): Promise<void> {
+  const mode = await detectWorkflowMode(projectDir);
   let manifest = null;
   try {
     manifest = await loadManifest(projectDir);
@@ -27,6 +29,7 @@ export async function projectStatus(projectDir?: string): Promise<void> {
     : resolveProjectMeta(manifest?.project, projectDir);
 
   console.log("\nProject Status\n");
+  console.log(`Workflow: ${describeWorkflowMode(mode)}`);
   console.log(`Project: ${formatProjectLabel(project)}`);
   console.log(`Dir:     ${project.projectDir}`);
   if (project.entryTeam) {
@@ -34,6 +37,16 @@ export async function projectStatus(projectDir?: string): Promise<void> {
   }
 
   if (!lockfile) {
+    if (mode === "claude-code-default") {
+      console.log("\nNo openclaw-store lockfile found. This repo appears to use the default Claude Code workflow.");
+      console.log("Run: openclaw-store init if you want project, team, and skill management from openclaw-store.");
+      return;
+    }
+    if (mode === "openclaw-default") {
+      console.log("\nNo openclaw-store lockfile found. This environment appears to use the default OpenClaw workflow.");
+      console.log("Run: openclaw-store init if you want project, team, and skill management from openclaw-store.");
+      return;
+    }
     console.log("\nNo lockfile found. Run: openclaw-store install");
     return;
   }

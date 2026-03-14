@@ -1,0 +1,36 @@
+id: self-healing-home-server
+version: 1
+name: Self-Healing Home Server & Infrastructure Management
+description: Running a home server means being on-call 24/7 for your own
+  infrastructure. Services go down at 3 AM, certificates expire silently, disk
+  fills up, and pods crash-loop — all while you're asleep or away.
+source_usecase: Self-Healing Home Server & Infrastructure Management
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/self-healing-home-server.md
+entry_team: dev-company
+packs:
+  - dev-company
+project_skills:
+  - openclaw-store-manager
+tags:
+  - development
+  - self
+  - healing
+  - home
+  - server
+external_requirements:
+  - ssh access to home network machines
+  - kubectl for Kubernetes cluster management
+  - terraform and ansible for infrastructure-as-code
+  - 1password CLI for secrets management
+  - gog CLI for email access
+  - Calendar API access
+  - Obsidian vault or notes directory (for knowledge base)
+  - openclaw doctor for self-diagnostics
+bootstrap_prompt: Start the Self-Healing Home Server & Infrastructure Management
+  demo project from the openclaw-store starter `self-healing-home-server`.
+  Running a home server means being on-call 24/7 for your own infrastructure.
+  Services go down at 3 AM, certificates expire silently, disk fills up, and
+  pods crash-loop — all while you're asleep or away. Use `dev-company` as the
+  initial entry team. Review STARTER.md, confirm any missing external
+  integrations, then break the work into clear team tasks.

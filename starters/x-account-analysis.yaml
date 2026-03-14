@@ -1,0 +1,28 @@
+id: x-account-analysis
+version: 1
+name: X Account Analysis
+description: There are many websites designed to give you a qualitative analysis
+  of your X account. While X already gives you an **analytics** section, it's
+  more focused to show your numbers on your performance.
+source_usecase: X Account Analysis
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/x-account-analysis.md
+entry_team: content-factory
+packs:
+  - content-factory
+project_skills:
+  - openclaw-store-manager
+tags:
+  - content
+  - x
+  - account
+  - analysis
+external_requirements:
+  - Bird Skill. clawhub install bird (it comes pre-bundled)
+bootstrap_prompt: Start the X Account Analysis demo project from the
+  openclaw-store starter `x-account-analysis`. There are many websites designed
+  to give you a qualitative analysis of your X account. While X already gives
+  you an **analytics** section, it's more focused to show your numbers on your
+  performance. Use `content-factory` as the initial entry team. Review
+  STARTER.md, confirm any missing external integrations, then break the work
+  into clear team tasks.

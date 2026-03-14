@@ -1,0 +1,33 @@
+id: dynamic-dashboard
+version: 1
+name: Dynamic Dashboard with Sub-agent Spawning
+description: Static dashboards show stale data and require constant manual
+  updates. You want real-time visibility across multiple data sources without
+  building a custom frontend or hitting API rate limits.
+source_usecase: Dynamic Dashboard with Sub-agent Spawning
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/dynamic-dashboard.md
+entry_team: dev-company
+packs:
+  - dev-company
+project_skills:
+  - openclaw-store-manager
+tags:
+  - development
+  - dynamic
+  - dashboard
+external_requirements:
+  - Sub-agent spawning for parallel execution
+  - github (gh CLI) for GitHub metrics
+  - bird (Twitter) for social data
+  - web_search or web_fetch for external APIs
+  - postgres for storing historical metrics
+  - Discord or Canvas for rendering the dashboard
+  - Cron jobs for scheduled updates
+bootstrap_prompt: Start the Dynamic Dashboard with Sub-agent Spawning demo
+  project from the openclaw-store starter `dynamic-dashboard`. Static dashboards
+  show stale data and require constant manual updates. You want real-time
+  visibility across multiple data sources without building a custom frontend or
+  hitting API rate limits. Use `dev-company` as the initial entry team. Review
+  STARTER.md, confirm any missing external integrations, then break the work
+  into clear team tasks.

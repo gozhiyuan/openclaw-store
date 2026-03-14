@@ -1,0 +1,36 @@
+id: multi-agent-team
+version: 1
+name: Multi-Agent Specialized Team (Solo Founder Setup)
+description: Solo founders wear every hat — strategy, development, marketing,
+  sales, operations. Context-switching between these roles destroys deep work.
+  Hiring is expensive and slow. What if you could spin up a small, specialized
+  team of AI agents, each with a distinct role and personality, all controllable
+  from a single chat interface?
+source_usecase: Multi-Agent Specialized Team (Solo Founder Setup)
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/multi-agent-team.md
+entry_team: autonomous-startup
+packs:
+  - autonomous-startup
+project_skills:
+  - openclaw-store-manager
+tags:
+  - automation
+  - multi
+  - agent
+  - team
+external_requirements:
+  - telegram skill for the shared control interface
+  - sessions_spawn / sessions_send for multi-agent coordination
+  - Shared file system or note-taking tool for team memory
+  - Individual API keys for different model providers (if using mixed models)
+  - A VPS or always-on machine to run the agents
+bootstrap_prompt: Start the Multi-Agent Specialized Team (Solo Founder Setup)
+  demo project from the openclaw-store starter `multi-agent-team`. Solo founders
+  wear every hat — strategy, development, marketing, sales, operations.
+  Context-switching between these roles destroys deep work. Hiring is expensive
+  and slow. What if you could spin up a small, specialized team of AI agents,
+  each with a distinct role and personality, all controllable from a single chat
+  interface? Use `autonomous-startup` as the initial entry team. Review
+  STARTER.md, confirm any missing external integrations, then break the work
+  into clear team tasks.

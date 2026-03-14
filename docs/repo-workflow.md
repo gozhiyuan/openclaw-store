@@ -16,6 +16,29 @@ This makes `openclaw-store` available on your machine.
 
 ## 2. Create or enter a project
 
+You can either start from scratch or begin from a demo starter.
+
+The demo catalog lives in:
+
+- `demo-projects/index.yaml`
+- `demo-projects/cards/<starter-id>.md`
+
+From a starter:
+
+```bash
+openclaw-store starter list
+openclaw-store starter suggest "podcast workflow"
+openclaw-store starter init podcast-production-pipeline ./my-podcast-project
+cd ./my-podcast-project
+```
+
+For the lightest managed setup:
+
+```bash
+openclaw-store starter show default-managed
+openclaw-store starter init default-managed ./my-project
+```
+
 For a new project:
 
 ```bash
@@ -43,12 +66,15 @@ openclaw-store doctor
 ```
 
 This installs the selected teams, seeds shared memory files, and patches `~/.openclaw/openclaw.json` unless you use `--no-openclaw`.
+Starter-based projects also include `DEMO_PROJECT.md`, copied from the richer demo card.
 
 ## 4. Find the right team entry point
 
 Use the CLI to inspect what is installed:
 
 ```bash
+openclaw-store starter list
+openclaw-store starter suggest "research product idea"
 openclaw-store project list
 openclaw-store list
 openclaw-store project show my-project
@@ -104,6 +130,13 @@ You do not open a skill directly in OpenClaw. Instead:
 2. Ensure the target agent templates list that skill
 3. Run `openclaw-store install`
 4. Talk to the agent or team entry point that has the skill available
+
+For external skills or APIs, the expected flow is:
+
+1. `openclaw-store-manager` identifies the missing requirement from the demo card or skill template
+2. OpenClaw guides the user through installing or configuring it
+3. Re-run `openclaw-store install`
+4. Verify placement with `openclaw-store skill check`
 
 If a required environment variable is missing, the skill is installed as inactive.
 Project skills are not automatically attached to every agent. They are installed where the agent template or project targets place them.
@@ -178,6 +211,13 @@ To add another project:
 
 Use `openclaw-store project list` to see all installed projects across your machine.
 
+If the project starts from a known pattern, prefer a starter:
+
+```bash
+openclaw-store starter suggest "family assistant"
+openclaw-store starter init family-calendar-household-assistant ./family-hub
+```
+
 ## 11. Configure which teams and skills a project should run
 
 The project manifest is the control point.
@@ -214,7 +254,21 @@ That means:
 - the preferred entry team is `content-factory`
 - agents that declare `github` or `last30days` receive those skills during install
 
-## 12. Typical workflow summary
+## 12. Turn a new idea into a managed project
+
+The intended flow for `openclaw-store-manager` is:
+
+1. Search for a similar starter with `openclaw-store starter suggest "<idea>"`
+2. Inspect the closest match with `openclaw-store starter show <id>`
+3. Read `demo-projects/cards/<id>.md` when you need setup and execution guidance
+4. Decide whether the default workflow is enough or whether to initialize the managed starter
+5. Initialize it with `openclaw-store starter init <id> <dir>`
+6. Edit the generated `openclaw-store.yaml`
+7. Run `openclaw-store install`
+
+If no starter is a clean fit, use `default-managed` or the closest starter as scaffolding and modify the generated packs, skills, and targets.
+
+## 13. Typical workflow summary
 
 ```bash
 # one-time setup in this repo
@@ -222,9 +276,12 @@ npm install
 npm run build
 npm link
 
+# optional: begin from a demo starter
+openclaw-store starter suggest "podcast workflow"
+openclaw-store starter init podcast-production-pipeline ./my-project
+
 # per project
 cd my-project
-openclaw-store init
 openclaw-store install
 openclaw-store doctor
 

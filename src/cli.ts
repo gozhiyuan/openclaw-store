@@ -27,14 +27,17 @@ program
   .option("--teams", "List team templates")
   .option("--skills", "List skill templates")
   .option("--packs", "List pack definitions")
+  .option("--starters", "List starter definitions")
   .action(async (opts) => {
     const { listAll, listAgents, listTeams, listSkills, listPacks } = await import(
       "./commands/list.js"
     );
+    const { starterList } = await import("./commands/starter.js");
     if (opts.agents) return listAgents();
     if (opts.teams) return listTeams();
     if (opts.skills) return listSkills();
     if (opts.packs) return listPacks();
+    if (opts.starters) return starterList();
     return listAll();
   });
 
@@ -46,14 +49,12 @@ program
   .option("--dry-run", "Preview changes without applying them")
   .option("--force", "Overwrite existing workspace files")
   .option("--pack <id>", "Install a specific pack without a manifest")
-  .option("--no-openclaw", "Skip openclaw.json patching (use with Claude Code or CI)")
   .action(async (opts) => {
     const { runInstall } = await import("./commands/install.js");
     await runInstall({
       dryRun: opts.dryRun,
       force: opts.force,
       pack: opts.pack,
-      noOpenclaw: opts.openclaw === false,  // commander inverts --no-* flags
     });
   });
 
@@ -243,6 +244,44 @@ projectCmd
   .action(async (teamId: string) => {
     const { projectKanban } = await import("./commands/project.js");
     await projectKanban(teamId);
+  });
+
+// ── starter ──────────────────────────────────────────────────────────────────
+
+const starterCmd = program.command("starter").description("Manage starter demo projects");
+
+starterCmd
+  .command("list")
+  .description("List starter definitions")
+  .option("--search <query>", "Filter starters by query")
+  .action(async (opts) => {
+    const { starterList } = await import("./commands/starter.js");
+    await starterList(opts.search);
+  });
+
+starterCmd
+  .command("show <id>")
+  .description("Show a starter definition")
+  .action(async (id: string) => {
+    const { starterShow } = await import("./commands/starter.js");
+    await starterShow(id);
+  });
+
+starterCmd
+  .command("suggest <query>")
+  .description("Suggest starters similar to an idea")
+  .action(async (query: string) => {
+    const { starterSuggest } = await import("./commands/starter.js");
+    await starterSuggest(query);
+  });
+
+starterCmd
+  .command("init <id> [dir]")
+  .description("Initialize a project from a starter")
+  .option("--force", "Overwrite starter files if they already exist")
+  .action(async (id: string, dir: string | undefined, opts) => {
+    const { starterInit } = await import("./commands/starter.js");
+    await starterInit(id, dir ?? process.cwd(), { force: opts.force });
   });
 
 // ── diff ─────────────────────────────────────────────────────────────────────

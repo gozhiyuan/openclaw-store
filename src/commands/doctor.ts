@@ -4,6 +4,7 @@ import { loadLockfile } from "../lib/loader.js";
 import { readOpenClawConfig } from "../lib/adapters/openclaw.js";
 import { resolveOpenClawConfigPath, resolveManifestPath } from "../lib/paths.js";
 import type { PackDef } from "../lib/schema.js";
+import { describeWorkflowMode, detectWorkflowMode } from "../lib/workflow-mode.js";
 
 type Finding = {
   severity: "ok" | "warning" | "error";
@@ -43,17 +44,28 @@ function deriveSourcePackId(
 
 export async function runDoctor(autoFix: boolean = false): Promise<void> {
   const findings: Finding[] = [];
+  const workflowMode = await detectWorkflowMode();
+
+  findings.push({ severity: "ok", message: `Workflow mode: ${describeWorkflowMode(workflowMode)}` });
 
   // Check 1: manifest exists
   const manifestPath = resolveManifestPath();
   if (await pathExists(manifestPath)) {
     findings.push({ severity: "ok", message: "openclaw-store.yaml found" });
   } else {
-    findings.push({
-      severity: "warning",
-      message: "openclaw-store.yaml not found in current directory",
-      fix: "Run: openclaw-store init",
-    });
+    if (workflowMode === "claude-code-default" || workflowMode === "openclaw-default") {
+      findings.push({
+        severity: "warning",
+        message: "openclaw-store.yaml not found — using default workflow instead of openclaw-store project management",
+        fix: "Run: openclaw-store init if you want managed projects, teams, and skills",
+      });
+    } else {
+      findings.push({
+        severity: "warning",
+        message: "openclaw-store.yaml not found in current directory",
+        fix: "Run: openclaw-store init",
+      });
+    }
   }
 
   // Check 2: openclaw.json accessible
@@ -61,21 +73,37 @@ export async function runDoctor(autoFix: boolean = false): Promise<void> {
   if (await pathExists(configPath)) {
     findings.push({ severity: "ok", message: `openclaw.json found at ${configPath}` });
   } else {
-    findings.push({
-      severity: "error",
-      message: `openclaw.json not found at ${configPath}`,
-      fix: "Ensure OpenClaw is installed and ~/.openclaw/openclaw.json exists",
-    });
+    if (workflowMode === "claude-code-default") {
+      findings.push({
+        severity: "warning",
+        message: "openclaw.json not found — acceptable for default Claude Code workflow",
+        fix: "Install OpenClaw first, then run `openclaw-store install`",
+      });
+    } else {
+      findings.push({
+        severity: "error",
+        message: `openclaw.json not found at ${configPath}`,
+        fix: "Ensure OpenClaw is installed and ~/.openclaw/openclaw.json exists",
+      });
+    }
   }
 
   // Check 3: lockfile
   const lockfile = await loadLockfile();
   if (!lockfile) {
-    findings.push({
-      severity: "warning",
-      message: "No lockfile found — nothing installed yet",
-      fix: "Run: openclaw-store install",
-    });
+    if (workflowMode === "claude-code-default" || workflowMode === "openclaw-default") {
+      findings.push({
+        severity: "warning",
+        message: "No openclaw-store lockfile found — repo is currently using the default workflow",
+        fix: "Run: openclaw-store init and openclaw-store install if you want store-managed projects",
+      });
+    } else {
+      findings.push({
+        severity: "warning",
+        message: "No lockfile found — nothing installed yet",
+        fix: "Run: openclaw-store install",
+      });
+    }
   } else {
     findings.push({
       severity: "ok",

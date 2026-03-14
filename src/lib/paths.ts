@@ -97,6 +97,26 @@ export function resolvePacksDir(): string {
   return path.resolve(__dirname, "..", "..", "packs");
 }
 
+export function resolveStartersDir(): string {
+  const env = process.env.OPENCLAW_STORE_STARTERS_DIR?.trim();
+  if (env) return env;
+  return path.resolve(__dirname, "..", "..", "starters");
+}
+
+export function resolveDemoProjectsDir(): string {
+  const env = process.env.OPENCLAW_STORE_DEMO_PROJECTS_DIR?.trim();
+  if (env) return env;
+  return path.resolve(__dirname, "..", "..", "demo-projects");
+}
+
+export function resolveDemoProjectsIndexPath(): string {
+  return path.join(resolveDemoProjectsDir(), "index.yaml");
+}
+
+export function resolveDemoProjectCardsDir(): string {
+  return path.join(resolveDemoProjectsDir(), "cards");
+}
+
 export function resolvePartialsDir(): string {
   return path.resolve(__dirname, "..", "..", "partials");
 }

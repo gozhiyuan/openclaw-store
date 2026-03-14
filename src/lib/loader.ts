@@ -6,6 +6,9 @@ import {
   TeamDef,
   SkillEntry,
   PackDef,
+  StarterDef,
+  DemoProjectIndex,
+  type DemoProjectDef,
   Manifest,
   Lockfile,
 } from "./schema.js";
@@ -14,6 +17,8 @@ import {
   resolveTeamTemplatesDir,
   resolveSkillTemplatesDir,
   resolvePacksDir,
+  resolveStartersDir,
+  resolveDemoProjectsIndexPath,
   resolveManifestPath,
   resolveLockfilePath,
   resolveOverlayTemplatesDir,
@@ -166,6 +171,37 @@ export async function listPackIds(): Promise<string[]> {
 export async function loadAllPacks(): Promise<PackDef[]> {
   const ids = await listPackIds();
   return Promise.all(ids.map(loadPack));
+}
+
+// ── Starter definitions ─────────────────────────────────────────────────────
+
+export async function loadStarter(starterId: string): Promise<StarterDef> {
+  const filePath = path.join(resolveStartersDir(), `${starterId}.yaml`);
+  const raw = await readYaml<unknown>(filePath);
+  return StarterDef.parse(raw);
+}
+
+export async function listStarterIds(): Promise<string[]> {
+  return listYamlIds([resolveStartersDir()]);
+}
+
+export async function loadAllStarters(): Promise<StarterDef[]> {
+  const ids = await listStarterIds();
+  return Promise.all(ids.map(loadStarter));
+}
+
+export async function loadDemoProjectIndex(): Promise<DemoProjectIndex> {
+  const raw = await readYaml<unknown>(resolveDemoProjectsIndexPath());
+  return DemoProjectIndex.parse(raw);
+}
+
+export async function loadDemoProject(demoId: string): Promise<DemoProjectDef> {
+  const index = await loadDemoProjectIndex();
+  const demo = index.demos.find((entry) => entry.id === demoId);
+  if (!demo) {
+    throw new Error(`Demo project "${demoId}" not found.`);
+  }
+  return demo;
 }
 
 // ── Project manifest & lockfile ──────────────────────────────────────────────

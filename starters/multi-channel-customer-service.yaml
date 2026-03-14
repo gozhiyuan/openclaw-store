@@ -1,0 +1,33 @@
+id: multi-channel-customer-service
+version: 1
+name: Multi-Channel AI Customer Service Platform
+description: Small businesses juggle WhatsApp, Instagram DMs, emails, and Google
+  Reviews across multiple apps. Customers expect instant responses 24/7, but
+  hiring staff for round-the-clock coverage is expensive.
+source_usecase: Multi-Channel AI Customer Service Platform
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/multi-channel-customer-service.md
+entry_team: autonomous-startup
+packs:
+  - autonomous-startup
+project_skills:
+  - openclaw-store-manager
+tags:
+  - automation
+  - multi
+  - channel
+  - customer
+  - service
+external_requirements:
+  - WhatsApp Business API integration
+  - Instagram Graph API (via Meta Business)
+  - gog CLI for Gmail
+  - Google Business Profile API for reviews
+  - Message routing logic in AGENTS.md
+bootstrap_prompt: Start the Multi-Channel AI Customer Service Platform demo
+  project from the openclaw-store starter `multi-channel-customer-service`.
+  Small businesses juggle WhatsApp, Instagram DMs, emails, and Google Reviews
+  across multiple apps. Customers expect instant responses 24/7, but hiring
+  staff for round-the-clock coverage is expensive. Use `autonomous-startup` as
+  the initial entry team. Review STARTER.md, confirm any missing external
+  integrations, then break the work into clear team tasks.

@@ -15,9 +15,11 @@ This document explains the technical architecture: data flow, file formats, the 
 | `--no-openclaw` flag | Install without patching `openclaw.json` (CI, Claude Code) |
 | Local overlay | Override any bundled template via `OPENCLAW_STORE_TEMPLATES` |
 | Multi-team packs | A single pack YAML can reference multiple teams |
+| Starter demo projects | Use curated starter definitions to scaffold a managed project from a demo use case |
+| Demo project catalog | Generated `demo-projects/index.yaml` and per-demo cards provide richer execution/setup guidance |
 | Pack compatibility | `compatibility.node_min` / `openclaw_min` in pack YAML, checked by `doctor` |
 | Skill installation | Skills are cached at `~/.openclaw-store/cache/skills/` and symlinked per workspace |
-| Test suite | 23 vitest tests covering schema, renderer, resolver, overlay, compat, skill-fetch, diff |
+| Test suite | 33 vitest tests covering schema, renderer, resolver, overlay, compat, skill-fetch, starters, and workflow detection |
 
 ---
 
@@ -26,10 +28,10 @@ This document explains the technical architecture: data flow, file formats, the 
 │                     openclaw-store                          │
 │                                                             │
 │  ┌──────────────┐   ┌──────────────┐   ┌────────────────┐  │
-│  │  Templates   │   │     CLI      │   │   Packs        │  │
+│  │  Templates   │   │     CLI      │   │ Packs/Starters │  │
 │  │  agents/     │   │  cli.ts      │   │  dev-company   │  │
 │  │  teams/      │──▶│  commands/   │◀──│  content-      │  │
-│  │  skills/     │   │  install.ts  │   │  factory       │  │
+│  │  skills/     │   │  install.ts  │   │  use-case demos│  │
 │  └──────────────┘   └──────┬───────┘   └────────────────┘  │
 │                            │                                │
 │              ┌─────────────▼──────────────┐                │
@@ -79,6 +81,19 @@ This document explains the technical architecture: data flow, file formats, the 
 ---
 
 ## Data Flow: `openclaw-store install`
+
+Projects can be created in two ways:
+
+- from scratch with `openclaw-store init`
+- from a curated starter with `openclaw-store starter init <starter-id> <dir>`
+
+The starter path writes a project-local `openclaw-store.yaml` that already includes:
+
+- `project.starter`
+- `project.entry_team`
+- starter-selected packs
+- project skills such as `openclaw-store-manager`
+- a copied `DEMO_PROJECT.md` card with setup and execution guidance
 
 ```
 openclaw-store.yaml
@@ -156,6 +171,58 @@ openclaw-store.yaml
   writeLockfile(lockfile)
   └── openclaw-store.lock
 ```
+
+---
+
+## Data Flow: `openclaw-store starter init`
+
+```
+awesome-openclaw-usecases/*.md
+         │
+         ▼
+  curated starter YAML
+  ┌─────────────────────────────────────────────────────┐
+  │ id: podcast-production-pipeline                     │
+  │ entry_team: content-factory                         │
+  │ packs: [content-factory]                            │
+  │ project_skills: [openclaw-store-manager]            │
+  │ source_usecase: Podcast Production Pipeline         │
+  └─────────────────────────────────────────────────────┘
+         │
+         ▼
+  starter init <id> <dir>
+         │
+         ▼
+  write project files
+  ┌─────────────────────────────────────────────────────┐
+  │ ./openclaw-store.yaml                              │
+  │   project:                                         │
+  │     id: my-project                                 │
+  │     starter: podcast-production-pipeline           │
+  │     entry_team: content-factory                    │
+  │   packs:                                           │
+  │     - id: content-factory                          │
+  │   skills:                                          │
+  │     - id: openclaw-store-manager                   │
+  │       targets:                                     │
+  │         teams: [content-factory]                   │
+  │                                                    │
+  │ ./STARTER.md                                       │
+  │   source use case, bootstrap prompt, next steps    │
+  │ ./DEMO_PROJECT.md                                  │
+  │   richer execution modes, setup guidance, reqs     │
+  └─────────────────────────────────────────────────────┘
+         │
+         ▼
+  openclaw-store install
+         │
+         ▼
+  managed project install flow
+```
+
+The `starter suggest` command uses simple token overlap across starter metadata, packs, tags, and requirements. It is intentionally lightweight so the bundled `openclaw-store-manager` skill can use it locally without external services.
+
+The richer demo metadata is generated separately into `demo-projects/index.yaml` and `demo-projects/cards/*.md`. The manager skill uses those cards to decide whether to keep the user in default workflow mode or move them into a managed starter install.
 
 ---
 
@@ -296,6 +363,21 @@ Like `package.json` + `package-lock.json`: the manifest is what you *want*, the 
 **Why runtime.json as well?**
 
 The manifest and lockfile are local to one project directory. `runtime.json` is the global index that lets OpenClaw Store list all installed projects and their entry-point agents across your machine.
+
+## Workflow Modes
+
+`openclaw-store` supports three practical modes:
+
+1. Managed project mode
+   The repo contains `openclaw-store.yaml`, and `openclaw-store` manages projects, teams, skills, lockfiles, and runtime registration.
+
+2. Default Claude Code mode
+   The repo contains `CLAUDE.md` or `.claude/`, but no `openclaw-store.yaml`. In this case, `openclaw-store` treats the repo as a normal Claude Code project and does not assume it is misconfigured.
+
+3. Default OpenClaw mode
+   OpenClaw is installed, but the repo does not have `openclaw-store.yaml`. In this case, `openclaw-store` treats the repo as a normal OpenClaw environment unless the user opts into managed projects.
+
+This allows the `openclaw-store-manager` skill to inspect default workflows first, then migrate a repo into managed mode only when the user asks for project/team/skill orchestration.
 
 ---
 

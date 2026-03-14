@@ -1,5 +1,4 @@
-import { loadAllAgents, loadAllTeams, loadAllSkills, loadAllPacks } from "../lib/loader.js";
-import type { AgentDef, TeamDef, SkillEntry, PackDef } from "../lib/schema.js";
+import { loadAllAgents, loadAllTeams, loadAllSkills, loadAllPacks, loadAllStarters } from "../lib/loader.js";
 
 export async function listAgents(): Promise<void> {
   const agents = await loadAllAgents();
@@ -59,7 +58,21 @@ export async function listPacks(): Promise<void> {
   }
 }
 
+export async function listStarters(): Promise<void> {
+  const starters = await loadAllStarters();
+  if (starters.length === 0) {
+    console.log("No starters found.");
+    return;
+  }
+  console.log(`\nStarters (${starters.length}):\n`);
+  for (const starter of starters) {
+    console.log(`  ${starter.name.padEnd(36)} (${starter.id})  entry: ${starter.entry_team}`);
+    console.log(`    packs: ${starter.packs.join(", ")}`);
+  }
+}
+
 export async function listAll(): Promise<void> {
+  await listStarters();
   await listPacks();
   await listTeams();
   await listAgents();

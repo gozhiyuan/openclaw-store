@@ -1,0 +1,32 @@
+id: n8n-workflow-orchestration
+version: 1
+name: OpenClaw + n8n Workflow Orchestration
+description: Letting your AI agent directly manage API keys and call external
+  services is a recipe for security incidents. Every new integration means
+  another credential in `.env.local`, another surface for the agent to
+  accidentally leak or misuse.
+source_usecase: OpenClaw + n8n Workflow Orchestration
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/n8n-workflow-orchestration.md
+entry_team: dev-company
+packs:
+  - dev-company
+project_skills:
+  - openclaw-store-manager
+tags:
+  - development
+  - n8n
+  - workflow
+  - orchestration
+external_requirements:
+  - n8n API access (for creating/triggering workflows)
+  - fetch or curl for webhook calls
+  - Docker (if using the pre-configured stack)
+  - n8n credential management (manual, one-time setup per integration)
+bootstrap_prompt: Start the OpenClaw + n8n Workflow Orchestration demo project
+  from the openclaw-store starter `n8n-workflow-orchestration`. Letting your AI
+  agent directly manage API keys and call external services is a recipe for
+  security incidents. Every new integration means another credential in
+  `.env.local`, another surface for the agent to accidentally leak or misuse.
+  Use `dev-company` as the initial entry team. Review STARTER.md, confirm any
+  missing external integrations, then break the work into clear team tasks.

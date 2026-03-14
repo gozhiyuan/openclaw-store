@@ -21,7 +21,6 @@ export type InstallOptions = {
   force?: boolean;
   pack?: string;
   projectDir?: string;
-  noOpenclaw?: boolean;
 };
 
 type FinalSkillState = {
@@ -55,7 +54,7 @@ export async function runInstall(opts: InstallOptions = {}): Promise<void> {
   }
 
   if (opts.dryRun) {
-    printDryRun(project.id, packs, Boolean(opts.noOpenclaw));
+    printDryRun(project.id, packs);
     printSkillStatus(skills.map((s) => ({
       id: s.skillDef.id,
       status: s.status,
@@ -96,22 +95,12 @@ export async function runInstall(opts: InstallOptions = {}): Promise<void> {
       }),
     );
 
-    if (opts.noOpenclaw) {
-      const { installTeamWorkspacesOnly } = await import("../lib/adapters/openclaw.js");
-      await installTeamWorkspacesOnly({
-        projectId: project.id,
-        teamDef: resolved.teamDef,
-        agents: agentsWithMembers,
-        overwrite: opts.force,
-      });
-    } else {
-      await installTeam({
-        projectId: project.id,
-        teamDef: resolved.teamDef,
-        agents: agentsWithMembers,
-        overwrite: opts.force,
-      });
-    }
+    await installTeam({
+      projectId: project.id,
+      teamDef: resolved.teamDef,
+      agents: agentsWithMembers,
+      overwrite: opts.force,
+    });
 
     console.log(`  Seeding shared memory for ${resolved.teamDef.name ?? resolved.teamDef.id}...`);
     await seedTeamSharedMemory(project.id, resolved.teamDef);
@@ -123,10 +112,8 @@ export async function runInstall(opts: InstallOptions = {}): Promise<void> {
   }
 
   // Update main agent guidance
-  if (!opts.noOpenclaw) {
-    console.log("\nUpdating main agent guidance (TOOLS.md, AGENTS.md)...");
-    await updateStoreGuidance();
-  }
+  console.log("\nUpdating main agent guidance (TOOLS.md, AGENTS.md)...");
+  await updateStoreGuidance();
 
   // Install skills into each agent workspace that lists them
   // Collect (skillId → agentIds) pairs for allowlist patching after all skills are installed
@@ -176,7 +163,7 @@ export async function runInstall(opts: InstallOptions = {}): Promise<void> {
     }
 
     // Patch agent allowlists in openclaw.json for agents with explicit skills[] keys
-    if (!opts.noOpenclaw && skillToAgentIds.size > 0) {
+    if (skillToAgentIds.size > 0) {
       const { path: configPath, config } = await readOpenClawConfig();
       for (const [skillId, agentIds] of skillToAgentIds) {
         addSkillsToAgentAllowlists(config, agentIds, [skillId]);
@@ -252,7 +239,7 @@ export function finalizeLockfileSkills(
   };
 }
 
-function printDryRun(projectId: string, packs: ResolvedPack[], noOpenclaw: boolean): void {
+function printDryRun(projectId: string, packs: ResolvedPack[]): void {
   console.log("\n[DRY RUN] Actions that would be performed:\n");
 
   for (const resolved of packs) {
@@ -270,7 +257,6 @@ function printDryRun(projectId: string, packs: ResolvedPack[], noOpenclaw: boole
       teamDef: resolved.teamDef,
       agents: agentsWithMembers,
       dryRun: true,
-      skipOpenClaw: noOpenclaw,
     });
 
     for (const action of actions) {
@@ -371,9 +357,7 @@ async function runZeroConfigInstall(opts: InstallOptions): Promise<void> {
     return;
   }
 
-  if (!opts.noOpenclaw) {
-    await updateStoreGuidance();
-  }
+  await updateStoreGuidance();
 
   console.log("The skill is now available in OpenClaw. Ask your agent to:");
   console.log("  1. Run: openclaw-store starter list");

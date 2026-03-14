@@ -1,0 +1,32 @@
+id: autonomous-game-dev-pipeline
+version: 1
+name: Autonomous Educational Game Development Pipeline
+description: '**The Origin Story:** A "LANero of the old school" dad wanted to
+  create a safe, ad-free, and high-quality gaming portal for his daughters,
+  Susana (3) and Julieta (coming soon). Existing sites were plagued with spam,
+  aggressive ads, and deceptive buttons (dark patterns) that frustrated his
+  toddler.'
+source_usecase: Autonomous Educational Game Development Pipeline
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/autonomous-game-dev-pipeline.md
+entry_team: dev-company
+packs:
+  - dev-company
+project_skills:
+  - openclaw-store-manager
+tags:
+  - development
+  - autonomous
+  - game
+  - dev
+  - pipeline
+external_requirements:
+  - "**Git**: To manage branches, commits, and merges."
+bootstrap_prompt: Start the Autonomous Educational Game Development Pipeline
+  demo project from the openclaw-store starter `autonomous-game-dev-pipeline`.
+  **The Origin Story:** A "LANero of the old school" dad wanted to create a
+  safe, ad-free, and high-quality gaming portal for his daughters, Susana (3)
+  and Julieta (coming soon). Existing sites were plagued with spam, aggressive
+  ads, and deceptive buttons (dark patterns) that frustrated his toddler. Use
+  `dev-company` as the initial entry team. Review STARTER.md, confirm any
+  missing external integrations, then break the work into clear team tasks.

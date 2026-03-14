@@ -1,0 +1,30 @@
+id: personal-crm
+version: 1
+name: Personal CRM with Automatic Contact Discovery
+description: Keeping track of who you've met, when, and what you discussed is
+  impossible to do manually. Important follow-ups slip through the cracks, and
+  you forget context before important meetings.
+source_usecase: Personal CRM with Automatic Contact Discovery
+source_path: /Users/ll/Documents/Zhiyuan
+  Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/personal-crm.md
+entry_team: autonomous-startup
+packs:
+  - autonomous-startup
+project_skills:
+  - openclaw-store-manager
+tags:
+  - automation
+  - personal
+  - crm
+external_requirements:
+  - gog CLI (for Gmail and Google Calendar)
+  - Custom CRM database (SQLite or similar) or use the crm-query skill if
+    available
+  - Telegram topic for CRM queries
+bootstrap_prompt: Start the Personal CRM with Automatic Contact Discovery demo
+  project from the openclaw-store starter `personal-crm`. Keeping track of who
+  you've met, when, and what you discussed is impossible to do manually.
+  Important follow-ups slip through the cracks, and you forget context before
+  important meetings. Use `autonomous-startup` as the initial entry team. Review
+  STARTER.md, confirm any missing external integrations, then break the work
+  into clear team tasks.
