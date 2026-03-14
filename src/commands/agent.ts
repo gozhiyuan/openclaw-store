@@ -1,6 +1,7 @@
 import { loadAgent, loadAllAgents, loadAllTeams } from "../lib/loader.js";
 import { loadLockfile } from "../lib/loader.js";
 import { findAgentTeams } from "../lib/team-graph.js";
+import { listOpenClawAgents } from "../lib/openclaw-agents.js";
 
 export async function agentList(): Promise<void> {
   // Show installed agents from lockfile if it exists
@@ -14,6 +15,16 @@ export async function agentList(): Promise<void> {
         console.log(`    workspace: ${agent.workspace}`);
       }
     }
+    const nativeAgents = (await listOpenClawAgents()).filter((agent) => agent.source === "openclaw-native");
+    if (nativeAgents.length > 0) {
+      console.log(`\nAvailable native OpenClaw agents (${nativeAgents.length}):\n`);
+      for (const agent of nativeAgents) {
+        console.log(`  ${agent.id}${agent.name ? ` — ${agent.name}` : ""}`);
+        if (agent.workspace) {
+          console.log(`    workspace: ${agent.workspace}`);
+        }
+      }
+    }
     return;
   }
 
@@ -24,6 +35,17 @@ export async function agentList(): Promise<void> {
     const emoji = a.identity?.emoji ?? "🤖";
     console.log(`  ${emoji} ${a.name} (${a.id})  [${a.team_role?.role ?? "—"}]`);
   }
+
+  const nativeAgents = (await listOpenClawAgents()).filter((agent) => agent.source === "openclaw-native");
+  if (nativeAgents.length > 0) {
+    console.log(`\nAvailable native OpenClaw agents (${nativeAgents.length}):\n`);
+    for (const agent of nativeAgents) {
+      console.log(`  ${agent.id}${agent.name ? ` — ${agent.name}` : ""}`);
+      if (agent.workspace) {
+        console.log(`    workspace: ${agent.workspace}`);
+      }
+    }
+  }
 }
 
 export async function agentShow(agentId: string): Promise<void> {
@@ -31,8 +53,31 @@ export async function agentShow(agentId: string): Promise<void> {
   try {
     agentDef = await loadAgent(agentId);
   } catch {
-    console.error(`Agent "${agentId}" not found in templates.`);
-    process.exit(1);
+    const openclawAgent = (await listOpenClawAgents()).find((agent) => agent.id === agentId);
+    if (!openclawAgent) {
+      console.error(`Agent "${agentId}" not found in templates or OpenClaw config.`);
+      process.exit(1);
+    }
+    console.log(`\n${openclawAgent.name ?? openclawAgent.id} (${openclawAgent.id})\n`);
+    console.log(`Source:    ${openclawAgent.source}`);
+    if (openclawAgent.workspace) {
+      console.log(`Workspace: ${openclawAgent.workspace}`);
+    }
+    if (openclawAgent.agentDir) {
+      console.log(`Agent dir: ${openclawAgent.agentDir}`);
+    }
+    if (openclawAgent.skills !== undefined) {
+      console.log(`Skills:    ${openclawAgent.skills.length > 0 ? openclawAgent.skills.join(", ") : "(explicitly none)"}`);
+    } else {
+      console.log("Skills:    unrestricted (no explicit allowlist)");
+    }
+    if (openclawAgent.projectId) {
+      console.log(`Project:   ${openclawAgent.projectId}`);
+    }
+    if (openclawAgent.teamId) {
+      console.log(`Team:      ${openclawAgent.teamId}`);
+    }
+    return;
   }
 
   const allTeams = await loadAllTeams();

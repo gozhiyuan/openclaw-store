@@ -9,6 +9,16 @@ const usecasesDir = path.resolve(repoRoot, "..", "awesome-openclaw-usecases", "u
 const startersDir = path.join(repoRoot, "starters");
 const demoProjectsDir = path.join(repoRoot, "demo-projects");
 const demoCardsDir = path.join(demoProjectsDir, "cards");
+const capabilityKeywords = [
+  "sessions_spawn",
+  "sessions_send",
+  "file system access",
+  "git",
+  "ssh",
+  "cron",
+  "webhook",
+  "browser automation",
+];
 
 const contentStarters = new Set([
   "content-factory",
@@ -135,9 +145,13 @@ function extractDescription(markdown) {
   return "Demo project starter generated from awesome-openclaw-usecases.";
 }
 
-function extractExternalRequirements(markdown) {
+function extractRequirementEntries(markdown) {
+  return extractSectionEntries(markdown, /^##\s+Skills (You Need|Needed)/i);
+}
+
+function extractSectionEntries(markdown, headingPattern) {
   const lines = markdown.split("\n");
-  const start = lines.findIndex((line) => /^##\s+Skills (You Need|Needed)/i.test(line.trim()));
+  const start = lines.findIndex((line) => headingPattern.test(line.trim()));
   if (start === -1) return [];
 
   const results = [];
@@ -146,15 +160,77 @@ function extractExternalRequirements(markdown) {
     if (!line) continue;
     if (line.startsWith("## ")) break;
     if (line.startsWith("```")) continue;
-    const cleaned = line
+    const raw = line
       .replace(/^[-*]\s*/, "")
       .replace(/^\d+\.\s*/, "")
-      .replace(/\[(.*?)\]\((.*?)\)/g, "$1")
-      .replace(/`/g, "")
       .trim();
-    if (cleaned) results.push(cleaned);
+    if (raw) results.push(raw);
   }
   return [...new Set(results)].slice(0, 8);
+}
+
+function cleanRequirement(requirement) {
+  return requirement
+    .replace(/\[(.*?)\]\((.*?)\)/g, "$1")
+    .replace(/`/g, "")
+    .trim();
+}
+
+function extractRequirementLines(markdown) {
+  return extractRequirementEntries(markdown).map(cleanRequirement);
+}
+
+function extractInstallableSkills(requirements) {
+  const ids = new Set();
+  for (const requirement of requirements) {
+    if (/don't need a pre-built skill/i.test(requirement)) continue;
+
+    for (const match of requirement.matchAll(/\[([a-z0-9][a-z0-9-]*)\]\((.*?)\)/gi)) {
+      const id = match[1].toLowerCase();
+      const url = match[2].toLowerCase();
+      if (url.includes("clawhub.ai") || url.includes("github.com/openclaw/skills")) {
+        ids.add(id);
+      }
+    }
+
+    const inlineSkill = requirement.match(/([a-z0-9][a-z0-9-]+)\s+skill\b/i);
+    if (inlineSkill) {
+      ids.add(inlineSkill[1].toLowerCase());
+    }
+
+    const inlineSlug = requirement.match(/`([a-z0-9][a-z0-9-]+)`/i);
+    if (inlineSlug) {
+      ids.add(inlineSlug[1].toLowerCase());
+    }
+  }
+  return [...ids].sort();
+}
+
+function extractRequiredApis(requirements) {
+  return requirements.filter((requirement) => {
+    if (/don't need a pre-built skill/i.test(requirement)) return false;
+    return /api|integration|webhook|bot|oauth|auth|sms|discord|telegram|slack|todoist/i.test(requirement);
+  });
+}
+
+function extractRequiredCapabilities(requirements) {
+  return requirements.filter((requirement) =>
+    capabilityKeywords.some((keyword) => requirement.toLowerCase().includes(keyword)));
+}
+
+function extractSupplementalApis(markdown) {
+  const setupEntries = [
+    ...extractSectionEntries(markdown, /^##\s+How to Set It Up/i),
+    ...extractSectionEntries(markdown, /^##\s+Detailed Setup Guide/i),
+    ...extractSectionEntries(markdown, /^##\s+Related Links/i),
+  ].map(cleanRequirement);
+
+  return [...new Set(setupEntries.filter((entry) =>
+    entry.length <= 80
+    && !entry.startsWith("#")
+    && !/script/i.test(entry)
+    && /api|webhook|oauth|bot|integration|sms/i.test(entry),
+  ))].slice(0, 8);
 }
 
 function buildBootstrapPrompt(title, description, starterId, entryTeam) {
@@ -166,15 +242,18 @@ function buildBootstrapPrompt(title, description, starterId, entryTeam) {
   ].join(" ");
 }
 
-function buildSetupGuidance(entryTeam, externalRequirements) {
+function buildSetupGuidance(entryTeam, metadata) {
+  const hasSetupDependencies = metadata.installable_skills.length > 0
+    || metadata.required_apis.length > 0
+    || metadata.required_capabilities.length > 0;
   const steps = [
     "Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.",
     `If you want managed execution, initialize the starter and use \`${entryTeam}\` as the entry-point team.`,
     "Review the generated STARTER.md and confirm the project scope before running install.",
   ];
-  if (externalRequirements.length > 0) {
-    steps.push("Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.");
-    steps.push("Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.");
+  if (hasSetupDependencies) {
+    steps.push("Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.");
+    steps.push("Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.");
   } else {
     steps.push("No additional external integrations are required beyond the selected team and bundled management skill.");
   }
@@ -205,12 +284,11 @@ function buildDemoCard(demo, starter) {
     `- Entry Team: ${demo.entry_team}`,
     `- Packs: ${demo.packs.join(", ") || "—"}`,
     `- Project Skills: ${demo.project_skills.join(", ") || "—"}`,
+    `- Installable OpenClaw Skills: ${demo.installable_skills.join(", ") || "—"}`,
+    `- Required APIs / Services: ${demo.required_apis.join(", ") || "—"}`,
+    `- Required Capabilities / Tools: ${demo.required_capabilities.join(", ") || "—"}`,
     `- Source Use Case: ${demo.source_usecase}`,
   ];
-
-  if (demo.source_path) {
-    lines.push(`- Source Path: ${demo.source_path}`);
-  }
 
   if (demo.tags.length > 0) {
     lines.push(`- Tags: ${demo.tags.join(", ")}`);
@@ -231,8 +309,29 @@ function buildDemoCard(demo, starter) {
     }
   }
 
+  if (demo.installable_skills.length > 0) {
+    lines.push("", "## Installable OpenClaw Skills", "");
+    for (const skill of demo.installable_skills) {
+      lines.push(`- ${skill}`);
+    }
+  }
+
+  if (demo.required_apis.length > 0) {
+    lines.push("", "## Required APIs / Services", "");
+    for (const api of demo.required_apis) {
+      lines.push(`- ${api}`);
+    }
+  }
+
+  if (demo.required_capabilities.length > 0) {
+    lines.push("", "## Required Capabilities / Tools", "");
+    for (const capability of demo.required_capabilities) {
+      lines.push(`- ${capability}`);
+    }
+  }
+
   if (demo.external_requirements.length > 0) {
-    lines.push("", "## External Requirements", "");
+    lines.push("", "## Requirement Summary", "");
     for (const req of demo.external_requirements) {
       lines.push(`- ${req}`);
     }
@@ -249,7 +348,7 @@ function buildDemoCard(demo, starter) {
     `1. Inspect the starter with \`openclaw-store starter show ${demo.starter}\`.`,
     `2. Initialize it with \`openclaw-store starter init ${demo.starter} <dir>\`.`,
     "3. Review STARTER.md and this demo card.",
-    "4. Install missing skills or API configuration in OpenClaw if needed.",
+    "4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.",
     "5. Run `openclaw-store install` and execute through the project entry-point agent.",
     "",
   );
@@ -272,7 +371,10 @@ function buildDefaultManagedStarter() {
     entry_team: entryTeam,
     packs: ["autonomous-startup"],
     project_skills: ["openclaw-store-manager"],
+    installable_skills: [],
     tags: ["default", "managed", "general", "bootstrap"],
+    required_apis: [],
+    required_capabilities: [],
     external_requirements: [],
     bootstrap_prompt: buildBootstrapPrompt(title, description, id, entryTeam),
   };
@@ -288,10 +390,13 @@ function buildDefaultManagedStarter() {
     entry_team: entryTeam,
     packs: starter.packs,
     project_skills: starter.project_skills,
+    installable_skills: [],
     tags: starter.tags,
+    required_apis: [],
+    required_capabilities: [],
     external_requirements: [],
-    setup_guidance: buildSetupGuidance(entryTeam, []),
-    card_path: path.join(demoCardsDir, `${id}.md`),
+    setup_guidance: buildSetupGuidance(entryTeam, starter),
+    card_path: path.join("cards", `${id}.md`),
     execution: buildExecution(entryTeam),
   };
 
@@ -316,18 +421,29 @@ async function main() {
     const title = extractTitle(markdown, id);
     const description = extractDescription(markdown);
     const classification = classifyStarter(id);
+    const requirementEntries = extractRequirementEntries(markdown);
+    const externalRequirements = requirementEntries.map(cleanRequirement);
+    const installableSkills = extractInstallableSkills(requirementEntries);
+    const requiredApis = [...new Set([
+      ...extractRequiredApis(externalRequirements),
+      ...extractSupplementalApis(markdown),
+    ])];
+    const requiredCapabilities = extractRequiredCapabilities(externalRequirements);
     const starter = {
       id,
       version: 1,
       name: title,
       description,
       source_usecase: title,
-      source_path: filePath,
+      source_path: path.relative(repoRoot, filePath),
       entry_team: classification.entry_team,
       packs: classification.packs,
       project_skills: ["openclaw-store-manager"],
+      installable_skills: installableSkills,
       tags: [...new Set([...classification.tags, ...id.split("-")])],
-      external_requirements: extractExternalRequirements(markdown),
+      required_apis: requiredApis,
+      required_capabilities: requiredCapabilities,
+      external_requirements: externalRequirements,
       bootstrap_prompt: buildBootstrapPrompt(title, description, id, classification.entry_team),
     };
     const demo = {
@@ -338,14 +454,17 @@ async function main() {
       category: classification.category,
       recommended_mode: "managed-team",
       source_usecase: title,
-      source_path: filePath,
+      source_path: starter.source_path,
       entry_team: classification.entry_team,
       packs: classification.packs,
       project_skills: starter.project_skills,
+      installable_skills: starter.installable_skills,
       tags: starter.tags,
+      required_apis: starter.required_apis,
+      required_capabilities: starter.required_capabilities,
       external_requirements: starter.external_requirements,
-      setup_guidance: buildSetupGuidance(classification.entry_team, starter.external_requirements),
-      card_path: path.join(demoCardsDir, `${id}.md`),
+      setup_guidance: buildSetupGuidance(classification.entry_team, starter),
+      card_path: path.join("cards", `${id}.md`),
       execution: buildExecution(classification.entry_team),
     };
 
@@ -354,7 +473,7 @@ async function main() {
       stringify(starter),
       "utf-8",
     );
-    await fs.writeFile(demo.card_path, buildDemoCard(demo, starter), "utf-8");
+    await fs.writeFile(path.join(demoProjectsDir, demo.card_path), buildDemoCard(demo, starter), "utf-8");
     demos.push(demo);
   }
 
@@ -365,7 +484,7 @@ async function main() {
     "utf-8",
   );
   await fs.writeFile(
-    defaultManaged.demo.card_path,
+    path.join(demoProjectsDir, defaultManaged.demo.card_path),
     buildDemoCard(defaultManaged.demo, defaultManaged.starter),
     "utf-8",
   );

@@ -87,6 +87,11 @@ Projects can be created in two ways:
 - from scratch with `openclaw-store init`
 - from a curated starter with `openclaw-store starter init <starter-id> <dir>`
 
+There is also a zero-config bootstrap path:
+
+- `openclaw-store install` with no manifest installs `openclaw-store-manager` into the main OpenClaw workspace instead of failing
+- this lets the user begin from OpenClaw first, then create a managed project later
+
 The starter path writes a project-local `openclaw-store.yaml` that already includes:
 
 - `project.starter`
@@ -174,6 +179,35 @@ openclaw-store.yaml
 
 ---
 
+## Data Flow: `openclaw-store install` with no manifest
+
+```
+no openclaw-store.yaml
+         │
+         ▼
+  runInstall()
+         │
+         ▼
+  detect missing manifest
+         │
+         ▼
+  runZeroConfigInstall()
+  ┌─────────────────────────────────────────────────────┐
+  │ loadSkill("openclaw-store-manager")                │
+  │ install into ~/.openclaw/workspace/skills/         │
+  │ updateStoreGuidance()                              │
+  │ print starter/bootstrap instructions               │
+  └─────────────────────────────────────────────────────┘
+         │
+         ▼
+  OpenClaw-first bootstrap complete
+         │
+         ▼
+  user chooses starter or scratch managed path later
+```
+
+---
+
 ## Data Flow: `openclaw-store starter init`
 
 ```
@@ -186,11 +220,16 @@ awesome-openclaw-usecases/*.md
   │ entry_team: content-factory                         │
   │ packs: [content-factory]                            │
   │ project_skills: [openclaw-store-manager]            │
+  │ installable_skills: [youtube-research]              │
+  │ required_apis: [YouTube API]                        │
   │ source_usecase: Podcast Production Pipeline         │
   └─────────────────────────────────────────────────────┘
          │
          ▼
   starter init <id> <dir>
+         │
+         ▼
+  mkdir -p <dir>
          │
          ▼
   write project files
@@ -363,6 +402,32 @@ Like `package.json` + `package-lock.json`: the manifest is what you *want*, the 
 **Why runtime.json as well?**
 
 The manifest and lockfile are local to one project directory. `runtime.json` is the global index that lets OpenClaw Store list all installed projects and their entry-point agents across your machine.
+It also records any explicitly attached native OpenClaw agents so projects can reference them without mirroring the whole OpenClaw agent registry.
+
+## Agent Ownership Model
+
+`openclaw-store` does not attempt to mirror every OpenClaw agent.
+
+- **store-managed agents**: provisioned from packs/teams/starters by `openclaw-store`
+- **native OpenClaw agents**: already present in `openclaw.json`, discovered but not owned by the store
+- **project-attached agents**: native OpenClaw agents explicitly attached to a managed project
+
+This keeps ownership boundaries simple:
+
+- OpenClaw remains the source of truth for all runtime agents
+- `openclaw-store` manages project/team scaffolding
+- `install` is the reconciliation point that can place targeted skills into both store-managed agents and attached native agents
+
+## Skill Availability Model
+
+`openclaw-store` does not mirror the full OpenClaw skill registry.
+
+- **store-managed skill templates**: skills defined in `templates/skills/`
+- **native OpenClaw skills**: skills already installed in `~/.openclaw/workspace/skills/` or `~/.openclaw/skills/`
+- **store cache copies**: skills materialized in `~/.openclaw-store/cache/skills/`
+
+Use `openclaw-store skill sync` to refresh the local availability inventory in `~/.openclaw-store/skills-index.json`.
+Discovered native skills can then be referenced directly by ID in `openclaw-store.yaml`, and `install` becomes the reconciliation point that places them into targeted agent workspaces.
 
 ## Workflow Modes
 

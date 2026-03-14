@@ -127,8 +127,17 @@ export async function loadSkill(skillId: string): Promise<SkillEntry> {
     }
   }
   const filePath = path.join(resolveSkillTemplatesDir(), `${skillId}.yaml`);
-  const raw = await readYaml<unknown>(filePath);
-  return SkillEntry.parse(raw);
+  try {
+    const raw = await readYaml<unknown>(filePath);
+    return SkillEntry.parse(raw);
+  } catch {
+    const { loadSkillEntryFromDiscovery } = await import("./openclaw-skills.js");
+    const discovered = await loadSkillEntryFromDiscovery(skillId);
+    if (discovered) {
+      return discovered;
+    }
+    throw new Error(`Skill "${skillId}" not found.`);
+  }
 }
 
 export async function listSkillIds(): Promise<string[]> {

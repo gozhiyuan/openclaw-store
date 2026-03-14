@@ -27,7 +27,39 @@ npm run build
 npm link   # makes `openclaw-store` available globally
 ```
 
-### 2. Initialise a project
+### 2. Bootstrap OpenClaw
+
+```bash
+openclaw-store install
+```
+
+If there is no `openclaw-store.yaml`, this is now a zero-config bootstrap path. It installs `openclaw-store-manager` into the main OpenClaw workspace so the user can start from inside OpenClaw first.
+
+```
+openclaw-store: no manifest found.
+Installing openclaw-store-manager skill into OpenClaw main agent workspace...
+
+✓ Skill installed: openclaw-store-manager
+
+The skill is now available in OpenClaw. Ask your agent to:
+  1. Run: openclaw-store starter list
+  2. Pick a starter and run: openclaw-store starter init <id> ./my-project
+  3. Then: openclaw-store install
+```
+
+### 3. Start a managed project
+
+Use a starter when possible. `starter init` creates the target project folder for you if it does not exist yet.
+
+```bash
+openclaw-store starter suggest "podcast workflow"
+openclaw-store starter init podcast-production-pipeline ./my-project
+cd ./my-project
+openclaw-store install --dry-run
+openclaw-store install
+```
+
+If you want to build a managed project from scratch instead, use:
 
 ```bash
 mkdir my-project && cd my-project
@@ -56,7 +88,7 @@ Run: openclaw-store install --dry-run   to preview
 Run: openclaw-store install             to install
 ```
 
-### 3. Preview the install
+### 4. Preview the install
 
 ```bash
 openclaw-store install --dry-run
@@ -64,7 +96,7 @@ openclaw-store install --dry-run
 
 Shows every file that will be created and every config change before touching anything.
 
-### 4. Install
+### 5. Install
 
 ```bash
 openclaw-store install
@@ -72,14 +104,14 @@ openclaw-store install
 
 This:
 - Creates agent workspaces at `~/.openclaw-store/workspaces/store/<project>/<team>/<agent>/`
-- Writes 5 bootstrap files per agent (SOUL.md, IDENTITY.md, TOOLS.md, AGENTS.md, USER.md)
+- Writes bootstrap files per agent (SOUL.md, IDENTITY.md, TOOLS.md, AGENTS.md, USER.md, MEMORY.md)
 - Seeds shared memory files with ownership headers
 - Patches `~/.openclaw/openclaw.json` with the new agents
 - Registers the project in `~/.openclaw-store/runtime.json`
 - Updates your main agent's TOOLS.md and AGENTS.md with store guidance
 - Writes `openclaw-store.lock`
 
-### 5. Verify
+### 6. Verify
 
 ```bash
 openclaw-store doctor
@@ -202,11 +234,14 @@ openclaw-store team show <id>                # Team graph + shared memory config
 
 openclaw-store skill show <id>               # Skill details + env var status
 openclaw-store skill check                   # Check which skills are active/inactive
+openclaw-store skill sync                    # Discover OpenClaw-installed skills and refresh availability
 
 openclaw-store project list                  # List installed projects from runtime.json
 openclaw-store project show <id>             # Show one installed project's entry points
 openclaw-store project status                # Installation overview
 openclaw-store project kanban <team-id>      # Show team kanban board
+openclaw-store project attach-agent <id>     # Attach an existing native OpenClaw agent to this project
+openclaw-store project detach-agent <id>     # Remove an attached native OpenClaw agent from this project
 
 # Preview & validate
 openclaw-store diff                          # Show what would change vs lockfile
@@ -231,6 +266,21 @@ openclaw-store doctor --fix                  # Attempt auto-remediation
 - Installed agent IDs are namespaced as `store__<project>__<team>__<agent>`
 - Installed workspaces live under `~/.openclaw-store/workspaces/store/<project>/<team>/<agent>/`
 - `~/.openclaw-store/runtime.json` is the global registry of installed projects
+
+Agent ownership is intentionally lightweight:
+
+- OpenClaw remains the source of truth for all runtime agents
+- `openclaw-store` directly manages only store-installed agents and teams
+- Existing native OpenClaw agents can be discovered and explicitly attached to a project
+- `install` remains the reconciliation point for store-managed agents and attached-agent skill placement
+
+Skill ownership follows the same rule:
+
+- OpenClaw remains the source of truth for the full runtime skill universe
+- `openclaw-store` directly manages a curated/project-aware subset
+- Native OpenClaw skills can be discovered with `openclaw-store skill sync`
+- Once available, they can be assigned by ID in `openclaw-store.yaml`
+- `install` remains the reconciliation point that places those skills into targeted agents
 
 The project manifest is the control point for choosing which teams and skills a project should run:
 
@@ -269,7 +319,9 @@ Skill placement rules:
 - OpenClaw does not auto-install missing skills on its own
 - If you change skill placement, re-run `openclaw-store install`
 
-To add another project later, create or enter that project's directory and run `openclaw-store init` there. Then use `openclaw-store project list` and `openclaw-store project show <id>` to discover installed projects and their entry-point agents.
+To add another project later, either initialize a starter directly into a new folder with `openclaw-store starter init <id> ./my-project`, or create/enter that project's directory and run `openclaw-store init` for the scratch path. Then use `openclaw-store project list` and `openclaw-store project show <id>` to discover installed projects and their entry-point agents.
+
+Native OpenClaw agents are not mirrored into `openclaw-store` as first-class templates. Instead, `openclaw-store` discovers them from `openclaw.json`, shows them as available, and lets you explicitly attach them to a managed project when needed.
 
 ## Starter Demo Projects
 
@@ -281,7 +333,10 @@ Each starter contains:
 - recommended built-in packs
 - a preferred entry team
 - the `openclaw-store-manager` project skill
-- extracted external requirements
+- recommended installable OpenClaw skills
+- required APIs or external services
+- required runtime capabilities or tools
+- a human-readable requirement summary
 - a bootstrap prompt for the demo
 - a metadata entry in `demo-projects/index.yaml`
 - a richer card in `demo-projects/cards/<starter-id>.md`
@@ -289,6 +344,7 @@ Each starter contains:
 Typical flow:
 
 ```bash
+openclaw-store install
 openclaw-store starter suggest "build a podcast workflow"
 openclaw-store starter show podcast-production-pipeline
 openclaw-store starter init podcast-production-pipeline ./my-podcast-project
@@ -321,6 +377,14 @@ If a repo does not have `openclaw-store.yaml`, `openclaw-store` treats it as an 
 - manifest present -> `openclaw-store` managed workflow
 
 That means you can install the `openclaw-store-manager` skill into OpenClaw, let it inspect repos, and only opt into full project/team/skill management when the user wants it.
+
+In practice, the easiest entry path is:
+
+```bash
+openclaw-store install
+```
+
+If no manifest exists, that bootstraps the manager skill into OpenClaw instead of failing.
 
 For managed installs in Claude Code or CI-style environments, use:
 

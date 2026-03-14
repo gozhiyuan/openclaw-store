@@ -13,8 +13,9 @@ import { seedTeamSharedMemory } from "../lib/memory.js";
 import { resolveLockfilePath, resolveMainAgentWorkspaceDir, resolveManifestPath, resolveStoreWorkspacesRoot } from "../lib/paths.js";
 import fs from "node:fs/promises";
 import path from "node:path";
-import type { LockedSkill, Lockfile, RuntimeProject } from "../lib/schema.js";
+import type { LockedSkill, Lockfile, RuntimeAttachedAgent, RuntimeProject } from "../lib/schema.js";
 import { upsertRuntimeProject } from "../lib/runtime.js";
+import { resolveOpenClawAgentsById } from "../lib/openclaw-agents.js";
 
 export type InstallOptions = {
   dryRun?: boolean;
@@ -74,6 +75,13 @@ export async function runInstall(opts: InstallOptions = {}): Promise<void> {
       },
     ]),
   );
+  const attachedAgents = (await resolveOpenClawAgentsById(project.attachedAgents)).map((agent) => ({
+    id: agent.id,
+    name: agent.name,
+    workspace: agent.workspace,
+    agent_dir: agent.agentDir,
+    source: "project-attached" as const,
+  }));
 
   // workspaceDir → agentId map for allowlist patching after skills are installed
   const workspaceDirToAgentId = new Map<string, string>();
@@ -127,6 +135,15 @@ export async function runInstall(opts: InstallOptions = {}): Promise<void> {
           if (shouldInstallSkillForAgent(pack, agent, resolvedSkill)) {
             targetWorkspaces.add(agent.workspaceDir);
           }
+        }
+      }
+      for (const attachedAgent of attachedAgents) {
+        if (
+          attachedAgent.workspace
+          && resolvedSkill.targets?.agents?.includes(attachedAgent.id)
+        ) {
+          targetWorkspaces.add(attachedAgent.workspace);
+          workspaceDirToAgentId.set(attachedAgent.workspace, attachedAgent.id);
         }
       }
       if (targetWorkspaces.size === 0) continue;
@@ -183,7 +200,7 @@ export async function runInstall(opts: InstallOptions = {}): Promise<void> {
   await upsertRuntimeProject(buildRuntimeProject(project, packs, finalLockfile, {
     manifestPath: opts.pack ? undefined : resolveManifestPath(opts.projectDir),
     lockfilePath: opts.pack ? undefined : resolveLockfilePath(opts.projectDir),
-  }));
+  }, attachedAgents));
 
   // Report skill status
   const activeSkills = finalLockfile.skills.filter((s) => s.status === "active");
@@ -289,6 +306,7 @@ function buildRuntimeProject(
   packs: ResolvedPack[],
   lockfile: Lockfile,
   opts: { manifestPath?: string; lockfilePath?: string },
+  attachedAgents: RuntimeAttachedAgent[] = [],
 ): RuntimeProject {
   const entryPoints = packs.flatMap((pack) => {
     const entryMember = pack.teamDef.members.find((m) => m.entry_point);
@@ -315,6 +333,7 @@ function buildRuntimeProject(
     packs: (lockfile.packs ?? []).map((p) => p.id),
     skills: (lockfile.skills ?? []).map((s) => s.id),
     entry_points: entryPoints,
+    attached_agents: attachedAgents,
     updated_at: new Date().toISOString(),
   };
 }

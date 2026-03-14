@@ -26,6 +26,7 @@ describe("starters", () => {
     const index = await loadDemoProjectIndex();
     expect(index.demos.length).toBeGreaterThanOrEqual(37);
     expect(index.demos.some((demo) => demo.id === "default-managed")).toBe(true);
+    expect(index.demos.every((demo) => !path.isAbsolute(demo.card_path))).toBe(true);
   });
 
   it("initializes a project from a starter", async () => {

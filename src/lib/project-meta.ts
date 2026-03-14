@@ -7,6 +7,7 @@ export type ResolvedProjectMeta = {
   description?: string;
   starter?: string;
   entryTeam?: string;
+  attachedAgents: string[];
   projectDir: string;
 };
 
@@ -40,6 +41,7 @@ export function resolveProjectMeta(
     description: project?.description,
     starter: project?.starter,
     entryTeam: project?.entry_team,
+    attachedAgents: project?.attached_agents ?? [],
     projectDir: path.resolve(projectDir),
   };
 }
@@ -55,6 +57,7 @@ export function projectMetaFromLockfile(
       description: lockfile.project.description,
       starter: lockfile.project.starter,
       entryTeam: lockfile.project.entry_team,
+      attachedAgents: lockfile.project.attached_agents ?? [],
       projectDir: path.resolve(lockfile.project.project_dir ?? projectDir),
     };
   }

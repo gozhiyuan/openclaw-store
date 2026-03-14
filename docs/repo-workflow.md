@@ -14,9 +14,17 @@ npm link
 
 This makes `openclaw-store` available on your machine.
 
-## 2. Create or enter a project
+## 2. Bootstrap OpenClaw or start a project
 
-You can either start from scratch or begin from a demo starter.
+You can either bootstrap OpenClaw first, or immediately start a managed project.
+
+OpenClaw-first bootstrap:
+
+```bash
+openclaw-store install
+```
+
+If there is no `openclaw-store.yaml`, this installs the `openclaw-store-manager` skill into the main OpenClaw workspace and updates the main guidance files. It does not require a project folder yet.
 
 The demo catalog lives in:
 
@@ -31,6 +39,8 @@ openclaw-store starter suggest "podcast workflow"
 openclaw-store starter init podcast-production-pipeline ./my-podcast-project
 cd ./my-podcast-project
 ```
+
+`starter init` creates the target folder if it does not already exist.
 
 For the lightest managed setup:
 
@@ -56,6 +66,7 @@ openclaw-store init
 
 The wizard creates `openclaw-store.yaml`, which declares which packs and skills the project wants.
 It also writes a `project` block so installs are namespaced by project ID.
+This is the scratch/manual managed path, not the only entry path.
 
 ## 3. Preview and install
 
@@ -84,11 +95,29 @@ openclaw-store agent show pm
 
 Each team has one `entry_point: true` agent. That agent is the normal front door for the team.
 
+`openclaw-store agent list` now shows both:
+
+- store-managed agents installed by this repo
+- available native OpenClaw agents discovered from `openclaw.json`
+
 Examples:
 
 - `dev-company` in project `my-project` -> `store__my-project__dev-company__pm`
 - `content-factory` -> the Editor entry point
 - `research-lab` -> the Research Lead entry point
+
+If you want to reuse an existing native OpenClaw agent in a managed project instead of provisioning a full new team, attach it explicitly:
+
+```bash
+openclaw-store project attach-agent ops
+openclaw-store install
+```
+
+This keeps ownership simple:
+
+- OpenClaw owns the full runtime agent universe
+- `openclaw-store` owns store-managed teams and project-level attachment metadata
+- `install` reconciles attached-agent skill placement
 
 ## 5. Give work to the entry-point agent
 
@@ -135,8 +164,16 @@ For external skills or APIs, the expected flow is:
 
 1. `openclaw-store-manager` identifies the missing requirement from the demo card or skill template
 2. OpenClaw guides the user through installing or configuring it
-3. Re-run `openclaw-store install`
-4. Verify placement with `openclaw-store skill check`
+3. Optionally run `openclaw-store skill sync` to refresh local availability
+4. Re-run `openclaw-store install`
+5. Verify placement with `openclaw-store skill check`
+
+The demo card should distinguish:
+
+- `project_skills`: skills the starter already places into the generated manifest
+- `installable_skills`: OpenClaw skills the user may need to install or sync before attaching them
+- `required_apis`: external APIs, SaaS integrations, or auth the user must configure
+- `required_capabilities`: runtime/tool prerequisites such as `sessions_spawn`, Git, SSH, or filesystem access
 
 If a required environment variable is missing, the skill is installed as inactive.
 Project skills are not automatically attached to every agent. They are installed where the agent template or project targets place them.
@@ -204,7 +241,7 @@ Each real project should have its own root directory and its own `openclaw-store
 To add another project:
 
 1. Create or open the project directory
-2. Run `openclaw-store init`
+2. Either run `openclaw-store starter init <id> <dir>` or `openclaw-store init`
 3. Select the team packs for that project
 4. Add any required skills to that project's manifest
 5. Run `openclaw-store install`
@@ -230,6 +267,8 @@ project:
   id: podcast-studio
   name: "Podcast Studio"
   entry_team: content-factory
+  attached_agents:
+    - ops
 packs:
   - id: content-factory
   - id: research-lab
@@ -252,7 +291,17 @@ That means:
 - the project is installed under the `podcast-studio` namespace
 - it gets both the content and research teams
 - the preferred entry team is `content-factory`
+- it also attaches the existing native OpenClaw agent `ops` to the project
 - agents that declare `github` or `last30days` receive those skills during install
+
+If a skill targets `ops` by ID, `openclaw-store install` places that skill into the native agent's workspace and updates its explicit allowlist if needed.
+
+The same applies to native OpenClaw skills:
+
+1. install/configure the skill in OpenClaw
+2. run `openclaw-store skill sync`
+3. reference the skill ID in `openclaw-store.yaml`
+4. run `openclaw-store install`
 
 ## 12. Turn a new idea into a managed project
 

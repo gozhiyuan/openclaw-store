@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { stringify } from "yaml";
 import { loadAllStarters, loadDemoProject, loadDemoProjectIndex, loadStarter, writeManifest } from "../lib/loader.js";
+import { resolveDemoProjectCardPath } from "../lib/paths.js";
 import { defaultProjectId, defaultProjectName } from "../lib/project-meta.js";
 import type { StarterDef } from "../lib/schema.js";
 
@@ -28,6 +29,9 @@ function starterScore(starter: StarterDef, query: string): number {
     starter.entry_team,
     ...starter.tags,
     ...starter.packs,
+    ...starter.installable_skills,
+    ...starter.required_apis,
+    ...starter.required_capabilities,
     ...starter.external_requirements,
   ].join(" ").toLowerCase();
 
@@ -78,20 +82,40 @@ function buildStarterReadme(starter: StarterDef, targetDir: string): string {
     `- Entry Team: ${starter.entry_team}`,
     `- Packs: ${starter.packs.join(", ") || "—"}`,
     `- Project Skills: ${starter.project_skills.join(", ") || "—"}`,
+    `- Installable OpenClaw Skills: ${starter.installable_skills.join(", ") || "—"}`,
+    `- Required APIs / Services: ${starter.required_apis.join(", ") || "—"}`,
+    `- Required Capabilities / Tools: ${starter.required_capabilities.join(", ") || "—"}`,
     "",
     `## Source Use Case`,
     "",
     `- Title: ${starter.source_usecase}`,
   ];
 
-  if (starter.source_path) {
-    lines.push(`- Path: ${starter.source_path}`);
-  }
-
   lines.push("", "## Description", "", starter.description);
 
+  if (starter.installable_skills.length > 0) {
+    lines.push("", "## Installable OpenClaw Skills", "");
+    for (const skill of starter.installable_skills) {
+      lines.push(`- ${skill}`);
+    }
+  }
+
+  if (starter.required_apis.length > 0) {
+    lines.push("", "## Required APIs / Services", "");
+    for (const api of starter.required_apis) {
+      lines.push(`- ${api}`);
+    }
+  }
+
+  if (starter.required_capabilities.length > 0) {
+    lines.push("", "## Required Capabilities / Tools", "");
+    for (const capability of starter.required_capabilities) {
+      lines.push(`- ${capability}`);
+    }
+  }
+
   if (starter.external_requirements.length > 0) {
-    lines.push("", "## External Requirements", "");
+    lines.push("", "## Requirement Summary", "");
     for (const req of starter.external_requirements) {
       lines.push(`- ${req}`);
     }
@@ -157,16 +181,15 @@ export async function starterShow(starterId: string): Promise<void> {
   console.log(`\n${starter.name} (${starter.id})\n`);
   console.log(`Description: ${starter.description}`);
   console.log(`Source:      ${starter.source_usecase}`);
-  if (starter.source_path) {
-    console.log(`Source path: ${starter.source_path}`);
-  }
   console.log(`Entry team:  ${starter.entry_team}`);
   console.log(`Packs:       ${starter.packs.join(", ") || "—"}`);
   console.log(`Proj skills: ${starter.project_skills.join(", ") || "—"}`);
+  console.log(`OC skills:   ${starter.installable_skills.join(", ") || "—"}`);
+  console.log(`APIs/svcs:   ${starter.required_apis.join(", ") || "—"}`);
+  console.log(`Capabilities:${starter.required_capabilities.length ? ` ${starter.required_capabilities.join(", ")}` : " —"}`);
   if (demo) {
     console.log(`Category:    ${demo.category}`);
     console.log(`Recommended: ${demo.recommended_mode}`);
-    console.log(`Card path:   ${demo.card_path}`);
   }
   if (starter.tags.length > 0) {
     console.log(`Tags:        ${starter.tags.join(", ")}`);
@@ -186,7 +209,7 @@ export async function starterShow(starterId: string): Promise<void> {
   }
 
   if (starter.external_requirements.length > 0) {
-    console.log("\nExternal requirements:");
+    console.log("\nRequirement summary:");
     for (const req of starter.external_requirements) {
       console.log(`  - ${req}`);
     }
@@ -254,7 +277,7 @@ export async function starterInit(
   await fs.writeFile(starterReadmePath, buildStarterReadme(starter, absTarget), "utf-8");
   const demo = await loadDemoProject(starter.id).catch(() => null);
   if (demo) {
-    await fs.copyFile(demo.card_path, demoProjectPath);
+    await fs.copyFile(resolveDemoProjectCardPath(demo.card_path), demoProjectPath);
   }
 
   console.log(`Initialized starter ${starter.id} in ${absTarget}`);

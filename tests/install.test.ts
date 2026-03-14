@@ -120,4 +120,130 @@ describe("runInstall", () => {
       fs.access(path.join(storeDir, "workspaces", "store", "project", "dev-company", "backend-dev", "skills", "openclaw-store-manager")),
     ).rejects.toThrow();
   });
+
+  it("installs targeted project skills into attached native OpenClaw agents", async () => {
+    tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-install-"));
+    const projectDir = path.join(tmpDir, "project");
+    const storeDir = path.join(tmpDir, "store");
+    const stateDir = path.join(tmpDir, "state");
+    const homeDir = path.join(tmpDir, "home");
+    const nativeWorkspace = path.join(stateDir, "workspace-native");
+
+    await fs.mkdir(projectDir, { recursive: true });
+    await fs.mkdir(stateDir, { recursive: true });
+    await fs.mkdir(homeDir, { recursive: true });
+    await fs.mkdir(nativeWorkspace, { recursive: true });
+    await fs.writeFile(
+      path.join(projectDir, "openclaw-store.yaml"),
+      stringify({
+        version: 1,
+        project: {
+          id: "project",
+          name: "Project",
+          attached_agents: ["ops"],
+        },
+        packs: [],
+        skills: [{
+          id: "openclaw-store-manager",
+          targets: { agents: ["ops"] },
+        }],
+      }),
+    );
+    await fs.writeFile(
+      path.join(stateDir, "openclaw.json"),
+      JSON.stringify({
+        agents: {
+          list: [{
+            id: "ops",
+            name: "Ops",
+            workspace: nativeWorkspace,
+            agentDir: path.join(stateDir, "agents", "ops", "agent"),
+            skills: [],
+          }],
+        },
+      }),
+    );
+
+    for (const key of envKeys) {
+      originalEnv.set(key, process.env[key]);
+    }
+    process.env.OPENCLAW_STORE_DIR = storeDir;
+    process.env.OPENCLAW_STATE_DIR = stateDir;
+    process.env.HOME = homeDir;
+    process.env.USERPROFILE = homeDir;
+
+    await runInstall({ projectDir });
+
+    await expect(
+      fs.access(path.join(nativeWorkspace, "skills", "openclaw-store-manager")),
+    ).resolves.not.toThrow();
+
+    const openclawConfig = JSON.parse(await fs.readFile(path.join(stateDir, "openclaw.json"), "utf-8"));
+    expect(openclawConfig.agents.list[0].skills).toContain("openclaw-store-manager");
+
+    const runtime = JSON.parse(await fs.readFile(path.join(storeDir, "runtime.json"), "utf-8"));
+    expect(runtime.projects[0].attached_agents[0].id).toBe("ops");
+    expect(runtime.projects[0].attached_agents[0].source).toBe("project-attached");
+  });
+
+  it("allows assignment of discovered native OpenClaw skills without a store template", async () => {
+    tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-install-"));
+    const projectDir = path.join(tmpDir, "project");
+    const storeDir = path.join(tmpDir, "store");
+    const stateDir = path.join(tmpDir, "state");
+    const homeDir = path.join(tmpDir, "home");
+    const nativeWorkspace = path.join(stateDir, "workspace-native");
+    const nativeSkillDir = path.join(homeDir, ".openclaw", "workspace", "skills", "native-skill");
+
+    await fs.mkdir(projectDir, { recursive: true });
+    await fs.mkdir(stateDir, { recursive: true });
+    await fs.mkdir(homeDir, { recursive: true });
+    await fs.mkdir(nativeWorkspace, { recursive: true });
+    await fs.mkdir(nativeSkillDir, { recursive: true });
+    await fs.writeFile(path.join(nativeSkillDir, "SKILL.md"), "# Native Skill\n");
+    await fs.writeFile(
+      path.join(projectDir, "openclaw-store.yaml"),
+      stringify({
+        version: 1,
+        project: {
+          id: "project",
+          attached_agents: ["ops"],
+        },
+        packs: [],
+        skills: [{
+          id: "native-skill",
+          targets: { agents: ["ops"] },
+        }],
+      }),
+    );
+    await fs.writeFile(
+      path.join(stateDir, "openclaw.json"),
+      JSON.stringify({
+        agents: {
+          list: [{
+            id: "ops",
+            workspace: nativeWorkspace,
+            agentDir: path.join(stateDir, "agents", "ops", "agent"),
+            skills: [],
+          }],
+        },
+      }),
+    );
+
+    for (const key of envKeys) {
+      originalEnv.set(key, process.env[key]);
+    }
+    process.env.OPENCLAW_STORE_DIR = storeDir;
+    process.env.OPENCLAW_STATE_DIR = stateDir;
+    process.env.HOME = homeDir;
+    process.env.USERPROFILE = homeDir;
+
+    await runInstall({ projectDir });
+
+    await expect(
+      fs.access(path.join(nativeWorkspace, "skills", "native-skill")),
+    ).resolves.not.toThrow();
+    const openclawConfig = JSON.parse(await fs.readFile(path.join(stateDir, "openclaw.json"), "utf-8"));
+    expect(openclawConfig.agents.list[0].skills).toContain("native-skill");
+  });
 });

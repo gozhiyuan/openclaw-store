@@ -53,6 +53,10 @@ export function resolveStoreRuntimeFile(): string {
   return path.join(resolveStoreRoot(), "runtime.json");
 }
 
+export function resolveStoreSkillsIndexFile(): string {
+  return path.join(resolveStoreRoot(), "skills-index.json");
+}
+
 // ── Project-local paths (git-committed) ─────────────────────────────────────
 
 export function resolveManifestPath(projectDir: string = process.cwd()): string {
@@ -115,6 +119,11 @@ export function resolveDemoProjectsIndexPath(): string {
 
 export function resolveDemoProjectCardsDir(): string {
   return path.join(resolveDemoProjectsDir(), "cards");
+}
+
+export function resolveDemoProjectCardPath(cardPath: string): string {
+  if (path.isAbsolute(cardPath)) return cardPath;
+  return path.join(resolveDemoProjectsDir(), cardPath);
 }
 
 export function resolvePartialsDir(): string {

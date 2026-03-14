@@ -174,7 +174,10 @@ export const StarterDef = z.object({
   entry_team: z.string(),
   packs: z.array(z.string()).default([]),
   project_skills: z.array(z.string()).default([]),
+  installable_skills: z.array(z.string()).default([]),
   tags: z.array(z.string()).default([]),
+  required_apis: z.array(z.string()).default([]),
+  required_capabilities: z.array(z.string()).default([]),
   external_requirements: z.array(z.string()).default([]),
   bootstrap_prompt: z.string().optional(),
 });
@@ -200,7 +203,10 @@ export const DemoProjectDef = z.object({
   entry_team: z.string(),
   packs: z.array(z.string()).default([]),
   project_skills: z.array(z.string()).default([]),
+  installable_skills: z.array(z.string()).default([]),
   tags: z.array(z.string()).default([]),
+  required_apis: z.array(z.string()).default([]),
+  required_capabilities: z.array(z.string()).default([]),
   external_requirements: z.array(z.string()).default([]),
   setup_guidance: z.array(z.string()).default([]),
   card_path: z.string(),
@@ -224,6 +230,7 @@ export const ManifestProject = z.object({
   description: z.string().optional(),
   starter: z.string().optional(),
   entry_team: z.string().optional(),
+  attached_agents: z.array(z.string()).optional(),
 });
 
 export const ManifestPackRef = z.object({
@@ -260,6 +267,7 @@ export const LockedProject = z.object({
   description: z.string().optional(),
   starter: z.string().optional(),
   entry_team: z.string().optional(),
+  attached_agents: z.array(z.string()).optional(),
   project_dir: z.string().optional(),
 });
 
@@ -312,6 +320,14 @@ export const RuntimeEntryPoint = z.object({
   agent_name: z.string().optional(),
 });
 
+export const RuntimeAttachedAgent = z.object({
+  id: z.string(),
+  name: z.string().optional(),
+  workspace: z.string().optional(),
+  agent_dir: z.string().optional(),
+  source: z.enum(["project-attached", "openclaw-native", "store-managed"]),
+});
+
 export const RuntimeProject = z.object({
   id: z.string(),
   name: z.string().optional(),
@@ -324,6 +340,7 @@ export const RuntimeProject = z.object({
   packs: z.array(z.string()).default([]),
   skills: z.array(z.string()).default([]),
   entry_points: z.array(RuntimeEntryPoint).default([]),
+  attached_agents: z.array(RuntimeAttachedAgent).default([]),
   updated_at: z.string(),
 });
 
@@ -333,5 +350,26 @@ export const RuntimeState = z.object({
 });
 
 export type RuntimeEntryPoint = z.infer<typeof RuntimeEntryPoint>;
+export type RuntimeAttachedAgent = z.infer<typeof RuntimeAttachedAgent>;
 export type RuntimeProject = z.infer<typeof RuntimeProject>;
 export type RuntimeState = z.infer<typeof RuntimeState>;
+
+// ── Skill inventory (~/.openclaw-store/skills-index.json) ───────────────────
+
+export const DiscoveredSkill = z.object({
+  id: z.string(),
+  name: z.string().optional(),
+  source: z.enum(["template", "openclaw-workspace", "openclaw-global", "store-cache"]),
+  path: z.string(),
+  version: z.string().optional(),
+  managed_by_store: z.boolean().default(false),
+});
+
+export const SkillInventory = z.object({
+  version: z.number().default(1),
+  updated_at: z.string().optional(),
+  skills: z.array(DiscoveredSkill).default([]),
+});
+
+export type DiscoveredSkill = z.infer<typeof DiscoveredSkill>;
+export type SkillInventory = z.infer<typeof SkillInventory>;

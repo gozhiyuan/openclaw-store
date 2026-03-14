@@ -144,6 +144,7 @@ function buildLockedProject(project: ResolvedProjectMeta): LockedProject {
     description: project.description,
     starter: project.starter,
     entry_team: project.entryTeam,
+    attached_agents: project.attachedAgents.length > 0 ? project.attachedAgents : undefined,
     project_dir: project.projectDir,
   };
 }

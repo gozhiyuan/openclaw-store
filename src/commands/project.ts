@@ -1,10 +1,11 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { loadLockfile, loadManifest } from "../lib/loader.js";
+import { loadLockfile, loadManifest, writeManifest } from "../lib/loader.js";
 import { resolveSharedMemoryDir } from "../lib/paths.js";
 import { formatProjectLabel, projectMetaFromLockfile, resolveProjectMeta } from "../lib/project-meta.js";
 import { loadRuntimeState } from "../lib/runtime.js";
 import { describeWorkflowMode, detectWorkflowMode } from "../lib/workflow-mode.js";
+import { listOpenClawAgents } from "../lib/openclaw-agents.js";
 
 async function readFileOrEmpty(filePath: string): Promise<string> {
   try {
@@ -34,6 +35,9 @@ export async function projectStatus(projectDir?: string): Promise<void> {
   console.log(`Dir:     ${project.projectDir}`);
   if (project.entryTeam) {
     console.log(`Entry:   ${project.entryTeam}`);
+  }
+  if (project.attachedAgents.length > 0) {
+    console.log(`Attached native agents: ${project.attachedAgents.join(", ")}`);
   }
 
   if (!lockfile) {
@@ -142,10 +146,67 @@ export async function projectShow(projectId: string): Promise<void> {
     }
   }
 
+  if (project.attached_agents.length > 0) {
+    console.log("\nAttached native agents:");
+    for (const agent of project.attached_agents) {
+      console.log(`  ${agent.id}${agent.name ? ` — ${agent.name}` : ""}`);
+      if (agent.workspace) {
+        console.log(`    workspace: ${agent.workspace}`);
+      }
+    }
+  }
+
   if (project.packs.length > 0) {
     console.log(`\nInstalled packs: ${project.packs.join(", ")}`);
   }
   if (project.skills.length > 0) {
     console.log(`Skills: ${project.skills.join(", ")}`);
   }
+}
+
+export async function projectAttachAgent(agentId: string, projectDir?: string): Promise<void> {
+  const manifest = await loadManifest(projectDir);
+  const agents = await listOpenClawAgents();
+  const agent = agents.find((entry) => entry.id === agentId);
+  if (!agent) {
+    console.error(`OpenClaw agent "${agentId}" not found.`);
+    process.exit(1);
+  }
+  if (agent.source === "store-managed") {
+    console.error(`Agent "${agentId}" is already store-managed. Attach only native OpenClaw agents.`);
+    process.exit(1);
+  }
+
+  const existing = new Set(manifest.project?.attached_agents ?? []);
+  existing.add(agentId);
+
+  await writeManifest({
+    ...manifest,
+    project: {
+      ...manifest.project,
+      attached_agents: [...existing].sort(),
+    },
+  }, projectDir);
+
+  console.log(`Attached native OpenClaw agent "${agentId}" to this project.`);
+  console.log("Run: openclaw-store install");
+}
+
+export async function projectDetachAgent(agentId: string, projectDir?: string): Promise<void> {
+  const manifest = await loadManifest(projectDir);
+  const existing = new Set(manifest.project?.attached_agents ?? []);
+  if (!existing.has(agentId)) {
+    console.log(`Agent "${agentId}" is not attached to this project.`);
+    return;
+  }
+  existing.delete(agentId);
+  await writeManifest({
+    ...manifest,
+    project: {
+      ...manifest.project,
+      attached_agents: [...existing].sort(),
+    },
+  }, projectDir);
+  console.log(`Detached native OpenClaw agent "${agentId}" from this project.`);
+  console.log("Run: openclaw-store install");
 }

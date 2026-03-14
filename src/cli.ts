@@ -210,6 +210,14 @@ skillCmd
     await skillCheck();
   });
 
+skillCmd
+  .command("sync")
+  .description("Discover OpenClaw-installed skills and sync availability inventory")
+  .action(async () => {
+    const { skillSync } = await import("./commands/skill.js");
+    await skillSync();
+  });
+
 // ── project ───────────────────────────────────────────────────────────────────
 
 const projectCmd = program.command("project").description("Project management");
@@ -244,6 +252,22 @@ projectCmd
   .action(async (teamId: string) => {
     const { projectKanban } = await import("./commands/project.js");
     await projectKanban(teamId);
+  });
+
+projectCmd
+  .command("attach-agent <agent-id>")
+  .description("Attach an existing native OpenClaw agent to the current project")
+  .action(async (agentId: string) => {
+    const { projectAttachAgent } = await import("./commands/project.js");
+    await projectAttachAgent(agentId);
+  });
+
+projectCmd
+  .command("detach-agent <agent-id>")
+  .description("Detach a native OpenClaw agent from the current project")
+  .action(async (agentId: string) => {
+    const { projectDetachAgent } = await import("./commands/project.js");
+    await projectDetachAgent(agentId);
   });
 
 // ── starter ──────────────────────────────────────────────────────────────────
