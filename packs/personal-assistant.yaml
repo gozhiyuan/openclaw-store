@@ -1,0 +1,12 @@
+id: personal-assistant
+version: "1.0.0"
+name: "Personal Assistant"
+description: "Personal life management team — calendar, tasks, health, and knowledge management"
+teams:
+  - personal-assistant
+default_skills:
+  - google-calendar
+  - brainz-tasks
+compatibility:
+  openclaw_min: "2026.2.9"
+  node_min: "22.0.0"

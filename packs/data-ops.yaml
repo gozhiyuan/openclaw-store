@@ -1,0 +1,12 @@
+id: data-ops
+version: "1.0.0"
+name: "Data Ops"
+description: "Data pipeline team — ETL, analytics, and storage management"
+teams:
+  - data-ops
+default_skills:
+  - duckdb-en
+  - nocodb
+compatibility:
+  openclaw_min: "2026.2.9"
+  node_min: "22.0.0"

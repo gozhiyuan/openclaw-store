@@ -1,0 +1,12 @@
+id: customer-service
+version: "1.0.0"
+name: "Customer Service"
+description: "Multi-channel customer service team — ticket routing, response, and escalation"
+teams:
+  - customer-service
+default_skills:
+  - clawemail
+  - connect-apps
+compatibility:
+  openclaw_min: "2026.2.9"
+  node_min: "22.0.0"

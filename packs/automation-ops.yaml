@@ -1,0 +1,12 @@
+id: automation-ops
+version: "1.0.0"
+name: "Automation Ops"
+description: "Workflow automation team — communications, integrations, and notifications"
+teams:
+  - automation-ops
+default_skills:
+  - clawemail
+  - n8n
+compatibility:
+  openclaw_min: "2026.2.9"
+  node_min: "22.0.0"

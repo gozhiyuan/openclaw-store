@@ -1,0 +1,11 @@
+id: finance-ops
+version: "1.0.0"
+name: "Finance Ops"
+description: "Financial research and trading team — market analysis, execution, and risk review"
+teams:
+  - finance-ops
+default_skills:
+  - aluvia-brave-search
+compatibility:
+  openclaw_min: "2026.2.9"
+  node_min: "22.0.0"
