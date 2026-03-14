@@ -1,0 +1,25 @@
+id: x-research-but-cheaper
+version: 1
+name: "X Research"
+description: "X/Twitter research and analysis via TwitterAPI.io — affordable alternative to official API"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/minilozio/x-research-but-cheaper"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  bins: []
+  env:
+    - key: TWITTER_API_IO_KEY
+      description: "TwitterAPI.io API key"
+      required: true
+
+disabled_until_configured: true
+
+install_hints:
+  - "Sign up at twitterapi.io for an API key"
+  - "Set: export TWITTER_API_IO_KEY=..."
+  - "Then re-run: openclaw-store install"

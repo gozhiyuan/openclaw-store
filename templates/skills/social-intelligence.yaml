@@ -1,0 +1,25 @@
+id: social-intelligence
+version: 1
+name: "Social Intelligence"
+description: "Social media research across Twitter, Instagram, and Reddit — 1.5B+ posts indexed"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/atyachin/social-intelligence"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  bins: []
+  env:
+    - key: SOCIAL_INTEL_API_KEY
+      description: "Social Intelligence API key"
+      required: true
+
+disabled_until_configured: true
+
+install_hints:
+  - "Get API key from the Social Intelligence skill README on ClawHub"
+  - "Set: export SOCIAL_INTEL_API_KEY=..."
+  - "Then re-run: openclaw-store install"

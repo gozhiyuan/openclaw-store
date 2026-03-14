@@ -1,0 +1,25 @@
+id: fal-ai
+version: 1
+name: "fal.ai"
+description: "Generate images, videos, and audio via fal.ai — supports FLUX, SDXL, Whisper, and more"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/agmmnn/fal-ai"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  bins: []
+  env:
+    - key: FAL_KEY
+      description: "fal.ai API key"
+      required: true
+
+disabled_until_configured: true
+
+install_hints:
+  - "Sign up at fal.ai and get your API key from the dashboard"
+  - "Set: export FAL_KEY=..."
+  - "Then re-run: openclaw-store install"

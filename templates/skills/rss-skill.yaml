@@ -1,0 +1,20 @@
+id: rss-skill
+version: 1
+name: "RSS Feed Reader"
+description: "Convert RSS or Atom feed URLs into Markdown — supports any public RSS feed"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/myx0m0p/rss-skill"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  bins: []
+  env: []
+
+disabled_until_configured: false
+
+install_hints:
+  - "No API key required — reads any public RSS or Atom feed URL"

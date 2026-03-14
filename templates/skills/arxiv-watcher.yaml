@@ -1,0 +1,20 @@
+id: arxiv-watcher
+version: 1
+name: "ArXiv Watcher"
+description: "Search and summarize academic papers from ArXiv"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/rubenfb23/arxiv-watcher"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  bins: []
+  env: []
+
+disabled_until_configured: false
+
+install_hints:
+  - "No API key required — uses ArXiv public API"

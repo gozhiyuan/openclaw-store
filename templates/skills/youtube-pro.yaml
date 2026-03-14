@@ -1,0 +1,26 @@
+id: youtube-pro
+version: 1
+name: "YouTube Pro"
+description: "Advanced YouTube analysis — transcripts, metadata extraction, channel research"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/kjaylee/youtube-pro"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  bins: []
+  env:
+    - key: YOUTUBE_API_KEY
+      description: "YouTube Data API v3 key"
+      required: true
+
+disabled_until_configured: true
+
+install_hints:
+  - "Enable YouTube Data API v3 in Google Cloud Console"
+  - "Create an API key at console.cloud.google.com/apis/credentials"
+  - "Set: export YOUTUBE_API_KEY=..."
+  - "Then re-run: openclaw-store install"

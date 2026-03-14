@@ -1,0 +1,25 @@
+id: aluvia-brave-search
+version: 1
+name: "Brave Search"
+description: "Web search and content extraction via Brave Search API"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/bertxtrella/aluvia-brave-search"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  bins: []
+  env:
+    - key: BRAVE_API_KEY
+      description: "Brave Search API key"
+      required: true
+
+disabled_until_configured: true
+
+install_hints:
+  - "Get a free API key at brave.com/search/api (2,000 queries/month free)"
+  - "Set: export BRAVE_API_KEY=..."
+  - "Then re-run: openclaw-store install"
