@@ -11,8 +11,10 @@ Your agent already monitors things for you — stocks, emails, smart home, calen
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: to
+- Required APIs / Services: That's it. No other dependencies. The setup prompt includes the API key and links to skill docs — the agent reads them and figures out the rest.
+- Required Capabilities / Tools: —
 - Source Use Case: Phone Call Notifications
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/phone-call-notifications.md
 - Tags: automation, phone, call, notifications
 
 ## Execution Paths
@@ -25,10 +27,18 @@ Your agent already monitors things for you — stocks, emails, smart home, calen
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Installable OpenClaw Skills
+
+- to
+
+## Required APIs / Services
+
+- That's it. No other dependencies. The setup prompt includes the API key and links to skill docs — the agent reads them and figures out the rest.
+
+## Requirement Summary
 
 - clawr.ing — install by pasting the setup prompt from the clawr.ing dashboard into your OpenClaw chat. No CLI install needed.
 - That's it. No other dependencies. The setup prompt includes the API key and links to skill docs — the agent reads them and figures out the rest.
@@ -44,5 +54,19 @@ Start the Phone Call Notifications demo project from the openclaw-store starter 
 1. Inspect the starter with `openclaw-store starter show phone-call-notifications`.
 2. Initialize it with `openclaw-store starter init phone-call-notifications <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `outbound-call` | `clawhub install outbound-call` | `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `ELEVENLABS_API_KEY` | https://twilio.com, https://elevenlabs.io |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `clawemail` | `clawhub install clawemail` | Email-based monitoring triggers to initiate phone call alerts |

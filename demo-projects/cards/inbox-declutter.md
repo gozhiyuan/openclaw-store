@@ -11,8 +11,10 @@ Newsletters can take up the inbox like nothing else. Often times they pile-up wi
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: —
+- Required APIs / Services: Gmail OAuth Setup.
+- Required Capabilities / Tools: —
 - Source Use Case: Inbox De-clutter
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/inbox-declutter.md
 - Tags: automation, inbox, declutter
 
 ## Execution Paths
@@ -25,10 +27,14 @@ Newsletters can take up the inbox like nothing else. Often times they pile-up wi
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Required APIs / Services
+
+- Gmail OAuth Setup.
+
+## Requirement Summary
 
 - Gmail OAuth Setup.
 
@@ -43,5 +49,19 @@ Start the Inbox De-clutter demo project from the openclaw-store starter `inbox-d
 1. Inspect the starter with `openclaw-store starter show inbox-declutter`.
 2. Initialize it with `openclaw-store starter init inbox-declutter <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `clawemail` | `clawhub install clawemail` | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | https://console.cloud.google.com/ |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `microsoft365` | `clawhub install microsoft365` | Outlook/Microsoft 365 inbox decluttering support |

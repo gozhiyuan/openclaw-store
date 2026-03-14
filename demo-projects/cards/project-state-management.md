@@ -11,8 +11,10 @@ Traditional Kanban boards are static and require manual updates. You forget to m
 - Entry Team: dev-company
 - Packs: dev-company
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: github, postgres
+- Required APIs / Services: Discord or Telegram for updates and queries
+- Required Capabilities / Tools: github (gh CLI) for commit tracking, Cron jobs for daily summaries
 - Source Use Case: Project State Management System: Event-Driven Alternative to Kanban
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/project-state-management.md
 - Tags: development, project, state, management
 
 ## Execution Paths
@@ -25,10 +27,24 @@ Traditional Kanban boards are static and require manual updates. You forget to m
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `dev-company` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Installable OpenClaw Skills
+
+- github
+- postgres
+
+## Required APIs / Services
+
+- Discord or Telegram for updates and queries
+
+## Required Capabilities / Tools
+
+- github (gh CLI) for commit tracking
+- Cron jobs for daily summaries
+
+## Requirement Summary
 
 - postgres or SQLite for project state database
 - github (gh CLI) for commit tracking
@@ -47,5 +63,17 @@ Start the Project State Management System: Event-Driven Alternative to Kanban de
 1. Inspect the starter with `openclaw-store starter show project-state-management`.
 2. Initialize it with `openclaw-store starter init project-state-management <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `github` | `clawhub install github` | `GITHUB_TOKEN` | https://github.com/settings/tokens |
+
+### Optional (install anytime to enhance capability)
+
+No optional skills for this demo.

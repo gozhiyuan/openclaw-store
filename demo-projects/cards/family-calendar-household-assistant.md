@@ -11,8 +11,10 @@ Modern families juggle five or more calendars — work, personal, shared family,
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: ical, imessage
+- Required APIs / Services: Calendar API access (Google Calendar, Apple Calendar via ical), Telegram or Slack for the shared family chat interface, Google Calendar API
+- Required Capabilities / Tools: File system access for inventory tracking
 - Source Use Case: Family Calendar Aggregation & Household Assistant
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/family-calendar-household-assistant.md
 - Tags: automation, family, calendar, household, assistant
 
 ## Execution Paths
@@ -25,10 +27,25 @@ Modern families juggle five or more calendars — work, personal, shared family,
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Installable OpenClaw Skills
+
+- ical
+- imessage
+
+## Required APIs / Services
+
+- Calendar API access (Google Calendar, Apple Calendar via ical)
+- Telegram or Slack for the shared family chat interface
+- Google Calendar API
+
+## Required Capabilities / Tools
+
+- File system access for inventory tracking
+
+## Requirement Summary
 
 - Calendar API access (Google Calendar, Apple Calendar via ical)
 - imessage skill for message monitoring (macOS only)
@@ -47,5 +64,20 @@ Start the Family Calendar Aggregation & Household Assistant demo project from th
 1. Inspect the starter with `openclaw-store starter show family-calendar-household-assistant`.
 2. Initialize it with `openclaw-store starter init family-calendar-household-assistant <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+No additional required skills.
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `google-calendar` | `clawhub install google-calendar` | Google Calendar integration for family event aggregation |
+| `apple-calendar` | `clawhub install apple-calendar` | Apple Calendar integration for macOS users |
+| `publora-telegram` | `clawhub install publora-telegram` | Family chat interface and daily schedule delivery via Telegram |
+| `clawemail` | `clawhub install clawemail` | Email-based calendar invites and household notifications |

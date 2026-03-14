@@ -11,8 +11,10 @@ You want to access your AI agent from any phone without needing a smartphone app
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: calendar, jira, search
+- Required APIs / Services: Telnyx API
+- Required Capabilities / Tools: —
 - Source Use Case: Phone-Based Personal Assistant
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/phone-based-personal-assistant.md
 - Tags: automation, phone, based, personal, assistant
 
 ## Execution Paths
@@ -25,10 +27,20 @@ You want to access your AI agent from any phone without needing a smartphone app
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Installable OpenClaw Skills
+
+- calendar
+- jira
+- search
+
+## Required APIs / Services
+
+- Telnyx API
+
+## Requirement Summary
 
 - ClawdTalk
 - Calendar skill (Google Calendar or Outlook)
@@ -46,5 +58,19 @@ Start the Phone-Based Personal Assistant demo project from the openclaw-store st
 1. Inspect the starter with `openclaw-store starter show phone-based-personal-assistant`.
 2. Initialize it with `openclaw-store starter init phone-based-personal-assistant <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `outbound-call` | `clawhub install outbound-call` | `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `ELEVENLABS_API_KEY` | https://twilio.com, https://elevenlabs.io |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `publora-telegram` | `clawhub install publora-telegram` | Telegram fallback interface when phone is not available |

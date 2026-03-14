@@ -11,8 +11,10 @@ You want to build a product but don't know what to build. Or you have a business
 - Entry Team: research-lab
 - Packs: research-lab, content-factory
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: —
+- Required APIs / Services: Telegram or Discord integration for receiving research reports
+- Required Capabilities / Tools: —
 - Source Use Case: Market Research & Product Factory
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/market-research-product-factory.md
 - Tags: research, content, market, product, factory
 
 ## Execution Paths
@@ -25,10 +27,14 @@ You want to build a product but don't know what to build. Or you have a business
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `research-lab` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Required APIs / Services
+
+- Telegram or Discord integration for receiving research reports
+
+## Requirement Summary
 
 - Last 30 Days skill by Matt Van Horde
 - Telegram or Discord integration for receiving research reports
@@ -44,5 +50,19 @@ Start the Market Research & Product Factory demo project from the openclaw-store
 1. Inspect the starter with `openclaw-store starter show market-research-product-factory`.
 2. Initialize it with `openclaw-store starter init market-research-product-factory <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `aluvia-brave-search` | `clawhub install aluvia-brave-search` | `BRAVE_API_KEY` | https://brave.com/search/api/ |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `social-intelligence` | `clawhub install social-intelligence` | Deep social media pain point mining from Reddit and X |

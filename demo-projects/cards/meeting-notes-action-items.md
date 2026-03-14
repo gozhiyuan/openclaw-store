@@ -11,8 +11,10 @@ You just finished a 45-minute team call. Now you need to write up the summary, p
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: —
+- Required APIs / Services: Jira, Linear, Todoist, or Notion integration (for task creation), Slack or Discord integration (for posting summaries), Optional: Otter.ai, Fireflies.ai, or Google Meet API for automatic transcript retrieval, Otter.ai API, Jira REST API, Linear API, Slack API
+- Required Capabilities / Tools: File system access (for reading transcript files), Scheduling / cron (for follow-up reminders)
 - Source Use Case: Automated Meeting Notes & Action Items
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/meeting-notes-action-items.md
 - Tags: automation, meeting, notes, action, items
 
 ## Execution Paths
@@ -25,10 +27,25 @@ You just finished a 45-minute team call. Now you need to write up the summary, p
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Required APIs / Services
+
+- Jira, Linear, Todoist, or Notion integration (for task creation)
+- Slack or Discord integration (for posting summaries)
+- Optional: Otter.ai, Fireflies.ai, or Google Meet API for automatic transcript retrieval
+- Otter.ai API
+- Jira REST API
+- Linear API
+- Slack API
+
+## Required Capabilities / Tools
+
+- File system access (for reading transcript files)
+- Scheduling / cron (for follow-up reminders)
+
+## Requirement Summary
 
 - Jira, Linear, Todoist, or Notion integration (for task creation)
 - Slack or Discord integration (for posting summaries)
@@ -47,5 +64,20 @@ Start the Automated Meeting Notes & Action Items demo project from the openclaw-
 1. Inspect the starter with `openclaw-store starter show meeting-notes-action-items`.
 2. Initialize it with `openclaw-store starter init meeting-notes-action-items <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `faster-whisper` | `clawhub install faster-whisper` | `none (local)` | — |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `google-calendar` | `clawhub install google-calendar` | Auto-fetch meeting details and attendees from Google Calendar |
+| `clawemail` | `clawhub install clawemail` | Email distribution of meeting summaries and action items |

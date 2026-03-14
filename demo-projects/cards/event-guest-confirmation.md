@@ -11,8 +11,10 @@ You're hosting an event — a dinner party, a wedding, a company offsite — and
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: supercall
+- Required APIs / Services: An OpenAI API key (for the GPT-4o Realtime voice AI), ngrok (for webhook tunneling — free tier works), OpenAI Realtime API
+- Required Capabilities / Tools: ngrok (for webhook tunneling — free tier works)
 - Source Use Case: Event Guest Confirmation
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/event-guest-confirmation.md
 - Tags: automation, event, guest, confirmation
 
 ## Execution Paths
@@ -25,10 +27,24 @@ You're hosting an event — a dinner party, a wedding, a company offsite — and
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Installable OpenClaw Skills
+
+- supercall
+
+## Required APIs / Services
+
+- An OpenAI API key (for the GPT-4o Realtime voice AI)
+- ngrok (for webhook tunneling — free tier works)
+- OpenAI Realtime API
+
+## Required Capabilities / Tools
+
+- ngrok (for webhook tunneling — free tier works)
+
+## Requirement Summary
 
 - SuperCall — install via openclaw plugins install @xonder/supercall
 - A Twilio account with a phone number (for making outbound calls)
@@ -47,5 +63,20 @@ Start the Event Guest Confirmation demo project from the openclaw-store starter 
 1. Inspect the starter with `openclaw-store starter show event-guest-confirmation`.
 2. Initialize it with `openclaw-store starter init event-guest-confirmation <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `clawemail` | `clawhub install clawemail` | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | https://console.cloud.google.com/ |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `google-calendar` | `clawhub install google-calendar` | Sync event details and guest lists from Google Calendar |
+| `publora-telegram` | `clawhub install publora-telegram` | Send confirmation summaries and RSVP updates via Telegram |

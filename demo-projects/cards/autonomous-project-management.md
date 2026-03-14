@@ -11,8 +11,10 @@ Managing complex projects with multiple parallel workstreams is exhausting. You 
 - Entry Team: dev-company
 - Packs: dev-company
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: —
+- Required APIs / Services: —
+- Required Capabilities / Tools: sessions_spawn / sessions_send for subagent management, File system access for STATE.yaml, Git for state versioning (optional but recommended)
 - Source Use Case: Autonomous Project Management with Subagents
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/autonomous-project-management.md
 - Tags: development, autonomous, project, management
 
 ## Execution Paths
@@ -25,10 +27,16 @@ Managing complex projects with multiple parallel workstreams is exhausting. You 
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `dev-company` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Required Capabilities / Tools
+
+- sessions_spawn / sessions_send for subagent management
+- File system access for STATE.yaml
+- Git for state versioning (optional but recommended)
+
+## Requirement Summary
 
 - sessions_spawn / sessions_send for subagent management
 - File system access for STATE.yaml
@@ -45,5 +53,19 @@ Start the Autonomous Project Management with Subagents demo project from the ope
 1. Inspect the starter with `openclaw-store starter show autonomous-project-management`.
 2. Initialize it with `openclaw-store starter init autonomous-project-management <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `github` | `clawhub install github` | `GITHUB_TOKEN` | https://github.com/settings/tokens |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `brainz-tasks` | `clawhub install brainz-tasks` | Todoist integration for syncing tasks and tracking project action items |

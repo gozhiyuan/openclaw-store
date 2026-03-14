@@ -11,8 +11,10 @@ Keeping track of who you've met, when, and what you discussed is impossible to d
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: crm-query, gog
+- Required APIs / Services: Telegram topic for CRM queries
+- Required Capabilities / Tools: —
 - Source Use Case: Personal CRM with Automatic Contact Discovery
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/personal-crm.md
 - Tags: automation, personal, crm
 
 ## Execution Paths
@@ -25,10 +27,19 @@ Keeping track of who you've met, when, and what you discussed is impossible to d
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Installable OpenClaw Skills
+
+- crm-query
+- gog
+
+## Required APIs / Services
+
+- Telegram topic for CRM queries
+
+## Requirement Summary
 
 - gog CLI (for Gmail and Google Calendar)
 - Custom CRM database (SQLite or similar) or use the crm-query skill if available
@@ -45,5 +56,20 @@ Start the Personal CRM with Automatic Contact Discovery demo project from the op
 1. Inspect the starter with `openclaw-store starter show personal-crm`.
 2. Initialize it with `openclaw-store starter init personal-crm <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `clawemail` | `clawhub install clawemail` | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | https://console.cloud.google.com/ |
+| `apple-contacts` | `clawhub install apple-contacts` | `none (macOS)` | — |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `danube` | `clawhub install danube` | Multi-service data connectors for richer contact discovery |

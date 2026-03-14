@@ -11,8 +11,10 @@ OpenClaw's built-in memory system stores everything as markdown files — but as
 - Entry Team: research-lab
 - Packs: research-lab
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: —
+- Required APIs / Services: memsearch Documentation — full CLI reference, Python API, and architecture
+- Required Capabilities / Tools: —
 - Source Use Case: Semantic Memory Search
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/semantic-memory-search.md
 - Tags: research, semantic, memory, search
 
 ## Execution Paths
@@ -25,10 +27,14 @@ OpenClaw's built-in memory system stores everything as markdown files — but as
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `research-lab` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Required APIs / Services
+
+- memsearch Documentation — full CLI reference, Python API, and architecture
+
+## Requirement Summary
 
 - No OpenClaw skills required — memsearch is a standalone Python CLI/library
 - Python 3.10+ with pip or uv
@@ -44,5 +50,20 @@ Start the Semantic Memory Search demo project from the openclaw-store starter `s
 1. Inspect the starter with `openclaw-store starter show semantic-memory-search`.
 2. Initialize it with `openclaw-store starter init semantic-memory-search <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `duckdb-en` | `clawhub install duckdb-en` | `none (local CLI)` | — |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `nocodb` | `clawhub install nocodb` | NocoDB UI for browsing and managing memory records |
+| `aluvia-brave-search` | `clawhub install aluvia-brave-search` | Web search to supplement memory results with live context |

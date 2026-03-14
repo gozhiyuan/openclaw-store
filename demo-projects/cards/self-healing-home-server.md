@@ -11,8 +11,10 @@ Running a home server means being on-call 24/7 for your own infrastructure. Serv
 - Entry Team: dev-company
 - Packs: dev-company
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: 1password, gog, kubectl, ssh, terraform
+- Required APIs / Services: Calendar API access
+- Required Capabilities / Tools: ssh access to home network machines
 - Source Use Case: Self-Healing Home Server & Infrastructure Management
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/self-healing-home-server.md
 - Tags: development, self, healing, home, server
 
 ## Execution Paths
@@ -25,10 +27,26 @@ Running a home server means being on-call 24/7 for your own infrastructure. Serv
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `dev-company` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Installable OpenClaw Skills
+
+- 1password
+- gog
+- kubectl
+- ssh
+- terraform
+
+## Required APIs / Services
+
+- Calendar API access
+
+## Required Capabilities / Tools
+
+- ssh access to home network machines
+
+## Requirement Summary
 
 - ssh access to home network machines
 - kubectl for Kubernetes cluster management
@@ -50,5 +68,19 @@ Start the Self-Healing Home Server & Infrastructure Management demo project from
 1. Inspect the starter with `openclaw-store starter show self-healing-home-server`.
 2. Initialize it with `openclaw-store starter init self-healing-home-server <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `agentic-devops` | `clawhub install agentic-devops` | `none (requires Docker)` | — |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `publora-telegram` | `clawhub install publora-telegram` | Alert delivery and remote control commands via Telegram |

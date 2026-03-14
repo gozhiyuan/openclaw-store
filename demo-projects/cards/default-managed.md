@@ -11,6 +11,9 @@ Minimal managed OpenClaw project that keeps the normal default workflow availabl
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: —
+- Required APIs / Services: —
+- Required Capabilities / Tools: —
 - Source Use Case: Default Managed Project
 - Tags: default, managed, general, bootstrap
 
@@ -37,5 +40,15 @@ Start the Default Managed Project demo project from the openclaw-store starter `
 1. Inspect the starter with `openclaw-store starter show default-managed`.
 2. Initialize it with `openclaw-store starter init default-managed <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+No additional required skills.
+
+### Optional (install anytime to enhance capability)
+
+No optional skills for this demo.

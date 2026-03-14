@@ -11,8 +11,10 @@ You've tried every habit tracker app out there. They all work for a week, then y
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: —
+- Required APIs / Services: Telegram or SMS integration (Twilio for SMS, or Telegram Bot API), Optional: Google Sheets integration for a visual habit dashboard, Telegram Bot API, Twilio SMS API, Google Sheets API
+- Required Capabilities / Tools: Scheduling / cron for timed check-ins
 - Source Use Case: Habit Tracker & Accountability Coach
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/habit-tracker-accountability-coach.md
 - Tags: automation, habit, tracker, accountability, coach
 
 ## Execution Paths
@@ -25,10 +27,22 @@ You've tried every habit tracker app out there. They all work for a week, then y
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Required APIs / Services
+
+- Telegram or SMS integration (Twilio for SMS, or Telegram Bot API)
+- Optional: Google Sheets integration for a visual habit dashboard
+- Telegram Bot API
+- Twilio SMS API
+- Google Sheets API
+
+## Required Capabilities / Tools
+
+- Scheduling / cron for timed check-ins
+
+## Requirement Summary
 
 - Telegram or SMS integration (Twilio for SMS, or Telegram Bot API)
 - Scheduling / cron for timed check-ins
@@ -46,5 +60,20 @@ Start the Habit Tracker & Accountability Coach demo project from the openclaw-st
 1. Inspect the starter with `openclaw-store starter show habit-tracker-accountability-coach`.
 2. Initialize it with `openclaw-store starter init habit-tracker-accountability-coach <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `brainz-tasks` | `clawhub install brainz-tasks` | `TODOIST_API_TOKEN` | https://todoist.com/prefs/integrations |
+| `apple-reminders` | `clawhub install apple-reminders` | `none (macOS)` | — |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `publora-telegram` | `clawhub install publora-telegram` | Proactive check-in messages and streak notifications via Telegram |

@@ -11,8 +11,10 @@ You read articles, tweets, and watch videos all day but can never find that one 
 - Entry Team: research-lab
 - Packs: research-lab
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: knowledge-base
+- Required APIs / Services: Telegram topic or Slack channel for ingestion
+- Required Capabilities / Tools: —
 - Source Use Case: Personal Knowledge Base (RAG)
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/knowledge-base-rag.md
 - Tags: research, knowledge, base, rag
 
 ## Execution Paths
@@ -25,10 +27,18 @@ You read articles, tweets, and watch videos all day but can never find that one 
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `research-lab` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Installable OpenClaw Skills
+
+- knowledge-base
+
+## Required APIs / Services
+
+- Telegram topic or Slack channel for ingestion
+
+## Requirement Summary
 
 - knowledge-base skill (or build custom RAG with embeddings)
 - web_fetch (built-in)
@@ -45,5 +55,20 @@ Start the Personal Knowledge Base (RAG) demo project from the openclaw-store sta
 1. Inspect the starter with `openclaw-store starter show knowledge-base-rag`.
 2. Initialize it with `openclaw-store starter init knowledge-base-rag <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `duckdb-en` | `clawhub install duckdb-en` | `none (local CLI)` | — |
+| `nocodb` | `clawhub install nocodb` | `NOCODB_BASE_URL`, `NOCODB_API_TOKEN` | Self-hosted or https://nocodb.com |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `aluvia-brave-search` | `clawhub install aluvia-brave-search` | Web search to enrich and cross-reference knowledge base entries |

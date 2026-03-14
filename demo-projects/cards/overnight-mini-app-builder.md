@@ -11,8 +11,10 @@ Your AI agent is powerful but reactive — it only works when you tell it what t
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: —
+- Required APIs / Services: Telegram or Discord integration
+- Required Capabilities / Tools: sessions_spawn / sessions_send for autonomous task execution
 - Source Use Case: Goal-Driven Autonomous Tasks
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/overnight-mini-app-builder.md
 - Tags: automation, overnight, mini, app, builder
 
 ## Execution Paths
@@ -25,10 +27,18 @@ Your AI agent is powerful but reactive — it only works when you tell it what t
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Required APIs / Services
+
+- Telegram or Discord integration
+
+## Required Capabilities / Tools
+
+- sessions_spawn / sessions_send for autonomous task execution
+
+## Requirement Summary
 
 - Telegram or Discord integration
 - sessions_spawn / sessions_send for autonomous task execution
@@ -45,5 +55,19 @@ Start the Goal-Driven Autonomous Tasks demo project from the openclaw-store star
 1. Inspect the starter with `openclaw-store starter show overnight-mini-app-builder`.
 2. Initialize it with `openclaw-store starter init overnight-mini-app-builder <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `github` | `clawhub install github` | `GITHUB_TOKEN` | https://github.com/settings/tokens |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `agentic-devops` | `clawhub install agentic-devops` | Docker-based deployment for built apps and services |

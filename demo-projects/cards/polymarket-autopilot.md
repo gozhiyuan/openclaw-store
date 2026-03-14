@@ -11,8 +11,10 @@ Manually monitoring prediction markets for arbitrage opportunities and executing
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: postgres
+- Required APIs / Services: web_search or web_fetch (for Polymarket API data), Discord integration for daily reports, Polymarket API
+- Required Capabilities / Tools: Cron jobs for continuous monitoring
 - Source Use Case: Polymarket Autopilot: Automated Paper Trading
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/polymarket-autopilot.md
 - Tags: automation, polymarket, autopilot
 
 ## Execution Paths
@@ -25,10 +27,24 @@ Manually monitoring prediction markets for arbitrage opportunities and executing
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Installable OpenClaw Skills
+
+- postgres
+
+## Required APIs / Services
+
+- web_search or web_fetch (for Polymarket API data)
+- Discord integration for daily reports
+- Polymarket API
+
+## Required Capabilities / Tools
+
+- Cron jobs for continuous monitoring
+
+## Requirement Summary
 
 - web_search or web_fetch (for Polymarket API data)
 - postgres or SQLite for trade logs and portfolio tracking
@@ -47,5 +63,19 @@ Start the Polymarket Autopilot: Automated Paper Trading demo project from the op
 1. Inspect the starter with `openclaw-store starter show polymarket-autopilot`.
 2. Initialize it with `openclaw-store starter init polymarket-autopilot <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `reef-polymarket-research` | `clawhub install reef-polymarket-research` | `POLYMARKET_API_KEY` | https://polymarket.com |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `aluvia-brave-search` | `clawhub install aluvia-brave-search` | Web search for news context behind market movements |

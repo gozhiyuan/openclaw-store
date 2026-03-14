@@ -11,8 +11,10 @@ Before OpenClaw starts building anything new, it automatically checks whether th
 - Entry Team: research-lab
 - Packs: research-lab
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: —
+- Required APIs / Services: —
+- Required Capabilities / Tools: —
 - Source Use Case: Pre-Build Idea Validator
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/pre-build-idea-validator.md
 - Tags: research, pre, build, idea, validator
 
 ## Execution Paths
@@ -25,10 +27,9 @@ Before OpenClaw starts building anything new, it automatically checks whether th
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `research-lab` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- No additional external integrations are required beyond the selected team and bundled management skill.
 
-## External Requirements
+## Requirement Summary
 
 - idea-reality-mcp — MCP server that scans real data sources and returns a competition score
 
@@ -43,5 +44,19 @@ Start the Pre-Build Idea Validator demo project from the openclaw-store starter 
 1. Inspect the starter with `openclaw-store starter show pre-build-idea-validator`.
 2. Initialize it with `openclaw-store starter init pre-build-idea-validator <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `aluvia-brave-search` | `clawhub install aluvia-brave-search` | `BRAVE_API_KEY` | https://brave.com/search/api/ |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `social-intelligence` | `clawhub install social-intelligence` | Social media signal analysis for idea validation |

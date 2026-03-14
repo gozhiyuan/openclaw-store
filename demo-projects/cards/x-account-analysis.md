@@ -11,8 +11,10 @@ There are many websites designed to give you a qualitative analysis of your X ac
 - Entry Team: content-factory
 - Packs: content-factory
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: bird
+- Required APIs / Services: For security and isolation, you better create a new account for your ClawdBot.
+- Required Capabilities / Tools: —
 - Source Use Case: X Account Analysis
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/x-account-analysis.md
 - Tags: content, x, account, analysis
 
 ## Execution Paths
@@ -25,10 +27,18 @@ There are many websites designed to give you a qualitative analysis of your X ac
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `content-factory` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Installable OpenClaw Skills
+
+- bird
+
+## Required APIs / Services
+
+- For security and isolation, you better create a new account for your ClawdBot.
+
+## Requirement Summary
 
 - Bird Skill. clawhub install bird (it comes pre-bundled)
 
@@ -43,5 +53,19 @@ Start the X Account Analysis demo project from the openclaw-store starter `x-acc
 1. Inspect the starter with `openclaw-store starter show x-account-analysis`.
 2. Initialize it with `openclaw-store starter init x-account-analysis <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `x-research-but-cheaper` | `clawhub install x-research-but-cheaper` | `TWITTER_API_IO_KEY` | https://twitterapi.io |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `social-intelligence` | `clawhub install social-intelligence` | Cross-platform social intelligence for deeper account benchmarking |

@@ -11,8 +11,10 @@ Following earnings season across dozens of tech companies means checking multipl
 - Entry Team: research-lab
 - Packs: research-lab
 - Project Skills: openclaw-store-manager
+- Installable OpenClaw Skills: —
+- Required APIs / Services: Telegram topic for earnings updates
+- Required Capabilities / Tools: Cron job support in OpenClaw
 - Source Use Case: AI-Powered Earnings Tracker
-- Source Path: /Users/ll/Documents/Zhiyuan Liu/github/openclaw-dir/awesome-openclaw-usecases/usecases/earnings-tracker.md
 - Tags: research, earnings, tracker
 
 ## Execution Paths
@@ -25,10 +27,18 @@ Following earnings season across dozens of tech companies means checking multipl
 - Choose between the default OpenClaw or Claude Code workflow and the managed multi-agent workflow.
 - If you want managed execution, initialize the starter and use `research-lab` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
-- Use OpenClaw to verify which external skills, tools, or APIs are still missing before execution.
-- Install or configure those missing skills and API keys in OpenClaw, then re-run openclaw-store install.
+- Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
 
-## External Requirements
+## Required APIs / Services
+
+- Telegram topic for earnings updates
+
+## Required Capabilities / Tools
+
+- Cron job support in OpenClaw
+
+## Requirement Summary
 
 - web_search (built-in)
 - Cron job support in OpenClaw
@@ -45,5 +55,20 @@ Start the AI-Powered Earnings Tracker demo project from the openclaw-store start
 1. Inspect the starter with `openclaw-store starter show earnings-tracker`.
 2. Initialize it with `openclaw-store starter init earnings-tracker <dir>`.
 3. Review STARTER.md and this demo card.
-4. Install missing skills or API configuration in OpenClaw if needed.
+4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
 5. Run `openclaw-store install` and execute through the project entry-point agent.
+
+## Skills Setup
+
+### Required (install before `openclaw-store install`)
+
+| Skill | Install | Env var | Get key |
+|---|---|---|---|
+| `aluvia-brave-search` | `clawhub install aluvia-brave-search` | `BRAVE_API_KEY` | https://brave.com/search/api/ |
+
+### Optional (install anytime to enhance capability)
+
+| Skill | Install | What it adds |
+|---|---|---|
+| `social-intelligence` | `clawhub install social-intelligence` | Social sentiment tracking around earnings announcements |
+| `publora-telegram` | `clawhub install publora-telegram` | Push earnings alerts and summaries via Telegram |
