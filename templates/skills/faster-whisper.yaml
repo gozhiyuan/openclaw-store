@@ -1,0 +1,23 @@
+id: faster-whisper
+version: 1
+name: "Faster Whisper"
+description: "Local speech-to-text transcription using faster-whisper — RAM-efficient, runs on 16GB machines"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/theplasmak/faster-whisper"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  bins:
+    - faster-whisper
+  env: []
+
+disabled_until_configured: false
+
+install_hints:
+  - "Install faster-whisper: pip install faster-whisper"
+  - "Requires Python 3.8+ and ~2GB disk for base model"
+  - "No API key needed — runs fully locally"

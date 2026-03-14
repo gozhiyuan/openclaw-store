@@ -1,0 +1,21 @@
+id: apple-health-skill
+version: 1
+name: "Apple Health"
+description: "Talk to your Apple Health data — workouts, heart rate, activity rings, fitness trends"
+
+source:
+  type: clawhub
+  url: "https://clawhub.ai/nftechie/apple-health-skill"
+  pin: "latest"
+
+trust_tier: community
+
+requires:
+  bins: []
+  env: []
+
+disabled_until_configured: false
+
+install_hints:
+  - "Requires macOS or iOS with Health.app data"
+  - "Grant Health data access permissions when prompted"
