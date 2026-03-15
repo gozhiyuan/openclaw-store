@@ -5,7 +5,7 @@
 If the CLI is not available yet:
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/gozhiyuan/openclaw-store
 cd openclaw-store
 npm install
 npm run build

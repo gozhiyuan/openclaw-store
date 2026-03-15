@@ -27,7 +27,7 @@ Send OpenClaw something like:
 Please follow this SKILL.md to install openclaw-store-manager for me and bootstrap openclaw-store:
 
 - local file: skills/openclaw-store-manager/SKILL.md
-- or repo URL: <repo-url>/blob/main/skills/openclaw-store-manager/SKILL.md
+- or repo URL: https://github.com/gozhiyuan/openclaw-store/blob/main/skills/openclaw-store-manager/SKILL.md
 ```
 
 The intended behavior is:
