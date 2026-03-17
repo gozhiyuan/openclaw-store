@@ -3,4 +3,8 @@ dist/
 *.js.map
 .DS_Store
 .worktrees/
-.worktrees/
+
+# Dashboard
+dashboard/dist/
+dashboard/node_modules/
+*.tsbuildinfo

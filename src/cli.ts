@@ -339,6 +339,18 @@ program
     await runDoctor(opts.fix);
   });
 
+// ── dashboard ────────────────────────────────────────────────────────────────
+
+program
+  .command("dashboard")
+  .description("Start the web dashboard")
+  .option("--port <port>", "Server port", "3456")
+  .option("--host <host>", "Bind host", "0.0.0.0")
+  .action(async (opts) => {
+    const { runDashboard } = await import("./commands/dashboard.js");
+    await runDashboard({ port: parseInt(opts.port), host: opts.host });
+  });
+
 program.parseAsync(process.argv).catch((err) => {
   console.error(err instanceof Error ? err.message : String(err));
   process.exit(1);
