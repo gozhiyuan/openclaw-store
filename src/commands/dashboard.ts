@@ -1,8 +1,13 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
 export async function runDashboard(opts: { port?: number; host?: string }): Promise<void> {
   const port = opts.port ?? 3456;
   const host = opts.host ?? "0.0.0.0";
 
-  // Dynamic import from dashboard's compiled server
-  const { createServer } = await import("../../dashboard/server/index.js");
-  await createServer({ port, host });
+  // Resolve the dashboard server entry at runtime — it lives outside src/
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const serverPath = path.resolve(__dirname, "../../dashboard/server/index.js");
+  const mod = await import(serverPath) as { createServer: (opts: { port: number; host: string }) => Promise<unknown> };
+  await mod.createServer({ port, host });
 }
