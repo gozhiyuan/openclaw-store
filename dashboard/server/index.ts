@@ -3,6 +3,7 @@ import fastifyWebsocket from "@fastify/websocket";
 import fastifyStatic from "@fastify/static";
 import fastifyCors from "@fastify/cors";
 import { addClient } from "./ws.js";
+import { startWatcher, stopWatcher } from "./watcher.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -57,6 +58,7 @@ export async function createServer(opts: { host?: string; port?: number } = {}) 
 
   // Graceful shutdown
   const shutdown = async () => {
+    await stopWatcher();
     await app.close();
     process.exit(0);
   };
@@ -65,6 +67,8 @@ export async function createServer(opts: { host?: string; port?: number } = {}) 
 
   await app.listen({ host, port });
   console.log(`Dashboard running at http://${host === "0.0.0.0" ? "localhost" : host}:${port}`);
+
+  await startWatcher();
 
   return app;
 }
