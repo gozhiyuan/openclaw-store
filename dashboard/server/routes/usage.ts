@@ -1,13 +1,14 @@
 import type { FastifyPluginAsync } from "fastify";
-import type { GatewayClient } from "../services/gateway.js";
+import type { RuntimeStatusProvider } from "../services/runtime-status.js";
 
-export function createUsageRoutes(gateway: GatewayClient): FastifyPluginAsync {
+export function createUsageRoutes(statusProvider: RuntimeStatusProvider): FastifyPluginAsync {
   return async (app) => {
-    app.get("/api/usage", async () => gateway.getUsage());
-
+    app.get("/api/usage", async () => statusProvider.getUsage());
     app.get("/api/usage/agents", async () => {
-      const statuses = gateway.getAgentStatuses();
-      return Object.fromEntries(statuses);
+      const statuses = await statusProvider.getAgentStatuses();
+      const map: Record<string, unknown> = {};
+      for (const s of statuses) map[s.agentId] = s;
+      return map;
     });
   };
 }

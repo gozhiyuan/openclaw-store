@@ -14,7 +14,7 @@ import healthRoutes from "./routes/health.js";
 import starterRoutes from "./routes/starters.js";
 import manifestRoutes from "./routes/manifest.js";
 import diffRoutes from "./routes/diff.js";
-import { GatewayClient } from "./services/gateway.js";
+import { RuntimeStatusProvider } from "./services/runtime-status.js";
 import { createUsageRoutes } from "./routes/usage.js";
 import { MemoryWriter } from "./services/memory-writer.js";
 import { createMemoryRoutes } from "./routes/memory.js";
@@ -27,10 +27,15 @@ export async function createServer(opts: { host?: string; port?: number; authTok
   const port = opts.port ?? 3456;
   const isDev = process.env.NODE_ENV !== "production";
 
-  const gateway = new GatewayClient({ url: "ws://localhost:18789" });
-  gateway.connect((event) => {
-    broadcast({ type: "gateway:" + event.type, ...(event.data as Record<string, unknown> ?? {}) });
-  });
+  const statusProvider = new RuntimeStatusProvider();
+  // Start OpenClaw observer by default (existing behavior)
+  statusProvider.addRuntime("openclaw", (event) => {
+    broadcast({ type: "runtime:" + event.type, ...(typeof event.data === "object" ? event.data as Record<string, unknown> : {}) });
+  }).catch(() => { /* OpenClaw gateway not available */ });
+  // Start ClawTeam observer (reads ~/.clawteam/ state)
+  statusProvider.addRuntime("clawteam", (event) => {
+    broadcast({ type: "runtime:" + event.type, ...(typeof event.data === "object" ? event.data as Record<string, unknown> : {}) });
+  }).catch(() => { /* ClawTeam not installed */ });
 
   const app = Fastify({ logger: false });
 
@@ -89,14 +94,14 @@ export async function createServer(opts: { host?: string; port?: number; authTok
   await app.register(starterRoutes);
   await app.register(manifestRoutes);
   await app.register(diffRoutes);
-  await app.register(createUsageRoutes(gateway));
+  await app.register(createUsageRoutes(statusProvider));
 
   const memoryWriter = new MemoryWriter();
   await app.register(createMemoryRoutes(memoryWriter));
 
   // Graceful shutdown
   const shutdown = async () => {
-    gateway.disconnect();
+    await statusProvider.stop();
     await stopWatcher();
     await app.close();
     process.exit(0);

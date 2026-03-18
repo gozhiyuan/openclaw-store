@@ -4,6 +4,7 @@ import {
   resolveStoreRuntimeFile,
   resolveStoreSkillsIndexFile,
   resolveStoreWorkspacesRoot,
+  resolveAgentTelemetryDir,
 } from "../../dist/lib/paths.js";
 import { loadRuntimeState } from "../../dist/lib/runtime.js";
 import path from "node:path";
@@ -38,6 +39,7 @@ export async function startWatcher(): Promise<FSWatcher> {
     runtimeFile,
     skillsIndexFile,
     path.join(workspacesRoot, "**/shared/memory/*.md"),
+    path.join(resolveAgentTelemetryDir(), "**", "state.json"),
     ...projectDirs.flatMap((dir) => [
       path.join(dir, "malaclaw.yaml"),
       path.join(dir, "malaclaw.lock"),
@@ -65,6 +67,11 @@ export async function startWatcher(): Promise<FSWatcher> {
     } else if (filePath.endsWith("malaclaw.lock")) {
       debounced("lockfile:" + filePath, () =>
         broadcast({ type: "lockfile:changed", projectDir: path.dirname(filePath) })
+      );
+    } else if (filePath.includes("/agents/") && filePath.endsWith("/state.json")) {
+      const agentId = path.basename(path.dirname(filePath));
+      debounced(`agent:${agentId}`, () =>
+        broadcast({ type: "agent:status-changed", agentId })
       );
     } else if (filePath.includes("/shared/memory/")) {
       const parts = filePath.split(path.sep);
