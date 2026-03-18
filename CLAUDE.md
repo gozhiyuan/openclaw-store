@@ -311,8 +311,8 @@ Run `malaclaw validate` after adding any template to confirm the YAML is schema-
 
 ## Important Constraints
 
-- **`claude-code.ts` adapter is a stub.** The Claude Code runtime adapter (`src/lib/adapters/claude-code.ts`) is not implemented. Only the OpenClaw adapter is real. Do not build features that assume a working Claude Code install target.
-- **OpenClaw is the runtime.** `malaclaw` scaffolds structure and configuration. OpenClaw owns agent sessions, memory indexing, and skill execution.
+- **MalaClaw is runtime-agnostic.** The install flow dispatches to runtime-specific provisioners via the adapter registry. Set `runtime:` in `malaclaw.yaml` to target OpenClaw, Claude Code, Codex, or ClawTeam.
+- **OpenClaw is the default runtime.** When `runtime` is omitted or set to `"openclaw"`, the OpenClaw adapter patches `~/.openclaw/openclaw.json` and creates agent dirs. Other runtimes use different provisioning strategies.
 - **Lockfile is machine-generated.** Never edit `malaclaw.lock` by hand. It is written by `writeLockfile()` during install.
 - **`install` is the reconciliation point.** Changing `malaclaw.yaml` has no effect until `malaclaw install` is re-run.
 - **Skill placement is not automatic.** A skill must appear in the agent template's `skills:` list OR be targeted via `targets.agents` / `targets.teams` in the manifest. OpenClaw does not auto-install missing skills.
@@ -347,6 +347,68 @@ When there is no manifest, `malaclaw install` runs `runZeroConfigInstall()` whic
 | `~/.malaclaw/runtime.json` | home | no | Global registry of installed projects |
 | `~/.malaclaw/workspaces/` | home | no | Agent workspace files (SOUL.md, TOOLS.md, etc.) |
 | `~/.openclaw/openclaw.json` | home | no | Patched by install — agent list, allowlists |
+| `~/.malaclaw/agents/<id>/state.json` | home | no | Per-agent telemetry state (normalized across runtimes) |
+
+## Runtime Adapters
+
+MalaClaw is a runtime-agnostic control plane. It provisions agents to different runtimes via adapters.
+
+### Supported Runtimes
+
+| Runtime | Manifest value | Provisioner | Observer |
+|---|---|---|---|
+| OpenClaw | `openclaw` (default) | Patches `~/.openclaw/openclaw.json`, creates agent dirs | Gateway WebSocket at `ws://localhost:18789` |
+| Claude Code | `claude-code` | Generates `CLAUDE.md` per agent workspace | ClawTeam observer (if running under ClawTeam) |
+| Codex | `codex` | Generates `AGENTS.md` per agent workspace | ClawTeam observer (if running under ClawTeam) |
+| ClawTeam | `clawteam` | Exports `team.toml` + spawn catalog | Reads `~/.clawteam/` native state (spawn_registry, tasks, config) |
+
+### Two-Path Observer Model
+
+1. **OpenClaw direct:** Gateway WebSocket → writes to `~/.malaclaw/agents/<id>/state.json`
+2. **ClawTeam-managed:** Reads `~/.clawteam/teams/*/` → writes to `~/.malaclaw/agents/<id>/state.json`
+
+Both paths normalize to the same telemetry schema. The dashboard reads only the normalized files.
+
+### Setting Runtime Target
+
+```yaml
+# malaclaw.yaml
+version: 1
+runtime: clawteam    # or openclaw (default), claude-code, codex
+packs:
+  - id: dev-company
+```
+
+### Telemetry Contract
+
+All runtimes write normalized agent state to `~/.malaclaw/agents/<agentId>/state.json`:
+
+```json
+{
+  "agentId": "store__proj__team__pm",
+  "runtime": "clawteam",
+  "status": "working",
+  "detail": "Research market trends",
+  "updatedAt": "2026-03-17T18:20:00Z",
+  "ttlSeconds": 300,
+  "source": "clawteam"
+}
+```
+
+**Status values:** `idle`, `working`, `error`, `offline`
+**Source values:** `gateway` (OpenClaw), `clawteam` (ClawTeam state), `heartbeat` (future), `manual` (install-time)
+
+### Adapter Architecture
+
+```
+src/lib/adapters/
+├── base.ts              ← RuntimeProvisioner + RuntimeObserver interfaces
+├── registry.ts          ← getProvisioner(runtime) + getObserver(runtime)
+├── openclaw.ts          ← OpenClaw adapter (existing) + class wrappers
+├── claude-code.ts       ← Claude Code provisioner (CLAUDE.md)
+├── codex.ts             ← Codex provisioner (AGENTS.md)
+└── clawteam.ts          ← ClawTeam provisioner (team.toml export) + observer (native state reader)
+```
 
 ## Dashboard Architecture
 
@@ -358,7 +420,7 @@ The web dashboard lives in `dashboard/` and provides a visual interface to all s
 ```
 Browser ←→ Fastify (:3456)
               ├── REST /api/* → services/store.ts → dist/lib/*.js
-              ├── REST /api/usage → GatewayClient → OpenClaw Gateway
+              ├── REST /api/usage → RuntimeStatusProvider → OpenClaw + ClawTeam observers
               ├── PUT /api/projects/:id/kanban/:teamId → MemoryWriter
               ├── WS /ws → broadcast file-change + gateway events
               ├── Auth middleware (optional Bearer token)
