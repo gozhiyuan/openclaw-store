@@ -7,6 +7,8 @@ import {
   writeOpenClawConfig,
   addSkillsToAgentAllowlists,
 } from "./adapters/openclaw.js";
+import { getProvisioner } from "./adapters/registry.js";
+import { writeAgentTelemetry } from "./telemetry.js";
 import { seedTeamSharedMemory } from "./memory.js";
 import { resolveLockfilePath, resolveManifestPath, resolveStoreWorkspacesRoot } from "./paths.js";
 import fs from "node:fs/promises";
@@ -130,6 +132,9 @@ export async function runHeadlessInstall(opts: InstallOpts): Promise<InstallResu
     projectDir: opts.projectDir,
   });
 
+  const runtime = manifest.runtime ?? "openclaw";
+  const provisioner = getProvisioner(runtime);
+
   if (packs.length === 0 && skills.length === 0) {
     opts.onProgress?.({ phase: "finalizing", message: "Nothing to install." });
     return {
@@ -203,7 +208,7 @@ export async function runHeadlessInstall(opts: InstallOpts): Promise<InstallResu
       }),
     );
 
-    await installTeam({
+    await provisioner.installTeam({
       projectId: project.id,
       teamDef: resolved.teamDef,
       agents: agentsWithMembers,
@@ -215,11 +220,26 @@ export async function runHeadlessInstall(opts: InstallOpts): Promise<InstallResu
       message: `Seeding shared memory for ${resolved.teamDef.name ?? resolved.teamDef.id}...`,
     });
     await seedTeamSharedMemory(project.id, resolved.teamDef);
+
+    for (const agent of resolved.agents) {
+      await writeAgentTelemetry({
+        agentId: agent.agentId,
+        runtime,
+        status: "idle",
+        detail: "Provisioned by malaclaw install",
+        updatedAt: new Date().toISOString(),
+        workspaceDir: agent.workspaceDir,
+        ttlSeconds: 300,
+        source: "manual",
+      });
+    }
   }
 
-  // Update main agent guidance
-  opts.onProgress?.({ phase: "installing", message: "Updating main agent guidance (TOOLS.md, AGENTS.md)..." });
-  await updateStoreGuidance();
+  // Update main agent guidance (OpenClaw only)
+  if (runtime === "openclaw") {
+    opts.onProgress?.({ phase: "installing", message: "Updating main agent guidance (TOOLS.md, AGENTS.md)..." });
+    await updateStoreGuidance();
+  }
 
   // Install skills into each agent workspace that lists them
   const skillToAgentIds = new Map<string, string[]>();
@@ -284,8 +304,8 @@ export async function runHeadlessInstall(opts: InstallOpts): Promise<InstallResu
       }
     }
 
-    // Patch agent allowlists in openclaw.json for agents with explicit skills[] keys
-    if (skillToAgentIds.size > 0) {
+    // Patch agent allowlists in openclaw.json for agents with explicit skills[] keys (OpenClaw only)
+    if (runtime === "openclaw" && skillToAgentIds.size > 0) {
       const { path: configPath, config } = await readOpenClawConfig();
       for (const [skillId, agentIds] of skillToAgentIds) {
         addSkillsToAgentAllowlists(config, agentIds, [skillId]);
