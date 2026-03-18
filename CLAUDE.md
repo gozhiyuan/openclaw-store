@@ -54,18 +54,23 @@ openclaw-store/
 ├── partials/               ← Shared Markdown fragments used by the renderer
 ├── dashboard/              ← Web dashboard (Fastify server + React SPA)
 │   ├── server/             ← Fastify server, REST routes, WebSocket, file watcher
-│   │   ├── index.ts        ← Server entry: Fastify + WS + CORS + SPA fallback
+│   │   ├── index.ts        ← Server entry: Fastify + WS + CORS + SPA fallback + auth
 │   │   ├── ws.ts           ← WebSocket client registry and broadcast
 │   │   ├── watcher.ts      ← chokidar file watcher → WS event broadcast
+│   │   ├── middleware/auth.ts ← Token-based auth middleware
 │   │   ├── services/store.ts ← Service bridge wrapping src/lib/ imports
-│   │   └── routes/         ← One file per resource (projects, agents, teams, skills, etc.)
+│   │   ├── services/gateway.ts ← WebSocket client to OpenClaw Gateway
+│   │   ├── services/memory-writer.ts ← Shared memory write-back with ownership
+│   │   └── routes/         ← One file per resource (projects, agents, teams, skills, usage, memory)
 │   ├── src/                ← React 19 SPA
-│   │   ├── hooks/useApi.ts ← TanStack Query hooks for all API endpoints
-│   │   ├── hooks/useWs.ts  ← WebSocket auto-reconnect + query invalidation
-│   │   ├── components/     ← 11 panel components (AgentList, SkillTable, KanbanBoard, etc.)
+│   │   ├── hooks/useApi.ts ← TanStack Query hooks (useUsage, useAgentStatuses, useUpdateKanban, etc.)
+│   │   ├── hooks/useWs.ts  ← WebSocket auto-reconnect + query invalidation + event store
+│   │   ├── components/     ← Panel components (VirtualOffice, KanbanBoard, CostTracker, ActivityFeed, etc.)
 │   │   ├── pages/          ← Dashboard, Projects, Starters, Config
-│   │   └── lib/types.ts    ← Frontend TypeScript types
-│   ├── package.json        ← Separate deps: fastify, react, @tanstack/react-query, vite
+│   │   └── lib/types.ts    ← Frontend TypeScript types (UsageSummary, AgentStatusEntry, etc.)
+│   ├── e2e/                ← Playwright E2E tests
+│   ├── package.json        ← Separate deps: fastify, react, @tanstack/react-query, vite, @dnd-kit
+│   ├── playwright.config.ts ← Playwright config (production server on :3456)
 │   ├── tsconfig.server.json ← Server config with project reference to root
 │   └── tsconfig.json       ← Frontend config (moduleResolution: bundler)
 ├── scripts/                ← Code generation scripts (e.g. generate-starters-from-usecases.mjs)
@@ -205,15 +210,22 @@ Always run `npm run build` before testing CLI behavior. The CLI runs from `dist/
 ```bash
 cd dashboard
 npm install          # dashboard deps (separate from root)
-npm test             # vitest run (dashboard server tests)
+npm test             # vitest run (server + frontend component tests)
 
 # Dev mode (two terminals):
 npx tsx server/index.ts        # Fastify server on :3456
 npx vite                       # Vite dev server on :5173 (proxies /api → :3456)
 
 # Production build:
+bash ../scripts/build-dashboard.sh   # Or manually:
 npx vite build                 # React → dashboard/dist/client/
 npx tsc -p tsconfig.server.json  # Server → dashboard/dist/server/
+
+# E2E tests (requires production build):
+npx playwright test            # Playwright E2E against production server
+
+# Auth (optional):
+npx tsx server/index.ts --auth-token <token>  # Require Bearer token for API
 ```
 
 The dashboard server imports from `../../dist/lib/` (the root project's compiled output), so always run `npm run build` in the root first.
@@ -247,11 +259,16 @@ Test files and what they cover:
 | `skill-ops.test.ts` | `checkSkills()` and `syncSkills()` return shapes |
 | `starter-ops.test.ts` | `initStarter()`, `suggestStarters()`, helper functions |
 
-Dashboard tests live in `dashboard/server/__tests__/`:
+Dashboard tests live in `dashboard/server/__tests__/` and `dashboard/src/__tests__/`:
 
 | File | What it tests |
 |---|---|
-| `routes.test.ts` | All 8 REST route groups via Fastify inject() |
+| `server/__tests__/routes.test.ts` | All REST route groups via Fastify inject() (12 tests) |
+| `server/__tests__/auth.test.ts` | Token-based auth middleware |
+| `server/__tests__/gateway.test.ts` | GatewayClient construction and methods |
+| `server/__tests__/memory-writer.test.ts` | MemoryWriter service |
+| `src/__tests__/components.test.tsx` | ErrorBoundary, HealthChecks, SkillTable (jsdom, 6 tests) |
+| `e2e/dashboard.spec.ts` | Playwright E2E: navigation, API endpoints (6 tests) |
 
 Test fixtures are in `tests/fixtures/`. Use env var overrides to point tests at fixtures instead of real system state.
 
@@ -336,13 +353,20 @@ When there is no manifest, `openclaw-store install` runs `runZeroConfigInstall()
 The web dashboard lives in `dashboard/` and provides a visual interface to all store management operations.
 
 **Server stack:** Fastify + @fastify/websocket + chokidar
-**Client stack:** React 19 + TanStack Query v5 + Vite + react-router-dom v7
+**Client stack:** React 19 + TanStack Query v5 + Vite + react-router-dom v7 + @dnd-kit
 
 ```
 Browser ←→ Fastify (:3456)
               ├── REST /api/* → services/store.ts → dist/lib/*.js
-              ├── WS /ws → broadcast file-change events
+              ├── REST /api/usage → GatewayClient → OpenClaw Gateway
+              ├── PUT /api/projects/:id/kanban/:teamId → MemoryWriter
+              ├── WS /ws → broadcast file-change + gateway events
+              ├── Auth middleware (optional Bearer token)
               └── Static files (production) or Vite proxy (dev)
+
+GatewayClient ←→ ws://localhost:18789 (OpenClaw Gateway)
+  - Live agent status (active/idle/spawning)
+  - Token usage tracking (input/output/cost)
 
 chokidar watches:
   ~/.openclaw-store/runtime.json
@@ -356,5 +380,10 @@ chokidar watches:
 - REST for data fetching, WebSocket for "something changed" notifications
 - WebSocket events trigger React Query invalidation (not data transfer)
 - Store service bridge (`dashboard/server/services/store.ts`) wraps all `src/lib/` imports
-- Install mutex prevents concurrent installs via the manifest route
+- GatewayClient auto-reconnects to OpenClaw Gateway for live agent status and token usage
+- MemoryWriter enforces shared memory ownership patterns (single-writer/append-only/private)
+- KanbanBoard supports drag-and-drop reordering with markdown write-back
+- Install mutex with 5-minute timeout prevents concurrent installs and deadlocks
+- Token-based auth middleware (optional `--auth-token` flag) protects API routes
+- ErrorBoundary isolates component failures to individual panels
 - SPA fallback in production (non-API routes serve `index.html`)
