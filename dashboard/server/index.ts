@@ -18,10 +18,11 @@ import { GatewayClient } from "./services/gateway.js";
 import { createUsageRoutes } from "./routes/usage.js";
 import { MemoryWriter } from "./services/memory-writer.js";
 import { createMemoryRoutes } from "./routes/memory.js";
+import { createAuthHook } from "./middleware/auth.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export async function createServer(opts: { host?: string; port?: number } = {}) {
+export async function createServer(opts: { host?: string; port?: number; authToken?: string } = {}) {
   const host = opts.host ?? "0.0.0.0";
   const port = opts.port ?? 3456;
   const isDev = process.env.NODE_ENV !== "production";
@@ -32,6 +33,12 @@ export async function createServer(opts: { host?: string; port?: number } = {}) 
   });
 
   const app = Fastify({ logger: false });
+
+  // Auth middleware (if token configured)
+  const authHook = createAuthHook(opts.authToken);
+  if (authHook) {
+    app.addHook("onRequest", authHook);
+  }
 
   // CORS in dev mode only
   if (isDev) {

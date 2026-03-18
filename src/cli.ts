@@ -346,9 +346,10 @@ program
   .description("Start the web dashboard")
   .option("--port <port>", "Server port", "3456")
   .option("--host <host>", "Bind host", "0.0.0.0")
+  .option("--auth-token <token>", "Bearer token for API authentication")
   .action(async (opts) => {
     const { runDashboard } = await import("./commands/dashboard.js");
-    await runDashboard({ port: parseInt(opts.port), host: opts.host });
+    await runDashboard({ port: parseInt(opts.port), host: opts.host, authToken: opts.authToken });
   });
 
 program.parseAsync(process.argv).catch((err) => {
