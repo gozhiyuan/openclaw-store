@@ -29,6 +29,11 @@ const routes: FastifyPluginAsync = async (app) => {
     const { id, teamId } = req.params as { id: string; teamId: string };
     return store.getTaskLog(id, teamId);
   });
+
+  app.get("/api/projects/:id/blockers/:teamId", async (req) => {
+    const { id, teamId } = req.params as { id: string; teamId: string };
+    return store.getBlockers(id, teamId);
+  });
 };
 
 export default routes;

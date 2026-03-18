@@ -45,6 +45,18 @@ export const store = {
     }
   },
 
+  // Blockers
+  getBlockers: async (projectId: string, teamId: string) => {
+    const dir = resolveSharedMemoryDir(projectId, teamId);
+    const filePath = path.join(dir, "blockers.md");
+    try {
+      const content = await fs.readFile(filePath, "utf-8");
+      return { content, raw: true };
+    } catch {
+      return { content: null, raw: true };
+    }
+  },
+
   // Task log
   getTaskLog: async (projectId: string, teamId: string) => {
     const dir = resolveSharedMemoryDir(projectId, teamId);

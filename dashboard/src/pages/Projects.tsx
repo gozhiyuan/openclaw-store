@@ -4,6 +4,8 @@ import { useProjects, useProject, useTeams } from "../hooks/useApi";
 import { AgentList } from "../components/AgentList";
 import { KanbanBoard } from "../components/KanbanBoard";
 import { TeamGraph } from "../components/TeamGraph";
+import { TaskTimeline } from "../components/TaskTimeline";
+import { BlockersList } from "../components/BlockersList";
 import { ErrorBoundary } from "../components/ErrorBoundary";
 
 function ProjectDetail({ project }: { project: Project }) {
@@ -40,6 +42,20 @@ function ProjectDetail({ project }: { project: Project }) {
         <h4 style={{ color: "#f0f6fc", margin: "0 0 8px" }}>Kanban</h4>
         <ErrorBoundary name="KanbanBoard">
           <KanbanBoard projectId={project.id} teamId={project.entry_team} />
+        </ErrorBoundary>
+      </div>
+
+      <div>
+        <h4 style={{ color: "#f0f6fc", margin: "0 0 8px" }}>Blockers</h4>
+        <ErrorBoundary name="BlockersList">
+          <BlockersList projectId={project.id} teamId={project.entry_team} />
+        </ErrorBoundary>
+      </div>
+
+      <div>
+        <h4 style={{ color: "#f0f6fc", margin: "0 0 8px" }}>Task Timeline</h4>
+        <ErrorBoundary name="TaskTimeline">
+          <TaskTimeline projectId={project.id} teamId={project.entry_team} />
         </ErrorBoundary>
       </div>
 
