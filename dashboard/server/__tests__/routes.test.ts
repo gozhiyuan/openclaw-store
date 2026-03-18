@@ -61,4 +61,39 @@ describe("API routes", () => {
     const res = await app.inject({ method: "GET", url: "/api/projects/nonexistent" });
     expect(res.statusCode).toBe(404);
   });
+
+  it("GET /api/usage returns usage summary", async () => {
+    const res = await app.inject({ method: "GET", url: "/api/usage" });
+    expect(res.statusCode).toBe(200);
+    const body = res.json();
+    expect(body).toHaveProperty("input_tokens");
+    expect(body).toHaveProperty("output_tokens");
+    expect(body).toHaveProperty("total_cost");
+  });
+
+  it("GET /api/usage/agents returns object", async () => {
+    const res = await app.inject({ method: "GET", url: "/api/usage/agents" });
+    expect(res.statusCode).toBe(200);
+    const body = res.json();
+    expect(typeof body).toBe("object");
+  });
+
+  it("PUT /api/projects/test/kanban/dev-company without content returns 400", async () => {
+    const res = await app.inject({
+      method: "PUT",
+      url: "/api/projects/test/kanban/dev-company",
+      payload: {},
+    });
+    expect(res.statusCode).toBe(400);
+  });
+
+  it("GET /api/projects/test/blockers/dev-company returns content field", async () => {
+    const res = await app.inject({
+      method: "GET",
+      url: "/api/projects/test/blockers/dev-company",
+    });
+    expect(res.statusCode).toBe(200);
+    const body = res.json();
+    expect(body).toHaveProperty("content");
+  });
 });
