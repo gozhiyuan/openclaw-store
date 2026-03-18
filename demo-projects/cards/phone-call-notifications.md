@@ -10,7 +10,7 @@ Your agent already monitors things for you — stocks, emails, smart home, calen
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: openclaw-store-manager
+- Project Skills: malaclaw-manager
 - Installable OpenClaw Skills: to
 - Required APIs / Services: That's it. No other dependencies. The setup prompt includes the API key and links to skill docs — the agent reads them and figures out the rest.
 - Required Capabilities / Tools: —
@@ -20,7 +20,7 @@ Your agent already monitors things for you — stocks, emails, smart home, calen
 ## Execution Paths
 
 - Default workflow: Stay in the normal OpenClaw or Claude Code default workflow if you only need one generalist agent or want to prototype without managed teams.
-- Managed workflow: Initialize this starter, run openclaw-store install, then open the `autonomous-startup` project entry-point agent for structured multi-agent execution.
+- Managed workflow: Initialize this starter, run malaclaw install, then open the `autonomous-startup` project entry-point agent for structured multi-agent execution.
 
 ## Setup Guidance
 
@@ -28,7 +28,7 @@ Your agent already monitors things for you — stocks, emails, smart home, calen
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
 - Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
-- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run malaclaw install.
 
 ## Installable OpenClaw Skills
 
@@ -46,20 +46,20 @@ Your agent already monitors things for you — stocks, emails, smart home, calen
 ## Bootstrap Prompt
 
 ```text
-Start the Phone Call Notifications demo project from the openclaw-store starter `phone-call-notifications`. Your agent already monitors things for you — stocks, emails, smart home, calendars — but notifications are easy to ignore. Push notifications pile up. Chat messages get buried. For the stuff that actually matters, you need something you can't swipe away. Use `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
+Start the Phone Call Notifications demo project from the malaclaw starter `phone-call-notifications`. Your agent already monitors things for you — stocks, emails, smart home, calendars — but notifications are easy to ignore. Push notifications pile up. Chat messages get buried. For the stuff that actually matters, you need something you can't swipe away. Use `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
 ```
 
 ## Suggested Flow
 
-1. Inspect the starter with `openclaw-store starter show phone-call-notifications`.
-2. Initialize it with `openclaw-store starter init phone-call-notifications <dir>`.
+1. Inspect the starter with `malaclaw starter show phone-call-notifications`.
+2. Initialize it with `malaclaw starter init phone-call-notifications <dir>`.
 3. Review STARTER.md and this demo card.
 4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
-5. Run `openclaw-store install` and execute through the project entry-point agent.
+5. Run `malaclaw install` and execute through the project entry-point agent.
 
 ## Skills Setup
 
-### Required (install before `openclaw-store install`)
+### Required (install before `malaclaw install`)
 
 | Skill | Install | Env var | Get key |
 |---|---|---|---|

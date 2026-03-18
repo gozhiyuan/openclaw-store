@@ -27,4 +27,4 @@ install_hints:
   - "Get your OpenAI API key at https://platform.openai.com/api-keys"
   - "Get a SerpAPI key at https://serpapi.com (free tier: 100 searches/month)"
   - "Set: export OPENAI_API_KEY=sk-..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

@@ -5,7 +5,7 @@ export async function runDiff(projectDir?: string): Promise<void> {
   const existing = await loadLockfile(projectDir);
 
   if (!existing) {
-    console.log("No lockfile. Run: openclaw-store install");
+    console.log("No lockfile. Run: malaclaw install");
     return;
   }
 
@@ -32,5 +32,5 @@ export async function runDiff(projectDir?: string): Promise<void> {
     console.log("\n~ Changed:");
     for (const d of changed) console.log(`  ~ [${d.kind}] ${d.id}  ${d.detail ?? ""}`);
   }
-  console.log(`\nRun: openclaw-store install to apply these changes.`);
+  console.log(`\nRun: malaclaw install to apply these changes.`);
 }

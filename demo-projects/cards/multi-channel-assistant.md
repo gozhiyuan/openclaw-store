@@ -10,7 +10,7 @@ Context-switching between apps to manage tasks, schedule events, send messages, 
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: openclaw-store-manager
+- Project Skills: malaclaw-manager
 - Installable OpenClaw Skills: gog, or
 - Required APIs / Services: Slack integration (bot + user tokens), Todoist API or skill, Asana API or skill, Telegram channel with multiple topics configured, config — bot settings and debugging
 - Required Capabilities / Tools: —
@@ -20,7 +20,7 @@ Context-switching between apps to manage tasks, schedule events, send messages, 
 ## Execution Paths
 
 - Default workflow: Stay in the normal OpenClaw or Claude Code default workflow if you only need one generalist agent or want to prototype without managed teams.
-- Managed workflow: Initialize this starter, run openclaw-store install, then open the `autonomous-startup` project entry-point agent for structured multi-agent execution.
+- Managed workflow: Initialize this starter, run malaclaw install, then open the `autonomous-startup` project entry-point agent for structured multi-agent execution.
 
 ## Setup Guidance
 
@@ -28,7 +28,7 @@ Context-switching between apps to manage tasks, schedule events, send messages, 
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
 - Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
-- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run malaclaw install.
 
 ## Installable OpenClaw Skills
 
@@ -54,20 +54,20 @@ Context-switching between apps to manage tasks, schedule events, send messages, 
 ## Bootstrap Prompt
 
 ```text
-Start the Multi-Channel Personal Assistant demo project from the openclaw-store starter `multi-channel-assistant`. Context-switching between apps to manage tasks, schedule events, send messages, and track work is exhausting. You want one interface that routes to all your tools. Use `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
+Start the Multi-Channel Personal Assistant demo project from the malaclaw starter `multi-channel-assistant`. Context-switching between apps to manage tasks, schedule events, send messages, and track work is exhausting. You want one interface that routes to all your tools. Use `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
 ```
 
 ## Suggested Flow
 
-1. Inspect the starter with `openclaw-store starter show multi-channel-assistant`.
-2. Initialize it with `openclaw-store starter init multi-channel-assistant <dir>`.
+1. Inspect the starter with `malaclaw starter show multi-channel-assistant`.
+2. Initialize it with `malaclaw starter init multi-channel-assistant <dir>`.
 3. Review STARTER.md and this demo card.
 4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
-5. Run `openclaw-store install` and execute through the project entry-point agent.
+5. Run `malaclaw install` and execute through the project entry-point agent.
 
 ## Skills Setup
 
-### Required (install before `openclaw-store install`)
+### Required (install before `malaclaw install`)
 
 | Skill | Install | Env var | Get key |
 |---|---|---|---|

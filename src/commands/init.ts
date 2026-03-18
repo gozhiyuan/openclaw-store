@@ -14,12 +14,12 @@ async function fileExists(filePath: string): Promise<boolean> {
 }
 
 export async function runInit(projectDir?: string): Promise<void> {
-  p.intro("openclaw-store init");
+  p.intro("malaclaw init");
 
   const manifestPath = resolveManifestPath(projectDir);
   if (await fileExists(manifestPath)) {
     const overwrite = await p.confirm({
-      message: "openclaw-store.yaml already exists. Overwrite?",
+      message: "malaclaw.yaml already exists. Overwrite?",
     });
     if (p.isCancel(overwrite) || !overwrite) {
       p.outro("Cancelled.");
@@ -80,8 +80,8 @@ export async function runInit(projectDir?: string): Promise<void> {
   await writeManifest(manifest, projectDir);
 
   p.outro(
-    `Created openclaw-store.yaml with ${manifest.packs.length} pack(s) and ${manifest.skills.length} skill(s).\n` +
-    `Run: openclaw-store install --dry-run   to preview\n` +
-    `Run: openclaw-store install             to install`,
+    `Created malaclaw.yaml with ${manifest.packs.length} pack(s) and ${manifest.skills.length} skill(s).\n` +
+    `Run: malaclaw install --dry-run   to preview\n` +
+    `Run: malaclaw install             to install`,
   );
 }

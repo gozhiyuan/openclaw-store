@@ -25,4 +25,4 @@ disabled_until_configured: true
 install_hints:
   - "Enable Google Calendar API in your Google Cloud project"
   - "Reuse GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET from clawemail if already set"
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

@@ -9,7 +9,7 @@ entry_team: content-factory
 packs:
   - content-factory
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - social-intelligence
 installable_skills:
   - rss-skill
@@ -24,7 +24,7 @@ required_capabilities: []
 external_requirements:
   - reddit-readonly skill. It doesn't need auth.
 bootstrap_prompt: Start the Daily Reddit Digest demo project from the
-  openclaw-store starter `daily-reddit-digest`. Run a daily digest everyday to
+  malaclaw starter `daily-reddit-digest`. Run a daily digest everyday to
   give you the top performing posts from your favourite subreddits. Use
   `content-factory` as the initial entry team. Review STARTER.md, confirm any
   missing external integrations, then break the work into clear team tasks.

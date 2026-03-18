@@ -12,7 +12,7 @@ export type SkillInstallResult = {
 
 /**
  * Install a skill into the shared cache first, then link it into one or more workspaces.
- * For local skills: canonicalize into ~/.openclaw-store/cache/skills/<id>@<version>/.
+ * For local skills: canonicalize into ~/.malaclaw/cache/skills/<id>@<version>/.
  * For openclaw-bundled: resolve from ~/.openclaw/skills/<id> or ~/.openclaw/workspace/skills/<id>.
  * For clawhub/community sources: Phase 1 resolves from pre-fetched cache only.
  */

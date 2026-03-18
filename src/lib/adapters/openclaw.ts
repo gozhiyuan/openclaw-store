@@ -51,7 +51,7 @@ export async function readOpenClawConfig(): Promise<{ path: string; config: Open
       const configPath = resolveOpenClawConfigPath();
       throw new Error(
         `OpenClaw config not found at ${configPath}.\n` +
-        `Install OpenClaw first, then run: openclaw-store install`,
+        `Install OpenClaw first, then run: malaclaw install`,
       );
     }
     const msg = err instanceof Error ? err.message : String(err);
@@ -183,45 +183,45 @@ export function removeTeamAgentEntries(
 
 // ── Main agent guidance (ported from antfarm/main-agent-guidance.ts) ─────────
 
-const STORE_BLOCK_START = "<!-- openclaw-store -->";
-const STORE_BLOCK_END = "<!-- /openclaw-store -->";
+const STORE_BLOCK_START = "<!-- malaclaw -->";
+const STORE_BLOCK_END = "<!-- /malaclaw -->";
 
 const TOOLS_BLOCK = `${STORE_BLOCK_START}
-# OpenClaw Store
+# MalaClaw
 
-openclaw-store manages projects, agent teams, and skills on top of OpenClaw.
+malaclaw manages projects, agent teams, and skills on top of OpenClaw.
 
 ## Quick start
 
-The \`openclaw-store-manager\` skill is available in your workspace.
+The \`malaclaw-manager\` skill is available in your workspace.
 Use it to discover and bootstrap projects:
 
-1. \`openclaw-store starter list\` — browse available demo projects
-2. \`openclaw-store starter suggest "<idea>"\` — find the closest starter
-3. \`openclaw-store starter init <id> ./my-project\` — scaffold
-4. \`openclaw-store install\` — provision agents and skills
+1. \`malaclaw starter list\` — browse available demo projects
+2. \`malaclaw starter suggest "<idea>"\` — find the closest starter
+3. \`malaclaw starter init <id> ./my-project\` — scaffold
+4. \`malaclaw install\` — provision agents and skills
 
 ## CLI reference
 
-- Project status:    \`openclaw-store project status\`
-- Health check:      \`openclaw-store doctor\`
-- Team graph:        \`openclaw-store team show <id>\`
-- Skill status:      \`openclaw-store skill check\`
+- Project status:    \`malaclaw project status\`
+- Health check:      \`malaclaw doctor\`
+- Team graph:        \`malaclaw team show <id>\`
+- Skill status:      \`malaclaw skill check\`
 
 ## Coordination
 
 Store-managed agents communicate via shared memory files in:
-  ~/.openclaw-store/workspaces/store/<project>/<team>/shared/memory/
+  ~/.malaclaw/workspaces/store/<project>/<team>/shared/memory/
 
 Never send direct messages to store agents — use memory files.
 ${STORE_BLOCK_END}
 `;
 
 const AGENTS_BLOCK = `${STORE_BLOCK_START}
-# OpenClaw Store — Agent Policy
+# MalaClaw — Agent Policy
 
 ## Installed Teams
-Teams are installed into project-scoped workspaces via openclaw-store. Each team has an entry point agent.
+Teams are installed into project-scoped workspaces via malaclaw. Each team has an entry point agent.
 
 ## Coordination Rules
 - Use memory files for all inter-agent communication
@@ -230,9 +230,9 @@ Teams are installed into project-scoped workspaces via openclaw-store. Each team
 - Check the project's team shared memory dir for task queue and status
 
 ## Finding Agents
-\`openclaw-store agent list\` — lists all installed agents
-\`openclaw-store project list\` — lists installed projects and entry points
-\`openclaw-store team show <id>\` — shows team graph and entry point
+\`malaclaw agent list\` — lists all installed agents
+\`malaclaw project list\` — lists installed projects and entry points
+\`malaclaw team show <id>\` — shows team graph and entry point
 ${STORE_BLOCK_END}
 `;
 

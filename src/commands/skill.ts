@@ -60,7 +60,7 @@ export async function skillShow(skillId: string): Promise<void> {
     if (discovered.version) {
       console.log(`Version:     ${discovered.version}`);
     }
-    console.log("\nThis skill is available for assignment. Add it to openclaw-store.yaml, then run openclaw-store install.");
+    console.log("\nThis skill is available for assignment. Add it to malaclaw.yaml, then run malaclaw install.");
     return;
   }
 
@@ -113,7 +113,7 @@ export async function skillShow(skillId: string): Promise<void> {
 export async function skillCheck(): Promise<void> {
   const results = await checkSkills();
   if (results.length === 0) {
-    console.log("No skills in lockfile. Run: openclaw-store install");
+    console.log("No skills in lockfile. Run: malaclaw install");
     return;
   }
 
@@ -132,7 +132,7 @@ export async function skillCheck(): Promise<void> {
   }
 
   if (!allActive) {
-    console.log("\nFix the missing configuration or unavailable skill sources, then re-run: openclaw-store install");
+    console.log("\nFix the missing configuration or unavailable skill sources, then re-run: malaclaw install");
   }
 }
 

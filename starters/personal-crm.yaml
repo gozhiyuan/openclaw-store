@@ -10,7 +10,7 @@ entry_team: personal-assistant
 packs:
   - personal-assistant
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - clawemail
   - apple-contacts
 installable_skills:
@@ -28,7 +28,7 @@ external_requirements:
     available
   - Telegram topic for CRM queries
 bootstrap_prompt: Start the Personal CRM with Automatic Contact Discovery demo
-  project from the openclaw-store starter `personal-crm`. Keeping track of who
+  project from the malaclaw starter `personal-crm`. Keeping track of who
   you've met, when, and what you discussed is impossible to do manually.
   Important follow-ups slip through the cracks, and you forget context before
   important meetings. Use `autonomous-startup` as the initial entry team. Review

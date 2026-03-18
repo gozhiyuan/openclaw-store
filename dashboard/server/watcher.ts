@@ -39,8 +39,8 @@ export async function startWatcher(): Promise<FSWatcher> {
     skillsIndexFile,
     path.join(workspacesRoot, "**/shared/memory/*.md"),
     ...projectDirs.flatMap((dir) => [
-      path.join(dir, "openclaw-store.yaml"),
-      path.join(dir, "openclaw-store.lock"),
+      path.join(dir, "malaclaw.yaml"),
+      path.join(dir, "malaclaw.lock"),
     ]),
   ];
 
@@ -58,11 +58,11 @@ export async function startWatcher(): Promise<FSWatcher> {
       });
     } else if (filePath === skillsIndexFile) {
       debounced("skills", () => broadcast({ type: "skills:changed" }));
-    } else if (filePath.endsWith("openclaw-store.yaml")) {
+    } else if (filePath.endsWith("malaclaw.yaml")) {
       debounced("manifest:" + filePath, () =>
         broadcast({ type: "manifest:changed", projectDir: path.dirname(filePath) })
       );
-    } else if (filePath.endsWith("openclaw-store.lock")) {
+    } else if (filePath.endsWith("malaclaw.lock")) {
       debounced("lockfile:" + filePath, () =>
         broadcast({ type: "lockfile:changed", projectDir: path.dirname(filePath) })
       );

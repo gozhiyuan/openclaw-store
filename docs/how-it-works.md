@@ -1,4 +1,4 @@
-# How openclaw-store Works
+# How malaclaw Works
 
 This document explains the technical architecture: data flow, file formats, the renderer pipeline, the coordination model, and how to extend everything.
 
@@ -17,7 +17,7 @@ This document explains the technical architecture: data flow, file formats, the 
 | Per-agent skill assignments | Existing teams (content-factory, research-lab, dev-company) now declare specific skills per agent |
 | 37 demo starters | All curated starters re-mapped to purpose-built teams with per-agent skill assignments |
 | Skills Setup cards | Each `demo-projects/cards/<id>.md` now includes a `## Skills Setup` section listing which skills are needed and how to install them |
-| Manager skill project init | `openclaw-store-manager` guides users through missing skills conversationally — detect, explain, guide |
+| Manager skill project init | `malaclaw-manager` guides users through missing skills conversationally — detect, explain, guide |
 | `requires.bins` field | Skill templates now declare required system binaries before `env:` under `requires:` |
 
 ### Web Dashboard
@@ -39,19 +39,19 @@ This document explains the technical architecture: data flow, file formats, the 
 | `diff` command | Preview what `install` would change vs the current lockfile |
 | `validate` command | Validate all bundled templates against Zod schemas |
 | `--no-openclaw` flag | Install without patching `openclaw.json` (CI, Claude Code) |
-| Local overlay | Override any bundled template via `OPENCLAW_STORE_TEMPLATES` |
+| Local overlay | Override any bundled template via `MALACLAW_TEMPLATES` |
 | Multi-team packs | A single pack YAML can reference multiple teams |
 | Starter demo projects | Use curated starter definitions to scaffold a managed project from a demo use case |
 | Demo project catalog | Generated `demo-projects/index.yaml` and per-demo cards provide richer execution/setup guidance |
 | Pack compatibility | `compatibility.node_min` / `openclaw_min` in pack YAML, checked by `doctor` |
-| Skill installation | Skills are cached at `~/.openclaw-store/cache/skills/` and symlinked per workspace |
+| Skill installation | Skills are cached at `~/.malaclaw/cache/skills/` and symlinked per workspace |
 | Test suite | Vitest tests covering schema, renderer, resolver, overlay, compat, skill-fetch, starters, and workflow detection |
 
 ---
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     openclaw-store                          │
+│                     malaclaw                          │
 │                                                             │
 │  ┌──────────────┐   ┌──────────────┐   ┌────────────────┐  │
 │  │  Templates   │   │     CLI      │   │ Packs/Starters │  │
@@ -90,7 +90,7 @@ This document explains the technical architecture: data flow, file formats, the 
            ┌─────────────────▼──────────────────┐
            │         File System                │
            │                                    │
-           │  ~/.openclaw-store/                │  ← runtime
+           │  ~/.malaclaw/                │  ← runtime
            │    runtime.json                    │
            │    workspaces/store/<project>/<team>/<agent>/│
            │      SOUL.md                       │
@@ -108,35 +108,35 @@ This document explains the technical architecture: data flow, file formats, the 
            │    TOOLS.md                        │
            │    AGENTS.md                       │
            │                                    │
-           │  ./openclaw-store.yaml             │  ← project
-           │  ./openclaw-store.lock             │    (committed)
+           │  ./malaclaw.yaml             │  ← project
+           │  ./malaclaw.lock             │    (committed)
            └────────────────────────────────────┘
 ```
 
 ---
 
-## Data Flow: `openclaw-store install`
+## Data Flow: `malaclaw install`
 
 Projects can be created in two ways:
 
-- from scratch with `openclaw-store init`
-- from a curated starter with `openclaw-store starter init <starter-id> <dir>`
+- from scratch with `malaclaw init`
+- from a curated starter with `malaclaw starter init <starter-id> <dir>`
 
 There is also a zero-config bootstrap path:
 
-- `openclaw-store install` with no manifest installs `openclaw-store-manager` into the main OpenClaw workspace instead of failing
+- `malaclaw install` with no manifest installs `malaclaw-manager` into the main OpenClaw workspace instead of failing
 - this lets the user begin from OpenClaw first, then create a managed project later
 
-The starter path writes a project-local `openclaw-store.yaml` that already includes:
+The starter path writes a project-local `malaclaw.yaml` that already includes:
 
 - `project.starter`
 - `project.entry_team`
 - starter-selected packs
-- project skills such as `openclaw-store-manager`
+- project skills such as `malaclaw-manager`
 - a copied `DEMO_PROJECT.md` card with setup and execution guidance
 
 ```
-openclaw-store.yaml
+malaclaw.yaml
        │
        ▼
   loadManifest()
@@ -165,7 +165,7 @@ openclaw-store.yaml
   │       → "store__my-project__dev-company__pm"        │
   │     resolveAgentWorkspaceDir("my-project",          │
   │                              "dev-company", "pm")   │
-  │       → "~/.openclaw-store/workspaces/store/        │
+  │       → "~/.malaclaw/workspaces/store/        │
   │             my-project/dev-company/pm"              │
   │                                                     │
   │ For each skill:                                     │
@@ -202,22 +202,22 @@ openclaw-store.yaml
                                  ▼
   updateStoreGuidance()
   ┌────────────────────────────────────────────────┐
-  │ Upsert <!-- openclaw-store --> block into:     │
+  │ Upsert <!-- malaclaw --> block into:     │
   │   ~/.openclaw/workspace/TOOLS.md               │
   │   ~/.openclaw/workspace/AGENTS.md              │
   └────────────────────────────────────────────────┘
                                  │
                                  ▼
   writeLockfile(lockfile)
-  └── openclaw-store.lock
+  └── malaclaw.lock
 ```
 
 ---
 
-## Data Flow: `openclaw-store install` with no manifest
+## Data Flow: `malaclaw install` with no manifest
 
 ```
-no openclaw-store.yaml
+no malaclaw.yaml
          │
          ▼
   runInstall()
@@ -228,7 +228,7 @@ no openclaw-store.yaml
          ▼
   runZeroConfigInstall()
   ┌─────────────────────────────────────────────────────┐
-  │ loadSkill("openclaw-store-manager")                │
+  │ loadSkill("malaclaw-manager")                │
   │ install into ~/.openclaw/workspace/skills/         │
   │ updateStoreGuidance()                              │
   │ print starter/bootstrap instructions               │
@@ -243,7 +243,7 @@ no openclaw-store.yaml
 
 ---
 
-## Data Flow: `openclaw-store starter init`
+## Data Flow: `malaclaw starter init`
 
 ```
 awesome-openclaw-usecases/*.md
@@ -254,7 +254,7 @@ awesome-openclaw-usecases/*.md
   │ id: podcast-production-pipeline                     │
   │ entry_team: content-factory                         │
   │ packs: [content-factory]                            │
-  │ project_skills: [openclaw-store-manager]            │
+  │ project_skills: [malaclaw-manager]            │
   │ installable_skills: [youtube-research]              │
   │ required_apis: [YouTube API]                        │
   │ source_usecase: Podcast Production Pipeline         │
@@ -269,7 +269,7 @@ awesome-openclaw-usecases/*.md
          ▼
   write project files
   ┌─────────────────────────────────────────────────────┐
-  │ ./openclaw-store.yaml                              │
+  │ ./malaclaw.yaml                              │
   │   project:                                         │
   │     id: my-project                                 │
   │     starter: podcast-production-pipeline           │
@@ -277,7 +277,7 @@ awesome-openclaw-usecases/*.md
   │   packs:                                           │
   │     - id: content-factory                          │
   │   skills:                                          │
-  │     - id: openclaw-store-manager                   │
+  │     - id: malaclaw-manager                   │
   │       targets:                                     │
   │         teams: [content-factory]                   │
   │                                                    │
@@ -288,13 +288,13 @@ awesome-openclaw-usecases/*.md
   └─────────────────────────────────────────────────────┘
          │
          ▼
-  openclaw-store install
+  malaclaw install
          │
          ▼
   managed project install flow
 ```
 
-The `starter suggest` command uses simple token overlap across starter metadata, packs, tags, and requirements. It is intentionally lightweight so the bundled `openclaw-store-manager` skill can use it locally without external services.
+The `starter suggest` command uses simple token overlap across starter metadata, packs, tags, and requirements. It is intentionally lightweight so the bundled `malaclaw-manager` skill can use it locally without external services.
 
 The richer demo metadata is generated separately into `demo-projects/index.yaml` and `demo-projects/cards/*.md`. The manager skill uses those cards to decide whether to keep the user in default workflow mode or move them into a managed starter install.
 
@@ -306,10 +306,10 @@ The renderer is the heart of the system. It turns YAML agent definitions into th
 
 This boundary matters:
 
-- YAML is the `openclaw-store` authoring format
+- YAML is the `malaclaw` authoring format
 - rendered Markdown files are the OpenClaw runtime format
 
-OpenClaw does not need to understand the team/pack/starter YAML files directly. `openclaw-store` is the layer that validates, resolves, and compiles them into OpenClaw-ready workspaces.
+OpenClaw does not need to understand the team/pack/starter YAML files directly. `malaclaw` is the layer that validates, resolves, and compiles them into OpenClaw-ready workspaces.
 
 ```
 AgentDef (YAML)         TeamDef (YAML)
@@ -408,10 +408,10 @@ This prefix lets the installer:
 
 ```
 my-project/                        ← git-committed
-├── openclaw-store.yaml            ← WHAT to install
-└── openclaw-store.lock            ← WHAT was installed (resolved)
+├── malaclaw.yaml            ← WHAT to install
+└── malaclaw.lock            ← WHAT was installed (resolved)
 
-~/.openclaw-store/                 ← NOT committed
+~/.malaclaw/                 ← NOT committed
 ├── runtime.json                  ← installed projects + entry points
 ├── workspaces/
 │   └── store/
@@ -439,58 +439,58 @@ my-project/                        ← git-committed
 
 **Why project-local manifest + lockfile?**
 
-Like `package.json` + `package-lock.json`: the manifest is what you *want*, the lockfile is what was actually *resolved*. The lockfile stores exact workspace paths, agent IDs, and skill status so that `openclaw-store doctor` can verify the installation without re-resolving.
+Like `package.json` + `package-lock.json`: the manifest is what you *want*, the lockfile is what was actually *resolved*. The lockfile stores exact workspace paths, agent IDs, and skill status so that `malaclaw doctor` can verify the installation without re-resolving.
 
 **Why runtime.json as well?**
 
-The manifest and lockfile are local to one project directory. `runtime.json` is the global index that lets OpenClaw Store list all installed projects and their entry-point agents across your machine.
+The manifest and lockfile are local to one project directory. `runtime.json` is the global index that lets MalaClaw list all installed projects and their entry-point agents across your machine.
 It also records any explicitly attached native OpenClaw agents so projects can reference them without mirroring the whole OpenClaw agent registry.
 
 ## Agent Ownership Model
 
-`openclaw-store` does not attempt to mirror every OpenClaw agent.
+`malaclaw` does not attempt to mirror every OpenClaw agent.
 
-- **store-managed agents**: provisioned from packs/teams/starters by `openclaw-store`
+- **store-managed agents**: provisioned from packs/teams/starters by `malaclaw`
 - **native OpenClaw agents**: already present in `openclaw.json`, discovered but not owned by the store
 - **project-attached agents**: native OpenClaw agents explicitly attached to a managed project
 
 This keeps ownership boundaries simple:
 
 - OpenClaw remains the source of truth for all runtime agents
-- `openclaw-store` manages project/team scaffolding
+- `malaclaw` manages project/team scaffolding
 - `install` is the reconciliation point that can place targeted skills into both store-managed agents and attached native agents
 
 ## Skill Availability Model
 
-`openclaw-store` does not mirror the full OpenClaw skill registry.
+`malaclaw` does not mirror the full OpenClaw skill registry.
 
 - **store-managed skill templates**: skills defined in `templates/skills/`
 - **native OpenClaw skills**: skills already installed in `~/.openclaw/workspace/skills/` or `~/.openclaw/skills/`
-- **store cache copies**: skills materialized in `~/.openclaw-store/cache/skills/`
+- **store cache copies**: skills materialized in `~/.malaclaw/cache/skills/`
 
-Use `openclaw-store skill sync` to refresh the local availability inventory in `~/.openclaw-store/skills-index.json`.
-Discovered native skills can then be referenced directly by ID in `openclaw-store.yaml`, and `install` becomes the reconciliation point that places them into targeted agent workspaces.
+Use `malaclaw skill sync` to refresh the local availability inventory in `~/.malaclaw/skills-index.json`.
+Discovered native skills can then be referenced directly by ID in `malaclaw.yaml`, and `install` becomes the reconciliation point that places them into targeted agent workspaces.
 
-As with agents and teams, the YAML skill template is metadata for `openclaw-store`. The runtime artifact OpenClaw actually uses is the installed skill directory inside the relevant workspace.
+As with agents and teams, the YAML skill template is metadata for `malaclaw`. The runtime artifact OpenClaw actually uses is the installed skill directory inside the relevant workspace.
 
 ## Workflow Modes
 
-`openclaw-store` supports three practical modes:
+`malaclaw` supports three practical modes:
 
 1. Managed project mode
-   The repo contains `openclaw-store.yaml`, and `openclaw-store` manages projects, teams, skills, lockfiles, and runtime registration.
+   The repo contains `malaclaw.yaml`, and `malaclaw` manages projects, teams, skills, lockfiles, and runtime registration.
 
 2. Default Claude Code mode
-   The repo contains `CLAUDE.md` or `.claude/`, but no `openclaw-store.yaml`. In this case, `openclaw-store` treats the repo as a normal Claude Code project and does not assume it is misconfigured.
+   The repo contains `CLAUDE.md` or `.claude/`, but no `malaclaw.yaml`. In this case, `malaclaw` treats the repo as a normal Claude Code project and does not assume it is misconfigured.
 
 3. Default OpenClaw mode
-   OpenClaw is installed, but the repo does not have `openclaw-store.yaml`. In this case, `openclaw-store` treats the repo as a normal OpenClaw environment unless the user opts into managed projects.
+   OpenClaw is installed, but the repo does not have `malaclaw.yaml`. In this case, `malaclaw` treats the repo as a normal OpenClaw environment unless the user opts into managed projects.
 
-This allows the `openclaw-store-manager` skill to inspect default workflows first, then migrate a repo into managed mode only when the user asks for project/team/skill orchestration.
+This allows the `malaclaw-manager` skill to inspect default workflows first, then migrate a repo into managed mode only when the user asks for project/team/skill orchestration.
 
 ## Native Memory vs Shared Memory
 
-`openclaw-store` intentionally keeps two memory layers separate:
+`malaclaw` intentionally keeps two memory layers separate:
 
 1. **Native OpenClaw memory**
    - lives inside each agent workspace
@@ -498,11 +498,11 @@ This allows the `openclaw-store-manager` skill to inspect default workflows firs
    - is what OpenClaw memory tools operate on for that agent
 
 2. **Shared team memory**
-   - lives under `~/.openclaw-store/workspaces/store/<project>/<team>/shared/memory/`
+   - lives under `~/.malaclaw/workspaces/store/<project>/<team>/shared/memory/`
    - contains orchestration files such as `kanban.md`, `tasks-log.md`, and `blockers.md`
-   - is managed by `openclaw-store` ownership rules
+   - is managed by `malaclaw` ownership rules
 
-This is deliberate. `openclaw-store` orchestrates shared coordination state, but it does not replace or redefine OpenClaw's native memory layer.
+This is deliberate. `malaclaw` orchestrates shared coordination state, but it does not replace or redefine OpenClaw's native memory layer.
 
 ---
 
@@ -510,12 +510,12 @@ This is deliberate. `openclaw-store` orchestrates shared coordination state, but
 
 When a user asks the manager skill to start a demo project, the skill:
 
-1. Runs `openclaw-store starter suggest` to identify the best match
+1. Runs `malaclaw starter suggest` to identify the best match
 2. Reads `demo-projects/cards/<id>.md` for setup requirements
 3. Detects which required skills or APIs are missing
 4. Guides the user through configuring missing items conversationally
-5. Calls `openclaw-store starter init <id> <dir>` once prerequisites are met
-6. Calls `openclaw-store install` to provision the team
+5. Calls `malaclaw starter init <id> <dir>` once prerequisites are met
+6. Calls `malaclaw install` to provision the team
 
 The skill uses a **declare-and-detect** pattern:
 
@@ -524,8 +524,8 @@ starter card declares requirements
          │
          ▼
 manager reads cards/<id>.md
-  project_skills   → placed automatically into openclaw-store.yaml
-  installable_skills → checked via `openclaw-store skill sync`
+  project_skills   → placed automatically into malaclaw.yaml
+  installable_skills → checked via `malaclaw skill sync`
   required_apis      → user must configure; manager guides setup
   required_capabilities → runtime prerequisites verified before init
          │
@@ -642,10 +642,10 @@ The renderer translates each agent's access into concrete instructions in their 
 The openclaw adapter injects guidance into the main agent's TOOLS.md and AGENTS.md using HTML comment markers:
 
 ```
-<!-- openclaw-store -->
+<!-- malaclaw -->
 # OpenClaw App Store
 ...guidance content...
-<!-- /openclaw-store -->
+<!-- /malaclaw -->
 ```
 
 The `upsertBlock()` function is idempotent:
@@ -663,9 +663,9 @@ The `removeBlock()` function strips the block cleanly on uninstall. This pattern
 The loader searches `templates/agents/<id>.yaml` for agent definitions. To override an agent without modifying the bundled templates, you can create a local overlay by either:
 
 1. Editing `templates/agents/<id>.yaml` directly (fine for personal forks)
-2. Setting `OPENCLAW_STORE_TEMPLATES` env var to point to a custom templates directory:
+2. Setting `MALACLAW_TEMPLATES` env var to point to a custom templates directory:
    ```bash
-   OPENCLAW_STORE_TEMPLATES=./my-templates openclaw-store install
+   MALACLAW_TEMPLATES=./my-templates malaclaw install
    ```
    The loader checks the overlay for each agent/team/skill YAML before falling back to bundled templates.
 
@@ -692,8 +692,8 @@ This means one agent YAML can serve multiple teams with different names, and the
 
 1. Add the skill ID to the agent's `skills:` list in its YAML
 2. Add the skill YAML to `templates/skills/<id>.yaml`
-3. Add to `openclaw-store.yaml` skills section
-4. Run `openclaw-store install`
+3. Add to `malaclaw.yaml` skills section
+4. Run `malaclaw install`
 
 The skill's env vars are checked at install time. If required vars are missing and `disabled_until_configured: true`, the skill is installed as **inactive** and reported by `doctor`.
 
@@ -701,7 +701,7 @@ You can also target a project skill without editing every agent template:
 
 ```yaml
 skills:
-  - id: openclaw-store-manager
+  - id: malaclaw-manager
     targets:
       agents:
         - tech-lead
@@ -734,7 +734,7 @@ members:
 
 When rendered, the security engineer's AGENTS.md will reference Content Factory as its team, but the same `security-engineer.yaml` definition is reused.
 
-`openclaw-store agent show security-engineer` reports all teams the agent belongs to.
+`malaclaw agent show security-engineer` reports all teams the agent belongs to.
 
 ---
 
@@ -861,9 +861,9 @@ compatibility:                # optional version requirements
   node_min: string            # minimum Node.js version (e.g. "22.0.0")
 ```
 
-### Manifest (`openclaw-store.yaml`)
+### Manifest (`malaclaw.yaml`)
 
-Created by `openclaw-store init`. This is the project's desired state: which packs and skills you want installed.
+Created by `malaclaw init`. This is the project's desired state: which packs and skills you want installed.
 
 ```yaml
 version: 1
@@ -910,15 +910,15 @@ skills:
     targets:
       teams:
         - research-lab
-  - id: openclaw-store-manager
+  - id: malaclaw-manager
     targets:
       agents:
         - tech-lead
 ```
 
-### Lockfile (`openclaw-store.lock`)
+### Lockfile (`malaclaw.lock`)
 
-Generated by `openclaw-store install` when installing from `openclaw-store.yaml`. It is not written for `openclaw-store install --pack <id>` or `openclaw-store install --dry-run`.
+Generated by `malaclaw install` when installing from `malaclaw.yaml`. It is not written for `malaclaw install --pack <id>` or `malaclaw install --dry-run`.
 
 This is the resolved state: exactly which teams, agents, workspaces, and skill states were installed. Do not edit it manually.
 
@@ -967,10 +967,10 @@ packs:
     version: <pack-version>
     agents:
       - id: store__acme-web__dev-company__pm
-        workspace: /Users/you/.openclaw-store/workspaces/store/acme-web/dev-company/pm
+        workspace: /Users/you/.malaclaw/workspaces/store/acme-web/dev-company/pm
         agent_dir: /Users/you/.openclaw/agents/store__acme-web__dev-company__pm
       - id: store__acme-web__dev-company__tech-lead
-        workspace: /Users/you/.openclaw-store/workspaces/store/acme-web/dev-company/tech-lead
+        workspace: /Users/you/.malaclaw/workspaces/store/acme-web/dev-company/tech-lead
         agent_dir: /Users/you/.openclaw/agents/store__acme-web__dev-company__tech-lead
   - type: pack
     id: acme-web__research-lab__research-lab
@@ -980,7 +980,7 @@ packs:
     version: <pack-version>
     agents:
       - id: store__acme-web__research-lab__research-lead
-        workspace: /Users/you/.openclaw-store/workspaces/store/acme-web/research-lab/research-lead
+        workspace: /Users/you/.malaclaw/workspaces/store/acme-web/research-lab/research-lead
         agent_dir: /Users/you/.openclaw/agents/store__acme-web__research-lab__research-lead
 skills:
   - type: skill
@@ -998,11 +998,11 @@ skills:
 Lifecycle summary:
 
 ```bash
-openclaw-store init          # creates openclaw-store.yaml
-openclaw-store install       # reads yaml and writes openclaw-store.lock
-openclaw-store project list  # global registry of installed projects
-openclaw-store install --pack dev-company  # one-shot install, no manifest or lockfile
-openclaw-store install --dry-run           # preview only, no lockfile write
+malaclaw init          # creates malaclaw.yaml
+malaclaw install       # reads yaml and writes malaclaw.lock
+malaclaw project list  # global registry of installed projects
+malaclaw install --pack dev-company  # one-shot install, no manifest or lockfile
+malaclaw install --dry-run           # preview only, no lockfile write
 ```
 
 ---
@@ -1012,8 +1012,8 @@ openclaw-store install --dry-run           # preview only, no lockfile write
 | Feature | Where to add |
 |---|---|
 | Remote pack registry | `src/lib/resolver.ts` — add HTTP fetch before local lookup |
-| Custom templates directory | ✅ Done — set `OPENCLAW_STORE_TEMPLATES` env var |
+| Custom templates directory | ✅ Done — set `MALACLAW_TEMPLATES` env var |
 | Claude Code adapter | `src/lib/adapters/claude-code.ts` — already stubbed |
 | Pack versioning + semver | `src/lib/resolver.ts` — extend `resolveManifest()` |
-| `openclaw-store update` | New command — re-resolve + diff lockfile |
-| Dashboard UI | ✅ Done — `openclaw-store dashboard` starts a Fastify + React web UI |
+| `malaclaw update` | New command — re-resolve + diff lockfile |
+| Dashboard UI | ✅ Done — `malaclaw dashboard` starts a Fastify + React web UI |

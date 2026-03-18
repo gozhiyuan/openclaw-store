@@ -16,7 +16,7 @@ describe("runDiff", () => {
     process.chdir(tmpDir);
     try {
       await fs.writeFile(
-        path.join(tmpDir, "openclaw-store.yaml"),
+        path.join(tmpDir, "malaclaw.yaml"),
         stringify({ version: 1, packs: [{ id: "dev-company" }], skills: [] }),
       );
       // Should not throw even without lockfile
@@ -34,11 +34,11 @@ describe("runDiff", () => {
     process.chdir(tmpDir);
     try {
       await fs.writeFile(
-        path.join(tmpDir, "openclaw-store.yaml"),
+        path.join(tmpDir, "malaclaw.yaml"),
         stringify({ version: 1, packs: [], skills: [] }),
       );
       await fs.writeFile(
-        path.join(tmpDir, "openclaw-store.lock"),
+        path.join(tmpDir, "malaclaw.lock"),
         stringify({
           version: 1,
           packs: [],

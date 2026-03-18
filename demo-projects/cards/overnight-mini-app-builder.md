@@ -10,7 +10,7 @@ Your AI agent is powerful but reactive — it only works when you tell it what t
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: openclaw-store-manager
+- Project Skills: malaclaw-manager
 - Installable OpenClaw Skills: —
 - Required APIs / Services: Telegram or Discord integration
 - Required Capabilities / Tools: sessions_spawn / sessions_send for autonomous task execution
@@ -20,7 +20,7 @@ Your AI agent is powerful but reactive — it only works when you tell it what t
 ## Execution Paths
 
 - Default workflow: Stay in the normal OpenClaw or Claude Code default workflow if you only need one generalist agent or want to prototype without managed teams.
-- Managed workflow: Initialize this starter, run openclaw-store install, then open the `autonomous-startup` project entry-point agent for structured multi-agent execution.
+- Managed workflow: Initialize this starter, run malaclaw install, then open the `autonomous-startup` project entry-point agent for structured multi-agent execution.
 
 ## Setup Guidance
 
@@ -28,7 +28,7 @@ Your AI agent is powerful but reactive — it only works when you tell it what t
 - If you want managed execution, initialize the starter and use `autonomous-startup` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
 - Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
-- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run malaclaw install.
 
 ## Required APIs / Services
 
@@ -47,20 +47,20 @@ Your AI agent is powerful but reactive — it only works when you tell it what t
 ## Bootstrap Prompt
 
 ```text
-Start the Goal-Driven Autonomous Tasks demo project from the openclaw-store starter `overnight-mini-app-builder`. Your AI agent is powerful but reactive — it only works when you tell it what to do. What if it knew your goals and proactively came up with tasks to move you closer to them every single day, without being asked? Use `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
+Start the Goal-Driven Autonomous Tasks demo project from the malaclaw starter `overnight-mini-app-builder`. Your AI agent is powerful but reactive — it only works when you tell it what to do. What if it knew your goals and proactively came up with tasks to move you closer to them every single day, without being asked? Use `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
 ```
 
 ## Suggested Flow
 
-1. Inspect the starter with `openclaw-store starter show overnight-mini-app-builder`.
-2. Initialize it with `openclaw-store starter init overnight-mini-app-builder <dir>`.
+1. Inspect the starter with `malaclaw starter show overnight-mini-app-builder`.
+2. Initialize it with `malaclaw starter init overnight-mini-app-builder <dir>`.
 3. Review STARTER.md and this demo card.
 4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
-5. Run `openclaw-store install` and execute through the project entry-point agent.
+5. Run `malaclaw install` and execute through the project entry-point agent.
 
 ## Skills Setup
 
-### Required (install before `openclaw-store install`)
+### Required (install before `malaclaw install`)
 
 | Skill | Install | Env var | Get key |
 |---|---|---|---|

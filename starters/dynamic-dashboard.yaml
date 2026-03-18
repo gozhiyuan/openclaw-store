@@ -10,7 +10,7 @@ entry_team: data-ops
 packs:
   - data-ops
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - duckdb-en
 installable_skills:
   - nocodb
@@ -34,7 +34,7 @@ external_requirements:
   - Discord or Canvas for rendering the dashboard
   - Cron jobs for scheduled updates
 bootstrap_prompt: Start the Dynamic Dashboard with Sub-agent Spawning demo
-  project from the openclaw-store starter `dynamic-dashboard`. Static dashboards
+  project from the malaclaw starter `dynamic-dashboard`. Static dashboards
   show stale data and require constant manual updates. You want real-time
   visibility across multiple data sources without building a custom frontend or
   hitting API rate limits. Use `dev-company` as the initial entry team. Review

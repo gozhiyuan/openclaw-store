@@ -10,7 +10,7 @@ entry_team: research-lab
 packs:
   - research-lab
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - rss-skill
   - aluvia-brave-search
 installable_skills:
@@ -29,7 +29,7 @@ external_requirements:
   - tech-news-digest — Install via clawhub install tech-news-digest
   - gog (optional) — For email delivery via Gmail
 bootstrap_prompt: Start the Multi-Source Tech News Digest demo project from the
-  openclaw-store starter `multi-source-tech-news-digest`. Automatically
+  malaclaw starter `multi-source-tech-news-digest`. Automatically
   aggregate, score, and deliver tech news from 109+ sources across RSS,
   Twitter/X, GitHub releases, and web search — all managed through natural
   language. Use `research-lab` as the initial entry team. Review STARTER.md,

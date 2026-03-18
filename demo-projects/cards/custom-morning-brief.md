@@ -10,7 +10,7 @@ You wake up and spend the first 30 minutes of your day catching up — scrolling
 - Recommended Mode: managed-team
 - Entry Team: research-lab
 - Packs: research-lab, content-factory
-- Project Skills: openclaw-store-manager
+- Project Skills: malaclaw-manager
 - Installable OpenClaw Skills: x-research-v2
 - Required APIs / Services: Telegram, Discord, or iMessage integration, Todoist / Apple Reminders / Asana integration (whichever you use for tasks)
 - Required Capabilities / Tools: —
@@ -20,7 +20,7 @@ You wake up and spend the first 30 minutes of your day catching up — scrolling
 ## Execution Paths
 
 - Default workflow: Stay in the normal OpenClaw or Claude Code default workflow if you only need one generalist agent or want to prototype without managed teams.
-- Managed workflow: Initialize this starter, run openclaw-store install, then open the `research-lab` project entry-point agent for structured multi-agent execution.
+- Managed workflow: Initialize this starter, run malaclaw install, then open the `research-lab` project entry-point agent for structured multi-agent execution.
 
 ## Setup Guidance
 
@@ -28,7 +28,7 @@ You wake up and spend the first 30 minutes of your day catching up — scrolling
 - If you want managed execution, initialize the starter and use `research-lab` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
 - Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
-- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run malaclaw install.
 
 ## Installable OpenClaw Skills
 
@@ -48,20 +48,20 @@ You wake up and spend the first 30 minutes of your day catching up — scrolling
 ## Bootstrap Prompt
 
 ```text
-Start the Custom Morning Brief demo project from the openclaw-store starter `custom-morning-brief`. You wake up and spend the first 30 minutes of your day catching up — scrolling news, checking your calendar, reviewing your to-do list, trying to figure out what matters today. What if all of that was already done and waiting for you as a text message? Use `research-lab` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
+Start the Custom Morning Brief demo project from the malaclaw starter `custom-morning-brief`. You wake up and spend the first 30 minutes of your day catching up — scrolling news, checking your calendar, reviewing your to-do list, trying to figure out what matters today. What if all of that was already done and waiting for you as a text message? Use `research-lab` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
 ```
 
 ## Suggested Flow
 
-1. Inspect the starter with `openclaw-store starter show custom-morning-brief`.
-2. Initialize it with `openclaw-store starter init custom-morning-brief <dir>`.
+1. Inspect the starter with `malaclaw starter show custom-morning-brief`.
+2. Initialize it with `malaclaw starter init custom-morning-brief <dir>`.
 3. Review STARTER.md and this demo card.
 4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
-5. Run `openclaw-store install` and execute through the project entry-point agent.
+5. Run `malaclaw install` and execute through the project entry-point agent.
 
 ## Skills Setup
 
-### Required (install before `openclaw-store install`)
+### Required (install before `malaclaw install`)
 
 | Skill | Install | Env var | Get key |
 |---|---|---|---|

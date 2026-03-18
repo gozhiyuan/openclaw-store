@@ -10,7 +10,7 @@ You have a podcast idea, maybe even a backlog of episode topics. But between res
 - Recommended Mode: managed-team
 - Entry Team: content-factory
 - Packs: content-factory
-- Project Skills: openclaw-store-manager
+- Project Skills: malaclaw-manager
 - Installable OpenClaw Skills: feed, research
 - Required APIs / Services: Slack, Discord, or Telegram integration (for delivering assets)
 - Required Capabilities / Tools: File system access (for reading transcripts and writing output files), Optional: sessions_spawn for running research and writing agents in parallel
@@ -20,7 +20,7 @@ You have a podcast idea, maybe even a backlog of episode topics. But between res
 ## Execution Paths
 
 - Default workflow: Stay in the normal OpenClaw or Claude Code default workflow if you only need one generalist agent or want to prototype without managed teams.
-- Managed workflow: Initialize this starter, run openclaw-store install, then open the `content-factory` project entry-point agent for structured multi-agent execution.
+- Managed workflow: Initialize this starter, run malaclaw install, then open the `content-factory` project entry-point agent for structured multi-agent execution.
 
 ## Setup Guidance
 
@@ -28,7 +28,7 @@ You have a podcast idea, maybe even a backlog of episode topics. But between res
 - If you want managed execution, initialize the starter and use `content-factory` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
 - Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
-- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run malaclaw install.
 
 ## Installable OpenClaw Skills
 
@@ -55,20 +55,20 @@ You have a podcast idea, maybe even a backlog of episode topics. But between res
 ## Bootstrap Prompt
 
 ```text
-Start the Podcast Production Pipeline demo project from the openclaw-store starter `podcast-production-pipeline`. You have a podcast idea, maybe even a backlog of episode topics. But between researching guests, writing outlines, drafting intros, generating show notes, and writing social media posts for promotion — the production overhead kills your momentum. What if you handed off a topic and got back a full production package? Use `content-factory` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
+Start the Podcast Production Pipeline demo project from the malaclaw starter `podcast-production-pipeline`. You have a podcast idea, maybe even a backlog of episode topics. But between researching guests, writing outlines, drafting intros, generating show notes, and writing social media posts for promotion — the production overhead kills your momentum. What if you handed off a topic and got back a full production package? Use `content-factory` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
 ```
 
 ## Suggested Flow
 
-1. Inspect the starter with `openclaw-store starter show podcast-production-pipeline`.
-2. Initialize it with `openclaw-store starter init podcast-production-pipeline <dir>`.
+1. Inspect the starter with `malaclaw starter show podcast-production-pipeline`.
+2. Initialize it with `malaclaw starter init podcast-production-pipeline <dir>`.
 3. Review STARTER.md and this demo card.
 4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
-5. Run `openclaw-store install` and execute through the project entry-point agent.
+5. Run `malaclaw install` and execute through the project entry-point agent.
 
 ## Skills Setup
 
-### Required (install before `openclaw-store install`)
+### Required (install before `malaclaw install`)
 
 | Skill | Install | Env var | Get key |
 |---|---|---|---|

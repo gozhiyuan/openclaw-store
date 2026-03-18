@@ -2,15 +2,15 @@
 
 **Date:** 2026-03-14
 **Status:** Approved
-**Scope:** openclaw-store — new agent teams, skill templates, demo re-mapping, manager skill install flow
+**Scope:** malaclaw — new agent teams, skill templates, demo re-mapping, manager skill install flow
 
 ---
 
 ## Problem Statement
 
-The current `openclaw-store` has 4 agent teams and 3 skill templates. Of the 37 demo projects, 21 are assigned to `autonomous-startup` (a single generic CEO agent) because no purpose-built team exists for their category. Skills are not wired to demos or agents — most demos have `installable_skills: []` despite requiring real integrations (email, calendar, Slack, Twilio, etc.).
+The current `malaclaw` has 4 agent teams and 3 skill templates. Of the 37 demo projects, 21 are assigned to `autonomous-startup` (a single generic CEO agent) because no purpose-built team exists for their category. Skills are not wired to demos or agents — most demos have `installable_skills: []` despite requiring real integrations (email, calendar, Slack, Twilio, etc.).
 
-The target workflow is: user installs `openclaw-store-manager` into OpenClaw, chats to spin up a demo project, and ends up with the right agent team, each agent having its specific skills installed and configured — no manual YAML editing required.
+The target workflow is: user installs `malaclaw-manager` into OpenClaw, chats to spin up a demo project, and ends up with the right agent team, each agent having its specific skills installed and configured — no manual YAML editing required.
 
 ---
 
@@ -19,9 +19,9 @@ The target workflow is: user installs `openclaw-store-manager` into OpenClaw, ch
 1. **Team = coordination structure.** Teams define roles, delegation graph, and shared memory ownership. They do not own skills.
 2. **Agent = unit of capability.** Each agent YAML declares its own `skills: []` list. Skills are installed per agent, not per team.
 3. **`sessions_spawn` belongs in the agent YAML.** `capabilities.coordination.sessions_spawn: true` is set on lead agents only. It is NOT a field on `TeamMember` in the team YAML. The tables below note which agents require it as a reminder for the agent YAML author.
-4. **Manifest `targets` = project overrides.** The project `openclaw-store.yaml` can add skills to specific agents on top of what the agent YAML declares. Used for optional or project-specific skills.
-5. **`openclaw-store install` = reconciliation point.** Changing the manifest or agent YAMLs has no effect until install is re-run.
-6. **OpenClaw is the runtime.** OpenClaw installs skills (via ClawHub or its own skill manager). `openclaw-store` declares which skills each agent needs and wires them in during install.
+4. **Manifest `targets` = project overrides.** The project `malaclaw.yaml` can add skills to specific agents on top of what the agent YAML declares. Used for optional or project-specific skills.
+5. **`malaclaw install` = reconciliation point.** Changing the manifest or agent YAMLs has no effect until install is re-run.
+6. **OpenClaw is the runtime.** OpenClaw installs skills (via ClawHub or its own skill manager). `malaclaw` declares which skills each agent needs and wires them in during install.
 
 ---
 
@@ -70,7 +70,7 @@ graph:
 **Shared memory:**
 ```yaml
 shared_memory:
-  dir: "~/.openclaw-store/workspaces/store/<project-id>/personal-assistant/shared/memory/"
+  dir: "~/.malaclaw/workspaces/store/<project-id>/personal-assistant/shared/memory/"
   files:
     - path: daily-brief.md
       access: single-writer
@@ -121,7 +121,7 @@ graph:
 **Shared memory:**
 ```yaml
 shared_memory:
-  dir: "~/.openclaw-store/workspaces/store/<project-id>/automation-ops/shared/memory/"
+  dir: "~/.malaclaw/workspaces/store/<project-id>/automation-ops/shared/memory/"
   files:
     - path: workflow-state.md
       access: single-writer
@@ -175,7 +175,7 @@ graph:
 **Shared memory:**
 ```yaml
 shared_memory:
-  dir: "~/.openclaw-store/workspaces/store/<project-id>/customer-service/shared/memory/"
+  dir: "~/.malaclaw/workspaces/store/<project-id>/customer-service/shared/memory/"
   files:
     - path: ticket-queue.md
       access: single-writer
@@ -229,7 +229,7 @@ graph:
 **Shared memory:**
 ```yaml
 shared_memory:
-  dir: "~/.openclaw-store/workspaces/store/<project-id>/finance-ops/shared/memory/"
+  dir: "~/.malaclaw/workspaces/store/<project-id>/finance-ops/shared/memory/"
   files:
     - path: portfolio-state.md
       access: single-writer
@@ -280,7 +280,7 @@ graph:
 **Shared memory:**
 ```yaml
 shared_memory:
-  dir: "~/.openclaw-store/workspaces/store/<project-id>/data-ops/shared/memory/"
+  dir: "~/.malaclaw/workspaces/store/<project-id>/data-ops/shared/memory/"
   files:
     - path: pipeline-state.md
       access: single-writer
@@ -382,20 +382,20 @@ All new skill templates live in `templates/skills/`. All use `source.type: clawh
 
 ## Section 3: Demo → Team + Skills Mapping
 
-All 37 demos. Required skills block `openclaw-store install`; optional skills install as inactive.
+All 37 demos. Required skills block `malaclaw install`; optional skills install as inactive.
 
 For `family-calendar-household-assistant`: the manager skill must ask the user during setup whether they use Google Calendar or Apple Calendar, then target the appropriate skill. Both are listed as required but only one will be selected per install.
 
 | Demo | Team | Required skills | Optional skills |
 |---|---|---|---|
-| `aionui-cowork-desktop` | autonomous-startup | `openclaw-store-manager` | — |
+| `aionui-cowork-desktop` | autonomous-startup | `malaclaw-manager` | — |
 | `autonomous-game-dev-pipeline` | dev-company | `gh` | `agentic-devops` |
 | `autonomous-project-management` | dev-company | `gh` | `brainz-tasks` |
 | `content-factory` | content-factory | `fal-ai` | `social-intelligence`, `x-research-but-cheaper` |
 | `custom-morning-brief` | research-lab | `aluvia-brave-search` | `social-intelligence`, `rss-skill`, `publora-telegram` |
 | `daily-reddit-digest` | content-factory | `social-intelligence` | `rss-skill` |
 | `daily-youtube-digest` | content-factory | `youtube-pro` | `rss-skill` |
-| `default-managed` | autonomous-startup | `openclaw-store-manager` | — |
+| `default-managed` | autonomous-startup | `malaclaw-manager` | — |
 | `dynamic-dashboard` | data-ops | `duckdb-en` | `nocodb`, `gh` |
 | `earnings-tracker` | finance-ops | `aluvia-brave-search` | `social-intelligence`, `publora-telegram` |
 | `event-guest-confirmation` | automation-ops | `clawemail` | `google-calendar`, `publora-telegram` |
@@ -406,7 +406,7 @@ For `family-calendar-household-assistant`: the manager skill must ask the user d
 | `knowledge-base-rag` | data-ops | `duckdb-en`, `nocodb` | `aluvia-brave-search` |
 | `market-research-product-factory` | research-lab | `aluvia-brave-search` | `social-intelligence` |
 | `meeting-notes-action-items` | personal-assistant | `faster-whisper` | `google-calendar`, `clawemail` |
-| `multi-agent-team` | autonomous-startup | `openclaw-store-manager` | — |
+| `multi-agent-team` | autonomous-startup | `malaclaw-manager` | — |
 | `multi-channel-assistant` | automation-ops | `clawemail`, `connect-apps` | `publora-telegram`, `microsoft365` |
 | `multi-channel-customer-service` | customer-service | `clawemail`, `connect-apps` | `publora-telegram`, `microsoft365` |
 | `multi-source-tech-news-digest` | research-lab | `rss-skill`, `aluvia-brave-search` | `arxiv-watcher` |
@@ -428,24 +428,24 @@ For `family-calendar-household-assistant`: the manager skill must ask the user d
 
 ---
 
-## Section 4: Interactive Install Flow in `openclaw-store-manager`
+## Section 4: Interactive Install Flow in `malaclaw-manager`
 
 ### Conversational flow
 
 When a user asks to spin up a project or demo, the manager skill follows this sequence:
 
 ```
-1. openclaw-store starter suggest "<user idea>"
+1. malaclaw starter suggest "<user idea>"
    → present closest match: name, team, agents, required/optional skills
 
 2. User confirms starter + target directory
    (If family-calendar demo: ask "Do you use Google Calendar or Apple Calendar?"
     then target the user's answer as the required skill)
 
-3. openclaw-store starter init <starter-id> <dir>
-   → generates openclaw-store.yaml, STARTER.md, DEMO_PROJECT.md
+3. malaclaw starter init <starter-id> <dir>
+   → generates malaclaw.yaml, STARTER.md, DEMO_PROJECT.md
 
-4. openclaw-store skill sync
+4. malaclaw skill sync
    → detects what is already installed in OpenClaw
    → compares against each agent's declared skills
    If skill sync fails (OpenClaw offline / unreachable):
@@ -461,15 +461,15 @@ When a user asks to spin up a project or demo, the manager skill follows this se
    - Provide: where to get the API key (from demo card setup_guidance)
    - Wait for user confirmation
 
-6. Re-run openclaw-store skill sync
+6. Re-run malaclaw skill sync
    → confirm all required skills are now present
    → repeat step 5 if any remain
 
-7. cd <dir> && openclaw-store install
+7. cd <dir> && malaclaw install
    → provisions all agents, wires skills per agent
    → seeds shared memory files
 
-8. openclaw-store doctor
+8. malaclaw doctor
    → verify all agents, workspaces, and required skills are healthy
 
 9. Tell user:
@@ -479,7 +479,7 @@ When a user asks to spin up a project or demo, the manager skill follows this se
 
 ### Required vs optional skill handling
 
-- **Required skills** (`project_skills` in starter YAML): manager blocks `openclaw-store install` until all are confirmed installed and active
+- **Required skills** (`project_skills` in starter YAML): manager blocks `malaclaw install` until all are confirmed installed and active
 - **Optional skills** (`installable_skills` in starter YAML): install proceeds, skills marked inactive, manager mentions them as "available when ready" — never blocking
 
 ### Demo card Skills Setup section (new addition to all 37 cards)
@@ -487,7 +487,7 @@ When a user asks to spin up a project or demo, the manager skill follows this se
 ```markdown
 ## Skills Setup
 
-### Required (needed before openclaw-store install)
+### Required (needed before malaclaw install)
 | Skill | Agent(s) | Install | Env var | Get key |
 |---|---|---|---|---|
 | aluvia-brave-search | researcher, writer | `clawhub install aluvia-brave-search` | `BRAVE_API_KEY` | brave.com/search/api |
@@ -502,7 +502,7 @@ When a user asks to spin up a project or demo, the manager skill follows this se
 
 ```yaml
 project_skills:          # required — placed in manifest, block install if missing
-  - openclaw-store-manager
+  - malaclaw-manager
   - rss-skill
 
 installable_skills:      # optional — listed in demo card, non-blocking
@@ -568,9 +568,9 @@ finance-ops.yaml          data-ops.yaml
 
 **`demo-projects/index.yaml`** — update `entry_team`, `packs`, `project_skills`, `installable_skills` per new mapping
 
-**`skills/openclaw-store-manager/SKILL.md`** — add Project Initialization Flow, Skill Gap Detection loop (including offline fallback), Entry-point handoff, Calendar selection branching
+**`skills/malaclaw-manager/SKILL.md`** — add Project Initialization Flow, Skill Gap Detection loop (including offline fallback), Entry-point handoff, Calendar selection branching
 
-**`skills/openclaw-store-manager/references/commands.md`** — update to reference new teams and packs
+**`skills/malaclaw-manager/references/commands.md`** — update to reference new teams and packs
 
 ---
 
@@ -578,8 +578,8 @@ finance-ops.yaml          data-ops.yaml
 
 1. All 37 demo projects are assigned a purpose-built team (not `autonomous-startup` unless genuinely appropriate)
 2. Every agent in every team has a `skills: []` list appropriate to its role
-3. All 25 new skill templates validate against `SkillEntry` Zod schema (`openclaw-store validate` passes)
-4. A user can chat with `openclaw-store-manager` in OpenClaw, spin up any demo, and have the right agents + skills installed without touching a terminal
-5. `openclaw-store doctor` passes for any freshly installed demo project with required skills present
+3. All 25 new skill templates validate against `SkillEntry` Zod schema (`malaclaw validate` passes)
+4. A user can chat with `malaclaw-manager` in OpenClaw, spin up any demo, and have the right agents + skills installed without touching a terminal
+5. `malaclaw doctor` passes for any freshly installed demo project with required skills present
 6. Required skills block install; optional skills never block install
-7. `openclaw-store validate` passes for all 20 new agent templates, 5 team templates, 5 pack definitions, and 25 skill templates
+7. `malaclaw validate` passes for all 20 new agent templates, 5 team templates, 5 pack definitions, and 25 skill templates

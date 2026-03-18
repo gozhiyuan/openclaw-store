@@ -1,8 +1,8 @@
-# openclaw-store Dashboard — Design Spec
+# malaclaw Dashboard — Design Spec
 
 ## Overview
 
-A web-based dashboard for managing openclaw-store projects, agent teams, skills, and configuration. It serves as a visual layer on top of the existing CLI, directly importing the store's TypeScript library modules with no separate database.
+A web-based dashboard for managing malaclaw projects, agent teams, skills, and configuration. It serves as a visual layer on top of the existing CLI, directly importing the store's TypeScript library modules with no separate database.
 
 **Audience:** Solo developer (v1), designed to grow into multi-user team monitoring.
 
@@ -66,7 +66,7 @@ Browser (React SPA)
                          │
               ┌──────────┴──────────┐
               │ YAML / Lock files   │
-              │ ~/.openclaw-store/  │
+              │ ~/.malaclaw/  │
               │   runtime.json      │
               │   workspaces/       │
               │   skills-index.json │
@@ -82,7 +82,7 @@ Browser (React SPA)
 
 **Write operations:**
 1. Frontend sends `PUT /api/manifest` with updated manifest
-2. Server validates against Zod schema, writes `openclaw-store.yaml`
+2. Server validates against Zod schema, writes `malaclaw.yaml`
 3. Frontend sends `POST /api/install` to trigger install pipeline
 4. Server calls existing install logic from `src/lib/`
 5. File watcher detects lockfile change → WS event → all panels refresh
@@ -199,7 +199,7 @@ dashboard/
 
 | Method | Endpoint | Source | Returns |
 |--------|----------|--------|---------|
-| GET | `/api/manifest` | `loader.loadManifest()` | Parsed `openclaw-store.yaml` |
+| GET | `/api/manifest` | `loader.loadManifest()` | Parsed `malaclaw.yaml` |
 | PUT | `/api/manifest` | Validate + write YAML | Updated manifest |
 | GET | `/api/diff` | `diff.computeDiff()` (extracted to `src/lib/diff.ts`) | `DiffEntry[]` — pending changes |
 | POST | `/api/install` | `runHeadlessInstall()` (extracted to `src/lib/install-headless.ts`) | Install result. Streams progress via WS. |
@@ -211,8 +211,8 @@ Events pushed to all connected clients when files change on disk:
 | Event | Trigger | Payload |
 |-------|---------|---------|
 | `projects:changed` | `runtime.json` modified | `{}` |
-| `manifest:changed` | `openclaw-store.yaml` modified | `{ projectDir }` |
-| `lockfile:changed` | `openclaw-store.lock` modified | `{ projectDir }` |
+| `manifest:changed` | `malaclaw.yaml` modified | `{ projectDir }` |
+| `lockfile:changed` | `malaclaw.lock` modified | `{ projectDir }` |
 | `skills:changed` | `skills-index.json` modified | `{}` |
 | `memory:changed` | Any shared memory `.md` modified | `{ projectId, teamId, file }` |
 | `install:progress` | Install pipeline emits progress | `{ phase, message, current?, total? }` |
@@ -257,7 +257,7 @@ Full project list. Expand a project to see teams, agents, delegation graph, kanb
 ### Empty State
 
 When no projects are installed (`runtime.json` is empty or absent), the Overview tab shows a welcome screen with:
-- Brief explanation of openclaw-store
+- Brief explanation of malaclaw
 - Prominent link to the Starters tab to bootstrap a first project
 - Quick health check (is OpenClaw installed? Is `openclaw.json` accessible?)
 
@@ -306,11 +306,11 @@ Server uses chokidar to monitor:
 
 | Path | Events | WS Event |
 |------|--------|----------|
-| `~/.openclaw-store/runtime.json` | change | `projects:changed` |
-| Known project dirs from `runtime.json` → `openclaw-store.yaml` | change | `manifest:changed` |
-| Known project dirs from `runtime.json` → `openclaw-store.lock` | change | `lockfile:changed` |
-| `~/.openclaw-store/skills-index.json` | change | `skills:changed` |
-| `~/.openclaw-store/workspaces/**/shared/memory/*.md` | change | `memory:changed` |
+| `~/.malaclaw/runtime.json` | change | `projects:changed` |
+| Known project dirs from `runtime.json` → `malaclaw.yaml` | change | `manifest:changed` |
+| Known project dirs from `runtime.json` → `malaclaw.lock` | change | `lockfile:changed` |
+| `~/.malaclaw/skills-index.json` | change | `skills:changed` |
+| `~/.malaclaw/workspaces/**/shared/memory/*.md` | change | `memory:changed` |
 
 Debounced at 500ms to avoid duplicate events from rapid writes. Watch paths are scoped to known project directories from `runtime.json` — not recursive globs — to avoid matching unrelated files in `node_modules` or nested directories. The watcher re-reads `runtime.json` on change to discover newly installed projects.
 
@@ -319,10 +319,10 @@ Debounced at 500ms to avoid duplicate events from rapid writes. Watch paths are 
 Dashboard starts via CLI command:
 
 ```bash
-openclaw-store dashboard              # Start on default port (3456)
-openclaw-store dashboard --port 8080  # Custom port
-openclaw-store dashboard --host 0.0.0.0  # LAN access (default)
-openclaw-store dashboard --host 127.0.0.1  # Local only
+malaclaw dashboard              # Start on default port (3456)
+malaclaw dashboard --port 8080  # Custom port
+malaclaw dashboard --host 0.0.0.0  # LAN access (default)
+malaclaw dashboard --host 127.0.0.1  # Local only
 ```
 
 In development:
@@ -342,7 +342,7 @@ Server binds to `0.0.0.0` by default. Any device on the same WiFi can access via
 
 ### Near-term: Auth Gate
 
-Token-based authentication middleware. Config in `openclaw-store.yaml` or env var:
+Token-based authentication middleware. Config in `malaclaw.yaml` or env var:
 
 ```yaml
 dashboard:
@@ -450,11 +450,11 @@ On `SIGTERM`/`SIGINT`:
 3. Drain in-flight HTTP requests (Fastify's built-in graceful close)
 4. Exit cleanly
 
-This matters when launched from the CLI (`openclaw-store dashboard`) and terminated with Ctrl+C.
+This matters when launched from the CLI (`malaclaw dashboard`) and terminated with Ctrl+C.
 
 ## Important Constraints
 
-- **Manifest save does NOT auto-install.** The two-step flow (`PUT /api/manifest` then `POST /api/install`) is intentional. This matches the CLI behavior where "changing `openclaw-store.yaml` has no effect until `openclaw-store install` is re-run." The dashboard must not merge these steps.
+- **Manifest save does NOT auto-install.** The two-step flow (`PUT /api/manifest` then `POST /api/install`) is intentional. This matches the CLI behavior where "changing `malaclaw.yaml` has no effect until `malaclaw install` is re-run." The dashboard must not merge these steps.
 - **CORS is dev-only.** In production, Fastify serves the built SPA from `@fastify/static`. In dev mode, Vite runs on port 5173 and proxies `/api/*` to Fastify on port 3456. `@fastify/cors` is only registered when `NODE_ENV !== 'production'`.
 
 ## Testing Strategy

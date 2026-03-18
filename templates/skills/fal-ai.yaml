@@ -22,4 +22,4 @@ disabled_until_configured: true
 install_hints:
   - "Sign up at fal.ai and get your API key from the dashboard"
   - "Set: export FAL_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

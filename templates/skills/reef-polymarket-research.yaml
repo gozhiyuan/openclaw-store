@@ -23,4 +23,4 @@ install_hints:
   - "Create a Polymarket account at polymarket.com"
   - "Get your API key from Polymarket account settings"
   - "Set: export POLYMARKET_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

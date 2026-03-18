@@ -12,7 +12,7 @@ npm run build
 npm link
 ```
 
-This makes `openclaw-store` available on your machine.
+This makes `malaclaw` available on your machine.
 
 ## 2. Bootstrap OpenClaw or start a project
 
@@ -21,10 +21,10 @@ You can either bootstrap OpenClaw first, or immediately start a managed project.
 OpenClaw-first bootstrap:
 
 ```bash
-openclaw-store install
+malaclaw install
 ```
 
-If there is no `openclaw-store.yaml`, this installs the `openclaw-store-manager` skill into the main OpenClaw workspace and updates the main guidance files. It does not require a project folder yet.
+If there is no `malaclaw.yaml`, this installs the `malaclaw-manager` skill into the main OpenClaw workspace and updates the main guidance files. It does not require a project folder yet.
 
 The demo catalog lives in:
 
@@ -34,9 +34,9 @@ The demo catalog lives in:
 From a starter:
 
 ```bash
-openclaw-store starter list
-openclaw-store starter suggest "podcast workflow"
-openclaw-store starter init podcast-production-pipeline ./my-podcast-project
+malaclaw starter list
+malaclaw starter suggest "podcast workflow"
+malaclaw starter init podcast-production-pipeline ./my-podcast-project
 cd ./my-podcast-project
 ```
 
@@ -45,8 +45,8 @@ cd ./my-podcast-project
 For the lightest managed setup:
 
 ```bash
-openclaw-store starter show default-managed
-openclaw-store starter init default-managed ./my-project
+malaclaw starter show default-managed
+malaclaw starter init default-managed ./my-project
 ```
 
 For a new project:
@@ -54,32 +54,32 @@ For a new project:
 ```bash
 mkdir my-project
 cd my-project
-openclaw-store init
+malaclaw init
 ```
 
 For an existing project:
 
 ```bash
 cd my-project
-openclaw-store init
+malaclaw init
 ```
 
-The wizard creates `openclaw-store.yaml`, which declares which packs and skills the project wants.
+The wizard creates `malaclaw.yaml`, which declares which packs and skills the project wants.
 It also writes a `project` block so installs are namespaced by project ID.
 This is the scratch/manual managed path, not the only entry path.
 
 Important boundary:
 
-- `openclaw-store.yaml` is the project authoring format for `openclaw-store`
+- `malaclaw.yaml` is the project authoring format for `malaclaw`
 - OpenClaw itself runs from the rendered workspace files, not directly from this YAML
 - `install` is the compilation/reconciliation step that turns YAML into OpenClaw-ready workspaces
 
 ## 3. Preview and install
 
 ```bash
-openclaw-store install --dry-run
-openclaw-store install
-openclaw-store doctor
+malaclaw install --dry-run
+malaclaw install
+malaclaw doctor
 ```
 
 This installs the selected teams, seeds shared memory files, and patches `~/.openclaw/openclaw.json` unless you use `--no-openclaw`.
@@ -92,13 +92,13 @@ The installed agent workspaces contain the Markdown files OpenClaw actually read
 Use the CLI to inspect what is installed:
 
 ```bash
-openclaw-store starter list
-openclaw-store starter suggest "research product idea"
-openclaw-store project list
-openclaw-store list
-openclaw-store project show my-project
-openclaw-store team show dev-company
-openclaw-store agent show pm
+malaclaw starter list
+malaclaw starter suggest "research product idea"
+malaclaw project list
+malaclaw list
+malaclaw project show my-project
+malaclaw team show dev-company
+malaclaw agent show pm
 ```
 
 Each team has one `entry_point: true` agent. That agent is the normal front door for the team.
@@ -117,7 +117,7 @@ The 9 available packs and their entry points:
 | `finance-ops` | `finance-lead` | Market analysis, trading, risk management |
 | `data-ops` | `data-lead` | Data pipelines, analytics, storage |
 
-`openclaw-store agent list` now shows both:
+`malaclaw agent list` now shows both:
 
 - store-managed agents installed by this repo
 - available native OpenClaw agents discovered from `openclaw.json`
@@ -131,14 +131,14 @@ Examples:
 If you want to reuse an existing native OpenClaw agent in a managed project instead of provisioning a full new team, attach it explicitly:
 
 ```bash
-openclaw-store project attach-agent ops
-openclaw-store install
+malaclaw project attach-agent ops
+malaclaw install
 ```
 
 This keeps ownership simple:
 
 - OpenClaw owns the full runtime agent universe
-- `openclaw-store` owns store-managed teams and project-level attachment metadata
+- `malaclaw` owns store-managed teams and project-level attachment metadata
 - `install` reconciles attached-agent skill placement
 
 ## 5. Give work to the entry-point agent
@@ -165,7 +165,7 @@ They coordinate by:
 - reading and writing shared memory files
 - following the team graph and shared memory ownership rules
 
-This shared memory is an orchestration layer managed by `openclaw-store`. It does not replace OpenClaw's native memory tools for each agent workspace.
+This shared memory is an orchestration layer managed by `malaclaw`. It does not replace OpenClaw's native memory tools for each agent workspace.
 
 In practice:
 
@@ -175,15 +175,15 @@ In practice:
 
 ## 7. How skills work
 
-Skills are installed into agent workspaces during `openclaw-store install`.
+Skills are installed into agent workspaces during `malaclaw install`.
 
-Skill YAML in `templates/skills/*.yaml` is metadata for `openclaw-store` to understand source, env requirements, and install hints. OpenClaw ultimately sees the installed skill folders inside workspaces, not the YAML metadata itself.
+Skill YAML in `templates/skills/*.yaml` is metadata for `malaclaw` to understand source, env requirements, and install hints. OpenClaw ultimately sees the installed skill folders inside workspaces, not the YAML metadata itself.
 
 You do not open a skill directly in OpenClaw. Instead:
 
-1. Add the skill to `openclaw-store.yaml`
+1. Add the skill to `malaclaw.yaml`
 2. Ensure the target agent templates list that skill
-3. Run `openclaw-store install`
+3. Run `malaclaw install`
 4. Talk to the agent or team entry point that has the skill available
 
 ### Declare-and-detect model
@@ -195,7 +195,7 @@ Each demo card (`demo-projects/cards/<id>.md`) includes a `## Skills Setup` sect
 - `required_apis`: external APIs, SaaS integrations, or auth the user must configure
 - `required_capabilities`: runtime/tool prerequisites such as `sessions_spawn`, Git, SSH, or filesystem access
 
-When a user asks the `openclaw-store-manager` skill to start a demo project, it reads the card, detects what is missing, explains each missing item, and guides the user through setup before initializing the project. Required skills and APIs block initialization. Optional skills are noted but do not block.
+When a user asks the `malaclaw-manager` skill to start a demo project, it reads the card, detects what is missing, explains each missing item, and guides the user through setup before initializing the project. Required skills and APIs block initialization. Optional skills are noted but do not block.
 
 ### Manual skill setup
 
@@ -203,17 +203,17 @@ For external skills or APIs without the manager skill:
 
 1. Identify missing requirements from the demo card or skill template `install_hints`
 2. Install or configure the external tool or API key
-3. Optionally run `openclaw-store skill sync` to refresh local availability
-4. Re-run `openclaw-store install`
-5. Verify placement with `openclaw-store skill check`
+3. Optionally run `malaclaw skill sync` to refresh local availability
+4. Re-run `malaclaw install`
+5. Verify placement with `malaclaw skill check`
 
 If a required environment variable is missing, the skill is installed as inactive. Project skills are not automatically attached to every agent — they are placed only where the agent template or project targets declare them.
 
-You can target skills from `openclaw-store.yaml`:
+You can target skills from `malaclaw.yaml`:
 
 ```yaml
 skills:
-  - id: openclaw-store-manager
+  - id: malaclaw-manager
     targets:
       agents:
         - tech-lead
@@ -231,7 +231,7 @@ To create a custom team in this repo:
 2. Add a team definition under `templates/teams/`
 3. Add a pack definition under `packs/`
 4. Run `npm run build`
-5. Install it in a project with `openclaw-store install --pack <your-pack-id>`
+5. Install it in a project with `malaclaw install --pack <your-pack-id>`
 
 Minimum structure:
 
@@ -251,7 +251,7 @@ Your team should usually have:
 The runtime install path will be project-scoped even when the team template is reused:
 
 ```text
-~/.openclaw-store/workspaces/store/<project-id>/<team-id>/<agent-id>
+~/.malaclaw/workspaces/store/<project-id>/<team-id>/<agent-id>
 ```
 
 ## 9. Add your own skill
@@ -260,8 +260,8 @@ To create a custom skill in this repo:
 
 1. Add `templates/skills/my-skill.yaml` following the `SkillEntry` schema
 2. Reference it from the agent templates that should receive it (add to `skills:` list)
-3. Add it to the project's `openclaw-store.yaml`
-4. Run `openclaw-store install`
+3. Add it to the project's `malaclaw.yaml`
+4. Run `malaclaw install`
 
 Minimum skill YAML structure:
 
@@ -290,30 +290,30 @@ disabled_until_configured: true
 install_hints:
   - "Get your API key at https://example.com/api-keys"
   - "Set: export MY_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
-If the skill needs environment variables, declare them in `requires.env` and set them before install. The `disabled_until_configured: true` flag marks the skill inactive until all required env vars are present, and `openclaw-store doctor` will surface it.
+If the skill needs environment variables, declare them in `requires.env` and set them before install. The `disabled_until_configured: true` flag marks the skill inactive until all required env vars are present, and `malaclaw doctor` will surface it.
 
 ## 10. Add more projects in the future
 
-Each real project should have its own root directory and its own `openclaw-store.yaml`.
+Each real project should have its own root directory and its own `malaclaw.yaml`.
 
 To add another project:
 
 1. Create or open the project directory
-2. Either run `openclaw-store starter init <id> <dir>` or `openclaw-store init`
+2. Either run `malaclaw starter init <id> <dir>` or `malaclaw init`
 3. Select the team packs for that project
 4. Add any required skills to that project's manifest
-5. Run `openclaw-store install`
+5. Run `malaclaw install`
 
-Use `openclaw-store project list` to see all installed projects across your machine.
+Use `malaclaw project list` to see all installed projects across your machine.
 
 If the project starts from a known pattern, prefer a starter:
 
 ```bash
-openclaw-store starter suggest "family assistant"
-openclaw-store starter init family-calendar-household-assistant ./family-hub
+malaclaw starter suggest "family assistant"
+malaclaw starter init family-calendar-household-assistant ./family-hub
 ```
 
 ## 11. Configure which teams and skills a project should run
@@ -341,7 +341,7 @@ skills:
     targets:
       teams:
         - research-lab
-  - id: openclaw-store-manager
+  - id: malaclaw-manager
     targets:
       agents:
         - tech-lead
@@ -355,26 +355,26 @@ That means:
 - it also attaches the existing native OpenClaw agent `ops` to the project
 - agents that declare `github` or `last30days` receive those skills during install
 
-If a skill targets `ops` by ID, `openclaw-store install` places that skill into the native agent's workspace and updates its explicit allowlist if needed.
+If a skill targets `ops` by ID, `malaclaw install` places that skill into the native agent's workspace and updates its explicit allowlist if needed.
 
 The same applies to native OpenClaw skills:
 
 1. install/configure the skill in OpenClaw
-2. run `openclaw-store skill sync`
-3. reference the skill ID in `openclaw-store.yaml`
-4. run `openclaw-store install`
+2. run `malaclaw skill sync`
+3. reference the skill ID in `malaclaw.yaml`
+4. run `malaclaw install`
 
 ## 12. Turn a new idea into a managed project
 
-The intended flow for `openclaw-store-manager` is:
+The intended flow for `malaclaw-manager` is:
 
-1. Search for a similar starter with `openclaw-store starter suggest "<idea>"`
-2. Inspect the closest match with `openclaw-store starter show <id>`
+1. Search for a similar starter with `malaclaw starter suggest "<idea>"`
+2. Inspect the closest match with `malaclaw starter show <id>`
 3. Read `demo-projects/cards/<id>.md` when you need setup and execution guidance
 4. Decide whether the default workflow is enough or whether to initialize the managed starter
-5. Initialize it with `openclaw-store starter init <id> <dir>`
-6. Edit the generated `openclaw-store.yaml`
-7. Run `openclaw-store install`
+5. Initialize it with `malaclaw starter init <id> <dir>`
+6. Edit the generated `malaclaw.yaml`
+7. Run `malaclaw install`
 
 If no starter is a clean fit, use `default-managed` or the closest starter as scaffolding and modify the generated packs, skills, and targets.
 
@@ -383,7 +383,7 @@ If no starter is a clean fit, use `default-managed` or the closest starter as sc
 For a visual overview of projects, agents, skills, and health:
 
 ```bash
-openclaw-store dashboard
+malaclaw dashboard
 ```
 
 Opens http://localhost:3456 with four tabs: Overview, Projects, Starters, and Config.
@@ -401,22 +401,22 @@ npm run build
 npm link
 
 # optional: begin from a demo starter
-openclaw-store starter suggest "podcast workflow"
-openclaw-store starter init podcast-production-pipeline ./my-project
+malaclaw starter suggest "podcast workflow"
+malaclaw starter init podcast-production-pipeline ./my-project
 
 # per project
 cd my-project
-openclaw-store install
-openclaw-store doctor
+malaclaw install
+malaclaw doctor
 
 # visual management
-openclaw-store dashboard
+malaclaw dashboard
 
 # inspect installed projects and available teams
-openclaw-store project list
-openclaw-store project show <project-id>
-openclaw-store list
-openclaw-store team show <team-id>
+malaclaw project list
+malaclaw project show <project-id>
+malaclaw list
+malaclaw team show <team-id>
 
 # then in OpenClaw
 # open the project's entry-point agent and give it the task

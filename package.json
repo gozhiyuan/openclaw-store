@@ -1,5 +1,5 @@
 {
-  "name": "openclaw-store",
+  "name": "malaclaw",
   "version": "1.0.0",
   "description": "Starter packs, agent templates, and CLI installer for OpenClaw",
   "type": "module",
@@ -8,7 +8,7 @@
     "node": ">=22"
   },
   "bin": {
-    "openclaw-store": "dist/cli.js"
+    "malaclaw": "dist/cli.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json && chmod +x dist/cli.js",

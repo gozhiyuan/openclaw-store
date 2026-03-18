@@ -7,7 +7,7 @@ import { runInstall } from "../src/commands/install.js";
 import { loadLockfile } from "../src/lib/loader.js";
 
 const envKeys = [
-  "OPENCLAW_STORE_DIR",
+  "MALACLAW_DIR",
   "OPENCLAW_STATE_DIR",
   "HOME",
   "USERPROFILE",
@@ -45,7 +45,7 @@ describe("runInstall", () => {
     await fs.mkdir(stateDir, { recursive: true });
     await fs.mkdir(homeDir, { recursive: true });
     await fs.writeFile(
-      path.join(projectDir, "openclaw-store.yaml"),
+      path.join(projectDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [{ id: "dev-company" }], skills: [] }),
     );
     await fs.writeFile(
@@ -56,7 +56,7 @@ describe("runInstall", () => {
     for (const key of envKeys) {
       originalEnv.set(key, process.env[key]);
     }
-    process.env.OPENCLAW_STORE_DIR = storeDir;
+    process.env.MALACLAW_DIR = storeDir;
     process.env.OPENCLAW_STATE_DIR = stateDir;
     process.env.HOME = homeDir;
     process.env.USERPROFILE = homeDir;
@@ -87,13 +87,13 @@ describe("runInstall", () => {
     await fs.mkdir(stateDir, { recursive: true });
     await fs.mkdir(homeDir, { recursive: true });
     await fs.writeFile(
-      path.join(projectDir, "openclaw-store.yaml"),
+      path.join(projectDir, "malaclaw.yaml"),
       stringify({
         version: 1,
         project: { id: "project", name: "Project" },
         packs: [{ id: "dev-company" }],
         skills: [{
-          id: "openclaw-store-manager",
+          id: "malaclaw-manager",
           targets: { agents: ["pm"] },
         }],
       }),
@@ -106,7 +106,7 @@ describe("runInstall", () => {
     for (const key of envKeys) {
       originalEnv.set(key, process.env[key]);
     }
-    process.env.OPENCLAW_STORE_DIR = storeDir;
+    process.env.MALACLAW_DIR = storeDir;
     process.env.OPENCLAW_STATE_DIR = stateDir;
     process.env.HOME = homeDir;
     process.env.USERPROFILE = homeDir;
@@ -114,10 +114,10 @@ describe("runInstall", () => {
     await runInstall({ projectDir });
 
     await expect(
-      fs.access(path.join(storeDir, "workspaces", "store", "project", "dev-company", "pm", "skills", "openclaw-store-manager")),
+      fs.access(path.join(storeDir, "workspaces", "store", "project", "dev-company", "pm", "skills", "malaclaw-manager")),
     ).resolves.not.toThrow();
     await expect(
-      fs.access(path.join(storeDir, "workspaces", "store", "project", "dev-company", "backend-dev", "skills", "openclaw-store-manager")),
+      fs.access(path.join(storeDir, "workspaces", "store", "project", "dev-company", "backend-dev", "skills", "malaclaw-manager")),
     ).rejects.toThrow();
   });
 
@@ -134,7 +134,7 @@ describe("runInstall", () => {
     await fs.mkdir(homeDir, { recursive: true });
     await fs.mkdir(nativeWorkspace, { recursive: true });
     await fs.writeFile(
-      path.join(projectDir, "openclaw-store.yaml"),
+      path.join(projectDir, "malaclaw.yaml"),
       stringify({
         version: 1,
         project: {
@@ -144,7 +144,7 @@ describe("runInstall", () => {
         },
         packs: [],
         skills: [{
-          id: "openclaw-store-manager",
+          id: "malaclaw-manager",
           targets: { agents: ["ops"] },
         }],
       }),
@@ -167,7 +167,7 @@ describe("runInstall", () => {
     for (const key of envKeys) {
       originalEnv.set(key, process.env[key]);
     }
-    process.env.OPENCLAW_STORE_DIR = storeDir;
+    process.env.MALACLAW_DIR = storeDir;
     process.env.OPENCLAW_STATE_DIR = stateDir;
     process.env.HOME = homeDir;
     process.env.USERPROFILE = homeDir;
@@ -175,11 +175,11 @@ describe("runInstall", () => {
     await runInstall({ projectDir });
 
     await expect(
-      fs.access(path.join(nativeWorkspace, "skills", "openclaw-store-manager")),
+      fs.access(path.join(nativeWorkspace, "skills", "malaclaw-manager")),
     ).resolves.not.toThrow();
 
     const openclawConfig = JSON.parse(await fs.readFile(path.join(stateDir, "openclaw.json"), "utf-8"));
-    expect(openclawConfig.agents.list[0].skills).toContain("openclaw-store-manager");
+    expect(openclawConfig.agents.list[0].skills).toContain("malaclaw-manager");
 
     const runtime = JSON.parse(await fs.readFile(path.join(storeDir, "runtime.json"), "utf-8"));
     expect(runtime.projects[0].attached_agents[0].id).toBe("ops");
@@ -202,7 +202,7 @@ describe("runInstall", () => {
     await fs.mkdir(nativeSkillDir, { recursive: true });
     await fs.writeFile(path.join(nativeSkillDir, "SKILL.md"), "# Native Skill\n");
     await fs.writeFile(
-      path.join(projectDir, "openclaw-store.yaml"),
+      path.join(projectDir, "malaclaw.yaml"),
       stringify({
         version: 1,
         project: {
@@ -233,7 +233,7 @@ describe("runInstall", () => {
     for (const key of envKeys) {
       originalEnv.set(key, process.env[key]);
     }
-    process.env.OPENCLAW_STORE_DIR = storeDir;
+    process.env.MALACLAW_DIR = storeDir;
     process.env.OPENCLAW_STATE_DIR = stateDir;
     process.env.HOME = homeDir;
     process.env.USERPROFILE = homeDir;

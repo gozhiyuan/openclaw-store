@@ -1,6 +1,6 @@
-# openclaw-store
+# malaclaw
 
-`openclaw-store` is a project layer on top of OpenClaw.
+`malaclaw` is a project layer on top of OpenClaw.
 
 It gives OpenClaw a catalog of demo projects, starter manifests, reusable agent teams, and skill-targeting rules so a user can go from:
 
@@ -24,16 +24,16 @@ If you are already using OpenClaw, you should be able to hand it the manager ski
 Send OpenClaw something like:
 
 ```text
-Please follow this SKILL.md to install openclaw-store-manager for me and bootstrap openclaw-store:
+Please follow this SKILL.md to install malaclaw-manager for me and bootstrap malaclaw:
 
-- local file: skills/openclaw-store-manager/SKILL.md
-- or repo URL: https://github.com/gozhiyuan/openclaw-store/blob/main/skills/openclaw-store-manager/SKILL.md
+- local file: skills/malaclaw-manager/SKILL.md
+- or repo URL: https://github.com/gozhiyuan/MalaClaw/blob/main/skills/malaclaw-manager/SKILL.md
 ```
 
 The intended behavior is:
 
 - OpenClaw reads the manager skill instructions
-- installs or copies `openclaw-store-manager` into its workspace
+- installs or copies `malaclaw-manager` into its workspace
 - uses that skill to inspect demos, starters, packs, and skill requirements
 - guides the user through any missing API auth or install steps
 - promotes the repo into a managed project only when needed
@@ -43,12 +43,12 @@ The intended behavior is:
 If the CLI is already available on your machine, run:
 
 ```bash
-openclaw-store install
+malaclaw install
 ```
 
-If there is no `openclaw-store.yaml` in the current directory, `openclaw-store` does a zero-config bootstrap instead of failing:
+If there is no `malaclaw.yaml` in the current directory, `malaclaw` does a zero-config bootstrap instead of failing:
 
-- it installs the bundled `openclaw-store-manager` skill into your main OpenClaw workspace
+- it installs the bundled `malaclaw-manager` skill into your main OpenClaw workspace
 - it updates the main OpenClaw guidance files
 - it leaves your repo in default OpenClaw mode until you choose to promote it
 
@@ -66,9 +66,9 @@ Add a GitHub skill to this project.
 Should this stay single-agent or become a team?
 ```
 
-## What `openclaw-store` Does Through OpenClaw
+## What `malaclaw` Does Through OpenClaw
 
-Once `openclaw-store-manager` is installed, OpenClaw can guide these flows.
+Once `malaclaw-manager` is installed, OpenClaw can guide these flows.
 
 ### 1. Demo Project Flow
 
@@ -77,7 +77,7 @@ This is the catalog-driven path.
 Typical sequence:
 
 1. The user describes an idea.
-2. `openclaw-store-manager` runs `starter suggest` and inspects the closest starter.
+2. `malaclaw-manager` runs `starter suggest` and inspects the closest starter.
 3. It reads the demo card metadata:
    - `entry_team`
    - `project_skills`
@@ -85,9 +85,9 @@ Typical sequence:
    - `required_apis`
    - `required_capabilities`
 4. It asks the user for any missing auth or API setup.
-5. It initializes the starter with `openclaw-store starter init`.
-6. It customizes the generated `openclaw-store.yaml` if needed.
-7. It runs `openclaw-store skill sync`, `openclaw-store install`, and `openclaw-store doctor`.
+5. It initializes the starter with `malaclaw starter init`.
+6. It customizes the generated `malaclaw.yaml` if needed.
+7. It runs `malaclaw skill sync`, `malaclaw install`, and `malaclaw doctor`.
 8. It tells the user which project entry-point agent to open in OpenClaw.
 
 In practice, that means OpenClaw can help the user:
@@ -107,7 +107,7 @@ The intended promotion flow is:
 1. OpenClaw inspects whether the repo is:
    - default OpenClaw workflow
    - default Claude Code workflow
-   - already `openclaw-store` managed
+   - already `malaclaw` managed
 2. It looks at what the user is already doing:
    - recurring prompts
    - installed skills
@@ -117,7 +117,7 @@ The intended promotion flow is:
    - stay in default workflow
    - promote to `default-managed`
    - promote to a fuller starter or custom managed project
-4. It generates or edits `openclaw-store.yaml`.
+4. It generates or edits `malaclaw.yaml`.
 5. It targets the needed skills to the right agents or teams.
 6. It installs and verifies the project.
 
@@ -125,7 +125,7 @@ This is how a user can start with ad hoc OpenClaw skills and later turn them int
 
 ### 3. Customize Managed Project Flow
 
-After a project exists, OpenClaw can use `openclaw-store-manager` to:
+After a project exists, OpenClaw can use `malaclaw-manager` to:
 
 - add or retarget skills
 - swap packs or change the entry team
@@ -133,12 +133,12 @@ After a project exists, OpenClaw can use `openclaw-store-manager` to:
 - install newly discovered OpenClaw skills into managed agent workspaces
 - re-run `diff`, `install`, `doctor`, and `skill check`
 
-## How Skills Work Across OpenClaw And `openclaw-store`
+## How Skills Work Across OpenClaw And `malaclaw`
 
 This is the key mental model:
 
 - OpenClaw is the runtime.
-- `openclaw-store` is the project and installation layer.
+- `malaclaw` is the project and installation layer.
 
 That means skills often exist in two places for two different reasons:
 
@@ -147,30 +147,30 @@ That means skills often exist in two places for two different reasons:
    - this is how the skill becomes available to OpenClaw itself
 
 2. **Project-targeted skill materialization**
-   - `openclaw-store skill sync` discovers available OpenClaw skills
-   - `openclaw-store install` then symlinks or copies those skills into the managed agent workspaces that need them
+   - `malaclaw skill sync` discovers available OpenClaw skills
+   - `malaclaw install` then symlinks or copies those skills into the managed agent workspaces that need them
    - it also updates OpenClaw agent allowlists when an agent has an explicit `skills[]` filter
 
-So yes: a user can install their own skills directly in OpenClaw without going through `openclaw-store`, and later `openclaw-store` can discover those skills and attach them to a managed project.
+So yes: a user can install their own skills directly in OpenClaw without going through `malaclaw`, and later `malaclaw` can discover those skills and attach them to a managed project.
 
-The bundled `openclaw-store-manager` skill works the same way conceptually:
+The bundled `malaclaw-manager` skill works the same way conceptually:
 
 - zero-config bootstrap installs it into the main OpenClaw workspace
 - starter or manifest targeting can also place it into managed project workspaces when desired
 
 ## Authoring Layer vs Runtime Layer
 
-`openclaw-store` uses YAML as its authoring and orchestration format.
+`malaclaw` uses YAML as its authoring and orchestration format.
 
 OpenClaw does not need to read the team or agent YAML files directly. Instead:
 
-1. `openclaw-store` reads the YAML definitions for agents, teams, packs, starters, and skills
+1. `malaclaw` reads the YAML definitions for agents, teams, packs, starters, and skills
 2. it renders the runtime Markdown files OpenClaw actually uses
 3. it provisions those files into the agent workspaces that OpenClaw runs
 
 In other words:
 
-- YAML is the `openclaw-store` control plane
+- YAML is the `malaclaw` control plane
 - rendered files like `SOUL.md`, `IDENTITY.md`, `TOOLS.md`, `AGENTS.md`, `USER.md`, and `MEMORY.md` are the OpenClaw runtime contract
 
 This is why the YAML structure is a good fit here: it is easy to validate, diff, generate from, and customize, while still compiling down to the exact OpenClaw workspace shape.
@@ -191,16 +191,16 @@ This repo currently ships:
   - `autonomous-startup`
 - 37 starter demo projects in [`demo-projects/index.yaml`](./demo-projects/index.yaml)
 - 28 bundled skill templates in [`templates/skills/`](./templates/skills)
-- 1 bundled manager skill implementation in [`skills/openclaw-store-manager/`](./skills/openclaw-store-manager)
+- 1 bundled manager skill implementation in [`skills/malaclaw-manager/`](./skills/malaclaw-manager)
 
 Use these commands to explore the catalog:
 
 ```bash
-openclaw-store starter list
-openclaw-store starter suggest "podcast workflow"
-openclaw-store starter show podcast-production-pipeline
-openclaw-store team show dev-company
-openclaw-store skill show openclaw-store-manager
+malaclaw starter list
+malaclaw starter suggest "podcast workflow"
+malaclaw starter show podcast-production-pipeline
+malaclaw team show dev-company
+malaclaw skill show malaclaw-manager
 ```
 
 ## Optional Manual Installation
@@ -209,7 +209,7 @@ If you want to install the CLI locally from this repo:
 
 ```bash
 git clone <this-repo>
-cd openclaw-store
+cd malaclaw
 npm install
 npm run build
 npm link
@@ -218,16 +218,16 @@ npm link
 Then bootstrap the OpenClaw entry path:
 
 ```bash
-openclaw-store install
+malaclaw install
 ```
 
 If you want to initialize a managed starter directly from the CLI:
 
 ```bash
-openclaw-store starter suggest "habit tracker"
-openclaw-store starter init habit-tracker-accountability-coach ./my-project
+malaclaw starter suggest "habit tracker"
+malaclaw starter init habit-tracker-accountability-coach ./my-project
 cd ./my-project
-openclaw-store install
+malaclaw install
 ```
 
 ## Repository Structure
@@ -235,7 +235,7 @@ openclaw-store install
 High-level layout:
 
 ```text
-openclaw-store/
+malaclaw/
 ├── packs/                 # reusable pack definitions
 ├── templates/
 │   ├── agents/            # agent YAML templates
@@ -246,7 +246,7 @@ openclaw-store/
 │   ├── index.yaml         # generated demo catalog
 │   └── cards/             # richer setup/execution cards per demo
 ├── skills/
-│   └── openclaw-store-manager/
+│   └── malaclaw-manager/
 ├── src/                   # CLI + install/runtime logic
 ├── dashboard/             # web dashboard (Fastify server + React SPA)
 │   ├── server/            # Fastify routes, WebSocket, file watcher
@@ -256,14 +256,14 @@ openclaw-store/
 
 Most important files:
 
-- `openclaw-store.yaml`
+- `malaclaw.yaml`
   - project manifest, committed to the repo
-- `openclaw-store.lock`
+- `malaclaw.lock`
   - resolved install state, committed to the repo
 - `demo-projects/index.yaml`
   - generated catalog for OpenClaw-guided demo selection
-- `skills/openclaw-store-manager/SKILL.md`
-  - the bridge skill that lets OpenClaw manage `openclaw-store` projects conversationally
+- `skills/malaclaw-manager/SKILL.md`
+  - the bridge skill that lets OpenClaw manage `malaclaw` projects conversationally
 
 ## Technical Model
 
@@ -352,15 +352,15 @@ Main state files:
 
 | File | Purpose |
 |---|---|
-| `openclaw-store.yaml` | desired project topology |
-| `openclaw-store.lock` | resolved install state |
-| `~/.openclaw-store/runtime.json` | installed project registry |
-| `~/.openclaw-store/workspaces/store/...` | managed agent workspaces |
+| `malaclaw.yaml` | desired project topology |
+| `malaclaw.lock` | resolved install state |
+| `~/.malaclaw/runtime.json` | installed project registry |
+| `~/.malaclaw/workspaces/store/...` | managed agent workspaces |
 | `~/.openclaw/openclaw.json` | OpenClaw runtime config patched during install |
 
 ## Memory Boundary
 
-`openclaw-store` does not replace OpenClaw's native memory model.
+`malaclaw` does not replace OpenClaw's native memory model.
 
 There are two distinct layers:
 
@@ -369,19 +369,19 @@ There are two distinct layers:
    - includes `MEMORY.md` and `memory/*.md`
    - is what OpenClaw's memory tools index for that agent
 
-2. **`openclaw-store` shared team memory**
-   - lives under `~/.openclaw-store/workspaces/store/<project>/<team>/shared/memory/`
+2. **`malaclaw` shared team memory**
+   - lives under `~/.malaclaw/workspaces/store/<project>/<team>/shared/memory/`
    - is used for coordination files like `kanban.md`, `tasks-log.md`, and `blockers.md`
    - is governed by explicit ownership rules from team YAML
 
-The shared team memory layer is orchestration state, not a replacement for OpenClaw memory. Agents should continue to use OpenClaw's native memory layer for their own workspace memory, while `openclaw-store` manages the extra team coordination files around it.
+The shared team memory layer is orchestration state, not a replacement for OpenClaw memory. Agents should continue to use OpenClaw's native memory layer for their own workspace memory, while `malaclaw` manages the extra team coordination files around it.
 
 ## Web Dashboard
 
-`openclaw-store` includes a built-in web dashboard for visual management of projects, agents, teams, skills, and configuration.
+`malaclaw` includes a built-in web dashboard for visual management of projects, agents, teams, skills, and configuration.
 
 ```bash
-openclaw-store dashboard
+malaclaw dashboard
 ```
 
 Opens at http://localhost:3456 with:
@@ -396,8 +396,8 @@ The dashboard uses a Fastify server with WebSocket for real-time file change not
 Options:
 
 ```bash
-openclaw-store dashboard --port 8080    # custom port
-openclaw-store dashboard --host 127.0.0.1  # localhost only
+malaclaw dashboard --port 8080    # custom port
+malaclaw dashboard --host 127.0.0.1  # localhost only
 ```
 
 For remote access (Cloudflare Tunnel, Tailscale, SSH), see [docs/remote-access.md](./docs/remote-access.md).
@@ -406,33 +406,33 @@ For remote access (Cloudflare Tunnel, Tailscale, SSH), see [docs/remote-access.m
 
 ```bash
 # bootstrap
-openclaw-store install
-openclaw-store install --dry-run
-openclaw-store install --force
+malaclaw install
+malaclaw install --dry-run
+malaclaw install --force
 
 # starter catalog
-openclaw-store starter list
-openclaw-store starter suggest "<idea>"
-openclaw-store starter show <id>
-openclaw-store starter init <id> <dir>
+malaclaw starter list
+malaclaw starter suggest "<idea>"
+malaclaw starter show <id>
+malaclaw starter init <id> <dir>
 
 # projects
-openclaw-store project list
-openclaw-store project show <id>
-openclaw-store project status
+malaclaw project list
+malaclaw project show <id>
+malaclaw project status
 
 # teams / agents / skills
-openclaw-store team show <id>
-openclaw-store agent show <id>
-openclaw-store skill show <id>
-openclaw-store skill sync
-openclaw-store skill check
+malaclaw team show <id>
+malaclaw agent show <id>
+malaclaw skill show <id>
+malaclaw skill sync
+malaclaw skill check
 
 # health + dashboard
-openclaw-store diff
-openclaw-store validate
-openclaw-store doctor
-openclaw-store dashboard
+malaclaw diff
+malaclaw validate
+malaclaw doctor
+malaclaw dashboard
 ```
 
 ## More Detail

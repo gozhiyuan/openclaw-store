@@ -48,7 +48,7 @@ describe("resolveManifest", () => {
     const FIXTURES_PACKS_DIR = path.resolve(fileURLToPath(import.meta.url), "../fixtures/packs");
 
     it("resolves multiple teams from a multi-team pack", async () => {
-      process.env.OPENCLAW_STORE_PACKS_DIR = FIXTURES_PACKS_DIR;
+      process.env.MALACLAW_PACKS_DIR = FIXTURES_PACKS_DIR;
       try {
         const result = await resolveManifest({
           version: 1,
@@ -60,7 +60,7 @@ describe("resolveManifest", () => {
         expect(teamIds).toContain("dev-company");
         expect(teamIds).toContain("research-lab");
       } finally {
-        delete process.env.OPENCLAW_STORE_PACKS_DIR;
+        delete process.env.MALACLAW_PACKS_DIR;
       }
     });
   });

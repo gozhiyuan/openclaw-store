@@ -19,12 +19,12 @@ export function resolveMainAgentWorkspaceDir(): string {
   return path.join(resolveOpenClawStateDir(), "workspace");
 }
 
-// ── openclaw-store runtime paths (~/.openclaw-store/) ───────────────────────
+// ── malaclaw runtime paths (~/.malaclaw/) ───────────────────────
 
 export function resolveStoreRoot(): string {
-  const env = process.env.OPENCLAW_STORE_DIR?.trim();
+  const env = process.env.MALACLAW_DIR?.trim();
   if (env) return env;
-  return path.join(os.homedir(), ".openclaw-store");
+  return path.join(os.homedir(), ".malaclaw");
 }
 
 export function resolveStoreCacheDir(): string {
@@ -60,20 +60,20 @@ export function resolveStoreSkillsIndexFile(): string {
 // ── Project-local paths (git-committed) ─────────────────────────────────────
 
 export function resolveManifestPath(projectDir: string = process.cwd()): string {
-  return path.join(projectDir, "openclaw-store.yaml");
+  return path.join(projectDir, "malaclaw.yaml");
 }
 
 export function resolveLockfilePath(projectDir: string = process.cwd()): string {
-  return path.join(projectDir, "openclaw-store.lock");
+  return path.join(projectDir, "malaclaw.lock");
 }
 
-// ── Template paths (bundled with openclaw-store) ────────────────────────────
+// ── Template paths (bundled with malaclaw) ────────────────────────────
 
 import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export function resolveTemplatesRoot(): string {
-  const env = process.env.OPENCLAW_STORE_BUNDLED_TEMPLATES?.trim();
+  const env = process.env.MALACLAW_BUNDLED_TEMPLATES?.trim();
   if (env) return env;
   // src/lib/paths.ts → ../../templates
   return path.resolve(__dirname, "..", "..", "templates");
@@ -96,19 +96,19 @@ export function resolveSkillTemplatesDir(): string {
 }
 
 export function resolvePacksDir(): string {
-  const env = process.env.OPENCLAW_STORE_PACKS_DIR?.trim();
+  const env = process.env.MALACLAW_PACKS_DIR?.trim();
   if (env) return env;
   return path.resolve(__dirname, "..", "..", "packs");
 }
 
 export function resolveStartersDir(): string {
-  const env = process.env.OPENCLAW_STORE_STARTERS_DIR?.trim();
+  const env = process.env.MALACLAW_STARTERS_DIR?.trim();
   if (env) return env;
   return path.resolve(__dirname, "..", "..", "starters");
 }
 
 export function resolveDemoProjectsDir(): string {
-  const env = process.env.OPENCLAW_STORE_DEMO_PROJECTS_DIR?.trim();
+  const env = process.env.MALACLAW_DEMO_PROJECTS_DIR?.trim();
   if (env) return env;
   return path.resolve(__dirname, "..", "..", "demo-projects");
 }
@@ -132,7 +132,7 @@ export function resolvePartialsDir(): string {
 
 /** Custom templates overlay directory (via env var or project-local ./templates) */
 export function resolveOverlayTemplatesDir(): string | null {
-  const env = process.env.OPENCLAW_STORE_TEMPLATES?.trim();
+  const env = process.env.MALACLAW_TEMPLATES?.trim();
   if (env) return env;
   // Check project-local ./templates (if it differs from bundled)
   const local = path.join(process.cwd(), "templates");

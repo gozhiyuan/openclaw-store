@@ -10,7 +10,7 @@ entry_team: finance-ops
 packs:
   - finance-ops
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - reef-polymarket-research
 installable_skills:
   - aluvia-brave-search
@@ -31,7 +31,7 @@ external_requirements:
   - Cron jobs for continuous monitoring
   - Sub-agent spawning for parallel market analysis
 bootstrap_prompt: "Start the Polymarket Autopilot: Automated Paper Trading demo
-  project from the openclaw-store starter `polymarket-autopilot`. Manually
+  project from the malaclaw starter `polymarket-autopilot`. Manually
   monitoring prediction markets for arbitrage opportunities and executing trades
   is time-consuming and requires constant attention. You want to test and refine
   trading strategies without risking real capital. Use `autonomous-startup` as

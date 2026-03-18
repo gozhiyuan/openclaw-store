@@ -57,21 +57,21 @@ export async function runChecks(opts?: { projectDir?: string }): Promise<Finding
   // Check 1: manifest exists
   const manifestPath = resolveManifestPath(projectDir);
   if (await pathExists(manifestPath)) {
-    findings.push({ check: "manifest", severity: "ok", message: "openclaw-store.yaml found" });
+    findings.push({ check: "manifest", severity: "ok", message: "malaclaw.yaml found" });
   } else {
     if (workflowMode === "claude-code-default" || workflowMode === "openclaw-default") {
       findings.push({
         check: "manifest",
         severity: "warning",
-        message: "openclaw-store.yaml not found — using default workflow instead of openclaw-store project management",
-        fix: "Run: openclaw-store init if you want managed projects, teams, and skills",
+        message: "malaclaw.yaml not found — using default workflow instead of malaclaw project management",
+        fix: "Run: malaclaw init if you want managed projects, teams, and skills",
       });
     } else {
       findings.push({
         check: "manifest",
         severity: "warning",
-        message: "openclaw-store.yaml not found in current directory",
-        fix: "Run: openclaw-store init",
+        message: "malaclaw.yaml not found in current directory",
+        fix: "Run: malaclaw init",
       });
     }
   }
@@ -86,7 +86,7 @@ export async function runChecks(opts?: { projectDir?: string }): Promise<Finding
         check: "openclaw-config",
         severity: "warning",
         message: "openclaw.json not found — acceptable for default Claude Code workflow",
-        fix: "Install OpenClaw first, then run `openclaw-store install`",
+        fix: "Install OpenClaw first, then run `malaclaw install`",
       });
     } else {
       findings.push({
@@ -105,15 +105,15 @@ export async function runChecks(opts?: { projectDir?: string }): Promise<Finding
       findings.push({
         check: "lockfile",
         severity: "warning",
-        message: "No openclaw-store lockfile found — repo is currently using the default workflow",
-        fix: "Run: openclaw-store init and openclaw-store install if you want store-managed projects",
+        message: "No malaclaw lockfile found — repo is currently using the default workflow",
+        fix: "Run: malaclaw init and malaclaw install if you want store-managed projects",
       });
     } else {
       findings.push({
         check: "lockfile",
         severity: "warning",
         message: "No lockfile found — nothing installed yet",
-        fix: "Run: openclaw-store install",
+        fix: "Run: malaclaw install",
       });
     }
   } else {
@@ -135,7 +135,7 @@ export async function runChecks(opts?: { projectDir?: string }): Promise<Finding
             check: "workspace",
             severity: "error",
             message: `Workspace missing: ${agent.id} → ${agent.workspace}`,
-            fix: "Run: openclaw-store install --force",
+            fix: "Run: malaclaw install --force",
           });
         }
       }
@@ -162,7 +162,7 @@ export async function runChecks(opts?: { projectDir?: string }): Promise<Finding
               check: "agent-registration",
               severity: "error",
               message: `openclaw.json missing agent: ${agent.id}`,
-              fix: "Run: openclaw-store install --force",
+              fix: "Run: malaclaw install --force",
             });
           }
         }
@@ -184,14 +184,14 @@ export async function runChecks(opts?: { projectDir?: string }): Promise<Finding
           check: "skill-status",
           severity: "warning",
           message: `[INACTIVE] ${skill.id} — missing env: ${skill.missing_env?.join(", ")}`,
-          fix: `Set the required environment variable(s), then re-run: openclaw-store install`,
+          fix: `Set the required environment variable(s), then re-run: malaclaw install`,
         });
       } else if (skill.status === "failed") {
         findings.push({
           check: "skill-status",
           severity: "error",
           message: `[FAILED] ${skill.id} — ${skill.install_error ?? "install failed"}`,
-          fix: "Ensure the skill source is available, then re-run: openclaw-store install --force",
+          fix: "Ensure the skill source is available, then re-run: malaclaw install --force",
         });
       } else {
         findings.push({ check: "skill-status", severity: "ok", message: `Skill active: ${skill.id}` });

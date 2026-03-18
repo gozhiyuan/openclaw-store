@@ -11,17 +11,17 @@ let originalHome: string | undefined;
 
 beforeEach(async () => {
   tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-skill-"));
-  originalStoreDir = process.env.OPENCLAW_STORE_DIR;
+  originalStoreDir = process.env.MALACLAW_DIR;
   originalHome = process.env.HOME;
-  process.env.OPENCLAW_STORE_DIR = path.join(tmpDir, "store");
+  process.env.MALACLAW_DIR = path.join(tmpDir, "store");
   process.env.HOME = path.join(tmpDir, "home");
 });
 
 afterEach(async () => {
   if (originalStoreDir === undefined) {
-    delete process.env.OPENCLAW_STORE_DIR;
+    delete process.env.MALACLAW_DIR;
   } else {
-    process.env.OPENCLAW_STORE_DIR = originalStoreDir;
+    process.env.MALACLAW_DIR = originalStoreDir;
   }
   if (originalHome === undefined) {
     delete process.env.HOME;

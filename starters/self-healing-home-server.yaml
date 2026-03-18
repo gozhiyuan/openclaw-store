@@ -10,7 +10,7 @@ entry_team: dev-company
 packs:
   - dev-company
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - agentic-devops
 installable_skills:
   - publora-telegram
@@ -34,7 +34,7 @@ external_requirements:
   - Obsidian vault or notes directory (for knowledge base)
   - openclaw doctor for self-diagnostics
 bootstrap_prompt: Start the Self-Healing Home Server & Infrastructure Management
-  demo project from the openclaw-store starter `self-healing-home-server`.
+  demo project from the malaclaw starter `self-healing-home-server`.
   Running a home server means being on-call 24/7 for your own infrastructure.
   Services go down at 3 AM, certificates expire silently, disk fills up, and
   pods crash-loop — all while you're asleep or away. Use `dev-company` as the

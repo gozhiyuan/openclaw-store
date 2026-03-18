@@ -11,7 +11,7 @@ entry_team: personal-assistant
 packs:
   - personal-assistant
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - faster-whisper
 installable_skills:
   - google-calendar
@@ -42,7 +42,7 @@ external_requirements:
   - "Optional: Otter.ai, Fireflies.ai, or Google Meet API for automatic
     transcript retrieval"
 bootstrap_prompt: Start the Automated Meeting Notes & Action Items demo project
-  from the openclaw-store starter `meeting-notes-action-items`. You just
+  from the malaclaw starter `meeting-notes-action-items`. You just
   finished a 45-minute team call. Now you need to write up the summary, pull out
   action items, and distribute them to Jira, Linear, or Todoist — manually. By
   the time you're done, the next meeting is starting. What if your agent handled

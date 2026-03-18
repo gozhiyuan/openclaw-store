@@ -139,30 +139,30 @@ function printSkillStatus(skills: SkillStatus[]): void {
 }
 
 function isManifestNotFoundError(err: unknown): boolean {
-  return err instanceof Error && err.message.includes("No openclaw-store.yaml found");
+  return err instanceof Error && err.message.includes("No malaclaw.yaml found");
 }
 
 async function runZeroConfigInstall(opts: InstallOptions): Promise<void> {
   const mainWorkspaceDir = resolveMainAgentWorkspaceDir();
-  console.log("openclaw-store: no manifest found.");
-  console.log("Installing openclaw-store-manager skill into OpenClaw main agent workspace...\n");
-  const skillDef = await loadSkill("openclaw-store-manager");
+  console.log("malaclaw: no manifest found.");
+  console.log("Installing malaclaw-manager skill into OpenClaw main agent workspace...\n");
+  const skillDef = await loadSkill("malaclaw-manager");
   const { installSkillToWorkspaces } = await import("../lib/skill-fetch.js");
   const results = await installSkillToWorkspaces(skillDef, [mainWorkspaceDir], "active");
-  const skillDir = path.join(mainWorkspaceDir, "skills", "openclaw-store-manager");
+  const skillDir = path.join(mainWorkspaceDir, "skills", "malaclaw-manager");
   const installed = results.some((r) => r.status === "installed");
   if (installed) {
-    console.log(`✓ Skill installed: openclaw-store-manager`);
+    console.log(`✓ Skill installed: malaclaw-manager`);
     console.log(`  → ${skillDir}\n`);
   } else {
     const reason = results[0]?.reason ?? "unknown error";
-    console.warn(`✗ Failed to install openclaw-store-manager: ${reason}`);
+    console.warn(`✗ Failed to install malaclaw-manager: ${reason}`);
     return;
   }
   await updateStoreGuidance();
   console.log("The skill is now available in OpenClaw. Ask your agent to:");
-  console.log("  1. Run: openclaw-store starter list");
-  console.log("  2. Pick a starter and run: openclaw-store starter init <id> ./my-project");
-  console.log("  3. Then: openclaw-store install");
-  console.log("\nFor a full managed setup, run: openclaw-store init");
+  console.log("  1. Run: malaclaw starter list");
+  console.log("  2. Pick a starter and run: malaclaw starter init <id> ./my-project");
+  console.log("  3. Then: malaclaw install");
+  console.log("\nFor a full managed setup, run: malaclaw init");
 }

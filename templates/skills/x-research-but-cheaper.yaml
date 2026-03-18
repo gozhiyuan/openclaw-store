@@ -22,4 +22,4 @@ disabled_until_configured: true
 install_hints:
   - "Sign up at twitterapi.io for an API key"
   - "Set: export TWITTER_API_IO_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

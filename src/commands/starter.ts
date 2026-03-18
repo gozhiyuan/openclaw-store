@@ -136,7 +136,7 @@ export async function starterInit(
   const manifest = await loadManifest(result.projectDir);
   console.log(`Project id: ${manifest.project?.id}`);
   console.log(`Entry team: ${starter.entry_team}`);
-  console.log(`Run: openclaw-store install --dry-run`);
+  console.log(`Run: malaclaw install --dry-run`);
 }
 
 export async function starterExportIndex(targetPath: string): Promise<void> {

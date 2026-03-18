@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test("dashboard overview loads with navigation tabs", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator("nav")).toContainText("openclaw-store");
+  await expect(page.locator("nav")).toContainText("malaclaw");
   await expect(page.locator("nav")).toContainText("Overview");
   await expect(page.locator("nav")).toContainText("Projects");
   await expect(page.locator("nav")).toContainText("Starters");

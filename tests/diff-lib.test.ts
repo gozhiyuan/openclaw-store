@@ -19,11 +19,11 @@ describe("computeDiff", () => {
     tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-diff-lib-"));
 
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.yaml"),
+      path.join(tmpDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.lock"),
+      path.join(tmpDir, "malaclaw.lock"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
 
@@ -36,7 +36,7 @@ describe("computeDiff", () => {
     tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-diff-lib-"));
 
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.yaml"),
+      path.join(tmpDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
     // No lockfile written
@@ -50,11 +50,11 @@ describe("computeDiff", () => {
     tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-diff-lib-"));
 
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.yaml"),
+      path.join(tmpDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.lock"),
+      path.join(tmpDir, "malaclaw.lock"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
 
@@ -68,11 +68,11 @@ describe("computeDiff", () => {
     tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-diff-lib-"));
 
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.yaml"),
+      path.join(tmpDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.lock"),
+      path.join(tmpDir, "malaclaw.lock"),
       stringify({
         version: 1,
         packs: [],
@@ -92,7 +92,7 @@ describe("computeDiff", () => {
 
     // Manifest references a skill that is not in the lockfile yet
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.yaml"),
+      path.join(tmpDir, "malaclaw.yaml"),
       stringify({
         version: 1,
         packs: [],
@@ -100,7 +100,7 @@ describe("computeDiff", () => {
       }),
     );
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.lock"),
+      path.join(tmpDir, "malaclaw.lock"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
 
@@ -115,11 +115,11 @@ describe("computeDiff", () => {
     tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-diff-lib-"));
 
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.yaml"),
+      path.join(tmpDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.lock"),
+      path.join(tmpDir, "malaclaw.lock"),
       stringify({
         version: 1,
         packs: [],
@@ -141,11 +141,11 @@ describe("computeDiff", () => {
     tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-diff-lib-"));
 
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.yaml"),
+      path.join(tmpDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.lock"),
+      path.join(tmpDir, "malaclaw.lock"),
       stringify({
         version: 1,
         packs: [],

@@ -10,7 +10,7 @@ entry_team: automation-ops
 packs:
   - automation-ops
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - outbound-call
 installable_skills:
   - publora-telegram
@@ -29,7 +29,7 @@ external_requirements:
   - Jira skill
   - Web search skill
 bootstrap_prompt: Start the Phone-Based Personal Assistant demo project from the
-  openclaw-store starter `phone-based-personal-assistant`. You want to access
+  malaclaw starter `phone-based-personal-assistant`. You want to access
   your AI agent from any phone without needing a smartphone app or internet
   browser. You need hands-free voice assistance while driving, walking, or when
   your hands are occupied. Use `autonomous-startup` as the initial entry team.

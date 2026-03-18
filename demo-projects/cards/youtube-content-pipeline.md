@@ -10,7 +10,7 @@ As a daily YouTube creator, finding fresh, timely video ideas across the web and
 - Recommended Mode: managed-team
 - Entry Team: content-factory
 - Packs: content-factory
-- Project Skills: openclaw-store-manager
+- Project Skills: malaclaw-manager
 - Installable OpenClaw Skills: gog, knowledge-base, search, x-research-v2
 - Required APIs / Services: Asana integration (or Todoist), Telegram topic for receiving pitches
 - Required Capabilities / Tools: —
@@ -20,7 +20,7 @@ As a daily YouTube creator, finding fresh, timely video ideas across the web and
 ## Execution Paths
 
 - Default workflow: Stay in the normal OpenClaw or Claude Code default workflow if you only need one generalist agent or want to prototype without managed teams.
-- Managed workflow: Initialize this starter, run openclaw-store install, then open the `content-factory` project entry-point agent for structured multi-agent execution.
+- Managed workflow: Initialize this starter, run malaclaw install, then open the `content-factory` project entry-point agent for structured multi-agent execution.
 
 ## Setup Guidance
 
@@ -28,7 +28,7 @@ As a daily YouTube creator, finding fresh, timely video ideas across the web and
 - If you want managed execution, initialize the starter and use `content-factory` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
 - Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
-- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run malaclaw install.
 
 ## Installable OpenClaw Skills
 
@@ -54,20 +54,20 @@ As a daily YouTube creator, finding fresh, timely video ideas across the web and
 ## Bootstrap Prompt
 
 ```text
-Start the YouTube Content Pipeline demo project from the openclaw-store starter `youtube-content-pipeline`. As a daily YouTube creator, finding fresh, timely video ideas across the web and X/Twitter is time-consuming. Tracking what you've already covered prevents duplicates and helps you stay ahead of trends. Use `content-factory` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
+Start the YouTube Content Pipeline demo project from the malaclaw starter `youtube-content-pipeline`. As a daily YouTube creator, finding fresh, timely video ideas across the web and X/Twitter is time-consuming. Tracking what you've already covered prevents duplicates and helps you stay ahead of trends. Use `content-factory` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
 ```
 
 ## Suggested Flow
 
-1. Inspect the starter with `openclaw-store starter show youtube-content-pipeline`.
-2. Initialize it with `openclaw-store starter init youtube-content-pipeline <dir>`.
+1. Inspect the starter with `malaclaw starter show youtube-content-pipeline`.
+2. Initialize it with `malaclaw starter init youtube-content-pipeline <dir>`.
 3. Review STARTER.md and this demo card.
 4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
-5. Run `openclaw-store install` and execute through the project entry-point agent.
+5. Run `malaclaw install` and execute through the project entry-point agent.
 
 ## Skills Setup
 
-### Required (install before `openclaw-store install`)
+### Required (install before `malaclaw install`)
 
 | Skill | Install | Env var | Get key |
 |---|---|---|---|

@@ -11,7 +11,7 @@ entry_team: automation-ops
 packs:
   - automation-ops
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - n8n
 installable_skills:
   - github
@@ -34,7 +34,7 @@ external_requirements:
   - Docker (if using the pre-configured stack)
   - n8n credential management (manual, one-time setup per integration)
 bootstrap_prompt: Start the OpenClaw + n8n Workflow Orchestration demo project
-  from the openclaw-store starter `n8n-workflow-orchestration`. Letting your AI
+  from the malaclaw starter `n8n-workflow-orchestration`. Letting your AI
   agent directly manage API keys and call external services is a recipe for
   security incidents. Every new integration means another credential in
   `.env.local`, another surface for the agent to accidentally leak or misuse.

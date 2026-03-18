@@ -10,7 +10,7 @@ entry_team: content-factory
 packs:
   - content-factory
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - x-research-but-cheaper
 installable_skills:
   - social-intelligence
@@ -26,7 +26,7 @@ required_capabilities: []
 external_requirements:
   - Bird Skill. clawhub install bird (it comes pre-bundled)
 bootstrap_prompt: Start the X Account Analysis demo project from the
-  openclaw-store starter `x-account-analysis`. There are many websites designed
+  malaclaw starter `x-account-analysis`. There are many websites designed
   to give you a qualitative analysis of your X account. While X already gives
   you an **analytics** section, it's more focused to show your numbers on your
   performance. Use `content-factory` as the initial entry team. Review

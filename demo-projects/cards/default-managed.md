@@ -10,7 +10,7 @@ Minimal managed OpenClaw project that keeps the normal default workflow availabl
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: openclaw-store-manager
+- Project Skills: malaclaw-manager
 - Installable OpenClaw Skills: —
 - Required APIs / Services: —
 - Required Capabilities / Tools: —
@@ -20,7 +20,7 @@ Minimal managed OpenClaw project that keeps the normal default workflow availabl
 ## Execution Paths
 
 - Default workflow: Stay in the normal OpenClaw or Claude Code default workflow if you only need one generalist agent or want to prototype without managed teams.
-- Managed workflow: Initialize this starter, run openclaw-store install, then open the `autonomous-startup` project entry-point agent for structured multi-agent execution.
+- Managed workflow: Initialize this starter, run malaclaw install, then open the `autonomous-startup` project entry-point agent for structured multi-agent execution.
 
 ## Setup Guidance
 
@@ -32,20 +32,20 @@ Minimal managed OpenClaw project that keeps the normal default workflow availabl
 ## Bootstrap Prompt
 
 ```text
-Start the Default Managed Project demo project from the openclaw-store starter `default-managed`. Minimal managed OpenClaw project that keeps the normal default workflow available while adding a single generalist entry-point team for structured installs. Use `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
+Start the Default Managed Project demo project from the malaclaw starter `default-managed`. Minimal managed OpenClaw project that keeps the normal default workflow available while adding a single generalist entry-point team for structured installs. Use `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
 ```
 
 ## Suggested Flow
 
-1. Inspect the starter with `openclaw-store starter show default-managed`.
-2. Initialize it with `openclaw-store starter init default-managed <dir>`.
+1. Inspect the starter with `malaclaw starter show default-managed`.
+2. Initialize it with `malaclaw starter init default-managed <dir>`.
 3. Review STARTER.md and this demo card.
 4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
-5. Run `openclaw-store install` and execute through the project entry-point agent.
+5. Run `malaclaw install` and execute through the project entry-point agent.
 
 ## Skills Setup
 
-### Required (install before `openclaw-store install`)
+### Required (install before `malaclaw install`)
 
 No additional required skills.
 

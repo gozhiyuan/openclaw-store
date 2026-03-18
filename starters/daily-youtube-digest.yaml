@@ -10,7 +10,7 @@ entry_team: content-factory
 packs:
   - content-factory
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - youtube-pro
 installable_skills:
   - rss-skill
@@ -39,7 +39,7 @@ external_requirements:
     contexts."
   - "!youtube-full skill installation"
 bootstrap_prompt: Start the Daily YouTube Digest demo project from the
-  openclaw-store starter `daily-youtube-digest`. Start your day with a
+  malaclaw starter `daily-youtube-digest`. Start your day with a
   personalized summary of new videos from your favorite YouTube channels — no
   more missing content from creators you actually want to follow. Use
   `content-factory` as the initial entry team. Review STARTER.md, confirm any

@@ -12,7 +12,7 @@ entry_team: dev-company
 packs:
   - dev-company
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - github
 installable_skills:
   - agentic-devops
@@ -28,7 +28,7 @@ required_capabilities:
 external_requirements:
   - "**Git**: To manage branches, commits, and merges."
 bootstrap_prompt: Start the Autonomous Educational Game Development Pipeline
-  demo project from the openclaw-store starter `autonomous-game-dev-pipeline`.
+  demo project from the malaclaw starter `autonomous-game-dev-pipeline`.
   **The Origin Story:** A "LANero of the old school" dad wanted to create a
   safe, ad-free, and high-quality gaming portal for his daughters, Susana (3)
   and Julieta (coming soon). Existing sites were plagued with spam, aggressive

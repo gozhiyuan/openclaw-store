@@ -10,7 +10,7 @@ entry_team: content-factory
 packs:
   - content-factory
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - youtube-pro
 installable_skills:
   - fal-ai
@@ -30,7 +30,7 @@ external_requirements:
   - gog CLI for YouTube Analytics
   - Telegram topic for receiving pitches
 bootstrap_prompt: Start the YouTube Content Pipeline demo project from the
-  openclaw-store starter `youtube-content-pipeline`. As a daily YouTube creator,
+  malaclaw starter `youtube-content-pipeline`. As a daily YouTube creator,
   finding fresh, timely video ideas across the web and X/Twitter is
   time-consuming. Tracking what you've already covered prevents duplicates and
   helps you stay ahead of trends. Use `content-factory` as the initial entry

@@ -235,7 +235,7 @@ function extractSupplementalApis(markdown) {
 
 function buildBootstrapPrompt(title, description, starterId, entryTeam) {
   return [
-    `Start the ${title} demo project from the openclaw-store starter \`${starterId}\`.`,
+    `Start the ${title} demo project from the malaclaw starter \`${starterId}\`.`,
     description,
     `Use \`${entryTeam}\` as the initial entry team.`,
     "Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.",
@@ -253,7 +253,7 @@ function buildSetupGuidance(entryTeam, metadata) {
   ];
   if (hasSetupDependencies) {
     steps.push("Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.");
-    steps.push("Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.");
+    steps.push("Install any missing OpenClaw skills, configure required APIs and auth, then re-run malaclaw install.");
   } else {
     steps.push("No additional external integrations are required beyond the selected team and bundled management skill.");
   }
@@ -265,7 +265,7 @@ function buildExecution(entryTeam) {
     default_workflow:
       "Stay in the normal OpenClaw or Claude Code default workflow if you only need one generalist agent or want to prototype without managed teams.",
     managed_workflow:
-      `Initialize this starter, run openclaw-store install, then open the \`${entryTeam}\` project entry-point agent for structured multi-agent execution.`,
+      `Initialize this starter, run malaclaw install, then open the \`${entryTeam}\` project entry-point agent for structured multi-agent execution.`,
   };
 }
 
@@ -345,11 +345,11 @@ function buildDemoCard(demo, starter) {
     "",
     "## Suggested Flow",
     "",
-    `1. Inspect the starter with \`openclaw-store starter show ${demo.starter}\`.`,
-    `2. Initialize it with \`openclaw-store starter init ${demo.starter} <dir>\`.`,
+    `1. Inspect the starter with \`malaclaw starter show ${demo.starter}\`.`,
+    `2. Initialize it with \`malaclaw starter init ${demo.starter} <dir>\`.`,
     "3. Review STARTER.md and this demo card.",
     "4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.",
-    "5. Run `openclaw-store install` and execute through the project entry-point agent.",
+    "5. Run `malaclaw install` and execute through the project entry-point agent.",
     "",
   );
 
@@ -370,7 +370,7 @@ function buildDefaultManagedStarter() {
     source_usecase: title,
     entry_team: entryTeam,
     packs: ["autonomous-startup"],
-    project_skills: ["openclaw-store-manager"],
+    project_skills: ["malaclaw-manager"],
     installable_skills: [],
     tags: ["default", "managed", "general", "bootstrap"],
     required_apis: [],
@@ -438,7 +438,7 @@ async function main() {
       source_path: path.relative(repoRoot, filePath),
       entry_team: classification.entry_team,
       packs: classification.packs,
-      project_skills: ["openclaw-store-manager"],
+      project_skills: ["malaclaw-manager"],
       installable_skills: installableSkills,
       tags: [...new Set([...classification.tags, ...id.split("-")])],
       required_apis: requiredApis,

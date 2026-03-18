@@ -9,7 +9,7 @@ entry_team: autonomous-startup
 packs:
   - autonomous-startup
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
 installable_skills: []
 
 tags:
@@ -21,7 +21,7 @@ required_apis: []
 required_capabilities: []
 external_requirements: []
 bootstrap_prompt: Start the Default Managed Project demo project from the
-  openclaw-store starter `default-managed`. Minimal managed OpenClaw project
+  malaclaw starter `default-managed`. Minimal managed OpenClaw project
   that keeps the normal default workflow available while adding a single
   generalist entry-point team for structured installs. Use `autonomous-startup`
   as the initial entry team. Review STARTER.md, confirm any missing external

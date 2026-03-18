@@ -1,8 +1,8 @@
-# openclaw-store: Open Source Readiness Plan
+# malaclaw: Open Source Readiness Plan
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Elevate openclaw-store from a working v1 prototype to a production-grade, open-source-ready platform across three phases — ending with a community pack catalog, dashboard, and AI-assisted configuration.
+**Goal:** Elevate malaclaw from a working v1 prototype to a production-grade, open-source-ready platform across three phases — ending with a community pack catalog, dashboard, and AI-assisted configuration.
 
 **Architecture:** Three-phase progression: Phase 1 stabilises the core install engine (tests, real skill install, multi-team packs, diff/apply, local overlays); Phase 2 adds a web dashboard, remote pack sources, and AI-assisted generation; Phase 3 introduces community catalog workflows, structured task backends, and Claude Code export. All state is project-local YAML — the CLI is the single source of truth.
 
@@ -219,7 +219,7 @@ const makeTeam = (): TeamDef =>
       { agent: "test-specialist", role: "specialist" },
     ],
     shared_memory: {
-      dir: "~/.openclaw-store/workspaces/store/test-team/shared/memory/",
+      dir: "~/.malaclaw/workspaces/store/test-team/shared/memory/",
       files: [
         { path: "tasks-log.md", access: "append-only", writer: "*" },
         { path: "brief.md", access: "single-writer", writer: "test-lead" },
@@ -351,12 +351,12 @@ describe("overlay loader", () => {
       path.join(agentsDir, "pm.yaml"),
       `id: pm\nversion: 1\nname: "Custom PM"\nsoul:\n  persona: "Custom persona"\nmodel:\n  primary: "claude-haiku-4-5"\ncapabilities: {}\nteam_role:\n  role: lead\n`,
     );
-    process.env.OPENCLAW_STORE_TEMPLATES = tmpDir;
+    process.env.MALACLAW_TEMPLATES = tmpDir;
     // Dynamically re-import to pick up env var
     const { loadAgent } = await import("../src/lib/loader.js");
     const agent = await loadAgent("pm");
     expect(agent.name).toBe("Custom PM");
-    delete process.env.OPENCLAW_STORE_TEMPLATES;
+    delete process.env.MALACLAW_TEMPLATES;
   });
 });
 ```
@@ -376,7 +376,7 @@ Add after the existing template path functions:
 ```typescript
 /** Custom templates overlay directory (via env var or project-local ./templates) */
 export function resolveOverlayTemplatesDir(): string | null {
-  const env = process.env.OPENCLAW_STORE_TEMPLATES?.trim();
+  const env = process.env.MALACLAW_TEMPLATES?.trim();
   if (env) return env;
   // Check project-local ./templates (if it differs from bundled)
   const local = path.join(process.cwd(), "templates");
@@ -428,7 +428,7 @@ Expected: All PASS
 
 ```bash
 git add src/lib/paths.ts src/lib/loader.ts tests/overlay.test.ts
-git commit -m "feat: local overlay directory for custom templates (OPENCLAW_STORE_TEMPLATES)"
+git commit -m "feat: local overlay directory for custom templates (MALACLAW_TEMPLATES)"
 ```
 
 ---
@@ -450,13 +450,13 @@ Before writing the multi-team fixture test, add test-only path resolution so `lo
 ```typescript
 // in src/lib/paths.ts
 export function resolvePacksDir(): string {
-  const env = process.env.OPENCLAW_STORE_PACKS_DIR?.trim();
+  const env = process.env.MALACLAW_PACKS_DIR?.trim();
   if (env) return env;
   return path.resolve(__dirname, "..", "..", "packs");
 }
 
 export function resolveTemplatesRoot(): string {
-  const env = process.env.OPENCLAW_STORE_BUNDLED_TEMPLATES?.trim();
+  const env = process.env.MALACLAW_BUNDLED_TEMPLATES?.trim();
   if (env) return env;
   return path.resolve(__dirname, "..", "..", "templates");
 }
@@ -556,7 +556,7 @@ teams:
 **Step 6: Point loader at fixture pack dir and run — confirm it FAILS** (resolver only takes teams[0])
 
 ```bash
-OPENCLAW_STORE_PACKS_DIR=$PWD/tests/fixtures/packs npm test tests/resolver.test.ts
+MALACLAW_PACKS_DIR=$PWD/tests/fixtures/packs npm test tests/resolver.test.ts
 ```
 
 Expected: FAIL on multi-team test.
@@ -612,7 +612,7 @@ function buildLockedPack(resolved: ResolvedPack): LockedPack {
 **Step 8: Run all tests**
 
 ```bash
-OPENCLAW_STORE_PACKS_DIR=$PWD/tests/fixtures/packs npm test
+MALACLAW_PACKS_DIR=$PWD/tests/fixtures/packs npm test
 ```
 
 Expected: All PASS
@@ -831,7 +831,7 @@ git commit -m "feat: pack compatibility metadata and version checks in doctor"
 - Create: `tests/skill-fetch.test.ts`
 
 **Architecture note:** Do not copy every skill into every workspace as the long-term model. The production architecture must use:
-- `~/.openclaw-store/cache/skills/<skill>@<version>/` as the canonical fetched cache
+- `~/.malaclaw/cache/skills/<skill>@<version>/` as the canonical fetched cache
 - per-agent workspace links or lightweight materialization into `workspace/skills/`
 - upgrade logic that refreshes the cached copy once and then relinks dependents
 
@@ -853,7 +853,7 @@ export type SkillInstallResult = {
 
 /**
  * Install a skill into the shared cache first, then link it into one or more workspaces.
- * For local skills: canonicalize into ~/.openclaw-store/cache/skills/<id>@<version>/.
+ * For local skills: canonicalize into ~/.malaclaw/cache/skills/<id>@<version>/.
  * For openclaw-bundled: resolve from ~/.openclaw/skills/<id> or ~/.openclaw/workspace/skills/<id>.
  * For clawhub/community sources: Phase 1 may resolve from pre-fetched cache only; real remote fetch remains a later task.
  */
@@ -883,7 +883,7 @@ export async function installSkillToWorkspaces(
 
   const cacheDir = path.join(
     process.env.HOME ?? process.env.USERPROFILE ?? "",
-    ".openclaw-store",
+    ".malaclaw",
     "cache",
     "skills",
     `${skill.id}@${skill.version}`,
@@ -937,7 +937,7 @@ async function resolveSkillSource(skill: SkillEntry): Promise<string | null> {
   const candidates = [
     path.join(home, ".openclaw", "workspace", "skills", skill.id),
     path.join(home, ".openclaw", "skills", skill.id),
-    path.join(home, ".openclaw-store", "cache", "skills", skill.id),
+    path.join(home, ".malaclaw", "cache", "skills", skill.id),
   ];
   for (const c of candidates) {
     if (await pathExists(c)) return c;
@@ -1084,9 +1084,9 @@ git commit -m "feat: real skill installation into agent workspace skills/ direct
 
 ---
 
-### Task 8: `openclaw-store diff` command
+### Task 8: `malaclaw diff` command
 
-Shows what would change if you re-ran `openclaw-store install` against the current lockfile.
+Shows what would change if you re-ran `malaclaw install` against the current lockfile.
 
 **Files:**
 - Create: `src/commands/diff.ts`
@@ -1111,7 +1111,7 @@ export async function runDiff(projectDir?: string): Promise<void> {
   const existing = await loadLockfile(projectDir);
 
   if (!existing) {
-    console.log("No lockfile. Run: openclaw-store install");
+    console.log("No lockfile. Run: malaclaw install");
     return;
   }
 
@@ -1177,7 +1177,7 @@ export async function runDiff(projectDir?: string): Promise<void> {
     console.log("\n~ Changed:");
     for (const d of changed) console.log(`  ~ [${d.kind}] ${d.id}  ${d.detail ?? ""}`);
   }
-  console.log(`\nRun: openclaw-store install to apply these changes.`);
+  console.log(`\nRun: malaclaw install to apply these changes.`);
 }
 ```
 
@@ -1213,7 +1213,7 @@ describe("runDiff", () => {
     process.chdir(tmpDir);
     try {
       await fs.writeFile(
-        path.join(tmpDir, "openclaw-store.yaml"),
+        path.join(tmpDir, "malaclaw.yaml"),
         stringify({ version: 1, packs: [{ id: "dev-company" }], skills: [] }),
       );
       // Should not throw even without lockfile
@@ -1238,12 +1238,12 @@ Expected: PASS
 
 ```bash
 git add src/commands/diff.ts src/cli.ts tests/diff.test.ts
-git commit -m "feat: openclaw-store diff command to preview lockfile changes"
+git commit -m "feat: malaclaw diff command to preview lockfile changes"
 ```
 
 ---
 
-### Task 9: `openclaw-store validate` command
+### Task 9: `malaclaw validate` command
 
 Validates all templates in the active templates path against schema and reports errors.
 
@@ -1317,7 +1317,7 @@ Expected: `✓ All templates valid.`
 
 ```bash
 git add src/commands/validate.ts src/cli.ts
-git commit -m "feat: openclaw-store validate command for schema validation of all templates"
+git commit -m "feat: malaclaw validate command for schema validation of all templates"
 ```
 
 ---
@@ -1333,21 +1333,21 @@ git commit -m "feat: openclaw-store validate command for schema validation of al
 **Step 1: Create `CONTRIBUTING.md`**
 
 ```markdown
-# Contributing to openclaw-store
+# Contributing to malaclaw
 
 ## Submitting a new agent, team, or pack
 
 1. Fork this repo
 2. Copy `templates/agents/_template.yaml` to `templates/agents/<your-id>.yaml`
 3. Fill in all required fields (schema reference: `docs/how-it-works.md`)
-4. Run `openclaw-store validate` — must pass with zero errors
+4. Run `malaclaw validate` — must pass with zero errors
 5. Add a team or pack YAML that uses your agent (optional but recommended)
 6. Add yourself to the `contributors/` directory (see `contributors/_template.md`)
 7. Open a PR with title: `feat(template): add <your-agent-name>`
 
 ## Checklist before submitting
 
-- [ ] `openclaw-store validate` passes
+- [ ] `malaclaw validate` passes
 - [ ] `npm test` passes
 - [ ] Agent has a realistic `soul.persona` with correct `{{variable}}` syntax
 - [ ] Capabilities match the role (`sessions_spawn: false` for non-leads)
@@ -1370,7 +1370,7 @@ git commit -m "feat: openclaw-store validate command for schema validation of al
 npm install
 npm test
 npm run build
-openclaw-store validate
+malaclaw validate
 ```
 
 ## Compatibility policy
@@ -1441,7 +1441,7 @@ graph:
     relationship: delegates_to
 
 shared_memory:
-  dir: "~/.openclaw-store/workspaces/store/your-team-id/shared/memory/"
+  dir: "~/.malaclaw/workspaces/store/your-team-id/shared/memory/"
   files:
     - path: tasks-log.md
       access: append-only
@@ -1552,7 +1552,7 @@ In `readOpenClawConfig`, catch ENOENT specifically and throw with a helpful mess
     if (isNotFound) {
       throw new Error(
         `OpenClaw config not found at ${configPath}.\n` +
-        `Either install OpenClaw first, or run: openclaw-store install --no-openclaw`,
+        `Either install OpenClaw first, or run: malaclaw install --no-openclaw`,
       );
     }
     throw new Error(`Failed to read OpenClaw config at ${configPath}: ${msg}`);
@@ -1563,14 +1563,14 @@ In `readOpenClawConfig`, catch ENOENT specifically and throw with a helpful mess
 
 ```bash
 npm run build
-cd /tmp/test-ocs && openclaw-store init
-openclaw-store install --no-openclaw
+cd /tmp/test-ocs && malaclaw init
+malaclaw install --no-openclaw
 ```
 
 Expected:
 - install succeeds without requiring `~/.openclaw/openclaw.json`
-- `openclaw-store.lock` is written
-- workspace files are created under `~/.openclaw-store/`
+- `malaclaw.lock` is written
+- workspace files are created under `~/.malaclaw/`
 - no OpenClaw config patch is attempted
 
 **Step 5: Commit**
@@ -1627,7 +1627,7 @@ git tag v1.0.0
 
 Express/Fastify HTTP server. Reads manifest, lockfile, runtime state, and openclaw.json.
 Serves JSON API at `/api/v1/`: `GET /packs`, `GET /agents`, `GET /teams`, `GET /skills`, `GET /health`.
-CLI command: `openclaw-store dashboard [--port 3456]`.
+CLI command: `malaclaw dashboard [--port 3456]`.
 
 ### Task 14: Web dashboard frontend — Catalog Browser
 
@@ -1654,7 +1654,7 @@ Skill activation status cards.
 **Files:** `src/lib/pack-fetch.ts`
 
 Fetch pack YAML from a URL (clawhub or raw GitHub).
-Cache to `~/.openclaw-store/cache/packs/<id>-<version>/`.
+Cache to `~/.malaclaw/cache/packs/<id>-<version>/`.
 Verify checksum if provided.
 Require `trust_tier: community` or higher for remote installs.
 Add `--source <url>` flag to `install` command.
@@ -1663,14 +1663,14 @@ Add `--source <url>` flag to `install` command.
 
 **Files:** `src/commands/generate.ts`
 
-`openclaw-store generate "I need a team that can..."` — calls Claude API (via `ANTHROPIC_API_KEY`) to generate a pack YAML draft, validates schema, prompts for review, then saves to `templates/` for use in manifest.
-`openclaw-store review-pack <id>` — AI reviews pack for race conditions, capability mismatches, and missing memory rules.
+`malaclaw generate "I need a team that can..."` — calls Claude API (via `ANTHROPIC_API_KEY`) to generate a pack YAML draft, validates schema, prompts for review, then saves to `templates/` for use in manifest.
+`malaclaw review-pack <id>` — AI reviews pack for race conditions, capability mismatches, and missing memory rules.
 
 ### Task 19: Pack contributor automation
 
 **Files:** `scripts/submit-pack.ts`, `.github/PULL_REQUEST_TEMPLATE.md`
 
-`openclaw-store submit` — validates, creates a PR to this repo with the new template.
+`malaclaw submit` — validates, creates a PR to this repo with the new template.
 GitHub Actions job: runs schema validation + dry-run install against PR templates.
 Auto-labels submissions by trust tier.
 
@@ -1686,9 +1686,9 @@ Enabled by `structured_tasks: true` in manifest.
 
 **Files:** `src/commands/upgrade.ts`
 
-`openclaw-store upgrade` — re-resolves manifest against latest template versions, shows diff, applies.
-`openclaw-store upgrade --pack dev-company --to 1.1.0`.
-Rollback: saves previous lockfile as `openclaw-store.lock.bak` before overwriting.
+`malaclaw upgrade` — re-resolves manifest against latest template versions, shows diff, applies.
+`malaclaw upgrade --pack dev-company --to 1.1.0`.
+Rollback: saves previous lockfile as `malaclaw.lock.bak` before overwriting.
 
 ### Task 22: Phase 2 tag
 
@@ -1711,7 +1711,7 @@ SHA-256 checksums for remote packs. Optional GPG signing for official/curated ti
 
 ### Task 25: Claude Code export
 
-Complete `src/lib/adapters/claude-code.ts`. Export installed teams as `.claude/agents/` layout + `CLAUDE.md` entries. `openclaw-store export --format claude-code`.
+Complete `src/lib/adapters/claude-code.ts`. Export installed teams as `.claude/agents/` layout + `CLAUDE.md` entries. `malaclaw export --format claude-code`.
 
 ### Task 26: Structured task/event backend for large orgs
 
@@ -1763,7 +1763,7 @@ import('./dist/lib/resolver.js').then(async ({resolveManifest}) => {
 })"
 
 # 5. Overlay works
-OPENCLAW_STORE_TEMPLATES=/tmp/my-templates node dist/cli.js list --agents
+MALACLAW_TEMPLATES=/tmp/my-templates node dist/cli.js list --agents
 
 # 6. Diff works (with a lockfile present)
 node dist/cli.js diff

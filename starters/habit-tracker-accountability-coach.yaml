@@ -12,7 +12,7 @@ entry_team: personal-assistant
 packs:
   - personal-assistant
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - brainz-tasks
   - apple-reminders
 installable_skills:
@@ -37,7 +37,7 @@ external_requirements:
   - File system or database access for storing habit data
   - "Optional: Google Sheets integration for a visual habit dashboard"
 bootstrap_prompt: Start the Habit Tracker & Accountability Coach demo project
-  from the openclaw-store starter `habit-tracker-accountability-coach`. You've
+  from the malaclaw starter `habit-tracker-accountability-coach`. You've
   tried every habit tracker app out there. They all work for a week, then you
   stop opening them. The problem isn't the app — it's that tracking habits is
   passive. What if your agent actively reached out to you, asked how your day

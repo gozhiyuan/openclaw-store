@@ -219,7 +219,7 @@ export async function loadManifest(projectDir?: string): Promise<Manifest> {
   const filePath = resolveManifestPath(projectDir);
   if (!(await fileExists(filePath))) {
     throw new Error(
-      `No openclaw-store.yaml found in ${projectDir ?? process.cwd()}.\nRun: openclaw-store init`,
+      `No malaclaw.yaml found in ${projectDir ?? process.cwd()}.\nRun: malaclaw init`,
     );
   }
   const raw = await readYaml<unknown>(filePath);

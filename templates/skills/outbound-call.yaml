@@ -30,4 +30,4 @@ install_hints:
   - "Set: export TWILIO_ACCOUNT_SID=... and export TWILIO_AUTH_TOKEN=..."
   - "Get ElevenLabs API key at elevenlabs.io"
   - "Set: export ELEVENLABS_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

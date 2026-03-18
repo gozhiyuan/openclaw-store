@@ -22,4 +22,4 @@ disabled_until_configured: true
 install_hints:
   - "Get your Todoist API token at todoist.com/app/settings/integrations/developer"
   - "Set: export TODOIST_API_TOKEN=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

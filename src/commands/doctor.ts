@@ -4,7 +4,7 @@ export async function runDoctor(autoFix: boolean = false): Promise<void> {
   const findings = await runChecks();
 
   // Print results
-  console.log("\nopenclaw-store doctor\n");
+  console.log("\nmalaclaw doctor\n");
   let hasErrors = false;
   let hasWarnings = false;
 

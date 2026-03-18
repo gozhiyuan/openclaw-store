@@ -10,7 +10,7 @@ Letting your AI agent directly manage API keys and call external services is a r
 - Recommended Mode: managed-team
 - Entry Team: dev-company
 - Packs: dev-company
-- Project Skills: openclaw-store-manager
+- Project Skills: malaclaw-manager
 - Installable OpenClaw Skills: fetch, n8n
 - Required APIs / Services: n8n API access (for creating/triggering workflows), fetch or curl for webhook calls, n8n credential management (manual, one-time setup per integration), n8n Webhook Trigger Docs
 - Required Capabilities / Tools: fetch or curl for webhook calls
@@ -20,7 +20,7 @@ Letting your AI agent directly manage API keys and call external services is a r
 ## Execution Paths
 
 - Default workflow: Stay in the normal OpenClaw or Claude Code default workflow if you only need one generalist agent or want to prototype without managed teams.
-- Managed workflow: Initialize this starter, run openclaw-store install, then open the `dev-company` project entry-point agent for structured multi-agent execution.
+- Managed workflow: Initialize this starter, run malaclaw install, then open the `dev-company` project entry-point agent for structured multi-agent execution.
 
 ## Setup Guidance
 
@@ -28,7 +28,7 @@ Letting your AI agent directly manage API keys and call external services is a r
 - If you want managed execution, initialize the starter and use `dev-company` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
 - Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
-- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run malaclaw install.
 
 ## Installable OpenClaw Skills
 
@@ -56,20 +56,20 @@ Letting your AI agent directly manage API keys and call external services is a r
 ## Bootstrap Prompt
 
 ```text
-Start the OpenClaw + n8n Workflow Orchestration demo project from the openclaw-store starter `n8n-workflow-orchestration`. Letting your AI agent directly manage API keys and call external services is a recipe for security incidents. Every new integration means another credential in `.env.local`, another surface for the agent to accidentally leak or misuse. Use `dev-company` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
+Start the OpenClaw + n8n Workflow Orchestration demo project from the malaclaw starter `n8n-workflow-orchestration`. Letting your AI agent directly manage API keys and call external services is a recipe for security incidents. Every new integration means another credential in `.env.local`, another surface for the agent to accidentally leak or misuse. Use `dev-company` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
 ```
 
 ## Suggested Flow
 
-1. Inspect the starter with `openclaw-store starter show n8n-workflow-orchestration`.
-2. Initialize it with `openclaw-store starter init n8n-workflow-orchestration <dir>`.
+1. Inspect the starter with `malaclaw starter show n8n-workflow-orchestration`.
+2. Initialize it with `malaclaw starter init n8n-workflow-orchestration <dir>`.
 3. Review STARTER.md and this demo card.
 4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
-5. Run `openclaw-store install` and execute through the project entry-point agent.
+5. Run `malaclaw install` and execute through the project entry-point agent.
 
 ## Skills Setup
 
-### Required (install before `openclaw-store install`)
+### Required (install before `malaclaw install`)
 
 | Skill | Install | Env var | Get key |
 |---|---|---|---|

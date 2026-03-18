@@ -42,16 +42,16 @@ export async function projectStatus(projectDir?: string): Promise<void> {
 
   if (!lockfile) {
     if (mode === "claude-code-default") {
-      console.log("\nNo openclaw-store lockfile found. This repo appears to use the default Claude Code workflow.");
-      console.log("Run: openclaw-store init if you want project, team, and skill management from openclaw-store.");
+      console.log("\nNo malaclaw lockfile found. This repo appears to use the default Claude Code workflow.");
+      console.log("Run: malaclaw init if you want project, team, and skill management from malaclaw.");
       return;
     }
     if (mode === "openclaw-default") {
-      console.log("\nNo openclaw-store lockfile found. This environment appears to use the default OpenClaw workflow.");
-      console.log("Run: openclaw-store init if you want project, team, and skill management from openclaw-store.");
+      console.log("\nNo malaclaw lockfile found. This environment appears to use the default OpenClaw workflow.");
+      console.log("Run: malaclaw init if you want project, team, and skill management from malaclaw.");
       return;
     }
-    console.log("\nNo lockfile found. Run: openclaw-store install");
+    console.log("\nNo lockfile found. Run: malaclaw install");
     return;
   }
 
@@ -189,7 +189,7 @@ export async function projectAttachAgent(agentId: string, projectDir?: string): 
   }, projectDir);
 
   console.log(`Attached native OpenClaw agent "${agentId}" to this project.`);
-  console.log("Run: openclaw-store install");
+  console.log("Run: malaclaw install");
 }
 
 export async function projectDetachAgent(agentId: string, projectDir?: string): Promise<void> {
@@ -208,5 +208,5 @@ export async function projectDetachAgent(agentId: string, projectDir?: string): 
     },
   }, projectDir);
   console.log(`Detached native OpenClaw agent "${agentId}" from this project.`);
-  console.log("Run: openclaw-store install");
+  console.log("Run: malaclaw install");
 }

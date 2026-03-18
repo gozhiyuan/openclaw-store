@@ -9,7 +9,7 @@ entry_team: automation-ops
 packs:
   - automation-ops
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - clawemail
 installable_skills:
   - microsoft365
@@ -23,7 +23,7 @@ required_capabilities: []
 external_requirements:
   - Gmail OAuth Setup.
 bootstrap_prompt: Start the Inbox De-clutter demo project from the
-  openclaw-store starter `inbox-declutter`. Newsletters can take up the inbox
+  malaclaw starter `inbox-declutter`. Newsletters can take up the inbox
   like nothing else. Often times they pile-up without being opened at all. Use
   `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any
   missing external integrations, then break the work into clear team tasks.

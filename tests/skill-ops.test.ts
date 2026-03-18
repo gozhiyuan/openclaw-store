@@ -12,16 +12,16 @@ let originalStoreDir: string | undefined;
 beforeEach(async () => {
   tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-skill-ops-"));
   originalHome = process.env.HOME;
-  originalStoreDir = process.env.OPENCLAW_STORE_DIR;
+  originalStoreDir = process.env.MALACLAW_DIR;
   process.env.HOME = path.join(tmpDir, "home");
-  process.env.OPENCLAW_STORE_DIR = path.join(tmpDir, "store");
+  process.env.MALACLAW_DIR = path.join(tmpDir, "store");
 });
 
 afterEach(async () => {
   if (originalHome === undefined) delete process.env.HOME;
   else process.env.HOME = originalHome;
-  if (originalStoreDir === undefined) delete process.env.OPENCLAW_STORE_DIR;
-  else process.env.OPENCLAW_STORE_DIR = originalStoreDir;
+  if (originalStoreDir === undefined) delete process.env.MALACLAW_DIR;
+  else process.env.MALACLAW_DIR = originalStoreDir;
   await fs.rm(tmpDir, { recursive: true, force: true });
 });
 
@@ -51,7 +51,7 @@ describe("skill-ops", () => {
       ],
     };
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.lock"),
+      path.join(tmpDir, "malaclaw.lock"),
       stringify(lockfileContent),
       "utf-8",
     );

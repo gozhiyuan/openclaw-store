@@ -10,7 +10,7 @@ entry_team: automation-ops
 packs:
   - automation-ops
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - clawemail
   - connect-apps
 installable_skills:
@@ -35,7 +35,7 @@ external_requirements:
   - Asana API or skill
   - Telegram channel with multiple topics configured
 bootstrap_prompt: Start the Multi-Channel Personal Assistant demo project from
-  the openclaw-store starter `multi-channel-assistant`. Context-switching
+  the malaclaw starter `multi-channel-assistant`. Context-switching
   between apps to manage tasks, schedule events, send messages, and track work
   is exhausting. You want one interface that routes to all your tools. Use
   `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any

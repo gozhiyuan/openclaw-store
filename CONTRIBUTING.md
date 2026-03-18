@@ -1,18 +1,18 @@
-# Contributing to openclaw-store
+# Contributing to malaclaw
 
 ## Submitting a new agent, team, or pack
 
 1. Fork this repo
 2. Copy `templates/agents/_template.yaml` to `templates/agents/<your-id>.yaml`
 3. Fill in all required fields (schema reference: `docs/how-it-works.md`)
-4. Run `openclaw-store validate` — must pass with zero errors
+4. Run `malaclaw validate` — must pass with zero errors
 5. Add a team or pack YAML that uses your agent (optional but recommended)
 6. Add yourself to the `contributors/` directory (see `contributors/_template.md`)
 7. Open a PR with title: `feat(template): add <your-agent-name>`
 
 ## Checklist before submitting
 
-- [ ] `openclaw-store validate` passes
+- [ ] `malaclaw validate` passes
 - [ ] `npm test` passes
 - [ ] Agent has a realistic `soul.persona` with correct `{{variable}}` syntax
 - [ ] Capabilities match the role (`sessions_spawn: false` for non-leads)
@@ -35,7 +35,7 @@
 npm install
 npm test
 npm run build
-openclaw-store validate
+malaclaw validate
 ```
 
 ## Compatibility policy

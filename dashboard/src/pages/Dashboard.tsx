@@ -66,7 +66,7 @@ export function Dashboard() {
       <div style={{ padding: 32, textAlign: "center" }}>
         <h2 style={{ color: "#f0f6fc", marginBottom: 8 }}>No projects found</h2>
         <p style={{ color: "#8b949e" }}>
-          Create an openclaw-store.yaml manifest and run install to get started.
+          Create an malaclaw.yaml manifest and run install to get started.
         </p>
       </div>
     );

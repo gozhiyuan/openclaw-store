@@ -10,7 +10,7 @@ entry_team: dev-company
 packs:
   - dev-company
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - github
 installable_skills: []
 tags:
@@ -30,7 +30,7 @@ external_requirements:
   - Cron jobs for daily summaries
   - Sub-agents for parallel project analysis
 bootstrap_prompt: "Start the Project State Management System: Event-Driven
-  Alternative to Kanban demo project from the openclaw-store starter
+  Alternative to Kanban demo project from the malaclaw starter
   `project-state-management`. Traditional Kanban boards are static and require
   manual updates. You forget to move cards, lose context between sessions, and
   can't track the \"why\" behind state changes. Projects drift without clear

@@ -12,7 +12,7 @@ entry_team: autonomous-startup
 packs:
   - autonomous-startup
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
 installable_skills: []
 tags:
   - automation
@@ -31,7 +31,7 @@ external_requirements:
   - Individual API keys for different model providers (if using mixed models)
   - A VPS or always-on machine to run the agents
 bootstrap_prompt: Start the Multi-Agent Specialized Team (Solo Founder Setup)
-  demo project from the openclaw-store starter `multi-agent-team`. Solo founders
+  demo project from the malaclaw starter `multi-agent-team`. Solo founders
   wear every hat — strategy, development, marketing, sales, operations.
   Context-switching between these roles destroys deep work. Hiring is expensive
   and slow. What if you could spin up a small, specialized team of AI agents,

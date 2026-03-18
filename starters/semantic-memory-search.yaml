@@ -11,7 +11,7 @@ entry_team: data-ops
 packs:
   - data-ops
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - duckdb-en
 installable_skills:
   - nocodb
@@ -28,7 +28,7 @@ external_requirements:
   - No OpenClaw skills required — memsearch is a standalone Python CLI/library
   - Python 3.10+ with pip or uv
 bootstrap_prompt: Start the Semantic Memory Search demo project from the
-  openclaw-store starter `semantic-memory-search`. OpenClaw's built-in memory
+  malaclaw starter `semantic-memory-search`. OpenClaw's built-in memory
   system stores everything as markdown files — but as memories grow over weeks
   and months, finding that one decision from last Tuesday becomes impossible.
   There is no search, just scrolling through files. Use `research-lab` as the

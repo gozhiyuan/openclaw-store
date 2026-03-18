@@ -22,4 +22,4 @@ disabled_until_configured: true
 install_hints:
   - "Sign up at publora.com and get your API key"
   - "Set: export PUBLORA_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

@@ -10,7 +10,7 @@ Before OpenClaw starts building anything new, it automatically checks whether th
 - Recommended Mode: managed-team
 - Entry Team: research-lab
 - Packs: research-lab
-- Project Skills: openclaw-store-manager
+- Project Skills: malaclaw-manager
 - Installable OpenClaw Skills: —
 - Required APIs / Services: —
 - Required Capabilities / Tools: —
@@ -20,7 +20,7 @@ Before OpenClaw starts building anything new, it automatically checks whether th
 ## Execution Paths
 
 - Default workflow: Stay in the normal OpenClaw or Claude Code default workflow if you only need one generalist agent or want to prototype without managed teams.
-- Managed workflow: Initialize this starter, run openclaw-store install, then open the `research-lab` project entry-point agent for structured multi-agent execution.
+- Managed workflow: Initialize this starter, run malaclaw install, then open the `research-lab` project entry-point agent for structured multi-agent execution.
 
 ## Setup Guidance
 
@@ -36,20 +36,20 @@ Before OpenClaw starts building anything new, it automatically checks whether th
 ## Bootstrap Prompt
 
 ```text
-Start the Pre-Build Idea Validator demo project from the openclaw-store starter `pre-build-idea-validator`. Before OpenClaw starts building anything new, it automatically checks whether the idea already exists across GitHub, Hacker News, npm, PyPI, and Product Hunt — and adjusts its approach based on what it finds. Use `research-lab` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
+Start the Pre-Build Idea Validator demo project from the malaclaw starter `pre-build-idea-validator`. Before OpenClaw starts building anything new, it automatically checks whether the idea already exists across GitHub, Hacker News, npm, PyPI, and Product Hunt — and adjusts its approach based on what it finds. Use `research-lab` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
 ```
 
 ## Suggested Flow
 
-1. Inspect the starter with `openclaw-store starter show pre-build-idea-validator`.
-2. Initialize it with `openclaw-store starter init pre-build-idea-validator <dir>`.
+1. Inspect the starter with `malaclaw starter show pre-build-idea-validator`.
+2. Initialize it with `malaclaw starter init pre-build-idea-validator <dir>`.
 3. Review STARTER.md and this demo card.
 4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
-5. Run `openclaw-store install` and execute through the project entry-point agent.
+5. Run `malaclaw install` and execute through the project entry-point agent.
 
 ## Skills Setup
 
-### Required (install before `openclaw-store install`)
+### Required (install before `malaclaw install`)
 
 | Skill | Install | Env var | Get key |
 |---|---|---|---|

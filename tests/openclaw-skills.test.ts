@@ -11,9 +11,9 @@ let originalStoreDir: string | undefined;
 beforeEach(async () => {
   tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-native-skills-"));
   originalHome = process.env.HOME;
-  originalStoreDir = process.env.OPENCLAW_STORE_DIR;
+  originalStoreDir = process.env.MALACLAW_DIR;
   process.env.HOME = path.join(tmpDir, "home");
-  process.env.OPENCLAW_STORE_DIR = path.join(tmpDir, "store");
+  process.env.MALACLAW_DIR = path.join(tmpDir, "store");
   await fs.mkdir(path.join(process.env.HOME!, ".openclaw", "workspace", "skills", "native-skill"), { recursive: true });
   await fs.writeFile(path.join(process.env.HOME!, ".openclaw", "workspace", "skills", "native-skill", "SKILL.md"), "# Native Skill\n");
 });
@@ -21,8 +21,8 @@ beforeEach(async () => {
 afterEach(async () => {
   if (originalHome === undefined) delete process.env.HOME;
   else process.env.HOME = originalHome;
-  if (originalStoreDir === undefined) delete process.env.OPENCLAW_STORE_DIR;
-  else process.env.OPENCLAW_STORE_DIR = originalStoreDir;
+  if (originalStoreDir === undefined) delete process.env.MALACLAW_DIR;
+  else process.env.MALACLAW_DIR = originalStoreDir;
   await fs.rm(tmpDir, { recursive: true, force: true });
 });
 
@@ -31,7 +31,7 @@ describe("OpenClaw skill discovery", () => {
     const skills = await syncSkillsInventory();
     expect(skills.some((skill) => skill.id === "native-skill")).toBe(true);
 
-    const inventoryPath = path.join(process.env.OPENCLAW_STORE_DIR!, "skills-index.json");
+    const inventoryPath = path.join(process.env.MALACLAW_DIR!, "skills-index.json");
     const raw = JSON.parse(await fs.readFile(inventoryPath, "utf-8"));
     expect(raw.skills.some((skill: { id: string }) => skill.id === "native-skill")).toBe(true);
   });

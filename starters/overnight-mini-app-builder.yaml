@@ -10,7 +10,7 @@ entry_team: autonomous-startup
 packs:
   - autonomous-startup
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - github
 installable_skills:
   - agentic-devops
@@ -29,7 +29,7 @@ external_requirements:
   - sessions_spawn / sessions_send for autonomous task execution
   - Next.js or similar (for the Kanban board — OpenClaw builds it for you)
 bootstrap_prompt: Start the Goal-Driven Autonomous Tasks demo project from the
-  openclaw-store starter `overnight-mini-app-builder`. Your AI agent is powerful
+  malaclaw starter `overnight-mini-app-builder`. Your AI agent is powerful
   but reactive — it only works when you tell it what to do. What if it knew your
   goals and proactively came up with tasks to move you closer to them every
   single day, without being asked? Use `autonomous-startup` as the initial entry

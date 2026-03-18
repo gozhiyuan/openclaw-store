@@ -6,7 +6,7 @@ import { stringify } from "yaml";
 import { runChecks } from "../src/lib/doctor.js";
 
 const envKeys = [
-  "OPENCLAW_STORE_DIR",
+  "MALACLAW_DIR",
   "OPENCLAW_STATE_DIR",
   "OPENCLAW_CONFIG_PATH",
   "HOME",
@@ -84,7 +84,7 @@ describe("runChecks", () => {
     tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-doctor-"));
     saveEnv();
 
-    // No openclaw-store.yaml in tmpDir
+    // No malaclaw.yaml in tmpDir
     process.env.OPENCLAW_CONFIG_PATH = path.join(tmpDir, "openclaw.json");
 
     const findings = await runChecks({ projectDir: tmpDir });
@@ -95,12 +95,12 @@ describe("runChecks", () => {
     expect(manifestFinding?.severity).toBe("warning");
   });
 
-  it("reports ok for manifest when openclaw-store.yaml exists", async () => {
+  it("reports ok for manifest when malaclaw.yaml exists", async () => {
     tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-doctor-"));
     saveEnv();
 
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.yaml"),
+      path.join(tmpDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
     process.env.OPENCLAW_CONFIG_PATH = path.join(tmpDir, "openclaw.json");
@@ -116,7 +116,7 @@ describe("runChecks", () => {
     tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-doctor-"));
     saveEnv();
 
-    // No openclaw-store.lock in tmpDir
+    // No malaclaw.lock in tmpDir
     process.env.OPENCLAW_CONFIG_PATH = path.join(tmpDir, "openclaw.json");
 
     const findings = await runChecks({ projectDir: tmpDir });
@@ -131,11 +131,11 @@ describe("runChecks", () => {
     saveEnv();
 
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.yaml"),
+      path.join(tmpDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.lock"),
+      path.join(tmpDir, "malaclaw.lock"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
     process.env.OPENCLAW_CONFIG_PATH = path.join(tmpDir, "openclaw.json");
@@ -166,9 +166,9 @@ describe("runChecks", () => {
     tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-doctor-"));
     saveEnv();
 
-    // Create openclaw-store.yaml to put us in 'managed' mode (not default)
+    // Create malaclaw.yaml to put us in 'managed' mode (not default)
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.yaml"),
+      path.join(tmpDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
     // Point config path at non-existent file
@@ -201,11 +201,11 @@ describe("runChecks", () => {
     saveEnv();
 
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.yaml"),
+      path.join(tmpDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.lock"),
+      path.join(tmpDir, "malaclaw.lock"),
       stringify({
         version: 1,
         packs: [],
@@ -236,11 +236,11 @@ describe("runChecks", () => {
     saveEnv();
 
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.yaml"),
+      path.join(tmpDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [], skills: [] }),
     );
     await fs.writeFile(
-      path.join(tmpDir, "openclaw-store.lock"),
+      path.join(tmpDir, "malaclaw.lock"),
       stringify({
         version: 1,
         packs: [],

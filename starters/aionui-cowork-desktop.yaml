@@ -13,7 +13,7 @@ entry_team: autonomous-startup
 packs:
   - autonomous-startup
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
 installable_skills: []
 
 tags:
@@ -31,7 +31,7 @@ external_requirements:
   - API keys or auth for your models (OpenClaw config + any built-in agent keys
     in AionUi).
 bootstrap_prompt: Start the OpenClaw as Desktop Cowork (AionUi) — Remote Rescue
-  & Multi-Agent Hub demo project from the openclaw-store starter
+  & Multi-Agent Hub demo project from the malaclaw starter
   `aionui-cowork-desktop`. Use OpenClaw from a desktop Cowork UI, access it from
   Telegram or WebUI when you’re away, and fix it remotely when it won’t connect.
   AionUi is a free, open-source app that runs **OpenClaw as a first-class

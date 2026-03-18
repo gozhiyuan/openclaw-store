@@ -222,7 +222,7 @@ export const DemoProjectIndex = z.object({
 export type DemoProjectDef = z.infer<typeof DemoProjectDef>;
 export type DemoProjectIndex = z.infer<typeof DemoProjectIndex>;
 
-// ── Project manifest (openclaw-store.yaml) ───────────────────────────────────
+// ── Project manifest (malaclaw.yaml) ───────────────────────────────────
 
 export const ManifestProject = z.object({
   id: z.string().optional(),
@@ -259,7 +259,7 @@ export type Manifest = z.infer<typeof Manifest>;
 export type ManifestPackRef = z.infer<typeof ManifestPackRef>;
 export type ManifestProject = z.infer<typeof ManifestProject>;
 
-// ── Lockfile (openclaw-store.lock) ───────────────────────────────────────────
+// ── Lockfile (malaclaw.lock) ───────────────────────────────────────────
 
 export const LockedProject = z.object({
   id: z.string(),
@@ -311,7 +311,7 @@ export type LockedPack = z.infer<typeof LockedPack>;
 export type LockedSkill = z.infer<typeof LockedSkill>;
 export type LockedAgent = z.infer<typeof LockedAgent>;
 
-// ── Runtime registry (~/.openclaw-store/runtime.json) ───────────────────────
+// ── Runtime registry (~/.malaclaw/runtime.json) ───────────────────────
 
 export const RuntimeEntryPoint = z.object({
   team_id: z.string(),
@@ -354,7 +354,7 @@ export type RuntimeAttachedAgent = z.infer<typeof RuntimeAttachedAgent>;
 export type RuntimeProject = z.infer<typeof RuntimeProject>;
 export type RuntimeState = z.infer<typeof RuntimeState>;
 
-// ── Skill inventory (~/.openclaw-store/skills-index.json) ───────────────────
+// ── Skill inventory (~/.malaclaw/skills-index.json) ───────────────────
 
 export const DiscoveredSkill = z.object({
   id: z.string(),

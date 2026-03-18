@@ -26,4 +26,4 @@ install_hints:
   - "Create a Google Cloud project and enable Gmail + Drive APIs"
   - "Create OAuth2 credentials at console.cloud.google.com"
   - "Set: export GOOGLE_CLIENT_ID=... and export GOOGLE_CLIENT_SECRET=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

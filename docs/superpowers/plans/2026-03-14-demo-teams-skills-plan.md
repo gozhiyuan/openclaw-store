@@ -2,11 +2,11 @@
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add 5 purpose-built agent teams, 25 skill templates, re-map all 37 demo projects to the correct team + skills, and update the `openclaw-store-manager` skill with an interactive guided install flow.
+**Goal:** Add 5 purpose-built agent teams, 25 skill templates, re-map all 37 demo projects to the correct team + skills, and update the `malaclaw-manager` skill with an interactive guided install flow.
 
 **Architecture:** All changes are YAML/Markdown data files — no TypeScript code changes required. The existing infrastructure (`schema.ts`, `loader.ts`, `resolver.ts`, `renderer.ts`) handles everything. The dependency order is: skill templates → agent templates → team templates → pack definitions → existing agent updates → starter YAMLs → demo cards + index → manager skill.
 
-**Tech Stack:** YAML (agent/team/pack/skill/starter templates), Markdown (demo cards, skill docs), Zod validation via `openclaw-store validate`, Vitest via `npm test`
+**Tech Stack:** YAML (agent/team/pack/skill/starter templates), Markdown (demo cards, skill docs), Zod validation via `malaclaw validate`, Vitest via `npm test`
 
 **Spec:** `docs/superpowers/specs/2026-03-14-demo-teams-and-skills-design.md`
 
@@ -56,7 +56,7 @@ install_hints:
   - "Create a Google Cloud project and enable Gmail + Drive APIs"
   - "Create OAuth2 credentials at console.cloud.google.com"
   - "Set: export GOOGLE_CLIENT_ID=... and export GOOGLE_CLIENT_SECRET=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 2: Create `templates/skills/microsoft365.yaml`**
@@ -89,7 +89,7 @@ install_hints:
   - "Register an app in Azure Active Directory at portal.azure.com"
   - "Grant Microsoft Graph API permissions: Mail.ReadWrite, Calendars.ReadWrite, Files.ReadWrite"
   - "Set: export MS365_CLIENT_ID=... and export MS365_CLIENT_SECRET=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 3: Create `templates/skills/connect-apps.yaml`**
@@ -143,7 +143,7 @@ disabled_until_configured: true
 install_hints:
   - "Sign up at publora.com and get your API key"
   - "Set: export PUBLORA_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 5: Create `templates/skills/outbound-call.yaml`**
@@ -180,7 +180,7 @@ install_hints:
   - "Set: export TWILIO_ACCOUNT_SID=... and export TWILIO_AUTH_TOKEN=..."
   - "Get ElevenLabs API key at elevenlabs.io"
   - "Set: export ELEVENLABS_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 6: Create `templates/skills/danube.yaml`**
@@ -212,8 +212,8 @@ install_hints:
 - [ ] **Step 7: Validate communication skills**
 
 ```bash
-cd /path/to/openclaw-store
-npm run build && openclaw-store validate
+cd /path/to/malaclaw
+npm run build && malaclaw validate
 ```
 
 Expected: all 6 new skill templates pass validation with no errors.
@@ -266,7 +266,7 @@ disabled_until_configured: true
 install_hints:
   - "Enable Google Calendar API in your Google Cloud project"
   - "Reuse GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET from clawemail if already set"
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 2: Create `templates/skills/apple-calendar.yaml`**
@@ -349,13 +349,13 @@ disabled_until_configured: true
 install_hints:
   - "Get your Todoist API token at todoist.com/app/settings/integrations/developer"
   - "Set: export TODOIST_API_TOKEN=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 5: Validate and commit**
 
 ```bash
-openclaw-store validate
+malaclaw validate
 git add templates/skills/google-calendar.yaml templates/skills/apple-calendar.yaml \
   templates/skills/apple-reminders.yaml templates/skills/brainz-tasks.yaml
 git commit -m "feat: add calendar and productivity skill templates"
@@ -453,7 +453,7 @@ install_hints:
 - [ ] **Step 4: Validate and commit**
 
 ```bash
-openclaw-store validate
+malaclaw validate
 git add templates/skills/apple-health-skill.yaml templates/skills/apple-contacts.yaml \
   templates/skills/faster-whisper.yaml
 git commit -m "feat: add health, contacts, and transcription skill templates"
@@ -498,7 +498,7 @@ disabled_until_configured: true
 install_hints:
   - "Get a free API key at brave.com/search/api (2,000 queries/month free)"
   - "Set: export BRAVE_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 2: Create `templates/skills/social-intelligence.yaml`**
@@ -527,7 +527,7 @@ disabled_until_configured: true
 install_hints:
   - "Get API key from the Social Intelligence skill README on ClawHub"
   - "Set: export SOCIAL_INTEL_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 3: Create `templates/skills/arxiv-watcher.yaml`**
@@ -607,7 +607,7 @@ install_hints:
   - "Enable YouTube Data API v3 in Google Cloud Console"
   - "Create an API key at console.cloud.google.com/apis/credentials"
   - "Set: export YOUTUBE_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 6: Create `templates/skills/x-research-but-cheaper.yaml`**
@@ -636,7 +636,7 @@ disabled_until_configured: true
 install_hints:
   - "Sign up at twitterapi.io for an API key"
   - "Set: export TWITTER_API_IO_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 7: Create `templates/skills/fal-ai.yaml`**
@@ -665,13 +665,13 @@ disabled_until_configured: true
 install_hints:
   - "Sign up at fal.ai and get your API key from the dashboard"
   - "Set: export FAL_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 8: Validate and commit**
 
 ```bash
-openclaw-store validate
+malaclaw validate
 git add templates/skills/aluvia-brave-search.yaml templates/skills/social-intelligence.yaml \
   templates/skills/arxiv-watcher.yaml templates/skills/rss-skill.yaml \
   templates/skills/youtube-pro.yaml templates/skills/x-research-but-cheaper.yaml \
@@ -748,7 +748,7 @@ install_hints:
   - "Set: export NOCODB_BASE_URL=http://localhost:8080"
   - "Get API token from NocoDB dashboard → Team & Settings → API Tokens"
   - "Set: export NOCODB_API_TOKEN=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 3: Create `templates/skills/agentic-devops.yaml`**
@@ -810,7 +810,7 @@ install_hints:
   - "Set: export N8N_BASE_URL=http://localhost:5678"
   - "Get API key from n8n Settings → API"
   - "Set: export N8N_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 5: Create `templates/skills/reef-polymarket-research.yaml`**
@@ -840,13 +840,13 @@ install_hints:
   - "Create a Polymarket account at polymarket.com"
   - "Get your API key from Polymarket account settings"
   - "Set: export POLYMARKET_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"
 ```
 
 - [ ] **Step 6: Validate all 25 skill templates and run test suite**
 
 ```bash
-openclaw-store validate
+malaclaw validate
 npm test
 ```
 
@@ -1109,7 +1109,7 @@ team_role:
 - [ ] **Step 5: Validate and commit personal assistant agents**
 
 ```bash
-openclaw-store validate
+malaclaw validate
 git add templates/agents/personal-assistant-lead.yaml templates/agents/life-organizer.yaml \
   templates/agents/health-wellness-tracker.yaml templates/agents/knowledge-manager.yaml
 git commit -m "feat: add personal-assistant team agent templates"
@@ -1353,7 +1353,7 @@ team_role:
 - [ ] **Step 5: Validate and commit automation ops agents**
 
 ```bash
-openclaw-store validate
+malaclaw validate
 git add templates/agents/automation-lead.yaml templates/agents/communications-agent.yaml \
   templates/agents/integration-specialist.yaml templates/agents/notification-agent.yaml
 git commit -m "feat: add automation-ops team agent templates"
@@ -2051,7 +2051,7 @@ team_role:
 - [ ] **Step 4: Validate all 20 new agent templates and run full test suite**
 
 ```bash
-openclaw-store validate
+malaclaw validate
 npm test
 ```
 
@@ -2105,7 +2105,7 @@ graph:
     relationship: delegates_to
 
 shared_memory:
-  dir: "~/.openclaw-store/workspaces/store/<project-id>/personal-assistant/shared/memory/"
+  dir: "~/.malaclaw/workspaces/store/<project-id>/personal-assistant/shared/memory/"
   files:
     - path: daily-brief.md
       access: single-writer
@@ -2145,7 +2145,7 @@ graph:
     relationship: delegates_to
 
 shared_memory:
-  dir: "~/.openclaw-store/workspaces/store/<project-id>/automation-ops/shared/memory/"
+  dir: "~/.malaclaw/workspaces/store/<project-id>/automation-ops/shared/memory/"
   files:
     - path: workflow-state.md
       access: single-writer
@@ -2188,7 +2188,7 @@ graph:
     relationship: requests_review
 
 shared_memory:
-  dir: "~/.openclaw-store/workspaces/store/<project-id>/customer-service/shared/memory/"
+  dir: "~/.malaclaw/workspaces/store/<project-id>/customer-service/shared/memory/"
   files:
     - path: ticket-queue.md
       access: single-writer
@@ -2231,7 +2231,7 @@ graph:
     relationship: requests_review
 
 shared_memory:
-  dir: "~/.openclaw-store/workspaces/store/<project-id>/finance-ops/shared/memory/"
+  dir: "~/.malaclaw/workspaces/store/<project-id>/finance-ops/shared/memory/"
   files:
     - path: portfolio-state.md
       access: single-writer
@@ -2271,7 +2271,7 @@ graph:
     relationship: delegates_to
 
 shared_memory:
-  dir: "~/.openclaw-store/workspaces/store/<project-id>/data-ops/shared/memory/"
+  dir: "~/.malaclaw/workspaces/store/<project-id>/data-ops/shared/memory/"
   files:
     - path: pipeline-state.md
       access: single-writer
@@ -2284,7 +2284,7 @@ shared_memory:
 - [ ] **Step 6: Validate team templates**
 
 ```bash
-openclaw-store validate
+malaclaw validate
 ```
 
 Expected: all 5 team templates pass.
@@ -2386,7 +2386,7 @@ compatibility:
 - [ ] **Step 2: Validate packs and run full test suite**
 
 ```bash
-openclaw-store validate
+malaclaw validate
 npm test
 ```
 
@@ -2514,7 +2514,7 @@ skills:
 - [ ] **Step 13: Validate all modified agents and run full test suite**
 
 ```bash
-openclaw-store validate
+malaclaw validate
 npm test
 ```
 
@@ -2548,12 +2548,12 @@ For each file, update `entry_team` and `packs` to `personal-assistant`, set `pro
 
 | Starter file | `entry_team` | `packs` | `project_skills` | `installable_skills` | `required_apis` |
 |---|---|---|---|---|---|
-| `starters/habit-tracker-accountability-coach.yaml` | personal-assistant | [personal-assistant] | [openclaw-store-manager, brainz-tasks, apple-reminders] | [publora-telegram] | Todoist API |
-| `starters/health-symptom-tracker.yaml` | personal-assistant | [personal-assistant] | [openclaw-store-manager, apple-health-skill] | [apple-reminders] | — (macOS only) |
-| `starters/family-calendar-household-assistant.yaml` | personal-assistant | [personal-assistant] | [openclaw-store-manager] | [google-calendar, apple-calendar, publora-telegram, clawemail] | Google Calendar API or Apple Calendar |
-| `starters/meeting-notes-action-items.yaml` | personal-assistant | [personal-assistant] | [openclaw-store-manager, faster-whisper] | [google-calendar, clawemail] | — (local whisper) |
-| `starters/personal-crm.yaml` | personal-assistant | [personal-assistant] | [openclaw-store-manager, clawemail, apple-contacts] | [danube] | Google OAuth2 |
-| `starters/second-brain.yaml` | personal-assistant | [personal-assistant] | [openclaw-store-manager, danube] | [duckdb-en, rss-skill] | Danube API |
+| `starters/habit-tracker-accountability-coach.yaml` | personal-assistant | [personal-assistant] | [malaclaw-manager, brainz-tasks, apple-reminders] | [publora-telegram] | Todoist API |
+| `starters/health-symptom-tracker.yaml` | personal-assistant | [personal-assistant] | [malaclaw-manager, apple-health-skill] | [apple-reminders] | — (macOS only) |
+| `starters/family-calendar-household-assistant.yaml` | personal-assistant | [personal-assistant] | [malaclaw-manager] | [google-calendar, apple-calendar, publora-telegram, clawemail] | Google Calendar API or Apple Calendar |
+| `starters/meeting-notes-action-items.yaml` | personal-assistant | [personal-assistant] | [malaclaw-manager, faster-whisper] | [google-calendar, clawemail] | — (local whisper) |
+| `starters/personal-crm.yaml` | personal-assistant | [personal-assistant] | [malaclaw-manager, clawemail, apple-contacts] | [danube] | Google OAuth2 |
+| `starters/second-brain.yaml` | personal-assistant | [personal-assistant] | [malaclaw-manager, danube] | [duckdb-en, rss-skill] | Danube API |
 
 Example YAML diff for `habit-tracker-accountability-coach.yaml`:
 ```yaml
@@ -2562,7 +2562,7 @@ entry_team: personal-assistant
 packs:
   - personal-assistant
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - brainz-tasks
   - apple-reminders
 installable_skills:
@@ -2580,66 +2580,66 @@ setup_guidance:
 
 | Starter file | `entry_team` | `packs` | `project_skills` | `installable_skills` |
 |---|---|---|---|---|
-| `starters/inbox-declutter.yaml` | automation-ops | [automation-ops] | [openclaw-store-manager, clawemail] | [microsoft365] |
-| `starters/phone-based-personal-assistant.yaml` | automation-ops | [automation-ops] | [openclaw-store-manager, outbound-call] | [publora-telegram] |
-| `starters/phone-call-notifications.yaml` | automation-ops | [automation-ops] | [openclaw-store-manager, outbound-call] | [clawemail] |
-| `starters/multi-channel-assistant.yaml` | automation-ops | [automation-ops] | [openclaw-store-manager, clawemail, connect-apps] | [publora-telegram, microsoft365] |
-| `starters/event-guest-confirmation.yaml` | automation-ops | [automation-ops] | [openclaw-store-manager, clawemail] | [google-calendar, publora-telegram] |
-| `starters/n8n-workflow-orchestration.yaml` | automation-ops | [automation-ops] | [openclaw-store-manager, n8n] | [gh, agentic-devops] |
-| `starters/todoist-task-manager.yaml` | automation-ops | [automation-ops] | [openclaw-store-manager, brainz-tasks] | [google-calendar] |
+| `starters/inbox-declutter.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, clawemail] | [microsoft365] |
+| `starters/phone-based-personal-assistant.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, outbound-call] | [publora-telegram] |
+| `starters/phone-call-notifications.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, outbound-call] | [clawemail] |
+| `starters/multi-channel-assistant.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, clawemail, connect-apps] | [publora-telegram, microsoft365] |
+| `starters/event-guest-confirmation.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, clawemail] | [google-calendar, publora-telegram] |
+| `starters/n8n-workflow-orchestration.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, n8n] | [gh, agentic-devops] |
+| `starters/todoist-task-manager.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, brainz-tasks] | [google-calendar] |
 
 - [ ] **Step 3: Update customer-service, finance-ops, data-ops starters (6 files)**
 
 | Starter file | `entry_team` | `packs` | `project_skills` | `installable_skills` |
 |---|---|---|---|---|
-| `starters/multi-channel-customer-service.yaml` | customer-service | [customer-service] | [openclaw-store-manager, clawemail, connect-apps] | [publora-telegram, microsoft365] |
-| `starters/earnings-tracker.yaml` | finance-ops | [finance-ops] | [openclaw-store-manager, aluvia-brave-search] | [social-intelligence, publora-telegram] |
-| `starters/polymarket-autopilot.yaml` | finance-ops | [finance-ops] | [openclaw-store-manager, reef-polymarket-research] | [aluvia-brave-search] |
-| `starters/dynamic-dashboard.yaml` | data-ops | [data-ops] | [openclaw-store-manager, duckdb-en] | [nocodb, gh] |
-| `starters/knowledge-base-rag.yaml` | data-ops | [data-ops] | [openclaw-store-manager, duckdb-en, nocodb] | [aluvia-brave-search] |
-| `starters/semantic-memory-search.yaml` | data-ops | [data-ops] | [openclaw-store-manager, duckdb-en] | [nocodb, aluvia-brave-search] |
+| `starters/multi-channel-customer-service.yaml` | customer-service | [customer-service] | [malaclaw-manager, clawemail, connect-apps] | [publora-telegram, microsoft365] |
+| `starters/earnings-tracker.yaml` | finance-ops | [finance-ops] | [malaclaw-manager, aluvia-brave-search] | [social-intelligence, publora-telegram] |
+| `starters/polymarket-autopilot.yaml` | finance-ops | [finance-ops] | [malaclaw-manager, reef-polymarket-research] | [aluvia-brave-search] |
+| `starters/dynamic-dashboard.yaml` | data-ops | [data-ops] | [malaclaw-manager, duckdb-en] | [nocodb, gh] |
+| `starters/knowledge-base-rag.yaml` | data-ops | [data-ops] | [malaclaw-manager, duckdb-en, nocodb] | [aluvia-brave-search] |
+| `starters/semantic-memory-search.yaml` | data-ops | [data-ops] | [malaclaw-manager, duckdb-en] | [nocodb, aluvia-brave-search] |
 
 - [ ] **Step 4: Update research-lab starters (4 files)**
 
 | Starter file | `entry_team` | `packs` | `project_skills` | `installable_skills` |
 |---|---|---|---|---|
-| `starters/custom-morning-brief.yaml` | research-lab | [research-lab] | [openclaw-store-manager, aluvia-brave-search] | [social-intelligence, rss-skill, publora-telegram] |
-| `starters/market-research-product-factory.yaml` | research-lab | [research-lab] | [openclaw-store-manager, aluvia-brave-search] | [social-intelligence] |
-| `starters/multi-source-tech-news-digest.yaml` | research-lab | [research-lab] | [openclaw-store-manager, rss-skill, aluvia-brave-search] | [arxiv-watcher] |
-| `starters/pre-build-idea-validator.yaml` | research-lab | [research-lab] | [openclaw-store-manager, aluvia-brave-search] | [social-intelligence] |
+| `starters/custom-morning-brief.yaml` | research-lab | [research-lab] | [malaclaw-manager, aluvia-brave-search] | [social-intelligence, rss-skill, publora-telegram] |
+| `starters/market-research-product-factory.yaml` | research-lab | [research-lab] | [malaclaw-manager, aluvia-brave-search] | [social-intelligence] |
+| `starters/multi-source-tech-news-digest.yaml` | research-lab | [research-lab] | [malaclaw-manager, rss-skill, aluvia-brave-search] | [arxiv-watcher] |
+| `starters/pre-build-idea-validator.yaml` | research-lab | [research-lab] | [malaclaw-manager, aluvia-brave-search] | [social-intelligence] |
 
 - [ ] **Step 5: Update content-factory starters (7 files)**
 
 | Starter file | `entry_team` | `packs` | `project_skills` | `installable_skills` |
 |---|---|---|---|---|
-| `starters/content-factory.yaml` | content-factory | [content-factory] | [openclaw-store-manager, fal-ai] | [social-intelligence, x-research-but-cheaper] |
-| `starters/daily-reddit-digest.yaml` | content-factory | [content-factory] | [openclaw-store-manager, social-intelligence] | [rss-skill] |
-| `starters/daily-youtube-digest.yaml` | content-factory | [content-factory] | [openclaw-store-manager, youtube-pro] | [rss-skill] |
-| `starters/podcast-production-pipeline.yaml` | content-factory | [content-factory] | [openclaw-store-manager, rss-skill] | [aluvia-brave-search, faster-whisper] |
-| `starters/x-account-analysis.yaml` | content-factory | [content-factory] | [openclaw-store-manager, x-research-but-cheaper] | [social-intelligence] |
-| `starters/youtube-content-pipeline.yaml` | content-factory | [content-factory] | [openclaw-store-manager, youtube-pro] | [fal-ai] |
-| `starters/aionui-cowork-desktop.yaml` | autonomous-startup | [autonomous-startup] | [openclaw-store-manager] | [] |
+| `starters/content-factory.yaml` | content-factory | [content-factory] | [malaclaw-manager, fal-ai] | [social-intelligence, x-research-but-cheaper] |
+| `starters/daily-reddit-digest.yaml` | content-factory | [content-factory] | [malaclaw-manager, social-intelligence] | [rss-skill] |
+| `starters/daily-youtube-digest.yaml` | content-factory | [content-factory] | [malaclaw-manager, youtube-pro] | [rss-skill] |
+| `starters/podcast-production-pipeline.yaml` | content-factory | [content-factory] | [malaclaw-manager, rss-skill] | [aluvia-brave-search, faster-whisper] |
+| `starters/x-account-analysis.yaml` | content-factory | [content-factory] | [malaclaw-manager, x-research-but-cheaper] | [social-intelligence] |
+| `starters/youtube-content-pipeline.yaml` | content-factory | [content-factory] | [malaclaw-manager, youtube-pro] | [fal-ai] |
+| `starters/aionui-cowork-desktop.yaml` | autonomous-startup | [autonomous-startup] | [malaclaw-manager] | [] |
 
 - [ ] **Step 6: Update dev-company and autonomous-startup starters (7 files)**
 
 | Starter file | `entry_team` | `packs` | `project_skills` | `installable_skills` |
 |---|---|---|---|---|
-| `starters/autonomous-game-dev-pipeline.yaml` | dev-company | [dev-company] | [openclaw-store-manager, github] | [agentic-devops] |
-| `starters/autonomous-project-management.yaml` | dev-company | [dev-company] | [openclaw-store-manager, github] | [brainz-tasks] |
-| `starters/project-state-management.yaml` | dev-company | [dev-company] | [openclaw-store-manager, github] | [] |
-| `starters/self-healing-home-server.yaml` | dev-company | [dev-company] | [openclaw-store-manager, agentic-devops] | [publora-telegram] |
-| `starters/default-managed.yaml` | autonomous-startup | [autonomous-startup] | [openclaw-store-manager] | [] |
-| `starters/multi-agent-team.yaml` | autonomous-startup | [autonomous-startup] | [openclaw-store-manager] | [] |
-| `starters/overnight-mini-app-builder.yaml` | autonomous-startup | [autonomous-startup] | [openclaw-store-manager, github] | [agentic-devops] |
+| `starters/autonomous-game-dev-pipeline.yaml` | dev-company | [dev-company] | [malaclaw-manager, github] | [agentic-devops] |
+| `starters/autonomous-project-management.yaml` | dev-company | [dev-company] | [malaclaw-manager, github] | [brainz-tasks] |
+| `starters/project-state-management.yaml` | dev-company | [dev-company] | [malaclaw-manager, github] | [] |
+| `starters/self-healing-home-server.yaml` | dev-company | [dev-company] | [malaclaw-manager, agentic-devops] | [publora-telegram] |
+| `starters/default-managed.yaml` | autonomous-startup | [autonomous-startup] | [malaclaw-manager] | [] |
+| `starters/multi-agent-team.yaml` | autonomous-startup | [autonomous-startup] | [malaclaw-manager] | [] |
+| `starters/overnight-mini-app-builder.yaml` | autonomous-startup | [autonomous-startup] | [malaclaw-manager, github] | [agentic-devops] |
 
 - [ ] **Step 7: Validate all starters and run test suite**
 
 ```bash
-openclaw-store validate
+malaclaw validate
 npm test
 ```
 
-Expected: all 37 starters pass validation. `openclaw-store starter list` shows correct teams.
+Expected: all 37 starters pass validation. `malaclaw starter list` shows correct teams.
 
 - [ ] **Step 8: Commit starter YAML updates**
 
@@ -2668,8 +2668,8 @@ Key changes (same logic as Chunk 5):
 - [ ] **Step 2: Validate index**
 
 ```bash
-openclaw-store validate
-openclaw-store starter list  # should show all 37 starters with correct teams
+malaclaw validate
+malaclaw starter list  # should show all 37 starters with correct teams
 ```
 
 - [ ] **Step 3: Commit index update**
@@ -2690,7 +2690,7 @@ For each card, add a new `## Skills Setup` section after the existing content. U
 ```markdown
 ## Skills Setup
 
-### Required (install before `openclaw-store install`)
+### Required (install before `malaclaw install`)
 
 | Skill | Agent(s) | Install | Env var | Get key |
 |---|---|---|---|---|
@@ -2709,7 +2709,7 @@ Example for `demo-projects/cards/habit-tracker-accountability-coach.md`:
 ```markdown
 ## Skills Setup
 
-### Required (install before `openclaw-store install`)
+### Required (install before `malaclaw install`)
 
 | Skill | Agent(s) | Install | Env var | Get key |
 |---|---|---|---|---|
@@ -2740,13 +2740,13 @@ git commit -m "feat: add Skills Setup section to all 37 demo project cards"
 
 ---
 
-## Chunk 7: openclaw-store-manager Skill Updates
+## Chunk 7: malaclaw-manager Skill Updates
 
-### Task 15: Update `skills/openclaw-store-manager/SKILL.md`
+### Task 15: Update `skills/malaclaw-manager/SKILL.md`
 
 - [ ] **Step 1: Add Project Initialization Flow section**
 
-In `skills/openclaw-store-manager/SKILL.md`, add a new `## Project Initialization Flow` section after the existing `## Workflow` section. This is the full conversational flow the manager follows when spinning up a demo:
+In `skills/malaclaw-manager/SKILL.md`, add a new `## Project Initialization Flow` section after the existing `## Workflow` section. This is the full conversational flow the manager follows when spinning up a demo:
 
 ```markdown
 ## Project Initialization Flow
@@ -2754,17 +2754,17 @@ In `skills/openclaw-store-manager/SKILL.md`, add a new `## Project Initializatio
 When a user asks to spin up a project or demo, follow this sequence exactly:
 
 ### Step 1: Suggest a starter
-Run `openclaw-store starter suggest "<user idea>"`.
+Run `malaclaw starter suggest "<user idea>"`.
 Present the closest match: name, team, agents, required skills, optional skills.
 
 ### Step 2: Confirm and initialize
 Once the user confirms the starter and target directory:
 - If the demo is `family-calendar-household-assistant`: ask "Do you use Google Calendar or Apple Calendar?" and note the answer — you will target only the user's chosen calendar skill during install.
-- Run `openclaw-store starter init <starter-id> <dir>`
-  This creates: `openclaw-store.yaml`, `STARTER.md`, `DEMO_PROJECT.md`
+- Run `malaclaw starter init <starter-id> <dir>`
+  This creates: `malaclaw.yaml`, `STARTER.md`, `DEMO_PROJECT.md`
 
 ### Step 3: Detect skill gaps
-Run `openclaw-store skill sync`
+Run `malaclaw skill sync`
 - This checks what is already installed in OpenClaw
 - Compare against each agent's declared skills
 - If skill sync fails (OpenClaw offline or unreachable): warn the user and ask them to confirm each required skill manually before you proceed
@@ -2775,10 +2775,10 @@ For each required skill not yet installed:
 2. Provide the install command: `clawhub install <skill-slug>`
 3. Provide the env var to set and where to get the key (read from the demo card's Skills Setup section)
 4. Wait for the user to confirm they have installed it
-5. Re-run `openclaw-store skill sync` to confirm presence
+5. Re-run `malaclaw skill sync` to confirm presence
 6. Repeat until all required skills are present
 
-Required skills BLOCK `openclaw-store install`. Do not proceed until all are confirmed.
+Required skills BLOCK `malaclaw install`. Do not proceed until all are confirmed.
 
 ### Step 5: Mention optional skills (non-blocking)
 After all required skills are confirmed, mention any optional skills from `installable_skills`:
@@ -2790,11 +2790,11 @@ Do not wait for optional skills. Proceed immediately.
 Run from the project directory:
 ```
 cd <dir>
-openclaw-store install
+malaclaw install
 ```
 
 ### Step 7: Verify
-Run `openclaw-store doctor`
+Run `malaclaw doctor`
 All agents and required skills must be healthy.
 
 ### Step 8: Hand off to user
@@ -2822,7 +2822,7 @@ Add to the `## Core Rules` section:
 - For family-calendar demo: ask the user which calendar system they use before targeting skills.
 ```
 
-- [ ] **Step 3: Update `skills/openclaw-store-manager/references/commands.md`**
+- [ ] **Step 3: Update `skills/malaclaw-manager/references/commands.md`**
 
 Add the 5 new packs and their entry teams to the commands reference. Add a "New Teams" section:
 
@@ -2842,7 +2842,7 @@ Add the 5 new packs and their entry teams to the commands reference. Add a "New 
 
 ```bash
 npm test
-openclaw-store validate
+malaclaw validate
 ```
 
 Expected: all tests pass. All templates validate.
@@ -2850,9 +2850,9 @@ Expected: all tests pass. All templates validate.
 - [ ] **Step 5: Commit manager skill updates**
 
 ```bash
-git add skills/openclaw-store-manager/SKILL.md \
-  skills/openclaw-store-manager/references/commands.md
-git commit -m "feat: add interactive project initialization flow and skill gap detection to openclaw-store-manager"
+git add skills/malaclaw-manager/SKILL.md \
+  skills/malaclaw-manager/references/commands.md
+git commit -m "feat: add interactive project initialization flow and skill gap detection to malaclaw-manager"
 ```
 
 - [ ] **Step 6: Final integration check**
@@ -2860,12 +2860,12 @@ git commit -m "feat: add interactive project initialization flow and skill gap d
 Run the full validation and list commands to confirm everything is wired correctly:
 
 ```bash
-openclaw-store validate
-openclaw-store list --packs
-openclaw-store list --teams
-openclaw-store list --agents
-openclaw-store list --skills
-openclaw-store starter list
+malaclaw validate
+malaclaw list --packs
+malaclaw list --teams
+malaclaw list --agents
+malaclaw list --skills
+malaclaw starter list
 npm test
 ```
 
@@ -2888,5 +2888,5 @@ git commit -m "feat: complete demo teams + per-agent skills + interactive instal
 - 25 new skill templates referencing verified ClawHub slugs
 - All 37 demo starters re-mapped to best-fit teams
 - All 37 demo cards updated with Skills Setup sections
-- openclaw-store-manager updated with guided interactive install flow"
+- malaclaw-manager updated with guided interactive install flow"
 ```

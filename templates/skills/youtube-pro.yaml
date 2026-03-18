@@ -23,4 +23,4 @@ install_hints:
   - "Enable YouTube Data API v3 in Google Cloud Console"
   - "Create an API key at console.cloud.google.com/apis/credentials"
   - "Set: export YOUTUBE_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

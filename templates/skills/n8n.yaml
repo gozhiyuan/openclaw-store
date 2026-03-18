@@ -27,4 +27,4 @@ install_hints:
   - "Set: export N8N_BASE_URL=http://localhost:5678"
   - "Get API key from n8n Settings → API"
   - "Set: export N8N_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

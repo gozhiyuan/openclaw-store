@@ -31,7 +31,7 @@ const makeTeam = (): TeamDef =>
       { agent: "test-specialist", role: "specialist" },
     ],
     shared_memory: {
-      dir: "~/.openclaw-store/workspaces/store/test-team/shared/memory/",
+      dir: "~/.malaclaw/workspaces/store/test-team/shared/memory/",
       files: [
         { path: "tasks-log.md", access: "append-only", writer: "*" },
         { path: "brief.md", access: "single-writer", writer: "test-lead" },

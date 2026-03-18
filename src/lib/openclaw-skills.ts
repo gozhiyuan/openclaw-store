@@ -113,7 +113,7 @@ export async function loadSkillEntryFromDiscovery(skillId: string): Promise<Skil
     trust_tier: discovered.source === "store-cache" ? "community" : "local",
     disabled_until_configured: false,
     install_hints: [
-      "Install or configure this skill in OpenClaw, then re-run openclaw-store install.",
+      "Install or configure this skill in OpenClaw, then re-run malaclaw install.",
     ],
   });
 }

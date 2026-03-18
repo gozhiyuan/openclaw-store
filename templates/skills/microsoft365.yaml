@@ -26,4 +26,4 @@ install_hints:
   - "Register an app in Azure Active Directory at portal.azure.com"
   - "Grant Microsoft Graph API permissions: Mail.ReadWrite, Calendars.ReadWrite, Files.ReadWrite"
   - "Set: export MS365_CLIENT_ID=... and export MS365_CLIENT_SECRET=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

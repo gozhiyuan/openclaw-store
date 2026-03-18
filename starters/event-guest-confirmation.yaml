@@ -12,7 +12,7 @@ entry_team: automation-ops
 packs:
   - automation-ops
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - clawemail
 installable_skills:
   - google-calendar
@@ -35,7 +35,7 @@ external_requirements:
   - ngrok (for webhook tunneling — free tier works)
   - See the SuperCall README for full configuration instructions.
 bootstrap_prompt: "Start the Event Guest Confirmation demo project from the
-  openclaw-store starter `event-guest-confirmation`. You're hosting an event — a
+  malaclaw starter `event-guest-confirmation`. You're hosting an event — a
   dinner party, a wedding, a company offsite — and you need to confirm
   attendance from a list of guests. Manually calling 20+ people is tedious: you
   play phone tag, forget who said what, and lose track of dietary restrictions

@@ -1,0 +1,19 @@
+id: malaclaw-manager
+version: 1
+name: "MalaClaw Manager"
+description: "Manage malaclaw projects, install and retarget project skills, and refresh project agents"
+
+source:
+  type: local
+  url: "malaclaw-manager"
+
+trust_tier: curated
+
+requires:
+  bins: []
+  env: []
+
+disabled_until_configured: false
+
+install_hints:
+  - "Re-run: malaclaw install after changing malaclaw.yaml"

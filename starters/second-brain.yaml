@@ -11,7 +11,7 @@ entry_team: personal-assistant
 packs:
   - personal-assistant
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - danube
 installable_skills:
   - duckdb-en
@@ -28,7 +28,7 @@ required_capabilities: []
 external_requirements:
   - Telegram, iMessage, or Discord integration (for text-based capture)
   - Next.js (OpenClaw builds this for you — no coding needed)
-bootstrap_prompt: Start the Second Brain demo project from the openclaw-store
+bootstrap_prompt: Start the Second Brain demo project from the malaclaw
   starter `second-brain`. You come up with ideas, find interesting links, hear
   about books to read — but you never have a good system for capturing them.
   Notion gets complex, Apple Notes becomes a graveyard of 10,000 unread entries.

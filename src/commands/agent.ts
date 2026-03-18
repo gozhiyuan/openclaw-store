@@ -120,7 +120,7 @@ export async function agentRefresh(agentId: string): Promise<void> {
   // Re-render and overwrite workspace files for an installed agent
   const lockfile = await loadLockfile();
   if (!lockfile) {
-    console.error("No lockfile found. Run: openclaw-store install");
+    console.error("No lockfile found. Run: malaclaw install");
     process.exit(1);
   }
 

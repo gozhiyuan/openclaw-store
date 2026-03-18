@@ -10,7 +10,7 @@ entry_team: customer-service
 packs:
   - customer-service
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - clawemail
   - connect-apps
 installable_skills:
@@ -40,7 +40,7 @@ external_requirements:
   - Google Business Profile API for reviews
   - Message routing logic in AGENTS.md
 bootstrap_prompt: Start the Multi-Channel AI Customer Service Platform demo
-  project from the openclaw-store starter `multi-channel-customer-service`.
+  project from the malaclaw starter `multi-channel-customer-service`.
   Small businesses juggle WhatsApp, Instagram DMs, emails, and Google Reviews
   across multiple apps. Customers expect instant responses 24/7, but hiring
   staff for round-the-clock coverage is expensive. Use `autonomous-startup` as

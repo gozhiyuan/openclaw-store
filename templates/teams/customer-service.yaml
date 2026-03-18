@@ -28,7 +28,7 @@ graph:
     relationship: requests_review
 
 shared_memory:
-  dir: "~/.openclaw-store/workspaces/store/<project-id>/customer-service/shared/memory/"
+  dir: "~/.malaclaw/workspaces/store/<project-id>/customer-service/shared/memory/"
   files:
     - path: ticket-queue.md
       access: single-writer

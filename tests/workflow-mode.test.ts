@@ -25,9 +25,9 @@ afterEach(async () => {
 });
 
 describe("detectWorkflowMode", () => {
-  it("detects managed mode when openclaw-store.yaml exists", async () => {
+  it("detects managed mode when malaclaw.yaml exists", async () => {
     tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ocs-mode-"));
-    await fs.writeFile(path.join(tmpDir, "openclaw-store.yaml"), "version: 1\n");
+    await fs.writeFile(path.join(tmpDir, "malaclaw.yaml"), "version: 1\n");
     await expect(detectWorkflowMode(tmpDir)).resolves.toBe("managed");
   });
 

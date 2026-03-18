@@ -39,7 +39,7 @@ export async function detectWorkflowMode(projectDir: string = process.cwd()): Pr
 export function describeWorkflowMode(mode: WorkflowMode): string {
   switch (mode) {
     case "managed":
-      return "openclaw-store managed project";
+      return "malaclaw managed project";
     case "claude-code-default":
       return "default Claude Code workflow";
     case "openclaw-default":

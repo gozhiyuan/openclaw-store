@@ -57,7 +57,7 @@ export function buildStarterManifest(starter: StarterDef, targetDir: string) {
   const projectName = defaultProjectName(targetDir);
   const skills = starter.project_skills.map((id) => ({
     id,
-    targets: id === "openclaw-store-manager"
+    targets: id === "malaclaw-manager"
       ? { teams: [starter.entry_team] }
       : undefined,
   }));
@@ -81,7 +81,7 @@ export function buildStarterReadme(starter: StarterDef, targetDir: string): stri
   const lines = [
     `# Starter: ${starter.name}`,
     "",
-    `This project was initialized from the \`${starter.id}\` starter in openclaw-store.`,
+    `This project was initialized from the \`${starter.id}\` starter in malaclaw.`,
     "",
     `## Project`,
     "",
@@ -137,9 +137,9 @@ export function buildStarterReadme(starter: StarterDef, targetDir: string): stri
     "",
     "## Next Steps",
     "",
-    "1. Review `openclaw-store.yaml`.",
-    "2. Run `openclaw-store install --dry-run`.",
-    "3. Run `openclaw-store install`.",
+    "1. Review `malaclaw.yaml`.",
+    "2. Run `malaclaw install --dry-run`.",
+    "3. Run `malaclaw install`.",
     "4. Open the project entry-point agent in OpenClaw.",
     "",
   );
@@ -163,7 +163,7 @@ export async function initStarter(
   const starter = await loadStarter(starterId);
 
   const absTarget = path.resolve(targetDir);
-  const manifestPath = path.join(absTarget, "openclaw-store.yaml");
+  const manifestPath = path.join(absTarget, "malaclaw.yaml");
   const starterReadmePath = path.join(absTarget, "STARTER.md");
   const demoProjectPath = path.join(absTarget, "DEMO_PROJECT.md");
 

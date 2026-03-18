@@ -10,7 +10,7 @@ entry_team: finance-ops
 packs:
   - finance-ops
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - aluvia-brave-search
 installable_skills:
   - social-intelligence
@@ -28,7 +28,7 @@ external_requirements:
   - Cron job support in OpenClaw
   - Telegram topic for earnings updates
 bootstrap_prompt: Start the AI-Powered Earnings Tracker demo project from the
-  openclaw-store starter `earnings-tracker`. Following earnings season across
+  malaclaw starter `earnings-tracker`. Following earnings season across
   dozens of tech companies means checking multiple sources and remembering
   report dates. You want to stay on top of AI/tech earnings without manually
   tracking every company. Use `research-lab` as the initial entry team. Review

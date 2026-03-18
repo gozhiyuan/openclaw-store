@@ -6,7 +6,7 @@ import { stringify } from "yaml";
 import { runHeadlessInstall, type InstallProgress } from "../src/lib/install-headless.js";
 
 const envKeys = [
-  "OPENCLAW_STORE_DIR",
+  "MALACLAW_DIR",
   "OPENCLAW_STATE_DIR",
   "HOME",
   "USERPROFILE",
@@ -48,7 +48,7 @@ describe("runHeadlessInstall", () => {
     await fs.mkdir(stateDir, { recursive: true });
     await fs.mkdir(homeDir, { recursive: true });
     await fs.writeFile(
-      path.join(projectDir, "openclaw-store.yaml"),
+      path.join(projectDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [{ id: "dev-company" }], skills: [] }),
     );
     await fs.writeFile(
@@ -59,7 +59,7 @@ describe("runHeadlessInstall", () => {
     for (const key of envKeys) {
       originalEnv.set(key, process.env[key]);
     }
-    process.env.OPENCLAW_STORE_DIR = storeDir;
+    process.env.MALACLAW_DIR = storeDir;
     process.env.OPENCLAW_STATE_DIR = stateDir;
     process.env.HOME = homeDir;
     process.env.USERPROFILE = homeDir;
@@ -88,7 +88,7 @@ describe("runHeadlessInstall", () => {
     await fs.mkdir(stateDir, { recursive: true });
     await fs.mkdir(homeDir, { recursive: true });
     await fs.writeFile(
-      path.join(projectDir, "openclaw-store.yaml"),
+      path.join(projectDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [{ id: "dev-company" }], skills: [] }),
     );
     await fs.writeFile(
@@ -99,7 +99,7 @@ describe("runHeadlessInstall", () => {
     for (const key of envKeys) {
       originalEnv.set(key, process.env[key]);
     }
-    process.env.OPENCLAW_STORE_DIR = storeDir;
+    process.env.MALACLAW_DIR = storeDir;
     process.env.OPENCLAW_STATE_DIR = stateDir;
     process.env.HOME = homeDir;
     process.env.USERPROFILE = homeDir;
@@ -135,7 +135,7 @@ describe("runHeadlessInstall", () => {
     await fs.mkdir(stateDir, { recursive: true });
     await fs.mkdir(homeDir, { recursive: true });
     await fs.writeFile(
-      path.join(projectDir, "openclaw-store.yaml"),
+      path.join(projectDir, "malaclaw.yaml"),
       stringify({
         version: 1,
         project: { id: "my-project" },
@@ -151,7 +151,7 @@ describe("runHeadlessInstall", () => {
     for (const key of envKeys) {
       originalEnv.set(key, process.env[key]);
     }
-    process.env.OPENCLAW_STORE_DIR = storeDir;
+    process.env.MALACLAW_DIR = storeDir;
     process.env.OPENCLAW_STATE_DIR = stateDir;
     process.env.HOME = homeDir;
     process.env.USERPROFILE = homeDir;
@@ -173,7 +173,7 @@ describe("runHeadlessInstall", () => {
     await fs.mkdir(stateDir, { recursive: true });
     await fs.mkdir(homeDir, { recursive: true });
     await fs.writeFile(
-      path.join(projectDir, "openclaw-store.yaml"),
+      path.join(projectDir, "malaclaw.yaml"),
       stringify({ version: 1, packs: [{ id: "dev-company" }], skills: [] }),
     );
     await fs.writeFile(
@@ -184,7 +184,7 @@ describe("runHeadlessInstall", () => {
     for (const key of envKeys) {
       originalEnv.set(key, process.env[key]);
     }
-    process.env.OPENCLAW_STORE_DIR = storeDir;
+    process.env.MALACLAW_DIR = storeDir;
     process.env.OPENCLAW_STATE_DIR = stateDir;
     process.env.HOME = homeDir;
     process.env.USERPROFILE = homeDir;

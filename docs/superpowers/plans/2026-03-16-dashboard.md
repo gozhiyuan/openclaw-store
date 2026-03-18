@@ -1,8 +1,8 @@
-# openclaw-store Dashboard Implementation Plan
+# malaclaw Dashboard Implementation Plan
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a web dashboard (React SPA + Fastify server) that provides visual management of openclaw-store projects, agent teams, skills, and configuration.
+**Goal:** Build a web dashboard (React SPA + Fastify server) that provides visual management of malaclaw projects, agent teams, skills, and configuration.
 
 **Architecture:** Top-level `dashboard/` directory with its own package.json. Fastify server directly imports `src/lib/` modules via TypeScript project references. REST API for data, WebSocket for file-change notifications. React frontend with TanStack Query for data fetching. No database — existing YAML/JSON files are the data layer.
 
@@ -473,7 +473,7 @@ git commit -m "build: add composite and declaration for project references"
 
 ```json
 {
-  "name": "openclaw-store-dashboard",
+  "name": "malaclaw-dashboard",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -780,8 +780,8 @@ export async function startWatcher(): Promise<FSWatcher> {
     skillsIndexFile,
     path.join(workspacesRoot, "**/shared/memory/*.md"),
     ...projectDirs.flatMap((dir) => [
-      path.join(dir, "openclaw-store.yaml"),
-      path.join(dir, "openclaw-store.lock"),
+      path.join(dir, "malaclaw.yaml"),
+      path.join(dir, "malaclaw.lock"),
     ]),
   ];
 
@@ -799,11 +799,11 @@ export async function startWatcher(): Promise<FSWatcher> {
       });
     } else if (filePath === skillsIndexFile) {
       debounced("skills", () => broadcast({ type: "skills:changed" }));
-    } else if (filePath.endsWith("openclaw-store.yaml")) {
+    } else if (filePath.endsWith("malaclaw.yaml")) {
       debounced("manifest:" + filePath, () =>
         broadcast({ type: "manifest:changed", projectDir: path.dirname(filePath) })
       );
-    } else if (filePath.endsWith("openclaw-store.lock")) {
+    } else if (filePath.endsWith("malaclaw.lock")) {
       debounced("lockfile:" + filePath, () =>
         broadcast({ type: "lockfile:changed", projectDir: path.dirname(filePath) })
       );
@@ -1197,7 +1197,7 @@ git commit -m "test(dashboard): add API route tests"
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>openclaw-store</title>
+    <title>malaclaw</title>
     <style>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0d1117; color: #c9d1d9; }
@@ -1257,7 +1257,7 @@ export function App() {
         borderBottom: "1px solid #30363d",
       }}>
         <span style={{ fontWeight: "bold", color: "#f0f6fc", marginRight: 16 }}>
-          ⬡ openclaw-store
+          ⬡ malaclaw
         </span>
         {tabs.map((tab) => (
           <NavLink
@@ -1706,7 +1706,7 @@ export function Dashboard() {
   if (projects && projects.length === 0) {
     return (
       <div style={{ textAlign: "center", padding: 40, color: "#8b949e" }}>
-        <h2 style={{ color: "#f0f6fc" }}>Welcome to openclaw-store</h2>
+        <h2 style={{ color: "#f0f6fc" }}>Welcome to malaclaw</h2>
         <p>No projects installed yet.</p>
         <a href="/starters" style={{ color: "#58a6ff" }}>Browse starters to get started →</a>
       </div>
@@ -1848,14 +1848,14 @@ program
 ```bash
 npm run build                    # Build root (src/lib + src/commands)
 cd dashboard && npm run build    # Build dashboard
-cd .. && openclaw-store dashboard  # Should start the dashboard
+cd .. && malaclaw dashboard  # Should start the dashboard
 ```
 
 - [ ] **Step 4: Commit**
 
 ```bash
 git add src/commands/dashboard.ts src/cli.ts
-git commit -m "feat: add 'openclaw-store dashboard' CLI command"
+git commit -m "feat: add 'malaclaw dashboard' CLI command"
 ```
 
 ---
@@ -1901,7 +1901,7 @@ cd dashboard && npm install && npm run build
 - [ ] **Step 2: Start dashboard and verify all features**
 
 ```bash
-openclaw-store dashboard
+malaclaw dashboard
 ```
 
 Open http://localhost:3456 and verify:

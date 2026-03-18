@@ -22,4 +22,4 @@ disabled_until_configured: true
 install_hints:
   - "Get a free API key at brave.com/search/api (2,000 queries/month free)"
   - "Set: export BRAVE_API_KEY=..."
-  - "Then re-run: openclaw-store install"
+  - "Then re-run: malaclaw install"

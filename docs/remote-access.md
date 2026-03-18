@@ -1,4 +1,4 @@
-# Remote Access — openclaw-store Dashboard
+# Remote Access — malaclaw Dashboard
 
 The dashboard binds to `0.0.0.0:3456` by default. To access it from another machine, use one of these methods.
 
@@ -42,7 +42,7 @@ ssh -L 3456:localhost:3456 user@server-with-dashboard
 ## Custom Port and Host
 
 ```bash
-openclaw-store dashboard --port 8080 --host 127.0.0.1
+malaclaw dashboard --port 8080 --host 127.0.0.1
 ```
 
 Use `--host 127.0.0.1` to restrict access to localhost only.

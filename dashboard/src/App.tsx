@@ -22,7 +22,7 @@ export function App() {
         borderBottom: "1px solid #30363d",
       }}>
         <span style={{ fontWeight: "bold", color: "#f0f6fc", marginRight: 16 }}>
-          openclaw-store
+          malaclaw
         </span>
         {tabs.map((tab) => (
           <NavLink

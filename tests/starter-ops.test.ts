@@ -10,7 +10,7 @@ function makeStarter(overrides: Partial<StarterDef> & { id: string; name: string
     source_usecase: overrides.source_usecase ?? "Test use case",
     entry_team: overrides.entry_team ?? "default-team",
     packs: overrides.packs ?? [],
-    project_skills: overrides.project_skills ?? ["openclaw-store-manager"],
+    project_skills: overrides.project_skills ?? ["malaclaw-manager"],
     installable_skills: overrides.installable_skills ?? [],
     required_apis: overrides.required_apis ?? [],
     required_capabilities: overrides.required_capabilities ?? [],

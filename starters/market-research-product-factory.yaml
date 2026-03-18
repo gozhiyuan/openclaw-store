@@ -11,7 +11,7 @@ entry_team: research-lab
 packs:
   - research-lab
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - aluvia-brave-search
 installable_skills:
   - social-intelligence
@@ -28,7 +28,7 @@ external_requirements:
   - Last 30 Days skill by Matt Van Horde
   - Telegram or Discord integration for receiving research reports
 bootstrap_prompt: Start the Market Research & Product Factory demo project from
-  the openclaw-store starter `market-research-product-factory`. You want to
+  the malaclaw starter `market-research-product-factory`. You want to
   build a product but don't know what to build. Or you have a business and need
   to understand what your customers are struggling with. This workflow uses the
   Last 30 Days skill to mine Reddit and X for real pain points, then has

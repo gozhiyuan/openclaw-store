@@ -4,7 +4,7 @@ import { Command } from "commander";
 const program = new Command();
 
 program
-  .name("openclaw-store")
+  .name("malaclaw")
   .description("Starter packs, agent templates, and installer for OpenClaw")
   .version("1.0.0");
 
@@ -12,7 +12,7 @@ program
 
 program
   .command("init")
-  .description("Interactive wizard to create openclaw-store.yaml")
+  .description("Interactive wizard to create malaclaw.yaml")
   .action(async () => {
     const { runInit } = await import("./commands/init.js");
     await runInit();
@@ -45,7 +45,7 @@ program
 
 program
   .command("install")
-  .description("Install packs from openclaw-store.yaml (or --pack for a one-shot install)")
+  .description("Install packs from malaclaw.yaml (or --pack for a one-shot install)")
   .option("--dry-run", "Preview changes without applying them")
   .option("--force", "Overwrite existing workspace files")
   .option("--pack <id>", "Install a specific pack without a manifest")

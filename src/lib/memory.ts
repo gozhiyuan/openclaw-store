@@ -31,20 +31,20 @@ function buildOwnershipHeader(file: SharedMemoryFile, teamDef: TeamDef): string 
 
   if (file.access === "single-writer") {
     lines.push(`# ${path.basename(file.path)} — single writer: ${file.writer}`);
-    lines.push(`<!-- openclaw-store: access=single-writer writer=${file.writer} team=${teamDef.id} -->`);
+    lines.push(`<!-- malaclaw: access=single-writer writer=${file.writer} team=${teamDef.id} -->`);
     lines.push("");
     lines.push(`> **Access policy:** Only \`${file.writer}\` may modify this file.`);
     lines.push(`> All other ${teamName} members have read-only access.`);
   } else if (file.access === "append-only") {
     const writer = file.writer === "*" ? "all team members" : file.writer;
     lines.push(`# ${path.basename(file.path)} — append-only`);
-    lines.push(`<!-- openclaw-store: access=append-only writer=${file.writer} team=${teamDef.id} -->`);
+    lines.push(`<!-- malaclaw: access=append-only writer=${file.writer} team=${teamDef.id} -->`);
     lines.push("");
     lines.push(`> **Access policy:** ${writer} may append entries. No overwrites or edits.`);
     lines.push(`> Always add new entries at the bottom.`);
   } else if (file.access === "private") {
     lines.push(`# ${path.basename(file.path)} — private: ${file.writer}`);
-    lines.push(`<!-- openclaw-store: access=private writer=${file.writer} team=${teamDef.id} -->`);
+    lines.push(`<!-- malaclaw: access=private writer=${file.writer} team=${teamDef.id} -->`);
     lines.push("");
     lines.push(`> **Access policy:** Only \`${file.writer}\` reads and writes this file.`);
   }
@@ -100,7 +100,7 @@ function buildInitialBody(file: SharedMemoryFile): string {
     ].join("\n");
   }
 
-  return "*(initialized by openclaw-store)*\n";
+  return "*(initialized by malaclaw)*\n";
 }
 
 /** Seed all shared memory files for a team */

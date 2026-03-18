@@ -10,7 +10,7 @@ entry_team: personal-assistant
 packs:
   - personal-assistant
 project_skills:
-  - openclaw-store-manager
+  - malaclaw-manager
   - apple-health-skill
 installable_skills:
   - apple-reminders
@@ -28,7 +28,7 @@ external_requirements:
   - Telegram topic for logging
   - File storage (markdown log file)
 bootstrap_prompt: Start the Health & Symptom Tracker demo project from the
-  openclaw-store starter `health-symptom-tracker`. Identifying food
+  malaclaw starter `health-symptom-tracker`. Identifying food
   sensitivities requires consistent logging over time, which is tedious to
   maintain. You need reminders to log and analysis to spot patterns. Use
   `autonomous-startup` as the initial entry team. Review STARTER.md, confirm any

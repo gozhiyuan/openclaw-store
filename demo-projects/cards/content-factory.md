@@ -10,7 +10,7 @@ You're a content creator juggling research, writing, and design across multiple 
 - Recommended Mode: managed-team
 - Entry Team: content-factory
 - Packs: content-factory
-- Project Skills: openclaw-store-manager
+- Project Skills: malaclaw-manager
 - Installable OpenClaw Skills: knowledge-base, x-research-v2
 - Required APIs / Services: Discord integration with multiple channels, Local image generation (e.g., Nano Banana) or an image generation API, Discord Bot Setup
 - Required Capabilities / Tools: sessions_spawn / sessions_send for multi-agent orchestration
@@ -20,7 +20,7 @@ You're a content creator juggling research, writing, and design across multiple 
 ## Execution Paths
 
 - Default workflow: Stay in the normal OpenClaw or Claude Code default workflow if you only need one generalist agent or want to prototype without managed teams.
-- Managed workflow: Initialize this starter, run openclaw-store install, then open the `content-factory` project entry-point agent for structured multi-agent execution.
+- Managed workflow: Initialize this starter, run malaclaw install, then open the `content-factory` project entry-point agent for structured multi-agent execution.
 
 ## Setup Guidance
 
@@ -28,7 +28,7 @@ You're a content creator juggling research, writing, and design across multiple 
 - If you want managed execution, initialize the starter and use `content-factory` as the entry-point team.
 - Review the generated STARTER.md and confirm the project scope before running install.
 - Use OpenClaw to verify which recommended skills, required services, and runtime capabilities are still missing before execution.
-- Install any missing OpenClaw skills, configure required APIs and auth, then re-run openclaw-store install.
+- Install any missing OpenClaw skills, configure required APIs and auth, then re-run malaclaw install.
 
 ## Installable OpenClaw Skills
 
@@ -56,20 +56,20 @@ You're a content creator juggling research, writing, and design across multiple 
 ## Bootstrap Prompt
 
 ```text
-Start the Multi-Agent Content Factory demo project from the openclaw-store starter `content-factory`. You're a content creator juggling research, writing, and design across multiple platforms. Each step — finding trending topics, writing scripts, generating thumbnails — eats hours of your day. What if a team of specialized agents handled all of it overnight? Use `content-factory` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
+Start the Multi-Agent Content Factory demo project from the malaclaw starter `content-factory`. You're a content creator juggling research, writing, and design across multiple platforms. Each step — finding trending topics, writing scripts, generating thumbnails — eats hours of your day. What if a team of specialized agents handled all of it overnight? Use `content-factory` as the initial entry team. Review STARTER.md, confirm any missing external integrations, then break the work into clear team tasks.
 ```
 
 ## Suggested Flow
 
-1. Inspect the starter with `openclaw-store starter show content-factory`.
-2. Initialize it with `openclaw-store starter init content-factory <dir>`.
+1. Inspect the starter with `malaclaw starter show content-factory`.
+2. Initialize it with `malaclaw starter init content-factory <dir>`.
 3. Review STARTER.md and this demo card.
 4. Install missing OpenClaw skills or API configuration in OpenClaw if needed.
-5. Run `openclaw-store install` and execute through the project entry-point agent.
+5. Run `malaclaw install` and execute through the project entry-point agent.
 
 ## Skills Setup
 
-### Required (install before `openclaw-store install`)
+### Required (install before `malaclaw install`)
 
 | Skill | Install | Env var | Get key |
 |---|---|---|---|
