@@ -2,6 +2,9 @@ id: content-factory
 name: "Content Factory"
 version: 1
 
+communication:
+  topology: star
+
 members:
   - agent: editor
     role: lead

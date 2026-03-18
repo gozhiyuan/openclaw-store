@@ -2,6 +2,9 @@ id: personal-assistant
 name: "Personal Assistant"
 version: 1
 
+communication:
+  topology: star
+
 members:
   - agent: personal-assistant-lead
     role: lead

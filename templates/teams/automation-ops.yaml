@@ -2,6 +2,9 @@ id: automation-ops
 name: "Automation Ops"
 version: 1
 
+communication:
+  topology: star
+
 members:
   - agent: automation-lead
     role: lead

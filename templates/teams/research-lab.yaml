@@ -2,6 +2,9 @@ id: research-lab
 name: "Research Lab"
 version: 1
 
+communication:
+  topology: star
+
 members:
   - agent: research-lead
     role: lead

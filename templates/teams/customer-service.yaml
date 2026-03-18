@@ -2,6 +2,9 @@ id: customer-service
 name: "Customer Service"
 version: 1
 
+communication:
+  topology: lead-reviewer
+
 members:
   - agent: service-lead
     role: lead

@@ -2,6 +2,9 @@ id: autonomous-startup
 name: "Autonomous Startup"
 version: 1
 
+communication:
+  topology: star
+
 members:
   - agent: ceo
     role: lead

@@ -2,6 +2,9 @@ id: finance-ops
 name: "Finance Ops"
 version: 1
 
+communication:
+  topology: lead-reviewer
+
 members:
   - agent: finance-lead
     role: lead

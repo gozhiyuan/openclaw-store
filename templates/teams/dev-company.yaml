@@ -2,6 +2,9 @@ id: dev-company
 name: "Dev Company"
 version: 1
 
+communication:
+  topology: star
+
 members:
   - agent: pm
     role: lead

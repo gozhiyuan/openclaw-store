@@ -2,6 +2,9 @@ id: data-ops
 name: "Data Ops"
 version: 1
 
+communication:
+  topology: star
+
 members:
   - agent: data-lead
     role: lead
