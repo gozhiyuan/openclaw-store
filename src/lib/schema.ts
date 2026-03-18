@@ -86,6 +86,15 @@ export const GraphEdge = z.object({
   relationship: z.enum(["delegates_to", "requests_review"]),
 });
 
+export const TopologyType = z.enum(["star", "lead-reviewer", "pipeline", "peer-mesh"]);
+export type TopologyType = z.infer<typeof TopologyType>;
+
+export const CommunicationConfig = z.object({
+  topology: TopologyType,
+  enforcement: z.enum(["advisory", "strict"]).default("advisory"),
+});
+export type CommunicationConfig = z.infer<typeof CommunicationConfig>;
+
 export const SharedMemoryFile = z.object({
   path: z.string(),
   access: z.enum(["single-writer", "append-only", "private"]),
@@ -98,6 +107,7 @@ export const TeamDef = z.object({
   version: z.number().default(1),
   members: z.array(TeamMember),
   graph: z.array(GraphEdge).optional().default([]),
+  communication: CommunicationConfig.optional(),
   shared_memory: z
     .object({
       dir: z.string(),
