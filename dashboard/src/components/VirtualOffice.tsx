@@ -1,4 +1,5 @@
-import type { Team } from "../lib/types";
+import type { Team, AgentStatusEntry } from "../lib/types";
+import { useAgentStatuses } from "../hooks/useApi";
 
 const ROLE_CONFIG: Record<string, { color: string; label: string; area: string }> = {
   lead: { color: "#a371f7", label: "Lead", area: "manager-desk" },
@@ -48,12 +49,22 @@ const areaStyle: React.CSSProperties = {
   minHeight: 52,
 };
 
-function AgentAvatar({ agent, role }: { agent: string; role: string }) {
+const statusColors: Record<string, string> = {
+  active: "#3fb950",
+  spawning: "#58a6ff",
+  idle: "#8b949e",
+};
+
+function AgentAvatar({ agent, role, status }: { agent: string; role: string; status?: AgentStatusEntry }) {
   const cfg = getRoleConfig(role);
+  const liveStatus = status?.status ?? "idle";
+  const isActive = liveStatus === "active";
+  const isSpawning = liveStatus === "spawning";
   return (
     <div
-      title={`${agent} (${role})`}
+      title={`${agent} (${role}) — ${liveStatus}`}
       style={{
+        position: "relative",
         width: 36,
         height: 36,
         borderRadius: "50%",
@@ -66,9 +77,37 @@ function AgentAvatar({ agent, role }: { agent: string; role: string }) {
         fontWeight: 600,
         color: cfg.color,
         cursor: "default",
+        opacity: liveStatus === "idle" && status ? 0.5 : 1,
+        transition: "opacity 0.3s ease",
+        animation: isActive ? "pulse 2s infinite" : undefined,
       }}
     >
       {agent.charAt(0).toUpperCase()}
+      {/* Status dot */}
+      <span style={{
+        position: "absolute",
+        bottom: -1,
+        right: -1,
+        width: 10,
+        height: 10,
+        borderRadius: "50%",
+        background: statusColors[liveStatus] ?? "#8b949e",
+        border: "2px solid #161b22",
+      }} />
+      {/* Spawning speech bubble */}
+      {isSpawning && (
+        <span style={{
+          position: "absolute",
+          top: -8,
+          right: -12,
+          fontSize: 10,
+          background: "#58a6ff",
+          color: "#0d1117",
+          padding: "1px 4px",
+          borderRadius: 4,
+          fontWeight: 700,
+        }}>...</span>
+      )}
     </div>
   );
 }
@@ -76,9 +115,11 @@ function AgentAvatar({ agent, role }: { agent: string; role: string }) {
 function RoleArea({
   areaLabel,
   members,
+  statuses,
 }: {
   areaLabel: string;
   members: { agent: string; role: string }[];
+  statuses?: Record<string, AgentStatusEntry>;
 }) {
   if (members.length === 0) return null;
   return (
@@ -87,7 +128,7 @@ function RoleArea({
       <div style={areaStyle}>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           {members.map((m) => (
-            <AgentAvatar key={m.agent} agent={m.agent} role={m.role} />
+            <AgentAvatar key={m.agent} agent={m.agent} role={m.role} status={statuses?.[m.agent]} />
           ))}
         </div>
       </div>
@@ -95,7 +136,7 @@ function RoleArea({
   );
 }
 
-function TeamRoom({ team }: { team: Team }) {
+function TeamRoom({ team, statuses }: { team: Team; statuses?: Record<string, AgentStatusEntry> }) {
   const leads = team.members.filter((m) => {
     const key = m.role.toLowerCase();
     return key.includes("lead") || key.includes("manager") || key.includes("pm");
@@ -123,15 +164,15 @@ function TeamRoom({ team }: { team: Team }) {
       >
         {leads.length > 0 && (
           <div>
-            <RoleArea areaLabel="Manager Desk" members={leads} />
+            <RoleArea areaLabel="Manager Desk" members={leads} statuses={statuses} />
           </div>
         )}
         <div>
-          <RoleArea areaLabel="Workstations" members={specialists} />
+          <RoleArea areaLabel="Workstations" members={specialists} statuses={statuses} />
         </div>
         {reviewers.length > 0 && (
           <div>
-            <RoleArea areaLabel="Review Area" members={reviewers} />
+            <RoleArea areaLabel="Review Area" members={reviewers} statuses={statuses} />
           </div>
         )}
       </div>
@@ -140,13 +181,15 @@ function TeamRoom({ team }: { team: Team }) {
 }
 
 export function VirtualOffice({ teams }: { teams: Team[] }) {
+  const { data: statuses } = useAgentStatuses();
+
   if (teams.length === 0) {
     return <div style={{ color: "#8b949e" }}>No teams loaded.</div>;
   }
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       {teams.map((team) => (
-        <TeamRoom key={team.id} team={team} />
+        <TeamRoom key={team.id} team={team} statuses={statuses} />
       ))}
     </div>
   );
