@@ -10,7 +10,7 @@ Small businesses juggle WhatsApp, Instagram DMs, emails, and Google Reviews acro
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: gog
 - Required APIs / Services: WhatsApp Business API integration, Instagram Graph API (via Meta Business), Google Business Profile API for reviews, WhatsApp Business API (through 360dialog or official API), Gmail via gog OAuth, Google Business Profile API token, WhatsApp Business API, Instagram Messaging API, Google Business Profile API
 - Required Capabilities / Tools: —

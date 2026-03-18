@@ -10,7 +10,7 @@ You're hosting an event — a dinner party, a wedding, a company offsite — and
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: supercall
 - Required APIs / Services: An OpenAI API key (for the GPT-4o Realtime voice AI), ngrok (for webhook tunneling — free tier works), OpenAI Realtime API
 - Required Capabilities / Tools: ngrok (for webhook tunneling — free tier works)

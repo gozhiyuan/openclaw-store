@@ -10,7 +10,7 @@
 
 The current `malaclaw` has 4 agent teams and 3 skill templates. Of the 37 demo projects, 21 are assigned to `autonomous-startup` (a single generic CEO agent) because no purpose-built team exists for their category. Skills are not wired to demos or agents — most demos have `installable_skills: []` despite requiring real integrations (email, calendar, Slack, Twilio, etc.).
 
-The target workflow is: user installs `malaclaw-manager` into OpenClaw, chats to spin up a demo project, and ends up with the right agent team, each agent having its specific skills installed and configured — no manual YAML editing required.
+The target workflow is: user installs `malaclaw-cook` into OpenClaw, chats to spin up a demo project, and ends up with the right agent team, each agent having its specific skills installed and configured — no manual YAML editing required.
 
 ---
 
@@ -388,14 +388,14 @@ For `family-calendar-household-assistant`: the manager skill must ask the user d
 
 | Demo | Team | Required skills | Optional skills |
 |---|---|---|---|
-| `aionui-cowork-desktop` | autonomous-startup | `malaclaw-manager` | — |
+| `aionui-cowork-desktop` | autonomous-startup | `malaclaw-cook` | — |
 | `autonomous-game-dev-pipeline` | dev-company | `gh` | `agentic-devops` |
 | `autonomous-project-management` | dev-company | `gh` | `brainz-tasks` |
 | `content-factory` | content-factory | `fal-ai` | `social-intelligence`, `x-research-but-cheaper` |
 | `custom-morning-brief` | research-lab | `aluvia-brave-search` | `social-intelligence`, `rss-skill`, `publora-telegram` |
 | `daily-reddit-digest` | content-factory | `social-intelligence` | `rss-skill` |
 | `daily-youtube-digest` | content-factory | `youtube-pro` | `rss-skill` |
-| `default-managed` | autonomous-startup | `malaclaw-manager` | — |
+| `default-managed` | autonomous-startup | `malaclaw-cook` | — |
 | `dynamic-dashboard` | data-ops | `duckdb-en` | `nocodb`, `gh` |
 | `earnings-tracker` | finance-ops | `aluvia-brave-search` | `social-intelligence`, `publora-telegram` |
 | `event-guest-confirmation` | automation-ops | `clawemail` | `google-calendar`, `publora-telegram` |
@@ -406,7 +406,7 @@ For `family-calendar-household-assistant`: the manager skill must ask the user d
 | `knowledge-base-rag` | data-ops | `duckdb-en`, `nocodb` | `aluvia-brave-search` |
 | `market-research-product-factory` | research-lab | `aluvia-brave-search` | `social-intelligence` |
 | `meeting-notes-action-items` | personal-assistant | `faster-whisper` | `google-calendar`, `clawemail` |
-| `multi-agent-team` | autonomous-startup | `malaclaw-manager` | — |
+| `multi-agent-team` | autonomous-startup | `malaclaw-cook` | — |
 | `multi-channel-assistant` | automation-ops | `clawemail`, `connect-apps` | `publora-telegram`, `microsoft365` |
 | `multi-channel-customer-service` | customer-service | `clawemail`, `connect-apps` | `publora-telegram`, `microsoft365` |
 | `multi-source-tech-news-digest` | research-lab | `rss-skill`, `aluvia-brave-search` | `arxiv-watcher` |
@@ -428,7 +428,7 @@ For `family-calendar-household-assistant`: the manager skill must ask the user d
 
 ---
 
-## Section 4: Interactive Install Flow in `malaclaw-manager`
+## Section 4: Interactive Install Flow in `malaclaw-cook`
 
 ### Conversational flow
 
@@ -502,7 +502,7 @@ When a user asks to spin up a project or demo, the manager skill follows this se
 
 ```yaml
 project_skills:          # required — placed in manifest, block install if missing
-  - malaclaw-manager
+  - malaclaw-cook
   - rss-skill
 
 installable_skills:      # optional — listed in demo card, non-blocking
@@ -568,9 +568,9 @@ finance-ops.yaml          data-ops.yaml
 
 **`demo-projects/index.yaml`** — update `entry_team`, `packs`, `project_skills`, `installable_skills` per new mapping
 
-**`skills/malaclaw-manager/SKILL.md`** — add Project Initialization Flow, Skill Gap Detection loop (including offline fallback), Entry-point handoff, Calendar selection branching
+**`skills/malaclaw-cook/SKILL.md`** — add Project Initialization Flow, Skill Gap Detection loop (including offline fallback), Entry-point handoff, Calendar selection branching
 
-**`skills/malaclaw-manager/references/commands.md`** — update to reference new teams and packs
+**`skills/malaclaw-cook/references/commands.md`** — update to reference new teams and packs
 
 ---
 
@@ -579,7 +579,7 @@ finance-ops.yaml          data-ops.yaml
 1. All 37 demo projects are assigned a purpose-built team (not `autonomous-startup` unless genuinely appropriate)
 2. Every agent in every team has a `skills: []` list appropriate to its role
 3. All 25 new skill templates validate against `SkillEntry` Zod schema (`malaclaw validate` passes)
-4. A user can chat with `malaclaw-manager` in OpenClaw, spin up any demo, and have the right agents + skills installed without touching a terminal
+4. A user can chat with `malaclaw-cook` in OpenClaw, spin up any demo, and have the right agents + skills installed without touching a terminal
 5. `malaclaw doctor` passes for any freshly installed demo project with required skills present
 6. Required skills block install; optional skills never block install
 7. `malaclaw validate` passes for all 20 new agent templates, 5 team templates, 5 pack definitions, and 25 skill templates

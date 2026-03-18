@@ -10,7 +10,7 @@ You read articles, tweets, and watch videos all day but can never find that one 
 - Recommended Mode: managed-team
 - Entry Team: research-lab
 - Packs: research-lab
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: knowledge-base
 - Required APIs / Services: Telegram topic or Slack channel for ingestion
 - Required Capabilities / Tools: —

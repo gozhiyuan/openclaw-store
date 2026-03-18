@@ -10,7 +10,7 @@ Start your day with a personalized summary of new videos from your favorite YouT
 - Recommended Mode: managed-team
 - Entry Team: content-factory
 - Packs: content-factory
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: the, youtube-full
 - Required APIs / Services: That's it. The agent handles the rest — including account creation and API key setup. You get **100 free credits on signup**, no credit card required., > Note: After creating the account, the skill auto-stores the API key securely in correct locations based on the OS, so the API will work in all contexts.
 - Required Capabilities / Tools: —

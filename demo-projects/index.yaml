@@ -19,7 +19,7 @@ demos:
     packs:
       - autonomous-startup
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
     installable_skills: []
     tags:
       - automation
@@ -70,7 +70,7 @@ demos:
     packs:
       - dev-company
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - github
     installable_skills:
       - agentic-devops
@@ -118,7 +118,7 @@ demos:
     packs:
       - dev-company
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - github
     installable_skills:
       - brainz-tasks
@@ -170,7 +170,7 @@ demos:
     packs:
       - content-factory
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - fal-ai
     installable_skills:
       - social-intelligence
@@ -224,7 +224,7 @@ demos:
     packs:
       - research-lab
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - aluvia-brave-search
     installable_skills:
       - social-intelligence
@@ -278,7 +278,7 @@ demos:
     packs:
       - content-factory
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - social-intelligence
     installable_skills:
       - rss-skill
@@ -325,7 +325,7 @@ demos:
     packs:
       - content-factory
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - youtube-pro
     installable_skills:
       - rss-skill
@@ -387,7 +387,7 @@ demos:
     packs:
       - autonomous-startup
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
     installable_skills: []
     tags:
       - default
@@ -428,7 +428,7 @@ demos:
     packs:
       - data-ops
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - duckdb-en
     installable_skills:
       - nocodb
@@ -484,7 +484,7 @@ demos:
     packs:
       - finance-ops
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - aluvia-brave-search
     installable_skills:
       - social-intelligence
@@ -537,7 +537,7 @@ demos:
     packs:
       - automation-ops
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - clawemail
     installable_skills:
       - google-calendar
@@ -595,7 +595,7 @@ demos:
     packs:
       - personal-assistant
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
     installable_skills:
       - google-calendar
       - apple-calendar
@@ -654,7 +654,7 @@ demos:
     packs:
       - personal-assistant
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - brainz-tasks
       - apple-reminders
     installable_skills:
@@ -711,7 +711,7 @@ demos:
     packs:
       - personal-assistant
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - apple-health-skill
     installable_skills:
       - apple-reminders
@@ -760,7 +760,7 @@ demos:
     packs:
       - automation-ops
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - clawemail
     installable_skills:
       - microsoft365
@@ -805,7 +805,7 @@ demos:
     packs:
       - data-ops
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - duckdb-en
       - nocodb
     installable_skills:
@@ -856,7 +856,7 @@ demos:
     packs:
       - research-lab
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - aluvia-brave-search
     installable_skills:
       - social-intelligence
@@ -906,7 +906,7 @@ demos:
     packs:
       - personal-assistant
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - faster-whisper
     installable_skills:
       - google-calendar
@@ -971,7 +971,7 @@ demos:
     packs:
       - autonomous-startup
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
     installable_skills: []
     tags:
       - automation
@@ -1022,7 +1022,7 @@ demos:
     packs:
       - automation-ops
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - clawemail
       - connect-apps
     installable_skills:
@@ -1079,7 +1079,7 @@ demos:
     packs:
       - customer-service
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - clawemail
       - connect-apps
     installable_skills:
@@ -1141,7 +1141,7 @@ demos:
     packs:
       - research-lab
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - rss-skill
       - aluvia-brave-search
     installable_skills:
@@ -1193,7 +1193,7 @@ demos:
     packs:
       - automation-ops
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - n8n
     installable_skills:
       - github
@@ -1248,7 +1248,7 @@ demos:
     packs:
       - autonomous-startup
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - github
     installable_skills:
       - agentic-devops
@@ -1299,7 +1299,7 @@ demos:
     packs:
       - personal-assistant
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - clawemail
       - apple-contacts
     installable_skills:
@@ -1349,7 +1349,7 @@ demos:
     packs:
       - automation-ops
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - outbound-call
     installable_skills:
       - publora-telegram
@@ -1401,7 +1401,7 @@ demos:
     packs:
       - automation-ops
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - outbound-call
     installable_skills:
       - clawemail
@@ -1454,7 +1454,7 @@ demos:
     packs:
       - content-factory
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - rss-skill
     installable_skills:
       - aluvia-brave-search
@@ -1510,7 +1510,7 @@ demos:
     packs:
       - finance-ops
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - reef-polymarket-research
     installable_skills:
       - aluvia-brave-search
@@ -1563,7 +1563,7 @@ demos:
     packs:
       - research-lab
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - aluvia-brave-search
     installable_skills:
       - social-intelligence
@@ -1609,7 +1609,7 @@ demos:
     packs:
       - dev-company
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - github
     installable_skills: []
     tags:
@@ -1662,7 +1662,7 @@ demos:
     packs:
       - personal-assistant
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - danube
     installable_skills:
       - duckdb-en
@@ -1712,7 +1712,7 @@ demos:
     packs:
       - dev-company
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - agentic-devops
     installable_skills:
       - publora-telegram
@@ -1769,7 +1769,7 @@ demos:
     packs:
       - data-ops
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - duckdb-en
     installable_skills:
       - nocodb
@@ -1819,7 +1819,7 @@ demos:
     packs:
       - automation-ops
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - brainz-tasks
     installable_skills:
       - google-calendar
@@ -1869,7 +1869,7 @@ demos:
     packs:
       - content-factory
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - x-research-but-cheaper
     installable_skills:
       - social-intelligence
@@ -1917,7 +1917,7 @@ demos:
     packs:
       - content-factory
     project_skills:
-      - malaclaw-manager
+      - malaclaw-cook
       - youtube-pro
     installable_skills:
       - fal-ai

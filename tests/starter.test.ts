@@ -38,9 +38,9 @@ describe("starters", () => {
     const manifest = await loadManifest(targetDir);
     expect(manifest.project?.starter).toBe("content-factory");
     expect(manifest.project?.entry_team).toBe("content-factory");
-    expect(manifest.skills.some((skill) => skill.id === "malaclaw-manager")).toBe(true);
+    expect(manifest.skills.some((skill) => skill.id === "malaclaw-cook")).toBe(true);
     expect(
-      manifest.skills.find((skill) => skill.id === "malaclaw-manager")?.targets?.teams,
+      manifest.skills.find((skill) => skill.id === "malaclaw-cook")?.targets?.teams,
     ).toContain("content-factory");
 
     await expect(fs.access(path.join(targetDir, "STARTER.md"))).resolves.not.toThrow();

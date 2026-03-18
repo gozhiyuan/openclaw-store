@@ -10,7 +10,7 @@ Automatically aggregate, score, and deliver tech news from 109+ sources across R
 - Recommended Mode: managed-team
 - Entry Team: research-lab
 - Packs: research-lab, content-factory
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: gog, tech-news-digest
 - Required APIs / Services: —
 - Required Capabilities / Tools: —

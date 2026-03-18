@@ -10,7 +10,7 @@ Your agent already monitors things for you — stocks, emails, smart home, calen
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: to
 - Required APIs / Services: That's it. No other dependencies. The setup prompt includes the API key and links to skill docs — the agent reads them and figures out the rest.
 - Required Capabilities / Tools: —

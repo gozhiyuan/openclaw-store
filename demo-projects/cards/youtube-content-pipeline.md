@@ -10,7 +10,7 @@ As a daily YouTube creator, finding fresh, timely video ideas across the web and
 - Recommended Mode: managed-team
 - Entry Team: content-factory
 - Packs: content-factory
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: gog, knowledge-base, search, x-research-v2
 - Required APIs / Services: Asana integration (or Todoist), Telegram topic for receiving pitches
 - Required Capabilities / Tools: —

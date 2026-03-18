@@ -10,7 +10,7 @@ entry_team: data-ops
 packs:
   - data-ops
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
   - duckdb-en
 installable_skills:
   - nocodb

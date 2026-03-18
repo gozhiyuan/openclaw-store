@@ -10,7 +10,7 @@ Static dashboards show stale data and require constant manual updates. You want 
 - Recommended Mode: managed-team
 - Entry Team: dev-company
 - Packs: dev-company
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: bird, github, postgres
 - Required APIs / Services: web_search or web_fetch for external APIs, Discord or Canvas for rendering the dashboard
 - Required Capabilities / Tools: github (gh CLI) for GitHub metrics, Cron jobs for scheduled updates

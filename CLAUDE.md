@@ -12,7 +12,7 @@ The repo provides:
 - A Node.js CLI (`malaclaw`) built on TypeScript + Commander
 - Bundled agent/team/skill/pack YAML templates under `templates/` and `packs/`
 - 36+ curated starter demo project definitions under `starters/` and `demo-projects/`
-- A `skills/malaclaw-manager/` skill that can be installed into OpenClaw itself
+- A `skills/malaclaw-cook/` skill that can be installed into OpenClaw itself
 
 ---
 
@@ -50,7 +50,7 @@ malaclaw/
 │   ├── index.yaml          ← Generated index of all demo projects (DemoProjectIndex schema)
 │   └── cards/              ← Per-demo Markdown cards with setup and execution guidance
 ├── skills/
-│   └── malaclaw-manager/ ← The manager skill installed into OpenClaw itself
+│   └── malaclaw-cook/ ← The manager skill installed into OpenClaw itself
 ├── partials/               ← Shared Markdown fragments used by the renderer
 ├── dashboard/              ← Web dashboard (Fastify server + React SPA)
 │   ├── server/             ← Fastify server, REST routes, WebSocket, file watcher
@@ -334,7 +334,7 @@ Run `malaclaw validate` after adding any template to confirm the YAML is schema-
 | `openclaw` | OpenClaw installed, no manifest | Treated as default OpenClaw environment |
 | `unconfigured` | None of the above | Offer to bootstrap |
 
-When there is no manifest, `malaclaw install` runs `runZeroConfigInstall()` which installs the `malaclaw-manager` skill into the main OpenClaw workspace instead of failing.
+When there is no manifest, `malaclaw install` runs `runZeroConfigInstall()` which installs the `malaclaw-cook` skill into the main OpenClaw workspace instead of failing.
 
 ---
 

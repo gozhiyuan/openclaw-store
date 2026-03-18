@@ -10,7 +10,7 @@ Running a home server means being on-call 24/7 for your own infrastructure. Serv
 - Recommended Mode: managed-team
 - Entry Team: dev-company
 - Packs: dev-company
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: 1password, gog, kubectl, ssh, terraform
 - Required APIs / Services: Calendar API access
 - Required Capabilities / Tools: ssh access to home network machines

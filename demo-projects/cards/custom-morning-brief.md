@@ -10,7 +10,7 @@ You wake up and spend the first 30 minutes of your day catching up — scrolling
 - Recommended Mode: managed-team
 - Entry Team: research-lab
 - Packs: research-lab, content-factory
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: x-research-v2
 - Required APIs / Services: Telegram, Discord, or iMessage integration, Todoist / Apple Reminders / Asana integration (whichever you use for tasks)
 - Required Capabilities / Tools: —

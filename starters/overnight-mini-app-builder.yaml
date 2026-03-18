@@ -10,7 +10,7 @@ entry_team: autonomous-startup
 packs:
   - autonomous-startup
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
   - github
 installable_skills:
   - agentic-devops

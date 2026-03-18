@@ -10,7 +10,7 @@ Modern families juggle five or more calendars — work, personal, shared family,
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: ical, imessage
 - Required APIs / Services: Calendar API access (Google Calendar, Apple Calendar via ical), Telegram or Slack for the shared family chat interface, Google Calendar API
 - Required Capabilities / Tools: File system access for inventory tracking

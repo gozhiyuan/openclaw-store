@@ -10,7 +10,7 @@ You want to build a product but don't know what to build. Or you have a business
 - Recommended Mode: managed-team
 - Entry Team: research-lab
 - Packs: research-lab, content-factory
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: Telegram or Discord integration for receiving research reports
 - Required Capabilities / Tools: —

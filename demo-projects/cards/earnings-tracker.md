@@ -10,7 +10,7 @@ Following earnings season across dozens of tech companies means checking multipl
 - Recommended Mode: managed-team
 - Entry Team: research-lab
 - Packs: research-lab
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: Telegram topic for earnings updates
 - Required Capabilities / Tools: Cron job support in OpenClaw

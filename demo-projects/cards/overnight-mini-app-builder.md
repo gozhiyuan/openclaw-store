@@ -10,7 +10,7 @@ Your AI agent is powerful but reactive — it only works when you tell it what t
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: Telegram or Discord integration
 - Required Capabilities / Tools: sessions_spawn / sessions_send for autonomous task execution

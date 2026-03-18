@@ -10,7 +10,7 @@ entry_team: dev-company
 packs:
   - dev-company
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
   - github
 installable_skills:
   - brainz-tasks

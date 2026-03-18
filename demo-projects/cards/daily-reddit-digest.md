@@ -10,7 +10,7 @@ Run a daily digest everyday to give you the top performing posts from your favou
 - Recommended Mode: managed-team
 - Entry Team: content-factory
 - Packs: content-factory
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: reddit-readonly
 - Required APIs / Services: reddit-readonly skill. It doesn't need auth.
 - Required Capabilities / Tools: —

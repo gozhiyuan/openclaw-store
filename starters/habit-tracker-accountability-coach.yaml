@@ -12,7 +12,7 @@ entry_team: personal-assistant
 packs:
   - personal-assistant
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
   - brainz-tasks
   - apple-reminders
 installable_skills:

@@ -10,7 +10,7 @@ Identifying food sensitivities requires consistent logging over time, which is t
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: Telegram topic for logging
 - Required Capabilities / Tools: Cron jobs for reminders

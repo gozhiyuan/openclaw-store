@@ -57,7 +57,7 @@ export function buildStarterManifest(starter: StarterDef, targetDir: string) {
   const projectName = defaultProjectName(targetDir);
   const skills = starter.project_skills.map((id) => ({
     id,
-    targets: id === "malaclaw-manager"
+    targets: id === "malaclaw-cook"
       ? { teams: [starter.entry_team] }
       : undefined,
   }));

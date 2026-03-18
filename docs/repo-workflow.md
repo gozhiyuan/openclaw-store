@@ -24,7 +24,7 @@ OpenClaw-first bootstrap:
 malaclaw install
 ```
 
-If there is no `malaclaw.yaml`, this installs the `malaclaw-manager` skill into the main OpenClaw workspace and updates the main guidance files. It does not require a project folder yet.
+If there is no `malaclaw.yaml`, this installs the `malaclaw-cook` skill into the main OpenClaw workspace and updates the main guidance files. It does not require a project folder yet.
 
 The demo catalog lives in:
 
@@ -195,7 +195,7 @@ Each demo card (`demo-projects/cards/<id>.md`) includes a `## Skills Setup` sect
 - `required_apis`: external APIs, SaaS integrations, or auth the user must configure
 - `required_capabilities`: runtime/tool prerequisites such as `sessions_spawn`, Git, SSH, or filesystem access
 
-When a user asks the `malaclaw-manager` skill to start a demo project, it reads the card, detects what is missing, explains each missing item, and guides the user through setup before initializing the project. Required skills and APIs block initialization. Optional skills are noted but do not block.
+When a user asks the `malaclaw-cook` skill to start a demo project, it reads the card, detects what is missing, explains each missing item, and guides the user through setup before initializing the project. Required skills and APIs block initialization. Optional skills are noted but do not block.
 
 ### Manual skill setup
 
@@ -213,7 +213,7 @@ You can target skills from `malaclaw.yaml`:
 
 ```yaml
 skills:
-  - id: malaclaw-manager
+  - id: malaclaw-cook
     targets:
       agents:
         - tech-lead
@@ -341,7 +341,7 @@ skills:
     targets:
       teams:
         - research-lab
-  - id: malaclaw-manager
+  - id: malaclaw-cook
     targets:
       agents:
         - tech-lead
@@ -366,7 +366,7 @@ The same applies to native OpenClaw skills:
 
 ## 12. Turn a new idea into a managed project
 
-The intended flow for `malaclaw-manager` is:
+The intended flow for `malaclaw-cook` is:
 
 1. Search for a similar starter with `malaclaw starter suggest "<idea>"`
 2. Inspect the closest match with `malaclaw starter show <id>`

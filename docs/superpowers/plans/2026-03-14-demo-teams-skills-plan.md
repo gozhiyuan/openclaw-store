@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add 5 purpose-built agent teams, 25 skill templates, re-map all 37 demo projects to the correct team + skills, and update the `malaclaw-manager` skill with an interactive guided install flow.
+**Goal:** Add 5 purpose-built agent teams, 25 skill templates, re-map all 37 demo projects to the correct team + skills, and update the `malaclaw-cook` skill with an interactive guided install flow.
 
 **Architecture:** All changes are YAML/Markdown data files — no TypeScript code changes required. The existing infrastructure (`schema.ts`, `loader.ts`, `resolver.ts`, `renderer.ts`) handles everything. The dependency order is: skill templates → agent templates → team templates → pack definitions → existing agent updates → starter YAMLs → demo cards + index → manager skill.
 
@@ -2548,12 +2548,12 @@ For each file, update `entry_team` and `packs` to `personal-assistant`, set `pro
 
 | Starter file | `entry_team` | `packs` | `project_skills` | `installable_skills` | `required_apis` |
 |---|---|---|---|---|---|
-| `starters/habit-tracker-accountability-coach.yaml` | personal-assistant | [personal-assistant] | [malaclaw-manager, brainz-tasks, apple-reminders] | [publora-telegram] | Todoist API |
-| `starters/health-symptom-tracker.yaml` | personal-assistant | [personal-assistant] | [malaclaw-manager, apple-health-skill] | [apple-reminders] | — (macOS only) |
-| `starters/family-calendar-household-assistant.yaml` | personal-assistant | [personal-assistant] | [malaclaw-manager] | [google-calendar, apple-calendar, publora-telegram, clawemail] | Google Calendar API or Apple Calendar |
-| `starters/meeting-notes-action-items.yaml` | personal-assistant | [personal-assistant] | [malaclaw-manager, faster-whisper] | [google-calendar, clawemail] | — (local whisper) |
-| `starters/personal-crm.yaml` | personal-assistant | [personal-assistant] | [malaclaw-manager, clawemail, apple-contacts] | [danube] | Google OAuth2 |
-| `starters/second-brain.yaml` | personal-assistant | [personal-assistant] | [malaclaw-manager, danube] | [duckdb-en, rss-skill] | Danube API |
+| `starters/habit-tracker-accountability-coach.yaml` | personal-assistant | [personal-assistant] | [malaclaw-cook, brainz-tasks, apple-reminders] | [publora-telegram] | Todoist API |
+| `starters/health-symptom-tracker.yaml` | personal-assistant | [personal-assistant] | [malaclaw-cook, apple-health-skill] | [apple-reminders] | — (macOS only) |
+| `starters/family-calendar-household-assistant.yaml` | personal-assistant | [personal-assistant] | [malaclaw-cook] | [google-calendar, apple-calendar, publora-telegram, clawemail] | Google Calendar API or Apple Calendar |
+| `starters/meeting-notes-action-items.yaml` | personal-assistant | [personal-assistant] | [malaclaw-cook, faster-whisper] | [google-calendar, clawemail] | — (local whisper) |
+| `starters/personal-crm.yaml` | personal-assistant | [personal-assistant] | [malaclaw-cook, clawemail, apple-contacts] | [danube] | Google OAuth2 |
+| `starters/second-brain.yaml` | personal-assistant | [personal-assistant] | [malaclaw-cook, danube] | [duckdb-en, rss-skill] | Danube API |
 
 Example YAML diff for `habit-tracker-accountability-coach.yaml`:
 ```yaml
@@ -2562,7 +2562,7 @@ entry_team: personal-assistant
 packs:
   - personal-assistant
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
   - brainz-tasks
   - apple-reminders
 installable_skills:
@@ -2580,57 +2580,57 @@ setup_guidance:
 
 | Starter file | `entry_team` | `packs` | `project_skills` | `installable_skills` |
 |---|---|---|---|---|
-| `starters/inbox-declutter.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, clawemail] | [microsoft365] |
-| `starters/phone-based-personal-assistant.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, outbound-call] | [publora-telegram] |
-| `starters/phone-call-notifications.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, outbound-call] | [clawemail] |
-| `starters/multi-channel-assistant.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, clawemail, connect-apps] | [publora-telegram, microsoft365] |
-| `starters/event-guest-confirmation.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, clawemail] | [google-calendar, publora-telegram] |
-| `starters/n8n-workflow-orchestration.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, n8n] | [gh, agentic-devops] |
-| `starters/todoist-task-manager.yaml` | automation-ops | [automation-ops] | [malaclaw-manager, brainz-tasks] | [google-calendar] |
+| `starters/inbox-declutter.yaml` | automation-ops | [automation-ops] | [malaclaw-cook, clawemail] | [microsoft365] |
+| `starters/phone-based-personal-assistant.yaml` | automation-ops | [automation-ops] | [malaclaw-cook, outbound-call] | [publora-telegram] |
+| `starters/phone-call-notifications.yaml` | automation-ops | [automation-ops] | [malaclaw-cook, outbound-call] | [clawemail] |
+| `starters/multi-channel-assistant.yaml` | automation-ops | [automation-ops] | [malaclaw-cook, clawemail, connect-apps] | [publora-telegram, microsoft365] |
+| `starters/event-guest-confirmation.yaml` | automation-ops | [automation-ops] | [malaclaw-cook, clawemail] | [google-calendar, publora-telegram] |
+| `starters/n8n-workflow-orchestration.yaml` | automation-ops | [automation-ops] | [malaclaw-cook, n8n] | [gh, agentic-devops] |
+| `starters/todoist-task-manager.yaml` | automation-ops | [automation-ops] | [malaclaw-cook, brainz-tasks] | [google-calendar] |
 
 - [ ] **Step 3: Update customer-service, finance-ops, data-ops starters (6 files)**
 
 | Starter file | `entry_team` | `packs` | `project_skills` | `installable_skills` |
 |---|---|---|---|---|
-| `starters/multi-channel-customer-service.yaml` | customer-service | [customer-service] | [malaclaw-manager, clawemail, connect-apps] | [publora-telegram, microsoft365] |
-| `starters/earnings-tracker.yaml` | finance-ops | [finance-ops] | [malaclaw-manager, aluvia-brave-search] | [social-intelligence, publora-telegram] |
-| `starters/polymarket-autopilot.yaml` | finance-ops | [finance-ops] | [malaclaw-manager, reef-polymarket-research] | [aluvia-brave-search] |
-| `starters/dynamic-dashboard.yaml` | data-ops | [data-ops] | [malaclaw-manager, duckdb-en] | [nocodb, gh] |
-| `starters/knowledge-base-rag.yaml` | data-ops | [data-ops] | [malaclaw-manager, duckdb-en, nocodb] | [aluvia-brave-search] |
-| `starters/semantic-memory-search.yaml` | data-ops | [data-ops] | [malaclaw-manager, duckdb-en] | [nocodb, aluvia-brave-search] |
+| `starters/multi-channel-customer-service.yaml` | customer-service | [customer-service] | [malaclaw-cook, clawemail, connect-apps] | [publora-telegram, microsoft365] |
+| `starters/earnings-tracker.yaml` | finance-ops | [finance-ops] | [malaclaw-cook, aluvia-brave-search] | [social-intelligence, publora-telegram] |
+| `starters/polymarket-autopilot.yaml` | finance-ops | [finance-ops] | [malaclaw-cook, reef-polymarket-research] | [aluvia-brave-search] |
+| `starters/dynamic-dashboard.yaml` | data-ops | [data-ops] | [malaclaw-cook, duckdb-en] | [nocodb, gh] |
+| `starters/knowledge-base-rag.yaml` | data-ops | [data-ops] | [malaclaw-cook, duckdb-en, nocodb] | [aluvia-brave-search] |
+| `starters/semantic-memory-search.yaml` | data-ops | [data-ops] | [malaclaw-cook, duckdb-en] | [nocodb, aluvia-brave-search] |
 
 - [ ] **Step 4: Update research-lab starters (4 files)**
 
 | Starter file | `entry_team` | `packs` | `project_skills` | `installable_skills` |
 |---|---|---|---|---|
-| `starters/custom-morning-brief.yaml` | research-lab | [research-lab] | [malaclaw-manager, aluvia-brave-search] | [social-intelligence, rss-skill, publora-telegram] |
-| `starters/market-research-product-factory.yaml` | research-lab | [research-lab] | [malaclaw-manager, aluvia-brave-search] | [social-intelligence] |
-| `starters/multi-source-tech-news-digest.yaml` | research-lab | [research-lab] | [malaclaw-manager, rss-skill, aluvia-brave-search] | [arxiv-watcher] |
-| `starters/pre-build-idea-validator.yaml` | research-lab | [research-lab] | [malaclaw-manager, aluvia-brave-search] | [social-intelligence] |
+| `starters/custom-morning-brief.yaml` | research-lab | [research-lab] | [malaclaw-cook, aluvia-brave-search] | [social-intelligence, rss-skill, publora-telegram] |
+| `starters/market-research-product-factory.yaml` | research-lab | [research-lab] | [malaclaw-cook, aluvia-brave-search] | [social-intelligence] |
+| `starters/multi-source-tech-news-digest.yaml` | research-lab | [research-lab] | [malaclaw-cook, rss-skill, aluvia-brave-search] | [arxiv-watcher] |
+| `starters/pre-build-idea-validator.yaml` | research-lab | [research-lab] | [malaclaw-cook, aluvia-brave-search] | [social-intelligence] |
 
 - [ ] **Step 5: Update content-factory starters (7 files)**
 
 | Starter file | `entry_team` | `packs` | `project_skills` | `installable_skills` |
 |---|---|---|---|---|
-| `starters/content-factory.yaml` | content-factory | [content-factory] | [malaclaw-manager, fal-ai] | [social-intelligence, x-research-but-cheaper] |
-| `starters/daily-reddit-digest.yaml` | content-factory | [content-factory] | [malaclaw-manager, social-intelligence] | [rss-skill] |
-| `starters/daily-youtube-digest.yaml` | content-factory | [content-factory] | [malaclaw-manager, youtube-pro] | [rss-skill] |
-| `starters/podcast-production-pipeline.yaml` | content-factory | [content-factory] | [malaclaw-manager, rss-skill] | [aluvia-brave-search, faster-whisper] |
-| `starters/x-account-analysis.yaml` | content-factory | [content-factory] | [malaclaw-manager, x-research-but-cheaper] | [social-intelligence] |
-| `starters/youtube-content-pipeline.yaml` | content-factory | [content-factory] | [malaclaw-manager, youtube-pro] | [fal-ai] |
-| `starters/aionui-cowork-desktop.yaml` | autonomous-startup | [autonomous-startup] | [malaclaw-manager] | [] |
+| `starters/content-factory.yaml` | content-factory | [content-factory] | [malaclaw-cook, fal-ai] | [social-intelligence, x-research-but-cheaper] |
+| `starters/daily-reddit-digest.yaml` | content-factory | [content-factory] | [malaclaw-cook, social-intelligence] | [rss-skill] |
+| `starters/daily-youtube-digest.yaml` | content-factory | [content-factory] | [malaclaw-cook, youtube-pro] | [rss-skill] |
+| `starters/podcast-production-pipeline.yaml` | content-factory | [content-factory] | [malaclaw-cook, rss-skill] | [aluvia-brave-search, faster-whisper] |
+| `starters/x-account-analysis.yaml` | content-factory | [content-factory] | [malaclaw-cook, x-research-but-cheaper] | [social-intelligence] |
+| `starters/youtube-content-pipeline.yaml` | content-factory | [content-factory] | [malaclaw-cook, youtube-pro] | [fal-ai] |
+| `starters/aionui-cowork-desktop.yaml` | autonomous-startup | [autonomous-startup] | [malaclaw-cook] | [] |
 
 - [ ] **Step 6: Update dev-company and autonomous-startup starters (7 files)**
 
 | Starter file | `entry_team` | `packs` | `project_skills` | `installable_skills` |
 |---|---|---|---|---|
-| `starters/autonomous-game-dev-pipeline.yaml` | dev-company | [dev-company] | [malaclaw-manager, github] | [agentic-devops] |
-| `starters/autonomous-project-management.yaml` | dev-company | [dev-company] | [malaclaw-manager, github] | [brainz-tasks] |
-| `starters/project-state-management.yaml` | dev-company | [dev-company] | [malaclaw-manager, github] | [] |
-| `starters/self-healing-home-server.yaml` | dev-company | [dev-company] | [malaclaw-manager, agentic-devops] | [publora-telegram] |
-| `starters/default-managed.yaml` | autonomous-startup | [autonomous-startup] | [malaclaw-manager] | [] |
-| `starters/multi-agent-team.yaml` | autonomous-startup | [autonomous-startup] | [malaclaw-manager] | [] |
-| `starters/overnight-mini-app-builder.yaml` | autonomous-startup | [autonomous-startup] | [malaclaw-manager, github] | [agentic-devops] |
+| `starters/autonomous-game-dev-pipeline.yaml` | dev-company | [dev-company] | [malaclaw-cook, github] | [agentic-devops] |
+| `starters/autonomous-project-management.yaml` | dev-company | [dev-company] | [malaclaw-cook, github] | [brainz-tasks] |
+| `starters/project-state-management.yaml` | dev-company | [dev-company] | [malaclaw-cook, github] | [] |
+| `starters/self-healing-home-server.yaml` | dev-company | [dev-company] | [malaclaw-cook, agentic-devops] | [publora-telegram] |
+| `starters/default-managed.yaml` | autonomous-startup | [autonomous-startup] | [malaclaw-cook] | [] |
+| `starters/multi-agent-team.yaml` | autonomous-startup | [autonomous-startup] | [malaclaw-cook] | [] |
+| `starters/overnight-mini-app-builder.yaml` | autonomous-startup | [autonomous-startup] | [malaclaw-cook, github] | [agentic-devops] |
 
 - [ ] **Step 7: Validate all starters and run test suite**
 
@@ -2740,13 +2740,13 @@ git commit -m "feat: add Skills Setup section to all 37 demo project cards"
 
 ---
 
-## Chunk 7: malaclaw-manager Skill Updates
+## Chunk 7: malaclaw-cook Skill Updates
 
-### Task 15: Update `skills/malaclaw-manager/SKILL.md`
+### Task 15: Update `skills/malaclaw-cook/SKILL.md`
 
 - [ ] **Step 1: Add Project Initialization Flow section**
 
-In `skills/malaclaw-manager/SKILL.md`, add a new `## Project Initialization Flow` section after the existing `## Workflow` section. This is the full conversational flow the manager follows when spinning up a demo:
+In `skills/malaclaw-cook/SKILL.md`, add a new `## Project Initialization Flow` section after the existing `## Workflow` section. This is the full conversational flow the manager follows when spinning up a demo:
 
 ```markdown
 ## Project Initialization Flow
@@ -2822,7 +2822,7 @@ Add to the `## Core Rules` section:
 - For family-calendar demo: ask the user which calendar system they use before targeting skills.
 ```
 
-- [ ] **Step 3: Update `skills/malaclaw-manager/references/commands.md`**
+- [ ] **Step 3: Update `skills/malaclaw-cook/references/commands.md`**
 
 Add the 5 new packs and their entry teams to the commands reference. Add a "New Teams" section:
 
@@ -2850,9 +2850,9 @@ Expected: all tests pass. All templates validate.
 - [ ] **Step 5: Commit manager skill updates**
 
 ```bash
-git add skills/malaclaw-manager/SKILL.md \
-  skills/malaclaw-manager/references/commands.md
-git commit -m "feat: add interactive project initialization flow and skill gap detection to malaclaw-manager"
+git add skills/malaclaw-cook/SKILL.md \
+  skills/malaclaw-cook/references/commands.md
+git commit -m "feat: add interactive project initialization flow and skill gap detection to malaclaw-cook"
 ```
 
 - [ ] **Step 6: Final integration check**
@@ -2888,5 +2888,5 @@ git commit -m "feat: complete demo teams + per-agent skills + interactive instal
 - 25 new skill templates referencing verified ClawHub slugs
 - All 37 demo starters re-mapped to best-fit teams
 - All 37 demo cards updated with Skills Setup sections
-- malaclaw-manager updated with guided interactive install flow"
+- malaclaw-cook updated with guided interactive install flow"
 ```

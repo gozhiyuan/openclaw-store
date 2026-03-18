@@ -10,7 +10,7 @@ Solo founders wear every hat — strategy, development, marketing, sales, operat
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: telegram
 - Required APIs / Services: telegram skill for the shared control interface, Individual API keys for different model providers (if using mixed models)
 - Required Capabilities / Tools: sessions_spawn / sessions_send for multi-agent coordination

@@ -13,7 +13,7 @@ entry_team: personal-assistant
 packs:
   - personal-assistant
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
 installable_skills:
   - google-calendar
   - apple-calendar

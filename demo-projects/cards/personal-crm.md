@@ -10,7 +10,7 @@ Keeping track of who you've met, when, and what you discussed is impossible to d
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: crm-query, gog
 - Required APIs / Services: Telegram topic for CRM queries
 - Required Capabilities / Tools: —

@@ -10,7 +10,7 @@ Manually monitoring prediction markets for arbitrage opportunities and executing
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: postgres
 - Required APIs / Services: web_search or web_fetch (for Polymarket API data), Discord integration for daily reports, Polymarket API
 - Required Capabilities / Tools: Cron jobs for continuous monitoring

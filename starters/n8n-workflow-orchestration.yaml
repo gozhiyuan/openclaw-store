@@ -11,7 +11,7 @@ entry_team: automation-ops
 packs:
   - automation-ops
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
   - n8n
 installable_skills:
   - github

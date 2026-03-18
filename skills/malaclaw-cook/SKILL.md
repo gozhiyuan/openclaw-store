@@ -1,5 +1,5 @@
 ---
-name: malaclaw-manager
+name: malaclaw-cook
 description: Use when managing projects installed by malaclaw: inspect installed projects, choose entry-point teams, add or retarget skills in malaclaw.yaml, run install/diff/doctor, and refresh project agents after project or skill changes.
 ---
 
@@ -165,7 +165,7 @@ Example:
 
 ```yaml
 skills:
-  - id: malaclaw-manager
+  - id: malaclaw-cook
     targets:
       agents:
         - tech-lead

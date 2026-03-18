@@ -10,7 +10,7 @@ You have a podcast idea, maybe even a backlog of episode topics. But between res
 - Recommended Mode: managed-team
 - Entry Team: content-factory
 - Packs: content-factory
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: feed, research
 - Required APIs / Services: Slack, Discord, or Telegram integration (for delivering assets)
 - Required Capabilities / Tools: File system access (for reading transcripts and writing output files), Optional: sessions_spawn for running research and writing agents in parallel

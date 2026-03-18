@@ -10,7 +10,7 @@ entry_team: automation-ops
 packs:
   - automation-ops
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
   - clawemail
   - connect-apps
 installable_skills:

@@ -12,7 +12,7 @@ entry_team: content-factory
 packs:
   - content-factory
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
   - rss-skill
 installable_skills:
   - aluvia-brave-search

@@ -10,7 +10,7 @@ You're a content creator juggling research, writing, and design across multiple 
 - Recommended Mode: managed-team
 - Entry Team: content-factory
 - Packs: content-factory
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: knowledge-base, x-research-v2
 - Required APIs / Services: Discord integration with multiple channels, Local image generation (e.g., Nano Banana) or an image generation API, Discord Bot Setup
 - Required Capabilities / Tools: sessions_spawn / sessions_send for multi-agent orchestration

@@ -93,7 +93,7 @@ describe("runInstall", () => {
         project: { id: "project", name: "Project" },
         packs: [{ id: "dev-company" }],
         skills: [{
-          id: "malaclaw-manager",
+          id: "malaclaw-cook",
           targets: { agents: ["pm"] },
         }],
       }),
@@ -114,10 +114,10 @@ describe("runInstall", () => {
     await runInstall({ projectDir });
 
     await expect(
-      fs.access(path.join(storeDir, "workspaces", "store", "project", "dev-company", "pm", "skills", "malaclaw-manager")),
+      fs.access(path.join(storeDir, "workspaces", "store", "project", "dev-company", "pm", "skills", "malaclaw-cook")),
     ).resolves.not.toThrow();
     await expect(
-      fs.access(path.join(storeDir, "workspaces", "store", "project", "dev-company", "backend-dev", "skills", "malaclaw-manager")),
+      fs.access(path.join(storeDir, "workspaces", "store", "project", "dev-company", "backend-dev", "skills", "malaclaw-cook")),
     ).rejects.toThrow();
   });
 
@@ -144,7 +144,7 @@ describe("runInstall", () => {
         },
         packs: [],
         skills: [{
-          id: "malaclaw-manager",
+          id: "malaclaw-cook",
           targets: { agents: ["ops"] },
         }],
       }),
@@ -175,11 +175,11 @@ describe("runInstall", () => {
     await runInstall({ projectDir });
 
     await expect(
-      fs.access(path.join(nativeWorkspace, "skills", "malaclaw-manager")),
+      fs.access(path.join(nativeWorkspace, "skills", "malaclaw-cook")),
     ).resolves.not.toThrow();
 
     const openclawConfig = JSON.parse(await fs.readFile(path.join(stateDir, "openclaw.json"), "utf-8"));
-    expect(openclawConfig.agents.list[0].skills).toContain("malaclaw-manager");
+    expect(openclawConfig.agents.list[0].skills).toContain("malaclaw-cook");
 
     const runtime = JSON.parse(await fs.readFile(path.join(storeDir, "runtime.json"), "utf-8"));
     expect(runtime.projects[0].attached_agents[0].id).toBe("ops");

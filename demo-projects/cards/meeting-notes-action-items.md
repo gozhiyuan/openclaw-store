@@ -10,7 +10,7 @@ You just finished a 45-minute team call. Now you need to write up the summary, p
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: Jira, Linear, Todoist, or Notion integration (for task creation), Slack or Discord integration (for posting summaries), Optional: Otter.ai, Fireflies.ai, or Google Meet API for automatic transcript retrieval, Otter.ai API, Jira REST API, Linear API, Slack API
 - Required Capabilities / Tools: File system access (for reading transcript files), Scheduling / cron (for follow-up reminders)

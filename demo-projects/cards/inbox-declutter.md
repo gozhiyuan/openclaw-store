@@ -10,7 +10,7 @@ Newsletters can take up the inbox like nothing else. Often times they pile-up wi
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: Gmail OAuth Setup.
 - Required Capabilities / Tools: —

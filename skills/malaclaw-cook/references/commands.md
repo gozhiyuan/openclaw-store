@@ -96,7 +96,7 @@ Starter-generated project with team-wide manager skill:
 
 ```yaml
 skills:
-  - id: malaclaw-manager
+  - id: malaclaw-cook
     targets:
       teams:
         - content-factory

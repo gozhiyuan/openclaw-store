@@ -1,11 +1,11 @@
-id: malaclaw-manager
+id: malaclaw-cook
 version: 1
 name: "MalaClaw Manager"
 description: "Manage malaclaw projects, install and retarget project skills, and refresh project agents"
 
 source:
   type: local
-  url: "malaclaw-manager"
+  url: "malaclaw-cook"
 
 trust_tier: curated
 

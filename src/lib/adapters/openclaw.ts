@@ -193,7 +193,7 @@ malaclaw manages projects, agent teams, and skills on top of OpenClaw.
 
 ## Quick start
 
-The \`malaclaw-manager\` skill is available in your workspace.
+The \`malaclaw-cook\` skill is available in your workspace.
 Use it to discover and bootstrap projects:
 
 1. \`malaclaw starter list\` — browse available demo projects

@@ -10,7 +10,7 @@ Minimal managed OpenClaw project that keeps the normal default workflow availabl
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: —
 - Required Capabilities / Tools: —

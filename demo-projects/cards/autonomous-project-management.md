@@ -10,7 +10,7 @@ Managing complex projects with multiple parallel workstreams is exhausting. You 
 - Recommended Mode: managed-team
 - Entry Team: dev-company
 - Packs: dev-company
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: —
 - Required Capabilities / Tools: sessions_spawn / sessions_send for subagent management, File system access for STATE.yaml, Git for state versioning (optional but recommended)

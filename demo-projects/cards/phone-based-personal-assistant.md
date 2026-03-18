@@ -10,7 +10,7 @@ You want to access your AI agent from any phone without needing a smartphone app
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: calendar, jira, search
 - Required APIs / Services: Telnyx API
 - Required Capabilities / Tools: —

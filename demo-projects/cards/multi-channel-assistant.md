@@ -10,7 +10,7 @@ Context-switching between apps to manage tasks, schedule events, send messages, 
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: gog, or
 - Required APIs / Services: Slack integration (bot + user tokens), Todoist API or skill, Asana API or skill, Telegram channel with multiple topics configured, config — bot settings and debugging
 - Required Capabilities / Tools: —

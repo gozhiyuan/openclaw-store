@@ -10,7 +10,7 @@ You come up with ideas, find interesting links, hear about books to read — but
 - Recommended Mode: managed-team
 - Entry Team: research-lab
 - Packs: research-lab
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: Telegram, iMessage, or Discord integration (for text-based capture), Start using it immediately — just text your bot anything you want to remember:
 - Required Capabilities / Tools: —

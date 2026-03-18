@@ -17,7 +17,7 @@ This document explains the technical architecture: data flow, file formats, the 
 | Per-agent skill assignments | Existing teams (content-factory, research-lab, dev-company) now declare specific skills per agent |
 | 37 demo starters | All curated starters re-mapped to purpose-built teams with per-agent skill assignments |
 | Skills Setup cards | Each `demo-projects/cards/<id>.md` now includes a `## Skills Setup` section listing which skills are needed and how to install them |
-| Manager skill project init | `malaclaw-manager` guides users through missing skills conversationally — detect, explain, guide |
+| Manager skill project init | `malaclaw-cook` guides users through missing skills conversationally — detect, explain, guide |
 | `requires.bins` field | Skill templates now declare required system binaries before `env:` under `requires:` |
 
 ### Web Dashboard
@@ -124,7 +124,7 @@ Projects can be created in two ways:
 
 There is also a zero-config bootstrap path:
 
-- `malaclaw install` with no manifest installs `malaclaw-manager` into the main OpenClaw workspace instead of failing
+- `malaclaw install` with no manifest installs `malaclaw-cook` into the main OpenClaw workspace instead of failing
 - this lets the user begin from OpenClaw first, then create a managed project later
 
 The starter path writes a project-local `malaclaw.yaml` that already includes:
@@ -132,7 +132,7 @@ The starter path writes a project-local `malaclaw.yaml` that already includes:
 - `project.starter`
 - `project.entry_team`
 - starter-selected packs
-- project skills such as `malaclaw-manager`
+- project skills such as `malaclaw-cook`
 - a copied `DEMO_PROJECT.md` card with setup and execution guidance
 
 ```
@@ -228,7 +228,7 @@ no malaclaw.yaml
          ▼
   runZeroConfigInstall()
   ┌─────────────────────────────────────────────────────┐
-  │ loadSkill("malaclaw-manager")                │
+  │ loadSkill("malaclaw-cook")                │
   │ install into ~/.openclaw/workspace/skills/         │
   │ updateStoreGuidance()                              │
   │ print starter/bootstrap instructions               │
@@ -254,7 +254,7 @@ awesome-openclaw-usecases/*.md
   │ id: podcast-production-pipeline                     │
   │ entry_team: content-factory                         │
   │ packs: [content-factory]                            │
-  │ project_skills: [malaclaw-manager]            │
+  │ project_skills: [malaclaw-cook]            │
   │ installable_skills: [youtube-research]              │
   │ required_apis: [YouTube API]                        │
   │ source_usecase: Podcast Production Pipeline         │
@@ -277,7 +277,7 @@ awesome-openclaw-usecases/*.md
   │   packs:                                           │
   │     - id: content-factory                          │
   │   skills:                                          │
-  │     - id: malaclaw-manager                   │
+  │     - id: malaclaw-cook                   │
   │       targets:                                     │
   │         teams: [content-factory]                   │
   │                                                    │
@@ -294,7 +294,7 @@ awesome-openclaw-usecases/*.md
   managed project install flow
 ```
 
-The `starter suggest` command uses simple token overlap across starter metadata, packs, tags, and requirements. It is intentionally lightweight so the bundled `malaclaw-manager` skill can use it locally without external services.
+The `starter suggest` command uses simple token overlap across starter metadata, packs, tags, and requirements. It is intentionally lightweight so the bundled `malaclaw-cook` skill can use it locally without external services.
 
 The richer demo metadata is generated separately into `demo-projects/index.yaml` and `demo-projects/cards/*.md`. The manager skill uses those cards to decide whether to keep the user in default workflow mode or move them into a managed starter install.
 
@@ -486,7 +486,7 @@ As with agents and teams, the YAML skill template is metadata for `malaclaw`. Th
 3. Default OpenClaw mode
    OpenClaw is installed, but the repo does not have `malaclaw.yaml`. In this case, `malaclaw` treats the repo as a normal OpenClaw environment unless the user opts into managed projects.
 
-This allows the `malaclaw-manager` skill to inspect default workflows first, then migrate a repo into managed mode only when the user asks for project/team/skill orchestration.
+This allows the `malaclaw-cook` skill to inspect default workflows first, then migrate a repo into managed mode only when the user asks for project/team/skill orchestration.
 
 ## Native Memory vs Shared Memory
 
@@ -701,7 +701,7 @@ You can also target a project skill without editing every agent template:
 
 ```yaml
 skills:
-  - id: malaclaw-manager
+  - id: malaclaw-cook
     targets:
       agents:
         - tech-lead
@@ -910,7 +910,7 @@ skills:
     targets:
       teams:
         - research-lab
-  - id: malaclaw-manager
+  - id: malaclaw-cook
     targets:
       agents:
         - tech-lead

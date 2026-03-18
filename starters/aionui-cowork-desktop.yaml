@@ -13,7 +13,7 @@ entry_team: autonomous-startup
 packs:
   - autonomous-startup
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
 installable_skills: []
 
 tags:

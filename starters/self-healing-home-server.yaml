@@ -10,7 +10,7 @@ entry_team: dev-company
 packs:
   - dev-company
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
   - agentic-devops
 installable_skills:
   - publora-telegram

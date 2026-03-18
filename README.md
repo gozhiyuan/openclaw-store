@@ -24,16 +24,16 @@ If you are already using OpenClaw, you should be able to hand it the manager ski
 Send OpenClaw something like:
 
 ```text
-Please follow this SKILL.md to install malaclaw-manager for me and bootstrap malaclaw:
+Please follow this SKILL.md to install malaclaw-cook for me and bootstrap malaclaw:
 
-- local file: skills/malaclaw-manager/SKILL.md
-- or repo URL: https://github.com/gozhiyuan/MalaClaw/blob/main/skills/malaclaw-manager/SKILL.md
+- local file: skills/malaclaw-cook/SKILL.md
+- or repo URL: https://github.com/gozhiyuan/MalaClaw/blob/main/skills/malaclaw-cook/SKILL.md
 ```
 
 The intended behavior is:
 
 - OpenClaw reads the manager skill instructions
-- installs or copies `malaclaw-manager` into its workspace
+- installs or copies `malaclaw-cook` into its workspace
 - uses that skill to inspect demos, starters, packs, and skill requirements
 - guides the user through any missing API auth or install steps
 - promotes the repo into a managed project only when needed
@@ -48,7 +48,7 @@ malaclaw install
 
 If there is no `malaclaw.yaml` in the current directory, `malaclaw` does a zero-config bootstrap instead of failing:
 
-- it installs the bundled `malaclaw-manager` skill into your main OpenClaw workspace
+- it installs the bundled `malaclaw-cook` skill into your main OpenClaw workspace
 - it updates the main OpenClaw guidance files
 - it leaves your repo in default OpenClaw mode until you choose to promote it
 
@@ -68,7 +68,7 @@ Should this stay single-agent or become a team?
 
 ## What `malaclaw` Does Through OpenClaw
 
-Once `malaclaw-manager` is installed, OpenClaw can guide these flows.
+Once `malaclaw-cook` is installed, OpenClaw can guide these flows.
 
 ### 1. Demo Project Flow
 
@@ -77,7 +77,7 @@ This is the catalog-driven path.
 Typical sequence:
 
 1. The user describes an idea.
-2. `malaclaw-manager` runs `starter suggest` and inspects the closest starter.
+2. `malaclaw-cook` runs `starter suggest` and inspects the closest starter.
 3. It reads the demo card metadata:
    - `entry_team`
    - `project_skills`
@@ -125,7 +125,7 @@ This is how a user can start with ad hoc OpenClaw skills and later turn them int
 
 ### 3. Customize Managed Project Flow
 
-After a project exists, OpenClaw can use `malaclaw-manager` to:
+After a project exists, OpenClaw can use `malaclaw-cook` to:
 
 - add or retarget skills
 - swap packs or change the entry team
@@ -153,7 +153,7 @@ That means skills often exist in two places for two different reasons:
 
 So yes: a user can install their own skills directly in OpenClaw without going through `malaclaw`, and later `malaclaw` can discover those skills and attach them to a managed project.
 
-The bundled `malaclaw-manager` skill works the same way conceptually:
+The bundled `malaclaw-cook` skill works the same way conceptually:
 
 - zero-config bootstrap installs it into the main OpenClaw workspace
 - starter or manifest targeting can also place it into managed project workspaces when desired
@@ -191,7 +191,7 @@ This repo currently ships:
   - `autonomous-startup`
 - 37 starter demo projects in [`demo-projects/index.yaml`](./demo-projects/index.yaml)
 - 28 bundled skill templates in [`templates/skills/`](./templates/skills)
-- 1 bundled manager skill implementation in [`skills/malaclaw-manager/`](./skills/malaclaw-manager)
+- 1 bundled manager skill implementation in [`skills/malaclaw-cook/`](./skills/malaclaw-cook)
 
 Use these commands to explore the catalog:
 
@@ -200,7 +200,7 @@ malaclaw starter list
 malaclaw starter suggest "podcast workflow"
 malaclaw starter show podcast-production-pipeline
 malaclaw team show dev-company
-malaclaw skill show malaclaw-manager
+malaclaw skill show malaclaw-cook
 ```
 
 ## Optional Manual Installation
@@ -246,7 +246,7 @@ malaclaw/
 │   ├── index.yaml         # generated demo catalog
 │   └── cards/             # richer setup/execution cards per demo
 ├── skills/
-│   └── malaclaw-manager/
+│   └── malaclaw-cook/
 ├── src/                   # CLI + install/runtime logic
 ├── dashboard/             # web dashboard (Fastify server + React SPA)
 │   ├── server/            # Fastify routes, WebSocket, file watcher
@@ -262,7 +262,7 @@ Most important files:
   - resolved install state, committed to the repo
 - `demo-projects/index.yaml`
   - generated catalog for OpenClaw-guided demo selection
-- `skills/malaclaw-manager/SKILL.md`
+- `skills/malaclaw-cook/SKILL.md`
   - the bridge skill that lets OpenClaw manage `malaclaw` projects conversationally
 
 ## Technical Model

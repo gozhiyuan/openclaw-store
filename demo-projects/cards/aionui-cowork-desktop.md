@@ -10,7 +10,7 @@ Use OpenClaw from a desktop Cowork UI, access it from Telegram or WebUI when you
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: API keys or auth for your models (OpenClaw config + any built-in agent keys in AionUi).
 - Required Capabilities / Tools: —

@@ -10,7 +10,7 @@
 - Recommended Mode: managed-team
 - Entry Team: dev-company
 - Packs: dev-company
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: —
 - Required Capabilities / Tools: **Git**: To manage branches, commits, and merges.

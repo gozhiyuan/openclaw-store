@@ -10,7 +10,7 @@ You've tried every habit tracker app out there. They all work for a week, then y
 - Recommended Mode: managed-team
 - Entry Team: autonomous-startup
 - Packs: autonomous-startup
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: Telegram or SMS integration (Twilio for SMS, or Telegram Bot API), Optional: Google Sheets integration for a visual habit dashboard, Telegram Bot API, Twilio SMS API, Google Sheets API
 - Required Capabilities / Tools: Scheduling / cron for timed check-ins

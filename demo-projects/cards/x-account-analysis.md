@@ -10,7 +10,7 @@ There are many websites designed to give you a qualitative analysis of your X ac
 - Recommended Mode: managed-team
 - Entry Team: content-factory
 - Packs: content-factory
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: bird
 - Required APIs / Services: For security and isolation, you better create a new account for your ClawdBot.
 - Required Capabilities / Tools: —

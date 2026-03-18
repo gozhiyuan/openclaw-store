@@ -10,7 +10,7 @@ Letting your AI agent directly manage API keys and call external services is a r
 - Recommended Mode: managed-team
 - Entry Team: dev-company
 - Packs: dev-company
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: fetch, n8n
 - Required APIs / Services: n8n API access (for creating/triggering workflows), fetch or curl for webhook calls, n8n credential management (manual, one-time setup per integration), n8n Webhook Trigger Docs
 - Required Capabilities / Tools: fetch or curl for webhook calls

@@ -10,7 +10,7 @@ Traditional Kanban boards are static and require manual updates. You forget to m
 - Recommended Mode: managed-team
 - Entry Team: dev-company
 - Packs: dev-company
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: github, postgres
 - Required APIs / Services: Discord or Telegram for updates and queries
 - Required Capabilities / Tools: github (gh CLI) for commit tracking, Cron jobs for daily summaries

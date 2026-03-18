@@ -9,7 +9,7 @@ entry_team: automation-ops
 packs:
   - automation-ops
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
   - clawemail
 installable_skills:
   - microsoft365

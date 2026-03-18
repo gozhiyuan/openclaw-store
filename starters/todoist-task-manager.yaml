@@ -9,7 +9,7 @@ entry_team: automation-ops
 packs:
   - automation-ops
 project_skills:
-  - malaclaw-manager
+  - malaclaw-cook
   - brainz-tasks
 installable_skills:
   - google-calendar

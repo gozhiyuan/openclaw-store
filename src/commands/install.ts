@@ -145,18 +145,18 @@ function isManifestNotFoundError(err: unknown): boolean {
 async function runZeroConfigInstall(opts: InstallOptions): Promise<void> {
   const mainWorkspaceDir = resolveMainAgentWorkspaceDir();
   console.log("malaclaw: no manifest found.");
-  console.log("Installing malaclaw-manager skill into OpenClaw main agent workspace...\n");
-  const skillDef = await loadSkill("malaclaw-manager");
+  console.log("Installing malaclaw-cook skill into OpenClaw main agent workspace...\n");
+  const skillDef = await loadSkill("malaclaw-cook");
   const { installSkillToWorkspaces } = await import("../lib/skill-fetch.js");
   const results = await installSkillToWorkspaces(skillDef, [mainWorkspaceDir], "active");
-  const skillDir = path.join(mainWorkspaceDir, "skills", "malaclaw-manager");
+  const skillDir = path.join(mainWorkspaceDir, "skills", "malaclaw-cook");
   const installed = results.some((r) => r.status === "installed");
   if (installed) {
-    console.log(`✓ Skill installed: malaclaw-manager`);
+    console.log(`✓ Skill installed: malaclaw-cook`);
     console.log(`  → ${skillDir}\n`);
   } else {
     const reason = results[0]?.reason ?? "unknown error";
-    console.warn(`✗ Failed to install malaclaw-manager: ${reason}`);
+    console.warn(`✗ Failed to install malaclaw-cook: ${reason}`);
     return;
   }
   await updateStoreGuidance();

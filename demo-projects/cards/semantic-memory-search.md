@@ -10,7 +10,7 @@ OpenClaw's built-in memory system stores everything as markdown files — but as
 - Recommended Mode: managed-team
 - Entry Team: research-lab
 - Packs: research-lab
-- Project Skills: malaclaw-manager
+- Project Skills: malaclaw-cook
 - Installable OpenClaw Skills: —
 - Required APIs / Services: memsearch Documentation — full CLI reference, Python API, and architecture
 - Required Capabilities / Tools: —
