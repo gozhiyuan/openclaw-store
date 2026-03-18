@@ -68,10 +68,25 @@ export type DiffEntry = {
   detail?: string;
 };
 
+export type UsageSummary = {
+  input_tokens: number;
+  output_tokens: number;
+  total_cost: number;
+};
+
+export type AgentStatusEntry = {
+  agentId: string;
+  status: "idle" | "active" | "spawning";
+  sessionId?: string;
+  updatedAt: number;
+};
+
 export type WsEvent =
   | { type: "projects:changed" }
   | { type: "manifest:changed"; projectDir: string }
   | { type: "lockfile:changed"; projectDir: string }
   | { type: "skills:changed" }
   | { type: "memory:changed"; projectId: string; teamId: string; file: string }
-  | { type: "install:progress"; phase: string; message: string; current?: number; total?: number };
+  | { type: "install:progress"; phase: string; message: string; current?: number; total?: number }
+  | { type: "gateway:agent:status"; agentId: string; status: string }
+  | { type: "gateway:usage:update" };

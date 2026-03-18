@@ -2,7 +2,7 @@ import Fastify from "fastify";
 import fastifyWebsocket from "@fastify/websocket";
 import fastifyStatic from "@fastify/static";
 import fastifyCors from "@fastify/cors";
-import { addClient } from "./ws.js";
+import { addClient, broadcast } from "./ws.js";
 import { startWatcher, stopWatcher } from "./watcher.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -14,6 +14,8 @@ import healthRoutes from "./routes/health.js";
 import starterRoutes from "./routes/starters.js";
 import manifestRoutes from "./routes/manifest.js";
 import diffRoutes from "./routes/diff.js";
+import { GatewayClient } from "./services/gateway.js";
+import { createUsageRoutes } from "./routes/usage.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -21,6 +23,11 @@ export async function createServer(opts: { host?: string; port?: number } = {}) 
   const host = opts.host ?? "0.0.0.0";
   const port = opts.port ?? 3456;
   const isDev = process.env.NODE_ENV !== "production";
+
+  const gateway = new GatewayClient({ url: "ws://localhost:18789" });
+  gateway.connect((event) => {
+    broadcast({ type: "gateway:" + event.type, ...(event.data as Record<string, unknown> ?? {}) });
+  });
 
   const app = Fastify({ logger: false });
 
@@ -73,9 +80,11 @@ export async function createServer(opts: { host?: string; port?: number } = {}) 
   await app.register(starterRoutes);
   await app.register(manifestRoutes);
   await app.register(diffRoutes);
+  await app.register(createUsageRoutes(gateway));
 
   // Graceful shutdown
   const shutdown = async () => {
+    gateway.disconnect();
     await stopWatcher();
     await app.close();
     process.exit(0);

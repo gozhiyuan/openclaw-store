@@ -71,6 +71,12 @@ export function useWs() {
             break;
           case "install:progress":
             break;
+          case "gateway:agent:status":
+            qc.invalidateQueries({ queryKey: ["agentStatuses"] });
+            break;
+          case "gateway:usage:update":
+            qc.invalidateQueries({ queryKey: ["usage"] });
+            break;
         }
         // Push every parsed event into the module-level store
         pushEvent({ type: event.type, timestamp: Date.now(), data: event });

@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import type { Project, Agent, Team, Skill, Finding, Starter, DiffEntry, SkillCheckResult } from "../lib/types";
+import type { Project, Agent, Team, Skill, Finding, Starter, DiffEntry, SkillCheckResult, UsageSummary, AgentStatusEntry } from "../lib/types";
 
 const BASE = "/api";
 
@@ -129,4 +129,12 @@ export function useSyncSkills() {
       qc.invalidateQueries({ queryKey: ["skillCheck"] });
     },
   });
+}
+
+export function useUsage() {
+  return useQuery<UsageSummary>({ queryKey: ["usage"], queryFn: () => fetchJson("/usage") });
+}
+
+export function useAgentStatuses() {
+  return useQuery<Record<string, AgentStatusEntry>>({ queryKey: ["agentStatuses"], queryFn: () => fetchJson("/usage/agents") });
 }
