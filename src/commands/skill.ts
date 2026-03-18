@@ -1,6 +1,7 @@
 import { loadSkill, loadAllSkills } from "../lib/loader.js";
 import { loadLockfile } from "../lib/loader.js";
-import { discoverSkills, loadDiscoveredSkill, syncSkillsInventory } from "../lib/openclaw-skills.js";
+import { discoverSkills, loadDiscoveredSkill } from "../lib/openclaw-skills.js";
+import { checkSkills, syncSkills } from "../lib/skill-ops.js";
 
 export async function skillList(): Promise<void> {
   const skills = await loadAllSkills();
@@ -110,23 +111,23 @@ export async function skillShow(skillId: string): Promise<void> {
 }
 
 export async function skillCheck(): Promise<void> {
-  const lockfile = await loadLockfile();
-  if (!lockfile || !lockfile.skills || lockfile.skills.length === 0) {
+  const results = await checkSkills();
+  if (results.length === 0) {
     console.log("No skills in lockfile. Run: openclaw-store install");
     return;
   }
 
   let allActive = true;
   console.log("\nSkill status:\n");
-  for (const s of lockfile.skills) {
+  for (const s of results) {
     if (s.status === "active") {
       console.log(`  ✓ [ACTIVE]   ${s.id}`);
     } else if (s.status === "failed") {
       allActive = false;
-      console.log(`  ✗ [FAILED]   ${s.id}  error: ${s.install_error ?? "install failed"}`);
+      console.log(`  ✗ [FAILED]   ${s.id}  error: ${s.installError ?? "install failed"}`);
     } else {
       allActive = false;
-      console.log(`  ✗ [INACTIVE] ${s.id}  missing: ${s.missing_env?.join(", ")}`);
+      console.log(`  ✗ [INACTIVE] ${s.id}  missing: ${s.missingEnv?.join(", ")}`);
     }
   }
 
@@ -136,9 +137,6 @@ export async function skillCheck(): Promise<void> {
 }
 
 export async function skillSync(): Promise<void> {
-  const skills = await syncSkillsInventory();
-  console.log(`Synced ${skills.length} available OpenClaw skill(s).`);
-  for (const skill of skills) {
-    console.log(`  ${skill.id}  (${skill.source})`);
-  }
+  const { synced } = await syncSkills();
+  console.log(`Synced ${synced} available OpenClaw skill(s).`);
 }
